@@ -8,18 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>우리들의 연결고리</title>
-<!-- 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-Latest compiled and minified CSS
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
-
-Optional theme
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css" integrity="sha384-jzngWsPS6op3fgRCDTESqrEJwRKck+CILhJVO5VvaAZCq8JYf8HsR/HPpBOOPZfR" crossorigin="anonymous">
-
-
-Latest compiled and minified JavaScript
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
- -->
  
  <!-- 참조 : http://getbootstrap.com/css/   -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,6 +17,10 @@ Latest compiled and minified JavaScript
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<script src="/resources/javascript/skel.min.js"></script>
+<script src="/resources/javascript/util.js"></script>
+<script src="/resources/javascript/main.js"></script>
 
 
 <link rel="stylesheet" href="/resources/css/main.css" >
@@ -53,14 +45,6 @@ Latest compiled and minified JavaScript
 		$(".complain").on("click", function() {
 			self.location = "/complain/addComplain?communityNo=${community.communityNo}"
 		});
-		/* $(".complain").on("click", function(){
-			popWin = window.open("/complain/addComplain?communityNo=${community.communityNo}",
-				   	 "popWin",
-					 "left=300, top=200, width=1100, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-
-		}); */
-		
-		
 		/* 신고 버튼 이벤트 : end */
 		
 		/* 수정 버튼 이벤트 : start */
@@ -152,15 +136,12 @@ Latest compiled and minified JavaScript
 	}
 	
 	.topImg{
-		display : block;
-		position : absolute;
-		top : 0;
-		background-image : url("/resources/images/background/getRestaurantInfo07_background.jpg");
-		background-repeat : no-repeat;
-		background-position : center -400px;
-		background-size : cover;
-		width : 100%;
+		max-width : 100%;
 		height : 400px;
+		background-image : url("/resources/images/background/dateStoryBackground.jpg");
+		background-position : center center;
+		background-size : cover;
+		background-repeat : no-repeat;
 	}
 	.topImg::after{
 		content : "";
@@ -173,16 +154,21 @@ Latest compiled and minified JavaScript
 	}
 	.topImg h1{
 		position : absolute;
-		line-height : 330px;
 		width : 100%;
+		margin : 0;
+		padding : 0;
+		font-family: 'Nanum Myeongjo', serif;
+		font-size : 60px;
 		text-align : center;
+		height : 400px;
+		line-height : 450px;
 		color : white;
 		z-index : 99;
-		font-size : 60px;
+		
 	}
 	h1 .slim{font-weight : lighter;}
 	
-	.wrap{margin-top : 400px;}
+	/* .wrap{margin-top : 400px;} */
 	
 	.rightBtn{float : right; margin-left : 6px;}
 	
@@ -277,6 +263,12 @@ Latest compiled and minified JavaScript
 		background : red;
 		margin-bottom : 10em;
 		
+	}
+	
+	
+	/* 빵메뉴 안맞아서 따로 만듬^^ */
+	.fa{
+		line-height : 50px;
 	}
 </style>
 
@@ -381,9 +373,6 @@ Latest compiled and minified JavaScript
 				</c:if>
 			</ul>
 		</div>
-		
-		
-		
 		
 		<!-- 댓글 : start -->
 		<jsp:include page="/comment/addComment.jsp" />

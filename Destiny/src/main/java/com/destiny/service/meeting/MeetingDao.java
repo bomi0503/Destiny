@@ -7,12 +7,13 @@ import com.destiny.common.Search;
 import com.destiny.service.domain.Meeting;
 
 public interface MeetingDao {
-   
-   public List<Meeting> getInterestList() throws Exception;
-   
-   public List<Meeting> todayTogeterMeeting(String today) throws Exception; /*리스트 보여줄때 오늘의 함께해요 리스팅*/
-   
-   public List<Meeting> hotMeeting() throws Exception; /*리스트 보여줄때  what's hot 리스팅*/
+
+	
+	public List<Meeting> getInterestList() throws Exception;
+	
+	public List<Meeting> todayTogeterMeeting(String today) throws Exception; /*리스트 보여줄때 오늘의 함께해요 리스팅*/
+
+	public List<Meeting> hotMeeting() throws Exception; /*리스트 보여줄때  what's hot 리스팅*/
 
    public void addMeeting(Meeting meeting)throws Exception;/*새로 개설하기 */
    

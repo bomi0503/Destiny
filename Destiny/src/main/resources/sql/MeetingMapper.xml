@@ -40,16 +40,30 @@
     <select    id="getInterestList" resultMap="meetingSelectMap">
       SELECT* FROM interest
     </select>
-<!-- /////////////////베스트상품 조회////////////////// -->
-    <select  id="getNearMeeting" parameterType="String" resultMap="meetingSelectMap">
-          SELECT *
-         FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
-            FROM (
-            select*from meeting where meeting_center = #{value} order by meeting_views desc
-            ) inner_table 
-         WHERE ROWNUM &lt;= 3)
-         WHERE row_seq BETWEEN 1 AND 3 
+<!-- /////////////////오늘의 함께해요 조회////////////////// -->
+    <select    id="todayTogeterMeeting" parameterType="String" resultMap="meetingSelectMap">
+      SELECT m.*, ma.act_date
+      FROM meeting m, meeting_act ma
+      where m.meeting_no = ma.meeting_no
+      and m.interest_name='함께해요'
+      and ma.act_date = #{value}
+      order by m.meeting_views desc
     </select>
+<!-- /////////////////what's hot 조회////////////////// -->
+    <select    id="hotMeeting" resultMap="meetingSelectMap">
+      SELECT*from meeting where meeting_views is not null
+      order by meeting_views desc
+    </select>
+<!-- /////////////////베스트상품 조회////////////////// -->
+	 <select  id="getNearMeeting" parameterType="String" resultMap="meetingSelectMap">
+	 		SELECT *
+			FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
+				FROM (
+				select*from meeting where meeting_center = #{value} order by meeting_views desc
+				) inner_table 
+			WHERE ROWNUM &lt;= 3)
+			WHERE row_seq BETWEEN 1 AND 3 
+	 </select>
 <!-- /////////////////개설하기////////////////// -->
     <insert    id="addMeeting"      parameterType="com.destiny.service.domain.Meeting">
         <selectKey keyProperty="meetingNo" resultType="int" order="BEFORE">
@@ -175,37 +189,37 @@
     </insert>
     
 <!-- ////////////////개설시 모임원에 모임장 생성용 ////////////////// -->
-    <insert    id="addCrewList"      parameterType="com.destiny.service.domain.Meeting">
-       INSERT
-      INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
-               role,crew_condition) 
-      VALUES    ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
-               'MST','YES')
-    </insert>
-<!-- ////////////////모임원가입시  모임원 등록용 ////////////////// -->    
-     <insert    id="addCrewM"      parameterType="com.destiny.service.domain.Meeting">
-       INSERT
-      INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
-               role, interview_title, interview, crew_condition) 
-      VALUES    ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
-               'MEM', #{interviewTitle}, #{interview},'APL')
-    </insert>
-<!-- ////////////////회차별 참여자 관리용 ////////////////// -->       
-    <insert    id="addCrewAct"      parameterType="com.destiny.service.domain.Meeting">
-       INSERT
-      INTO meeting_act_crew_list ( act_crew_no, meeting_act_no, meeting_crew_no,
-               act_crew_id, meeting_act_count,meeting_act_date, 
-               meeting_act_time, meeting_act_location) 
-      VALUES    ( seq_meeting_act_crew_no.nextval, #{meetingActNo}, #{meetingCrewNo},
-               #{meetingMasterId}, #{meetingActCount}, #{meetingDate}, #{meetingTime}, #{meetingLocation})
-    </insert>
-    
-<!-- ////////////////모임원인지 확인 ////////////////// -->    
-    <select  id="checkDuplicationCrew" resultType="int">
-          select count(*) CREW_ID from meeting_crew_list where meeting_no=#{meetingNo} 
-          and crew_id=#{meetingMasterId}
-          and crew_condition = 'YES'
-    </select>
+	 <insert 	id="addCrewList"		parameterType="com.destiny.service.domain.Meeting">
+	 	INSERT
+		INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
+					role,crew_condition) 
+		VALUES	 ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
+					'MST','YES')
+	 </insert>
+<!-- ////////////////모임원가입시  모임원 등록용 ////////////////// -->	 
+	  <insert 	id="addCrewM"		parameterType="com.destiny.service.domain.Meeting">
+	 	INSERT
+		INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
+					role, interview_title, interview, crew_condition) 
+		VALUES	 ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
+					'MEM', #{interviewTitle}, #{interview},'APL')
+	 </insert>
+<!-- ////////////////회차별 참여자 관리용 ////////////////// -->		 
+	 <insert 	id="addCrewAct"		parameterType="com.destiny.service.domain.Meeting">
+	 	INSERT
+		INTO meeting_act_crew_list ( act_crew_no, meeting_act_no, meeting_crew_no,
+					act_crew_id, meeting_act_count,meeting_act_date, 
+					meeting_act_time, meeting_act_location) 
+		VALUES	 ( seq_meeting_act_crew_no.nextval, #{meetingActNo}, #{meetingCrewNo},
+					#{meetingMasterId}, #{meetingActCount}, #{meetingDate}, #{meetingTime}, #{meetingLocation})
+	 </insert>
+	 
+<!-- ////////////////모임원인지 확인 ////////////////// -->	 
+	 <select  id="checkDuplicationCrew" resultType="int">
+	 		select count(*) CREW_ID from meeting_crew_list where meeting_no=#{meetingNo} 
+	 		and crew_id=#{meetingMasterId}
+	 		and crew_condition = 'YES'
+	 </select>
 <!-- ////////////////참여자인지 확인 ////////////////// -->
     <select  id="duplicationAct" resultType="int">
           select count(*) from meeting_act_crew_list 

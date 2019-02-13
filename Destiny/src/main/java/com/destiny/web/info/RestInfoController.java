@@ -63,7 +63,7 @@ public class RestInfoController {
 		
 		//업로드할 폴더 경로
 		/*String realFolder = request.getSession().getServletContext().getRealPath("imageUpload");*/
-		String realFolder = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\uploadImg";
+		String realFolder = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg";
 		System.out.println("realFolder : "+realFolder);
 		UUID uuid = UUID.randomUUID();
 		
