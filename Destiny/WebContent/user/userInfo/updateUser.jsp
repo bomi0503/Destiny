@@ -191,22 +191,66 @@
 								"Content-Type" : "application/json"
 							},
 							success : function(JSONData , status) {
-								//alert("성공?");
 								var list="";
 								//list+="<option></option>";
 								for(i in JSONData.list){
 									var town = JSONData.list[i].townName;
-									//alert(town);
 									list+="<option value='"+town+"' >"+town+"</option>";
 							}
 								$( "#address2:eq("+idx+")" ).empty().append(list);
 							},
 							error : function(what){
-								//alert("ㅇㅇ?" + what);
+								
 							}
-						});
 					});
 				});
+				
+				
+				$( "#updateAddress" ).on("click" , function() {
+				
+					var displayValue = "<select id='address2' name='address2'>" + 
+										"<c:forEach var='location' items='${list}'>" + 
+						"<option value='${location.townName}' ${ ! empty location[1] && location[1] == location.townName ? 'selected' : ''  }>${location.townName}</option>" + 
+						"</c:forEach>" + 
+						"</select>" + 
+						"<input type='hidden' name='address'>";
+						
+						$("#addTown").html(displayValue);
+						
+						
+						var idx = $("#address1").index(this);
+						var city = $("#address1").val();
+						
+						//alert(city + idx);
+						
+						$.ajax( 
+							{
+								url : "/user/json/getLocationList/"+city ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								success : function(JSONData , status) {
+									var list="";
+									//list+="<option></option>";
+									for(i in JSONData.list){
+										var town = JSONData.list[i].townName;
+										list+="<option value='"+town+"' >"+town+"</option>";
+								}
+									$( "#address2:eq("+idx+")" ).empty().append(list);
+								},
+								error : function(what){
+									
+								}
+							});
+						
+						$("#updateAddress").remove();
+						$("#thisIsTown").remove();
+				});
+				
+			});
 			 
 			 
 			 $(function() {
@@ -317,6 +361,10 @@
 				}
 					
 				var address = address1 + " " + address2;
+				
+				alert(address1);
+				alert(address2);
+				alert(address);
 				
 				var items = [];
 				$('input:checkbox[type=checkbox]:checked').each(function () {
@@ -492,7 +540,9 @@
 					<hr/>
 					
 					<div class="row uniform">
-						<div class="6u 12u$(small)">
+						<div class="4u 12u$(small)">
+						
+						
 							<label for="address1">주소  도/시</label>
 							<div class="select-wrapper">
 								<select id="address1" name="address1">
@@ -518,17 +568,26 @@
 							</div>
 						</div>
 						
-						<div class="6u$ 12u$(small)">
+						
+						<div class="4u 12u$(small)">
+						
 							<label for="address1">구/군</label>
-							<div class="select-wrapper">
-								<select id="address2" name="address2">
+							
+							<div class="select-wrapper" id="addTown">
+								<!-- <select id="address2" name="address2">
 									<c:forEach var="location" items="${list}">
 										<option value="${location.townName}" ${ ! empty location[1] && location[1] == location.townName ? "selected" : ""  }>${location.townName}</option>
 									</c:forEach>
-								</select>
-								<input type="hidden" name="address">
-							</div>
+								</select> 
+								<input type="hidden" name="address"> -->
+							</div> 
+							
+							<h4 id="thisIsTown">${location[1]}</h4>
+							<div class="button" id="updateAddress">수정</div>
 						</div>
+						
+						
+						
 					</div>
 					
 					<hr/>

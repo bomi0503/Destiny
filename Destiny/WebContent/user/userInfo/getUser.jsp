@@ -251,14 +251,19 @@
 			
 			<div class="row uniform">
 				<div class="3u 12u$(small) subTitle">내 성격유형</div>
-				<div class="4u 12u$(small)">${typeMap.myType}</div>
-				<div class="5u 12u$(small)">
-					<img src="/resources/images/mbti/${typeFileMap.myTpyeFile}" width="150" height="200"/>
-				</div>
+				<c:if test="${typeMap.myType == null}">
+					<div class="3u 12u$(small)">
+						<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+					</div>
+				</c:if>
 				
-				<%-- <div class="3u 12u$(small)">
-					<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
-				</div> --%>
+				<c:if test="${typeMap.myType != null}">
+					<div class="4u 12u$(small)">${typeMap.myType}</div>
+					<div class="5u 12u$(small)">
+						<img src="/resources/images/mbti/${typeFileMap.myTpyeFile}" width="150" height="200"/>
+					</div>
+				</c:if>
+				
 				
 			</div>
 			
@@ -266,28 +271,34 @@
 			
 			<div class="row uniform">
 				<div class="3u 12u$(small) subTitle">상대방 성격유형</div>
-				<div class="3u 12u$(small)">${typeMap.firstType}</div>
-				<div class="3u 12u$(small)">${typeMap.secondType}</div>
-				<div class="3u 12u$(small)">${typeMap.thirdType}</div>
 				
-				<%-- <div class="3u 12u$(small)">
-					<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
-				</div> --%>
+				<c:if test="${typeMap.firstType == null && typeMap.secondType == null&& typeMap.thirdType == null}">
+					<div class="3u 12u$(small)">
+						<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+					</div>
+				</c:if>
 				
+				<c:if test="${typeMap.firstType != null && typeMap.secondType != null&& typeMap.thirdType != null}">
+					<div class="3u 12u$(small)">${typeMap.firstType}</div>
+					<div class="3u 12u$(small)">${typeMap.secondType}</div>
+					<div class="3u 12u$(small)">${typeMap.thirdType}</div>
+				</c:if>
 			</div>
 			
-			<div class="row uniform">
-				<div class="3u 12u$(small)"></div>
-				<div class="3u 12u$(small)">
-					<img src="/resources/images/mbti/${typeFileMap.typeFileList[0]}" width="150" height="200"/>
+			<c:if test="${typeMap.firstType != null && typeMap.secondType != null&& typeMap.thirdType != null}">
+				<div class="row uniform">
+					<div class="3u 12u$(small)"></div>
+					<div class="3u 12u$(small)">
+						<img src="/resources/images/mbti/${typeFileMap.typeFileList[0]}" width="150" height="200"/>
+					</div>
+					<div class="3u 12u$(small)">
+						<img src="/resources/images/mbti/${typeFileMap.typeFileList[1]}" width="150" height="200"/>
+					</div>
+					<div class="3u 12u$(small)">
+						<img src="/resources/images/mbti/${typeFileMap.typeFileList[2]}" width="150" height="200"/>
+					</div>
 				</div>
-				<div class="3u 12u$(small)">
-					<img src="/resources/images/mbti/${typeFileMap.typeFileList[1]}" width="150" height="200"/>
-				</div>
-				<div class="3u 12u$(small)">
-					<img src="/resources/images/mbti/${typeFileMap.typeFileList[2]}" width="150" height="200"/>
-				</div>
-			</div>
+			</c:if>
 			<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		
 		</div>

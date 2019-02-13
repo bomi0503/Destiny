@@ -509,8 +509,11 @@ public class UserController {
 		
 		//지역 시/도  - 구/군 따로 확보
 		List<String> location = new ArrayList<String>();
+		
 		location.add(user.getAddress().split(" ")[0]);
 		location.add(user.getAddress().split(" ")[1]);
+		
+		System.out.println("획득한 장소 리스트 : " + location);
 		
 		//폰 번호 따로 확보
 		List<String> phone = new ArrayList<String>();
