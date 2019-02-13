@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>우연</title>
 <!-- All CSS Insert -->
 <link rel="stylesheet" href="/resources/css/main.css" > 
@@ -39,7 +38,7 @@
 		href="//cdn.rawgit.com/fgelinas/timepicker/master/jquery.ui.timepicker.css">
 	<script
 		src='//cdn.rawgit.com/fgelinas/timepicker/master/jquery.ui.timepicker.js'></script>
-    <script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script ><!-- sweetAlert -->
+	
 	
 	
 	
@@ -62,9 +61,9 @@
 	//============= "가입"  Event 연결 =============
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			/* $( "#joinM" ).on("click" , function() {
+			$( "a[name='join']" ).on("click" , function() {
 				fncAddProduct();
-			}); */
+			});
 		});	
 		
 		
@@ -117,57 +116,57 @@
 			console.log(meetingDate<today);
 
 			if (interestName == null || interestName.length < 1) {
-				swal("관심사를 선택해 주세요.");
+				alert("관심사를 선택해 주세요.");
 				return;
 			}
 
 			if (meetingCenter == null || meetingCenter.length < 1) {
-				swal("중심지역을 선택해 주세요.");
+				alert("중심지역을 선택해 주세요.");
 				return;
 			}
 
 			if (titleImg == null || titleImg.length < 1) {
-				swal("대표이미지를 설정하여 주세요.");
+				alert("대표이미지를 설정하여 주세요.");
 				return;
 			}
 
 			if (meetingName == null || meetingName.length < 1) {
-				swal("모임이름을 작성하여 주세요.");
+				alert("모임이름을 작성하여 주세요.");
 				return;
 			}
 
 			if (meetingDetail == null || meetingDetail.length < 1) {
-				swal("모임설명을 작성하여 주세요.");
+				alert("모임설명을 작성하여 주세요.");
 				return;
 			}
 
 			if (meetingCrewLimit == null || meetingCrewLimit.length < 1) {
-				swal("모임인원을 설정하여 주세요.");
+				alert("모임인원을 설정하여 주세요.");
 				return;
 			}
 
 			if (snooze != 'Y' && snooze != 'N') {
-				swal("반복여부를 설정하여 주세요.");
+				alert("반복여부를 설정하여 주세요.");
 				return;
 			}
 
 			if (meetingDate == null && meetingDate == "") {
-				swal("날짜를 지정하여 주세요.");
+				alert("날짜를 지정하여 주세요.");
 				return;
 			}
 			
 			if (meetingDate<today) {
-				swal("잘못 된 날짜입니다.");
+				alert("잘못 된 날짜입니다.");
 				return;
 			}
 
 			if (meetingTime == null || meetingTime == '모임시간') {
-				swal("모임시간을 입력하여 주세요.");
+				alert("모임시간을 입력하여 주세요.");
 				return;
 			}
 
 			if (meetingLocation == null || meetingLocation.length < 1) {
-				swal("모임장소를 입력하여 주세요.");
+				alert("모임장소를 입력하여 주세요.");
 				return;
 			}
 
@@ -369,7 +368,7 @@
 	
 	<!-- 메인배경이미지 : start -->
 	<div class="topImg">
-		<h1>모임<span class="slim">개설</span></h1>
+		<h1>회원<span class="slim">가입</span></h1>
 	</div>
 	<!-- 메인배경이미지 : end -->
 	
@@ -636,7 +635,7 @@
 				
 				<ul class="actions align-center">
 					<li><a href="#" class="button" name="reset">취소</a></li>
-					<li><a href="#" class="button special" name="join" onclick="fncAddProduct()">토토</a></li>
+					<li><a href="#" class="button special" name="join">토토</a></li>
 				</ul>
 					
 				<!-- ////////////////////////////////////////////////////////////////// -->
@@ -757,3 +756,4 @@
 	
 </body>
 </html>
+
