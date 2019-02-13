@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommentMapper">
+ 	
+ 	
+	<resultMap id="commentSelectMap" type="com.destiny.service.domain.Comment">
+		<result property="commentNo" 			column="comment_no" 					jdbcType="NUMERIC"/>
+		<result property="commentComuNo"		column="community_no" 					jdbcType="NUMERIC" />
+		<result property="commentWriterId" 		column="comment_writer_id" 				jdbcType="VARCHAR" />
+		<result property="commentDetail" 		column="comment_detail" 				jdbcType="VARCHAR" />
+		<result property="commentDate"			column="comment_write_date" 			jdbcType="DATE" />
+		<result property="targetNo"				column="comment_target_no" 				jdbcType="NUMERIC" />
+		<result property="viewCondition" 		column="comment_view_condition" 		jdbcType="VARCHAR" />
+		<result property="profile" 				column="profile_img"			 		jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addReComment" parameterType="com.destiny.service.domain.Comment">
+	 	INSERT
+		INTO comments ( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
+		VALUES ( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, #{targetNo}, #{viewCondition})
+	 </insert>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addComment" parameterType="com.destiny.service.domain.Comment">
+	 	INSERT
+		INTO comments( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
+		VALUES( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, seq_comment_no.currval, #{viewCondition} )
+	</insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select id="getComment" parameterType="int" resultMap="commentSelectMap">
+		SELECT
+		comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition
+		FROM comments
+		WHERE comment_no = #{value}
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update id="updateComment"	parameterType="com.destiny.service.domain.Comment" >
+	   	UPDATE comments
+	   	<set>
+	   		comment_detail = #{commentDetail}
+	   	</set>
+	   	WHERE comment_no = #{commentNo}
+	 </update>
+	 
+	 <!-- SQL : VIEW_CONDITION UPDATE -->
+	 <update id="updateViewCondition"	parameterType="com.destiny.service.domain.Comment" >
+	   	UPDATE comments
+	   	<set>
+	   		comment_view_condition = 'DEL'
+	   	</set>
+	   	WHERE comment_no = #{commentNo}
+	 </update>
+	
+	<!-- SQL : SELECT LIST -->
+	<select  id="getCommentList"  parameterType="map"	resultMap="commentSelectMap">
+	  	SELECT re.comment_no , re.community_no , re.comment_writer_id , re.comment_detail , re.comment_write_date, re.comment_target_no, re.comment_view_condition, us.profile_img
+		FROM comments re, users us
+		WHERE re.comment_writer_id = us.user_id and re.community_no = #{commentComuNo} and re.comment_view_condition = 'DEF'<!--  and parent_reply_no is NULL -->
+		ORDER BY re.comment_target_no, re.comment_no 
+	  	<!-- SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
+											FROM comments
+											WHERE community_no = #{commentComuNo} and parent_reply_no is NULL
+											ORDER BY comment_target_no, comment_no
+									 	) inner_table
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} --> 
+	 </select>
+	 
+	 <!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="String"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
+						FROM comments
+						WHERE community_no = #{value} 
+					 ) countTable						
+	 </select>
+	 
+</mapper>

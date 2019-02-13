@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MeetingMapper">
+    
+    
+   <resultMap id="meetingSelectMap" type="com.destiny.service.domain.Meeting">
+      <result property="meetingNo"          column="meeting_no"       jdbcType="NUMERIC"/>   <!-- 모임번호 -->
+      <result property="role"             column="role"             jdbcType="VARCHAR" />   <!-- 역활 MST:모임장 MEM:모임원 EMP: 공석-->
+      <result property="meetingMasterId"      column="meeting_master_id"    jdbcType="VARCHAR" />   <!-- 아이디 -->
+      <result property="masterProfileImg"      column="master_profile_img" jdbcType="VARCHAR" />   <!-- 프로필 -->
+      <result property="meetingCenter"      column="meeting_center"    jdbcType="VARCHAR" />   <!-- 중심지 -->
+      <result property="meetingName"         column="meeting_name"       jdbcType="VARCHAR" />   <!-- 모임명 -->
+      <result property="titleImg"            column="title_img"          jdbcType="VARCHAR" />   <!-- 대표이미지 -->
+      <result property="meetingDetail"      column="meeting_detail"    jdbcType="VARCHAR"/>   <!-- 모임설명 -->
+      <result property="meetingRule"          column="meeting_rule"       jdbcType="VARCHAR" />   <!-- 모임규칙 -->
+      <result property="interestName"       column="interest_name"       jdbcType="VARCHAR"/>   <!-- 관심사 -->
+      <result property="meetingLocation"       column="meeting_location"    jdbcType="VARCHAR" />   <!-- 모임장소 -->
+      <result property="meetingDate"          column="meeting_date"       jdbcType="DATE" />      <!-- 모임날짜 -->
+      <result property="meetingDay"          column="meeting_day"       jdbcType="VARCHAR" />   <!-- 모임요일 -->
+      <result property="meetingTime"          column="meeting_time"       jdbcType="VARCHAR" />   <!-- 모임시간 -->
+      <result property="snooze"             column="snooze"          jdbcType="CHAR" />      <!-- 반복여부 Y:반복 N:한번 -->
+      <result property="meetingDues"          column="meeting_dues"       jdbcType="VARCHAR" />   <!-- 회비    -->
+      <result property="meetingViews"       column="meeting_views"       jdbcType="NUMERIC"/>   <!-- 조회수 -->
+      <result property="meetingCondition"    column="meeting_condition"    jdbcType="CHAR"/>      <!-- 모임컨디션 DEF:기본 DEL:삭제 BLD:블라인드 FIN:종료  -->
+      <result property="shutDownDate"       column="shut_down_date"    jdbcType="DATE" />      <!-- 셧다운 시작일 -->
+      <result property="meetingCrewLimit"    column="meeting_crew_limit" jdbcType="NUMERIC" />   <!-- 모임정원 -->
+      <result property="interestNo"          column="interest_no"       jdbcType="NUMERIC" />   <!-- 관심사 번호 -->
+      <result property="crewCondition"       column="crew_condition"    jdbcType="VARCHAR" />      <!-- 모임원 상태 APL:신청 YES:수락 OUT:강퇴 -->
+      <result property="crewNickName"       column="crew_nick_name"    jdbcType="VARCHAR" />   <!-- 닉네임 -->
+      <result property="meetingActNo"       column="meeting_act_no"    jdbcType="VARCHAR" />      <!-- ACT_NO -->
+      <result property="meetingCrewNo"       column="meeting_Crew_no"    jdbcType="VARCHAR" />      <!-- CREW_NO -->
+      <result property="meetingActCount"       column="meeting_act_count"    jdbcType="NUMERIC" />   <!-- 관심사 번호 -->
+      <result property="targetId"       column="target_id"             jdbcType="VARCHAR" />   <!-- 강퇴시킬 아이디 -->
+   </resultMap>
+<!-- /////////////////관심사 조회////////////////// -->
+    <select    id="getInterestList" resultMap="meetingSelectMap">
+      SELECT* FROM interest
+    </select>
+<!-- /////////////////베스트상품 조회////////////////// -->
+    <select  id="getNearMeeting" parameterType="String" resultMap="meetingSelectMap">
+          SELECT *
+         FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
+            FROM (
+            select*from meeting where meeting_center = #{value} order by meeting_views desc
+            ) inner_table 
+         WHERE ROWNUM &lt;= 3)
+         WHERE row_seq BETWEEN 1 AND 3 
+    </select>
+<!-- /////////////////개설하기////////////////// -->
+    <insert    id="addMeeting"      parameterType="com.destiny.service.domain.Meeting">
+        <selectKey keyProperty="meetingNo" resultType="int" order="BEFORE">
+          select seq_meeting_no.nextval FROM DUAL
+          </selectKey>
+       INSERT
+      INTO meeting( meeting_no, meeting_master_id, meeting_center, 
+         meeting_name, title_img, meeting_detail, meeting_rule, interest_name,
+         snooze, meeting_condition, meeting_crew_limit) 
+      VALUES    ( #{meetingNo}, #{meetingMasterId}, #{meetingCenter},
+         #{meetingName}, #{titleImg}, #{meetingDetail}, #{meetingRule}, #{interestName},
+         #{snooze},'DEF', #{meetingCrewLimit})
+    </insert>
+<!-- /////////////////개설된 모임 조회////////////////// -->
+    <select    id="getMeetingList" parameterType="com.destiny.common.Search" resultMap="meetingSelectMap">
+       SELECT *
+      FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
+         FROM (
+            SELECT m.*, ma.act_date as meeting_date, ma.act_location as meeting_location
+            FROM meeting m, meeting_act ma
+            WHERE m.meeting_no = ma.meeting_no 
+            and m.meeting_condition in ('DEF','EMP')
+         <if test="searchKeyword != null">
+            and m.meeting_name LIKE '%'||#{searchKeyword}||'%'
+         </if>
+         <if test="searchCondition != null">
+            and m.meeting_center LIKE '%'||#{searchCondition}||'%'
+         </if>
+         <if test="searchSortingOption != null">
+            and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
+         </if>
+         order by m.meeting_no desc) inner_table 
+      WHERE ROWNUM &lt;= #{endRowNum})
+   WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+    </select>
+<!-- /////////////////상세 조회////////////////// -->
+    <select    id   ="getMeeting"   parameterType="string"   resultMap="meetingSelectMap">
+      SELECT*FROM meeting
+      where meeting_no = #{meetingNo}
+    </select>
+    <!-- /////////////////회차표현용 회차 확인하기////////////////// -->
+    <select    id   ="getAct"   resultMap="meetingSelectMap">
+      SELECT ma.meeting_act_count, u.profile_img as master_profile_img, 
+      ma.act_location as meeting_location, ma.act_date as meeting_date, 
+      ma.act_time as meeting_time, ma.act_dues as meeting_dues,mcl.role
+      FROM meeting_act ma, users u, meeting_crew_list mcl
+      Where ma.meeting_no = mcl.meeting_no
+      and mcl.crew_id = u.user_id
+      and mcl.role = 'MST'
+      and ma.meeting_no = #{meetingNo}
+    </select>
+<!-- ///////////////// 조회수 올리기////////////////// -->
+    <update    id="updateViews"      parameterType="com.destiny.service.domain.Meeting">
+       UPDATE meeting
+       <set>
+        meeting_views = NVL(meeting_views,0) +1
+       </set>
+       WHERE meeting_no = #{meetingNo}
+    </update>
+    
+<!-- ////////////////모임원수 조회////////////////// -->
+    <select  id="getCrewCount" resultType="int">
+          select count(*)from meeting_crew_list 
+          where meeting_no= #{meetingNo}
+          and crew_condition = 'YES'
+    </select>
+    
+<!-- ////////////////가입된 모임원 리스트 표현용////////////////// -->    
+    <select  id="getCrew" resultMap="meetingSelectMap">
+       select u.user_id as meeting_master_id, u.profile_img as master_profile_img, 
+               u.nick_name as crew_nick_name, cl.role 
+      from meeting_crew_list cl, users u
+      where u.user_id= cl.crew_id
+      and cl.crew_condition = 'YES'
+      and cl.meeting_no= #{meetingNo}
+      order by cl.role desc
+    </select>
+    
+<!-- ////////////////모임 컨디션 업데이트////////////////// -->    
+    <update   id="updateMeeting"   parameterType="com.destiny.service.domain.Meeting" >
+         UPDATE meeting
+         <set>
+            meeting_condition       = #{meetingCondition}
+         </set>
+         WHERE meeting_no = #{meetingNo}
+    </update>
+    
+<!-- ////////////////모임수정시 미팅 테이블 업데이트용////////////////// -->    
+    <update   id="updateContentsMeeting"   parameterType="com.destiny.service.domain.Meeting" >
+         UPDATE meeting
+         <set>
+            meeting_center      =#{meetingCenter:VARCHAR}, 
+         meeting_name      =#{meetingName:VARCHAR}, 
+         title_img         =#{titleImg:VARCHAR}, 
+         meeting_detail      =#{meetingDetail:VARCHAR}, 
+         meeting_rule      =#{meetingRule:VARCHAR}, 
+         interest_name      =#{interestName:VARCHAR},
+         snooze            =#{snooze:CHAR}, 
+         meeting_crew_limit    =#{meetingCrewLimit:NUMERIC}
+         </set>
+         WHERE meeting_no = #{meetingNo}
+    </update>
+
+<!-- ////////////////모임수정시 회차 테이블 업데이트용////////////////// -->    
+    <update   id="updateContentsAct"   parameterType="com.destiny.service.domain.Meeting" >
+         UPDATE meeting_act
+         <set>
+         act_location   =#{meetingLocation:VARCHAR}, 
+         act_date      =#{meetingDate:DATE}, 
+         act_time      =#{meetingTime:VARCHAR}, 
+         act_dues      =#{meetingDues:VARCHAR}
+         </set>
+         WHERE meeting_no = #{meetingNo}
+    </update>
+      
+<!-- ////////////////개설시 회차 생성용 ////////////////// -->       
+    <insert    id="addAct"      parameterType="com.destiny.service.domain.Meeting">
+       INSERT
+      INTO meeting_act ( meeting_act_no, meeting_no, meeting_act_count, act_date,
+               act_location, act_time,act_dues) 
+      VALUES    ( seq_meeting_act_no.nextval, #{meetingNo}, 1, #{meetingDate:DATE}, 
+               #{meetingLocation:VARCHAR}, #{meetingTime:VARCHAR}, #{meetingDues:VARCHAR})
+    </insert>
+    
+<!-- ////////////////개설시 모임원에 모임장 생성용 ////////////////// -->
+    <insert    id="addCrewList"      parameterType="com.destiny.service.domain.Meeting">
+       INSERT
+      INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
+               role,crew_condition) 
+      VALUES    ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
+               'MST','YES')
+    </insert>
+<!-- ////////////////모임원가입시  모임원 등록용 ////////////////// -->    
+     <insert    id="addCrewM"      parameterType="com.destiny.service.domain.Meeting">
+       INSERT
+      INTO meeting_crew_list ( meeting_crew_no, meeting_no, crew_id,
+               role, interview_title, interview, crew_condition) 
+      VALUES    ( seq_meeting_crew_no.nextval, #{meetingNo}, #{meetingMasterId}, 
+               'MEM', #{interviewTitle}, #{interview},'APL')
+    </insert>
+<!-- ////////////////회차별 참여자 관리용 ////////////////// -->       
+    <insert    id="addCrewAct"      parameterType="com.destiny.service.domain.Meeting">
+       INSERT
+      INTO meeting_act_crew_list ( act_crew_no, meeting_act_no, meeting_crew_no,
+               act_crew_id, meeting_act_count,meeting_act_date, 
+               meeting_act_time, meeting_act_location) 
+      VALUES    ( seq_meeting_act_crew_no.nextval, #{meetingActNo}, #{meetingCrewNo},
+               #{meetingMasterId}, #{meetingActCount}, #{meetingDate}, #{meetingTime}, #{meetingLocation})
+    </insert>
+    
+<!-- ////////////////모임원인지 확인 ////////////////// -->    
+    <select  id="checkDuplicationCrew" resultType="int">
+          select count(*) CREW_ID from meeting_crew_list where meeting_no=#{meetingNo} 
+          and crew_id=#{meetingMasterId}
+          and crew_condition = 'YES'
+    </select>
+<!-- ////////////////참여자인지 확인 ////////////////// -->
+    <select  id="duplicationAct" resultType="int">
+          select count(*) from meeting_act_crew_list 
+          where meeting_act_no=#{meetingActNo} 
+          and act_crew_id=#{meetingMasterId}
+          and meeting_act_count=#{meetingActCount:NUMERIC}
+    </select>
+<!-- ////////////////참여자할떄 모임의 액트 번호 확인 ////////////////// -->     
+    <select  id="getActNo" resultMap="meetingSelectMap">
+          select meeting_act_no from meeting_act where meeting_no = #{meetingNo}
+    </select>
+<!-- ////////////////참여자할떄 모임의 크루 번호 확인 ////////////////// -->    
+    <select  id="getCrewNo" resultMap="meetingSelectMap">
+          select meeting_crew_no from meeting_crew_list where meeting_no = #{meetingNo} and crew_id=#{meetingMasterId}
+    </select>
+<!-- ////////////////참여자 목록 불러오기 용 ////////////////// -->   <!-- !!!!!!!!!!!!이거도 아마 회차 확인부 추가해야할듯!!!!!!!!!!!!!!  -->    
+    <select    id="getActCrew" resultMap="meetingSelectMap">
+      select macl.act_crew_id as meeting_master_id, u.profile_img as master_profile_img, 
+          u.nick_name as crew_nick_name, cl.meeting_no as meeting_no
+      from users u, meeting_act_crew_list macl, meeting_crew_list cl
+      where u.user_id = macl.act_crew_id
+      and cl.meeting_crew_no = macl.meeting_crew_no
+      and cl.meeting_no = #{meetingNo}
+      and macl.meeting_act_count = #{meetingActCount}
+    </select>
+<!-- ////////////////수정 & 삭제 할 때 모임장인지 확인용 용 ////////////////// -->   
+    <select    id="getCrewrole" resultType="string">
+      select role from meeting_crew_list
+      where meeting_no= #{meetingNo}
+      and crew_id= #{meetingMasterId}
+    </select>
+<!-- /////////////////강퇴 하기 실행시 ////////////////// -->
+   <update   id="kickOut"   parameterType="com.destiny.service.domain.Meeting">
+         UPDATE meeting_crew_list
+         <set>
+         crew_condition   =#{crewCondition} 
+         </set>
+         WHERE meeting_no = #{meetingNo}
+         and crew_id = #{meetingMasterId}
+    </update>
+<!-- /////////////////강퇴 하기 실행시  이번 회차 참여자 목록에서도 지우기 ////////////////// -->
+   <delete   id="kickOutAct"   parameterType="com.destiny.service.domain.Meeting">
+         DELETE meeting_act_crew_list
+         <where>
+         meeting_act_no   = #{meetingActNo:NUMERIC} 
+             and meeting_act_count = #{meetingActCount:NUMERIC}
+             and act_crew_id = #{meetingMasterId:VARCHAR}
+         </where>
+    </delete>
+<!-- /////////////////위임하기 실행시////////////////// -->
+   <update   id="passto"   parameterType="com.destiny.service.domain.Meeting">
+         UPDATE meeting_crew_list
+         <set>
+         role = #{role} 
+         </set>
+         WHERE meeting_no = #{meetingNo}
+         and crew_id = #{meetingMasterId}
+    </update>
+    
+<!-- /////////////////강퇴 하기 실행시 ////////////////// -->
+   <delete   id="dropMeeting"   parameterType="com.destiny.service.domain.Meeting">
+         DELETE meeting_crew_list
+         <where>
+         crew_id   =#{meetingMasterId}
+         and meeting_no = #{meetingNo} 
+         </where>
+    </delete>    
+<!-- /////////////////강퇴 하기 실행시 ////////////////// -->
+   <update   id="nextMeeting"   parameterType="com.destiny.service.domain.Meeting">
+         UPDATE meeting_act
+         <set>
+         meeting_act_count = #{meetingActCount},
+         act_date = #{meetingDate:DATE},
+         act_location = #{meetingLocation},
+         act_time = #{meetingTime},
+         act_dues = #{meetingDues:VARCHAR}
+         </set>
+         WHERE meeting_no = #{meetingNo}
+    </update>    
+<!-- /////////////////모임장탈퇴 셧다운 발동////////////////// -->
+   <update   id="shutdown"   parameterType="com.destiny.service.domain.Meeting">
+         UPDATE meeting
+         <set>
+         shut_down_date = SYSDATE
+         </set>
+         WHERE meeting_no = #{meetingNo}
+    </update>    
+<!-- /////////////////토탈카운트 가져가기////////////////// -->    
+    <select  id="getTotalCount"  parameterType="com.destiny.common.Search"    resultType="int">
+    SELECT COUNT(*)
+      FROM ( SELECT m.*, ma.act_date as meeting_date, ma.act_location as meeting_location, ma.act_date as meeting_date
+      FROM meeting m, meeting_act ma
+      WHERE m.meeting_no = ma.meeting_no 
+      and m.meeting_condition in ('DEF','EMP')
+         <if test="searchKeyword != null">
+            and m.meeting_name LIKE '%'||#{searchKeyword}||'%'
+         </if>
+         <if test="searchCondition != null">
+            and m.meeting_center LIKE '%'||#{searchCondition}||'%'
+         </if>
+         <if test="searchSortingOption != null">
+            and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
+         </if>
+      order by m.meeting_no desc   ) countTable      
+    </select>
+</mapper>

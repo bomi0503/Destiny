@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UploadMapper">
+ 	
+ 	
+	<resultMap id="UploadSelectMap" type="com.destiny.service.domain.Upload">
+		<result property="uploadNo" 			column="upload_no" 					jdbcType="NUMERIC"/>
+		<result property="communityNo"			column="community_no" 				jdbcType="NUMERIC" />
+		<result property="fileName" 			column="file_name" 					jdbcType="VARCHAR" />
+		<result property="fileCode" 			column="file_code" 					jdbcType="CHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addUpload" parameterType="com.destiny.service.domain.Upload" >
+	 	INSERT
+		INTO upload( upload_no, community_no, file_name, file_code ) 
+		VALUES( seq_upload_no.nextval, #{communityNo}, #{fileName}, #{fileCode} )
+	</insert>
+	
+	<!-- SQL : UPDATE -->
+	<update id="updateUpload"	parameterType="com.destiny.service.domain.Upload" >
+		UPDATE upload
+	   	<set>
+	   		file_name = #{fileName}
+	   	</set>
+	   	WHERE upload_no = #{uploadNo}
+	</update>
+	 
+	<!-- SQL : SELECT ONE -->
+	<select id="getUpload" parameterType="int" resultMap="UploadSelectMap">
+		SELECT
+		up.upload_no, up.community_no, up.file_name, up.file_code
+		FROM community comu, upload up
+		WHERE comu.community_no = up.community_no 
+				and comu.community_no = #{value}
+	</select>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <!-- <select id="getPreCommunity" parameterType="int" resultMap="communitySelectMap">
+		SELECT community_no, community_writer_id, category, community_user_grade, community_title, community_writer_nick_name, community_detail, community_write_date,  community_views, community_like, import_rank, community_view_condition
+		FROM community
+		WHERE community_no = ( SELECT max(community_no)
+								FROM community
+								WHERE <![CDATA[#{value} > community_no]]> 
+										and community_view_condition = 'DEF')
+	 </select> -->
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <!-- <select id="getNextCommunity" parameterType="int" resultMap="communitySelectMap">
+		SELECT community_no, community_writer_id, category, community_user_grade, community_title, community_writer_nick_name, community_detail, community_write_date,  community_views, community_like, import_rank, community_view_condition
+		FROM community
+		WHERE community_no = ( SELECT min(community_no)
+								FROM community
+								WHERE <![CDATA[#{value} < community_no]]> 
+										and community_view_condition = 'DEF')
+	 </select> -->
+	 
+	 <!-- SQL : VIEW_CONDITION UPDATE -->
+	 <!-- <update id="updateViewsCondition"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+			community_view_condition	= #{viewCondition}
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+	 
+	 <!-- SQL : VIEW_CONDITION UPDATE ADMIN -->
+	 <!-- <update id="updateViewsConditionAdmin"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+			community_view_condition	= #{viewCondition}
+	   	</set>
+	   	WHERE community_writer_id = #{writerId}
+	 </update> -->
+	 
+	 <!-- SQL : VIEW UPDATE -->
+	 <!-- <update id="updateViews"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+	   		community_writer_id			= #{writerId},
+	   		category					= #{category},
+	   		community_user_grade		= #{userGrade},
+	   		community_title 			= #{title},
+	   		community_writer_nick_name	= #{writerNickName},
+			community_detail			= #{detail},
+			community_write_date		= SYSDATE
+			community_views				= community_views + 1
+			community_like				= #{like},
+			import_rank					= #{importRank},
+			community_view_condition	= #{viewCondition}
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+	 
+	 <!-- SQL : LIKE UPDATE(+1) -->
+	 <!-- <update id="addLikeCommunity"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+			community_like = community_like + 1
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+	 
+	 <!-- SQL : LIKE UPDATE(-1) -->
+	 <!-- <update id="subLikeCommunity"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+			community_like = community_like - 1
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+	 
+	 <!-- SQL : UPDATE -->
+	 <!-- <update id="updateCommunity"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+	   		community_writer_id			= #{writerId},
+	   		category					= #{category},
+	   		community_user_grade		= #{userGrade},
+	   		community_title 			= #{title},
+	   		community_writer_nick_name	= #{writerNickName},
+			community_detail			= #{detail},
+			community_write_date		= SYSDATE
+			community_views				= #{views},
+			community_like				= #{like},
+			import_rank					= #{importRank},
+			community_view_condition	= #{viewCondition}
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+	 
+	 <!-- SQL : deleteUPDATE -->
+	 <!-- <update id="deleteCommunity"	parameterType="com.destiny.service.domain.Community" >
+	   	UPDATE community
+	   	<set>
+	   		community_writer_id			= #{writerId},
+	   		category					= #{category},
+	   		community_user_grade		= #{userGrade},
+	   		community_title 			= #{title},
+	   		community_writer_nick_name	= #{writerNickName},
+			community_detail			= #{detail},
+			community_write_date		= SYSDATE
+			community_views				= #{views},
+			community_like				= #{like},
+			import_rank					= #{importRank},
+			community_view_condition	= 'DEL'
+	   	</set>
+	   	WHERE community_no = #{communityNo}
+	 </update> -->
+		 
+	<!-- SQL : SELECT LIST -->
+	<!-- <select id="getCommunityList" parameterType="com.destiny.common.Search" resultMap="communitySelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT  comu.community_no, comu.community_writer_id, comu.category, comu.community_user_grade, comu.community_title, comu.community_writer_nick_name, comu.community_detail, comu.community_write_date, comu.community_views, comu.community_like, comu.import_rank, comu.community_view_condition
+											FROM community comu
+											WHERE  category = 'RES' and community_view_condition = 'DEF'
+											
+											<if test="searchCondition != null">
+												<if test="searchCondition == 0 and searchKeyword !='' ">
+									 				and comu.community_title like '%'||#{searchKeyword}||'%' 
+												</if>
+												<if test="searchCondition == 1 and searchKeyword !='' ">
+									 				and comu.community_writer_nick_name like '%'||#{searchKeyword}||'%' 
+												</if>
+											</if>
+											
+											<choose>
+												<when test="viewSort == 1">
+														ORDER BY comu.community_views desc 
+												</when>
+											</choose>
+											<choose>
+												<when test="likeSort == 1">
+														ORDER BY comu.community_like desc 
+												</when>
+											</choose>
+											<choose>
+												<when test="viewSort != 1 and likeSort != 1 or noSort == 1">
+														ORDER BY comu.community_no desc  
+												</when>
+											</choose>
+											
+											<if test="viewSort == 1">
+												ORDER BY comu.community_views desc 
+											</if>
+											<if test="likeSort == 1">
+												ORDER BY comu.community_like desc 
+											</if>
+											<if test="viewSort != 1 and likeSort != 1 or noSort == 1">
+												ORDER BY comu.community_no desc 
+											</if>
+						) inner_table WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select> -->
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <!-- <select  id="getTotalCount"  parameterType="com.destiny.common.Search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT comu.community_no, comu.community_writer_id, comu.category, comu.community_user_grade, comu.community_title, comu.community_writer_nick_name, comu.community_detail, comu.community_write_date, comu.community_views, comu.community_like, comu.import_rank, comu.community_view_condition
+						FROM community comu
+						WHERE  category = 'RES' and community_view_condition = 'DEF'
+						<if test="searchCondition != null">
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+					 			and comu.community_title like '%'||#{searchKeyword}||'%'
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+					 			and comu.community_writer_nick_name like '%'||#{searchKeyword}||'%'
+							</if>
+						</if>
+						
+						<choose>
+							<when test="viewSort == 1">
+									ORDER BY comu.community_views desc 
+							</when>
+						</choose>
+						<choose>
+							<when test="likeSort == 1">
+									ORDER BY comu.community_like desc 
+							</when>
+						</choose>
+						<choose>
+							<when test="viewSort != 1 and likeSort != 1 or noSort == 1">
+									ORDER BY comu.community_no desc  
+							</when>
+						</choose>
+						)countTable
+						
+						<if test="viewSort == 1">
+							ORDER BY comu.community_views desc ) countTable
+						</if>
+						<if test="likeSort == 1">
+							ORDER BY comu.community_like desc ) countTable
+						</if>
+						<if test="viewSort != 1 and likeSort != 1 or noSort == 1">
+							ORDER BY comu.community_no desc ) countTable
+						</if>						
+	 </select> -->
+	 
+</mapper>

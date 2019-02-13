@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+ 	
+ 	
+	<resultMap id="userSelectMap" type="com.destiny.service.domain.User">
+		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
+		<result property="password" 		column="password" 			jdbcType="VARCHAR" />
+		<result property="nickName"			column="nick_name" 			jdbcType="VARCHAR" />
+		<result property="userGrade"		column="user_grade" 		jdbcType="VARCHAR"/>
+		<result property="email" 			column="email" 				jdbcType="VARCHAR" />
+		<result property="birthday" 		column="birthday" 			jdbcType="DATE" />
+		<result property="address" 			column="address" 			jdbcType="VARCHAR" />
+		<result property="profile" 			column="profile_img" 		jdbcType="VARCHAR" />
+		<result property="gender" 			column="gender" 			jdbcType="CHAR" />
+		<result property="phone" 			column="phone" 				jdbcType="VARCHAR" />
+		<result property="attendCount" 		column="attend_count" 		jdbcType="INTEGER" />
+		<result property="lastLoginDay" 	column="last_login_day" 	jdbcType="DATE" />
+		<result property="warningCount" 	column="warning_count" 		jdbcType="INTEGER" />
+		<result property="myType" 			column="my_type" 			jdbcType="NUMERIC" />
+		<result property="firstType" 		column="first_type" 		jdbcType="NUMERIC" />
+		<result property="secondType" 		column="second_type" 		jdbcType="NUMERIC" />
+		<result property="thirdType" 		column="thrid_type" 		jdbcType="NUMERIC" />
+		<result property="firstInterest" 	column="first_interest" 	jdbcType="NUMERIC" />
+		<result property="secondInterest" 	column="second_interest" 	jdbcType="NUMERIC" />
+		<result property="thirdInterest" 	column="third_interest" 	jdbcType="NUMERIC" />		
+		<result property="userState" 		column="user_state" 		jdbcType="CHAR"/>	
+	</resultMap>
+	
+	<resultMap id="locationSelectMap" type="com.destiny.service.domain.Location">
+		<result property="locationNo" column="location_no" jdbcType="INTEGER"/>
+		<result property="cityName" column="city_name" jdbcType="VARCHAR"/>
+		<result property="townName" column="town_name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
+	
+	
+
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
+		SELECT
+		user_id, nick_name, user_grade, password, email, birthday, address, profile_img, gender, phone, attend_count, last_login_day, warning_count, my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest, user_state	
+		FROM users 
+		WHERE user_id = #{value}
+	 </select>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getUserByNickName"	parameterType="string"	resultMap="userSelectMap">
+		SELECT
+		user_id, nick_name, user_grade, password, email, birthday, address, profile_img, gender, phone, attend_count, last_login_day, warning_count, my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest, user_state
+		FROM users 
+		WHERE nick_name = #{value}
+	 </select>
+	 
+	 <select 	id="getUserByEmail"	parameterType="string"	resultMap="userSelectMap">
+		SELECT
+		user_id, nick_name, user_grade, password, email, birthday, address, profile_img, gender, phone, attend_count, last_login_day, warning_count, my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest, user_state	
+		FROM users 
+		WHERE email = #{value}
+	 </select>
+	 
+	 <select 	id="getUserByPhone"	parameterType="string"	resultMap="userSelectMap">
+		SELECT
+		user_id, nick_name, user_grade, password, email, birthday, address, profile_img, gender, phone, attend_count, last_login_day, warning_count, my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest, user_state	
+		FROM users 
+		WHERE phone = #{value}
+	 </select>
+	 
+	 <update id="attendLogin" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		last_login_day = #{lastLoginDay},
+	 		attend_count = #{attendCount}
+	 	</set>
+	 	WHERE user_id = #{userId}
+	 </update>
+	 
+	 <insert id="addUser" parameterType="com.destiny.service.domain.User">
+	 	INSERT 
+	 	INTO users(user_id, nick_name, user_grade, password, email, birthday, address, profile_img, gender, phone, attend_count, last_login_day, warning_count, first_interest, second_interest, third_interest, user_state)
+	 	VALUES	  (#{userId}, #{nickName}, 'NEW', #{password}, #{email}, #{birthday}, #{address}, #{profile}, #{gender}, #{phone}, 0, to_date('1970/01/19 10:48:43', 'YYYY/MM/DD HH24:MI:SS'), 0, #{firstInterest}, #{secondInterest}, #{thirdInterest},'I')
+	 </insert>
+	 
+	 <select id="locationList" parameterType="String" resultMap="locationSelectMap">
+	 	SELECT town_name
+	 	FROM location
+	 	<where>
+	 		city_name = #{value}
+	 	</where>
+	 </select>
+	 
+	 <select id="getInterest" parameterType="int" resultType="String">
+	 	SELECT INTEREST_NAME
+	 	from interest
+	 	<where>
+	 		interest_no = #{value}
+	 	</where>
+	 </select>
+	 
+	 <select id="getInterestList" resultType="String">
+	 	SELECT INTEREST_NAME
+	 	from interest
+	 </select>
+	 
+	 <select id="getType" parameterType="int" resultType="String">
+	 	SELECT type_name
+	 	from type
+	 	<where>
+	 		type_no = #{value}
+	 	</where>
+	 </select>
+	 
+	 <select id="getTypeList" resultType="String">
+	 	SELECT type_name
+	 	FROM type
+	 </select>
+	 
+	 <update id="updateUser" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		nick_name = #{nickName},
+	 		address	  = #{address},
+	 		phone	  = #{phone},
+	 		email	  = #{email},
+	 		first_interest = #{firstInterest},
+	 		second_interest = #{secondInterest},
+	 		third_interest = #{thirdInterest},
+	 		profile_img = #{profile}
+	 	</set>
+	 	WHERE user_id = #{userId}
+	 </update>
+	 
+	 <update id="updateType" parameterType="com.destiny.service.domain.User" >
+	 	UPDATE users
+	 	<set>
+	 		my_type 	= #{myType},
+	 		first_type  = #{firstType},
+	 		second_type = #{secondType},
+	 		thrid_type  = #{thirdType}
+	 	</set>
+	 	WHERE user_id = #{userId}
+	 </update>
+	 
+	 <update id="updateGrade" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		user_grade = #{userGrade}
+	 	</set>
+	 	<where>
+	 		user_id = #{userId}
+	 	</where>
+	 </update>
+	 
+	 <update id="updateState" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		user_state = #{userState}
+	 	</set>
+	 	<where>
+	 		user_id = #{userId}
+	 	</where>
+	 </update>
+	 
+	 <update id="updatePassword" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		password = #{password}
+	 	</set>
+	 	<where>
+	 		user_id = #{userId}
+	 	</where>
+	 </update>
+	 
+	 <!-- //////////SQL : WARNING UPDATE///////////////////////////////////////////////////////////////////////// -->
+	 <update id="updateWarningCount" parameterType="com.destiny.service.domain.User">
+	 	UPDATE users
+	 	<set>
+	 		warning_count = warning_count+1
+	 	</set>
+	 	<where>
+	 		user_id = #{userId}
+	 	</where>
+	 </update>
+	 <!-- //////////SQL : WARNING UPDATE///////////////////////////////////////////////////////////////////////// -->
+	 
+	 <!-- SQL : SELECT LIST -->
+	<select  id="getUserList"  parameterType="com.destiny.common.Search"	resultMap="userSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT user_id, password, nick_name, user_grade, email, birthday, address,
+	  					                    profile_img, gender, phone, attend_count, last_login_day, warning_count,
+	  					                    my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest, user_state    
+											FROM users
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				user_id like #{searchKeyword}||'%' 
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				nick_name like #{searchKeyword}||'%' 
+													</if>
+												</where>
+											</if>
+											<if test="searchSortingOption != null and searchSortingOption != ''">											
+												<if test="searchSortingOption == 0 and searchSortingOption != '' ">											
+													ORDER BY user_id
+												</if>
+												<if test="searchSortingOption == 1 and searchSortingOption != '' ">
+													ORDER BY attend_count ASC
+												</if>	
+												<if test="searchSortingOption == 2 and searchSortingOption != '' ">
+													ORDER BY attend_count DESC
+												</if>										
+										</if>
+											 ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+		<if test="searchSortingOption != null">											
+			<if test="searchSortingOption == 3 and searchSortingOption != '' ">
+				ORDER BY attend_count ASC
+			</if>
+			<if test="searchSortingOption == 4 and searchSortingOption != '' ">
+				ORDER BY attend_count DESC
+			</if>											
+		</if>	
+	 </select>
+	 
+	 <select  id="getTotalCount"  parameterType="com.destiny.common.Search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT  user_id, password, nick_name, user_grade, email, birthday, address,
+	                    profile_img, gender, phone, attend_count, last_login_day, warning_count,
+	                    my_type, first_type, second_type, thrid_type, first_interest, second_interest, third_interest    
+						FROM users
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			user_id like #{searchKeyword}||'%' 
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			nick_name like #{searchKeyword}||'%' 
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+	 
+	 
+	 
+	 
+</mapper>

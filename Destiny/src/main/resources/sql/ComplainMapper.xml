@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ComplainMapper">
+ 	
+ 	
+	<resultMap id="complainSelectMap" type="com.destiny.service.domain.Complain">
+		<result property="complainNo" 			column="complain_no" 				jdbcType="NUMERIC"/>
+		<result property="complainerId"			column="complainer_id" 				jdbcType="VARCHAR" />
+		<result property="defendantId" 			column="defendant_id" 				jdbcType="VARCHAR" />
+		<result property="meetingNo" 			column="meeting_no" 				jdbcType="NUMERIC" />
+		<result property="communityNo"			column="community_no" 				jdbcType="NUMERIC" />
+		<result property="commentNo"			column="comment_no" 				jdbcType="NUMERIC" />
+		<result property="complainDetail" 		column="complain_detail" 			jdbcType="VARCHAR" />
+		<result property="complainText" 		column="complain_text" 				jdbcType="VARCHAR" />
+		<result property="complainType"			column="complain_type" 				jdbcType="CHAR" />
+		<result property="complainKind"			column="complain_kind" 				jdbcType="CHAR" />
+		<result property="complainDate"			column="complain_date" 				jdbcType="DATE" />
+		<result property="checkDate"			column="complain_check_date" 		jdbcType="DATE" />
+		<result property="complainState"		column="complain_state" 			jdbcType="CHAR" />
+		<result property="complainCondition"	column="complain_condition" 		jdbcType="CHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addComplain" parameterType="com.destiny.service.domain.Complain" >
+		<!-- INSERT INTO complain (complain_no, complainer_id, defendant_id, meeting_no, community_no, complain_detail, complain_type, complain_kind, complain_date, complain_state) 
+		VALUES(seq_complain_no.nextval, #{complainerId}, #{defendantId}, #{meetingNo}, #{communityNo}, #{complainDetail}, #{complainType}, #{complainKind}, SYSDATE, 'N') -->
+		<if test="meetingNo == 0">
+			INSERT INTO complain (complain_no, complainer_id, defendant_id, community_no, complain_detail, complain_text, complain_type, complain_kind, complain_date, complain_state) 
+			VALUES(seq_complain_no.nextval, #{complainerId}, #{defendantId}, #{communityNo}, #{complainDetail}, #{complainText}, #{complainType}, 'BD', SYSDATE, 'N')
+		</if>
+		<if test="communityNo == 0">
+			INSERT INTO complain (complain_no, complainer_id, defendant_id, meeting_no, complain_detail, complain_text, complain_type, complain_kind, complain_date, complain_state) 
+			VALUES(seq_complain_no.nextval, #{complainerId}, #{defendantId}, #{meetingNo}, #{complainDetail}, #{complainText}, #{complainType}, 'MT', SYSDATE, 'N')
+		</if>
+	</insert> 
+	
+	<!-- SQL : SELECT ONE -->
+	 <select id="getComplain" parameterType="int" resultMap="complainSelectMap">
+			SELECT * FROM complain WHERE complain_no = ${value}
+			<!-- SELECT co.category, co.community_title, c.*
+			FROM community co, complain c 
+			WHERE co.community_no = c.community_no
+				AND c.complain_no = ${value} -->
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update id="updateComplain"	parameterType="com.destiny.service.domain.Complain" >
+	   	UPDATE complain
+	   	<set>
+	   		complain_state			= 'Y',
+	   		complain_condition		= #{complainCondition},
+			complain_check_date		= SYSDATE
+	   	</set>
+	   	WHERE complain_no = #{complainNo}
+	 </update>
+ 
+	<!-- SQL : SELECT LIST -->
+	<select id="getComplainList" parameterType="com.destiny.common.Search" resultMap="complainSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  			FROM ( SELECT complain_no, complainer_id, complain_kind, complain_date, complain_state, complain_check_date, complain_condition
+						FROM complain
+						ORDER BY complain_no desc ) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="com.destiny.common.Search"	 resultType="int">
+	  	SELECT COUNT(*) 
+	  	FROM ( SELECT complainer_id, complain_kind, complain_date, complain_state, complain_check_date 
+				FROM complain) countTable						
+	 </select>
+	 
+</mapper>

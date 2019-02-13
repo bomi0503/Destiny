@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+ 		 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+  						
+<!--	mybatis-config.xml :: MyBatis Framework  MetaData -->
+<configuration>
+
+	<!-- 기타 설정정보 :: [MyBatis_Home]/mybatis-3.2.1.pdf 참조 -->
+	<settings>
+		<setting name="callSettersOnNulls" value="false"/>
+	</settings>	
+	
+	<!-- FQCN(Full Qualified Class Name) Alias(별칭관리) -->
+	<!-- <typeAliases>
+		<typeAlias alias="chatting" type="com.destiny.service.domain.Chatting" />
+		<typeAlias alias="comment" type="com.destiny.service.domain.Comment" />
+		<typeAlias alias="community" type="com.destiny.service.domain.Community" />
+		<typeAlias alias="complain" type="com.destiny.service.domain.Complain" />
+		<typeAlias alias="find" type="com.destiny.service.domain.Find" />
+		<typeAlias alias="letter" type="com.destiny.service.domain.Letter" />
+		<typeAlias alias="meeting" type="com.destiny.service.domain.Meeting" />
+		<typeAlias alias="telepathy" type="com.destiny.service.domain.Telepathy" />
+		<typeAlias alias="user" type="com.destiny.service.domain.User" />
+		
+		<typeAlias alias="search" type="com.destiny.common.Search" />
+	</typeAliases> -->
+	
+	<!-- SQL Definition :: file include -->
+	<!-- <mappers>
+		<mapper resource="sql/ChattingMapper.xml"/>
+		<mapper resource="sql/CommentMapper.xml"/>
+		<mapper resource="sql/CommunityMapper.xml"/>
+		<mapper resource="sql/ComplainMapper.xml"/>
+		<mapper resource="sql/FindMapper.xml"/>
+		<mapper resource="sql/LetterMapper.xml"/>
+		<mapper resource="sql/MeetingMapper.xml"/>
+		<mapper resource="sql/PushMapper.xml"/>
+		
+	</mappers> -->
+	<mappers>
+		<mapper resource="sql/ActMapper.xml"/>
+		<mapper resource="sql/UserMapper.xml"/>
+		<mapper resource="sql/LetterMapper.xml"/>
+		<mapper resource="sql/FindMapper.xml"/>		
+		<mapper resource="sql/MeetingMapper.xml"/>
+		<mapper resource="sql/CommunityMapper.xml"/>
+		<mapper resource="sql/ChattingMapper.xml"/>
+		<mapper resource="sql/ComplainMapper.xml"/>
+		<mapper resource="sql/LikeCountMapper.xml"/>
+		<mapper resource="sql/CommentMapper.xml"/>
+		<mapper resource="sql/UploadMapper.xml"/>
+	</mappers>
+</configuration>

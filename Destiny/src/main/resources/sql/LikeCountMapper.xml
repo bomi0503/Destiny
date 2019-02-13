@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LikeCountMapper">
+ 	
+ 	
+	<resultMap id="likecountSelectMap" type="com.destiny.service.domain.LikeCount">
+		<result property="likeCountNo" 				column="likecount_no" 					jdbcType="NUMERIC"/>
+		<result property="likeCountId"				column="likecount_id" 					jdbcType="VARCHAR" />
+		<result property="likeCountCommunityNo" 	column="likecount_community_no" 		jdbcType="NUMERIC" />
+		<result property="likeCountCheck" 			column="likecount_check" 				jdbcType="CHAR" />
+	</resultMap>
+	
+	<!-- SQL : SELECT -->
+	<select id="getLikeCount" parameterType="com.destiny.service.domain.LikeCount" resultMap="likecountSelectMap" >
+	 	SELECT * FROM likeCount 
+	 	WHERE likecount_community_no = #{likeCountCommunityNo} AND likecount_id = #{likeCountId}
+	</select>
+	
+	<!-- SQL : SELECT -->
+	<select id="checkId" parameterType="com.destiny.service.domain.LikeCount" resultMap="likecountSelectMap" >
+	 	SELECT * FROM likeCount 
+	 	WHERE likecount_id = #{likeCountId} AND likecount_community_no = #{likeCountCommunityNo}
+	</select>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addLikeCount" parameterType="com.destiny.service.domain.LikeCount" >
+	 	INSERT
+		INTO likecount( likecount_no, likecount_id, likecount_community_no, likecount_check) 
+		VALUES( seq_likecount_no.nextval, #{likeCountId}, #{likeCountCommunityNo}, 'Y')
+	</insert>
+	
+	<!-- SQL : SELECT ONE -->
+	 <!-- <select id="getLikecount" parameterType="int" resultMap="LikeCountMapper">
+		SELECT
+		likecount_no, likecount_id, likecount_community_no, likecount_check
+		FROM likecount
+		WHERE likecount_no = #{value}
+	 </select> -->
+	
+	<!-- SQL : UPDATE -->
+	 <update id="updateLikeCount"	parameterType="com.destiny.service.domain.LikeCount" >
+	   	UPDATE likecount
+	   	<set>
+	   		likecount_check = #{likeCountCheck}
+	   	</set>
+	   	WHERE likecount_community_no = #{likeCountCommunityNo} AND likecount_id = #{likeCountId}
+	 </update>
+	 
+</mapper>

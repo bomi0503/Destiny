@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChattingMapper">
+ 	
+ 	
+	<resultMap id="chattingSelectMap" type="com.destiny.service.domain.Chatting">
+		<result property="chattingNo" 		column="chatting_no" 		jdbcType="NUMERIC" />			
+		<result property="manId" 			column="man_id" 			jdbcType="VARCHAR" />
+		<result property="womanId" 			column="woman_id" 			jdbcType="VARCHAR" />
+		<result property="chattingDate" 	column="chatting_date" 		jdbcType="DATE" />
+		<result property="contactMeeting" 	column="contact_meeting" 	jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="telepathySelectMap" type="com.destiny.service.domain.Telepathy">
+		<result property="telepathyNo" 			column="telepathy_no" 			jdbcType="NUMERIC" />
+		<result property="telepathyQuestion" 	column="telepathy_question" 	jdbcType="VARCHAR" />
+		<result property="exOne" 				column="ex_one" 				jdbcType="VARCHAR" />
+		<result property="exTwo" 				column="ex_two" 				jdbcType="VARCHAR" />
+		<result property="exOneImg" 			column="ex_one_img" 			jdbcType="VARCHAR" />
+		<result property="exTwoImg" 			column="ex_two_img" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<resultMap id="userSelectMap" type="com.destiny.service.domain.User">
+		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
+		<result property="password" 		column="password" 			jdbcType="VARCHAR" />
+		<result property="nickName"			column="nick_name" 			jdbcType="VARCHAR" />
+		<result property="userGrade"		column="user_grade" 		jdbcType="CHAR"/>
+		<result property="email" 			column="email" 				jdbcType="VARCHAR" />
+		<result property="birthday" 		column="birthday" 			jdbcType="DATE" />
+		<result property="address" 			column="address" 			jdbcType="VARCHAR" />
+		<result property="profile" 			column="profile_img" 		jdbcType="VARCHAR" />
+		<result property="gender" 			column="gender" 			jdbcType="CHAR" />
+		<result property="phone" 			column="phone" 				jdbcType="VARCHAR" />
+		<result property="attendCount" 		column="attend_count" 		jdbcType="INTEGER" />
+		<result property="lastLoginDay" 	column="last_login_day" 	jdbcType="DATE" />
+		<result property="warningCount" 	column="warning_count" 		jdbcType="INTEGER" />
+		<result property="myType" 			column="my_type" 			jdbcType="NUMERIC" />
+		<result property="firstType" 		column="first_type" 		jdbcType="NUMERIC" />
+		<result property="secondType" 		column="second_type" 		jdbcType="NUMERIC" />
+		<result property="thirdType" 		column="thrid_type" 		jdbcType="NUMERIC" />
+		<result property="firstInterest" 	column="first_interest" 	jdbcType="NUMERIC" />
+		<result property="secondInterest" 	column="second_interest" 	jdbcType="NUMERIC" />
+		<result property="thirdInterest" 	column="third_interest" 	jdbcType="NUMERIC" />			
+	</resultMap>
+
+	 <!-- SQL : SELECT ONE -->
+	 <insert 	id="addChatting"	parameterType="com.destiny.service.domain.Chatting">
+		INSERT INTO chatting(chatting_no, man_id,woman_id, chatting_date, contact_meeting)
+	 	VALUES (seq_chatting_no.nextval,#{manId:VARCHAR},#{womanId:VARCHAR},SYSDATE,#{contactMeeting:VARCHAR})
+	 </insert>
+	 
+	 <select 	id="getChatting"	parameterType="string"	resultMap="chattingSelectMap">
+		
+	 	select * from( 
+    		select * from chatting 
+    		where man_id=#{value} OR woman_id=#{value} 
+   			order by chatting_date desc) 
+   		where rownum <![CDATA[ < ]]> 2
+	 </select>
+	 
+	 <select 	id="getChatting2"	parameterType="int"	resultMap="chattingSelectMap">
+		
+	 	
+    		select * from chatting 
+    		where chatting_no=#{value} 
+   			
+	 </select>
+	 
+	 <select 	id="listChatting"	parameterType="map" resultMap="chattingSelectMap">
+		SELECT *
+		FROM chatting
+	 	WHERE woman_id=#{userId} OR man_id=#{userId}
+	 </select>
+	 
+	 <update 	id="updateContactMeeting"	parameterType="com.destiny.service.domain.Chatting">
+		UPDATE chatting 
+		<set>
+			contact_meeting='Y' 
+		</set>
+	 	WHERE chatting_no=#{chattingNo} 
+	 </update>
+	 
+	 <select 	id="listTelepathy"	parameterType="map" resultMap="telepathySelectMap">
+		select * from( 
+    		select * from telepathy
+   			order by DBMS_RANDOM.RANDOM) 
+   		where rownum <![CDATA[ < ]]> 4
+
+	 </select>
+	 
+	 <select 	id="getTelepathyResult"	parameterType="map" resultMap="telepathySelectMap">
+		select *
+		from telepathy
+		where telepathy_no=#{telepathyNo}
+
+	 </select>
+	 
+</mapper>
