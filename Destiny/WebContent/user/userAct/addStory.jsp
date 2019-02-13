@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>우리들의 연결고리</title>
 
 <!-- include libraries(jQuery, bootstrap) -->
@@ -24,8 +25,12 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 
+<script src="/resources/javascript/skel.min.js"></script>
+<script src="/resources/javascript/util.js"></script>
+<script src="/resources/javascript/main.js"></script>
 
-	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="/resources/css/main.css" >
 
 <script type="text/javascript">
 	$(function(){
@@ -113,6 +118,7 @@
 	});
 </script>
 <style>
+
 	#loading {
 		 width: 100%;  
 		 height: 100%;  
@@ -132,20 +138,36 @@
 		 left: 50%; 
 		 z-index: 100; 
 	}
-	
-	body{
-		position : relative;
+	.representImg{
+		margin-top : 1em;
+		width : 25%;
+		height : 20em;
+		padding : 1em;
+		text-align : center;
+		border : 1px solid #a9a9a9;
+		border-radius : 5px;
 	}
-	.topImg{
+	.representImg img{
+		width : 80%;
+	}
+	/* .topImg{
 		display : block;
 		position : absolute;
 		top : 0;
-		background-image : url("/resources/images/background/getRestaurantInfo_background.jpg");
+		background-image : url("/resources/images/background/getRestaurantInfo07_background.jpg");
 		background-repeat : no-repeat;
-		background-position : center center;
+		background-position : center -400px;
 		background-size : cover;
 		width : 100%;
 		height : 400px;
+	} */
+	.topImg{
+		max-width : 100%;
+		height : 400px;
+		background-image : url("/resources/images/background/getRestaurantInfo_background.jpg");
+		background-position : center center;
+		background-size : cover;
+		background-repeat : no-repeat;
 	}
 	.topImg::after{
 		content : "";
@@ -155,33 +177,65 @@
 		left : 0;
 		width : 100%;
 		height : 400px;
-		z-index : 1;
 	}
-	.topImg h1{
+	/* .topImg h1{
 		position : absolute;
-		line-height : 450px;
+		line-height : 330px;
 		width : 100%;
 		text-align : center;
 		color : white;
-		z-index : 2;
+		z-index : 99;
 		font-size : 60px;
-		font-weight : bold;
+	} */
+	.topImg h1{
+		position : absolute;
+		width : 100%;
+		margin : 0;
+		padding : 0;
+		font-family: 'Nanum Myeongjo', serif;
+		font-size : 60px;
+		text-align : center;
+		height : 400px;
+		line-height : 450px;
+		color : white;
+		z-index : 99;
+		
+	}
+	li{
+		list-style-type : none;
+	}
+	.smallNavi{
+		overflow : hidden;
+		margin-top : -80px;
+		margin-bottom : 60px;
+		float : right;
 	}
 	
-	
-	form{
-		margin-top : 400px;
+	.smallNavi li{
+		float : left;
+		margin-right : 20px;
+		margin-top : 8em;
+	}
+	.updateForm{
+		display : block;
+		padding : 60px 0 10em 0;
 	}
 	
-	.container{
-		padding-bottom : 100px;
+	/* 빵메뉴 안맞아서 따로 만듬^^ */
+	.fa{
+		line-height : 50px;
+	}
+	/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
 	}
 </style>
 </head>
 <body>
 
 <!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolBar.jsp" />
+	<jsp:include page="/layout/header.jsp" />
   <!-- ToolBar End /////////////////////////////////////-->
   
   	<div class="topImg">
@@ -190,7 +244,7 @@
 
 	<div class="container">
 		
-		<div class="row">
+		<div class="updateForm">
 		
 			<form enctype="multipart/form-data">
 			
@@ -200,7 +254,7 @@
 					<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." autofocus autocomplete=off>
 					
 				</div>
-			
+				
 				<div class="form-group">
 				
 					<label for="title">대표이미지</label>
@@ -216,7 +270,7 @@
 				
 				<div class="form-group text-center">
 				
-					<button type="button" class="btn btn-default btn-lg" id="save">확인</button>
+					<button type="button" class="" id="save">확인</button>
 					
 				</div>
 				
@@ -230,6 +284,7 @@
 	<div id="loading">
 		<img id="loading-image" src="../resources/images/loading.gif" alt="loading">
 	</div>
+
 	
 </body>
 </html>

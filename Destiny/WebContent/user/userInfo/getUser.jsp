@@ -45,9 +45,9 @@
 	</script>
 	
 	<style>
-		.userInfo {vertical-align: middle; background-color: #F8E6E0; }
 		body{
 			position : relative;
+			font-family: 'Nanum Myeongjo', serif;
 		}
 		.container{
 			font-weight : 700;
@@ -60,14 +60,13 @@
 			display : block;
 			position : absolute;
 			top : 0;
-			background-image : url("/resources/images/background/userlistbg.png");
+			background-image : url("/resources/images/background/notice02_background.jpg");
 			background-repeat : no-repeat;
-			background-position : center -280px;
+			background-position : center -500px;
 			background-size : cover;
 			width : 100%;
 			height : 400px;
 		}
-		
 		.topImg::after{
 			content : "";
 			background : rgba(0, 0, 0, 0.2);
@@ -77,20 +76,16 @@
 			width : 100%;
 			height : 400px;
 		}
-		
 		.topImg h1{
-			font-family: 'Nanum Myeongjo', serif;
 			position : absolute;
-			line-height : 450px;
+			line-height : 330px;
 			width : 100%;
 			text-align : center;
 			color : white;
 			z-index : 99;
 			font-size : 60px;
 		}
-		
 		h1 .slim{
-			font-family: 'Nanum Myeongjo', serif;
 			font-weight : lighter;
 		}
 		.wrap{
@@ -101,10 +96,14 @@
 			list-style-type : none;
 		}
 		
+		/*  .container{
+			overflow : hidden;
+		} */
+		
 		.smallNavi{
 			overflow : hidden;
 			float : right;
-			margin-top : -30px;
+			margin-top : -80px;
 			margin-bottom : 60px;
 		}
 		
@@ -128,6 +127,19 @@
 		    width: 70%;
 		    margin: 40px auto;
 		}
+		
+		.button-mbti {
+		    background-color: transparent;
+		    box-shadow: inset 0 0 0 3px #c5c5c5;
+		    color: #c5c5c5 !important;
+		    display: inline-block;
+		    font-size: .75em;
+		    height: 3.75em;
+		    line-height: 3.85em;
+		    padding: 0 4em;
+		    text-decoration: none;
+		}
+		
 		.profileImg{overflow:hidden; max-width:350px; max-height:350px; margin:-150px auto 0; text-align:center; border:3px solid #AAA; border-radius:50%;}
 		.profileImg img{max-width:350px; max-height:350px;}
 		.subTitle{font-size:15px; font-weight:900;}
@@ -143,7 +155,7 @@
 	
 	<!-- 메인배경이미지 : start -->
 	<div class="topImg">
-		<h1>회원<span class="slim">리스트</span></h1>
+		<h1>회원<span class="slim">정보</span></h1>
 	</div>
 	<!-- 메인배경이미지 : end -->
 	
@@ -151,13 +163,25 @@
 	<section id="main" class="wrapper">
 		<div class="inner">
 		
+		<!-- 페이지 내부 네비게이션 경로 : start -->
+		<!-- <ul class="smallNavi">
+			<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+			<li>></li>
+			<li>마이페이지</li>
+			<li>></li>
+			<li>개인정보조회</li>
+		</ul> -->
+		<!-- 페이지 내부 네비게이션 경로 : end -->
+		
+		
 		<div class="box" style="margin-top:80px;">
 			<div class="profileImg">
-				<c:set var="i" value="0" />
+				<%-- <c:set var="i" value="0" />
 				<c:forEach var="file" items="${filelist}" >
 					<c:set var="i" value="${ i+1 }" />
 					<img src="/resources/images/userprofile/${file}">
-				</c:forEach>
+				</c:forEach> --%>
+				<img src="/resources/images/userprofile/${user.profile}">
 			</div>
 			
 			<hr/>
@@ -215,14 +239,6 @@
 				<div class="3u 12u$(small)">${user.email}</div>
 			</div>
 			<hr/>
-			<%-- <div class="row uniform">
-				<div class="3u 12u$(small)">이메일</div>
-				<div class="9u$ 12u$(small)">${user.email}</div>
-			</div> --%>
-			<%-- <div class="row uniform">
-				<div class="3u 12u$(small)">생년월일</div>
-				<div class="9u$ 12u$(small)">${user.birthday}</div>
-			</div> --%>
 			<div class="row uniform">
 				<div class="3u 12u$(small) subTitle">관심사</div>
 				<div class="3u 12u$(small)">${interestList[0]}</div>
@@ -230,20 +246,36 @@
 				<div class="3u 12u$(small)">${interestList[2]}</div>
 			</div>
 			<hr/>
+			
+			<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			
 			<div class="row uniform">
 				<div class="3u 12u$(small) subTitle">내 성격유형</div>
 				<div class="4u 12u$(small)">${typeMap.myType}</div>
 				<div class="5u 12u$(small)">
 					<img src="/resources/images/mbti/${typeFileMap.myTpyeFile}" width="150" height="200"/>
 				</div>
+				
+				<%-- <div class="3u 12u$(small)">
+					<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+				</div> --%>
+				
 			</div>
+			
 			<hr/>
+			
 			<div class="row uniform">
 				<div class="3u 12u$(small) subTitle">상대방 성격유형</div>
 				<div class="3u 12u$(small)">${typeMap.firstType}</div>
 				<div class="3u 12u$(small)">${typeMap.secondType}</div>
 				<div class="3u 12u$(small)">${typeMap.thirdType}</div>
+				
+				<%-- <div class="3u 12u$(small)">
+					<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+				</div> --%>
+				
 			</div>
+			
 			<div class="row uniform">
 				<div class="3u 12u$(small)"></div>
 				<div class="3u 12u$(small)">
@@ -256,6 +288,7 @@
 					<img src="/resources/images/mbti/${typeFileMap.typeFileList[2]}" width="150" height="200"/>
 				</div>
 			</div>
+			<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		
 		</div>
 		

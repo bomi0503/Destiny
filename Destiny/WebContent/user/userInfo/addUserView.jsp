@@ -695,6 +695,7 @@
 											</select>
 										</div>
 									</div>
+									<input type="hidden" name="address"/>
 								</div>
 							</td>
 						</tr>
@@ -838,11 +839,14 @@
 									</div>
 								</div>
 							</td>
+							<input type="hidden" name="firstInterest"/>
+							<input type="hidden" name="secondInterest"/>
+							<input type="hidden" name="thirdInterest"/>
 						</tr>
 						<tr>
 							<th>프로필 사진</th>
 							<td colspan="3">
-								<input type="file" id="file" name="file"  multiple>
+								<input type="file" name="uploadFile" >
 							</td>
 						</tr>
 					</tbody>

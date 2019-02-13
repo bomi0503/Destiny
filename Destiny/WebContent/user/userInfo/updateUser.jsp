@@ -663,13 +663,18 @@
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
 							<label for="profile" >프로필 이미지</label>
-							<input type="file" id="file" name="file"  multiple>
+							<input type="file" name="uploadFile" >
+							<%-- <input type="file" name="uploadFile" >
 							<c:set var="i" value="0" />
 							<c:forEach var="file" items="${filelist}" >
 								<c:set var="i" value="${ i+1 }" />
 								<img src="/resources/images/userprofile/${file}" width="500" height="500"/>
 								<input type="hidden" name="profile${i}" value="${file}">
-							</c:forEach>
+							</c:forEach> --%>
+						</div>
+						<div class="6u 12u$(small)">
+							<img src="/resources/images/userprofile/${user.profile}" width="300px" height="300px"/>
+								<%-- <input type="hidden" name="profile${i}" value="${file}"> --%>
 						</div>
 					</div>
 				</div>
