@@ -46,7 +46,7 @@
 											<where>
 											receiver_id = #{Id}
 											</where>
-											ORDER BY send_date ) inner_table
+											ORDER BY send_date desc) inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
@@ -59,7 +59,7 @@
 											<where>
 											sender_id = #{Id}
 											</where>
-											ORDER BY send_date ) inner_table
+											ORDER BY send_date desc) inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>

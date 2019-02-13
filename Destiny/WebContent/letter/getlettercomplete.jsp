@@ -54,7 +54,7 @@
 		  
 		  
 		<ul class="actions small">	
-		   <li><a class="button special small" href="/letter/letterMain.jsp">쪽지 메인으로</a></li>
+		   <li><a class="button special small" href="/letter/getLetterList">쪽지 메인으로</a></li>
 		   <li><a class="button special small" href="/letter/sendletter.jsp">또&nbsp;보내기</a></li>
 		</ul>
 

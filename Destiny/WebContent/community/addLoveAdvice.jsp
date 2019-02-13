@@ -118,7 +118,6 @@
 				});
 				return false;
 			}
-
 			/* if (file == null || file.length < 1) {
 				swal({
 					title : "대표이미지를 등록해주세요.",
