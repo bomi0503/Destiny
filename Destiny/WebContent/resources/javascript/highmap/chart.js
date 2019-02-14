@@ -63,8 +63,8 @@ highMaps.prototype.init = function(){
                                          *                                      * 
                                          * */
                                         style : {
-                                        	color : '#000',
-                                            textShadow: '0 0 0px #000000',
+                                        	color : '#000', /*하위 지도 지역이름 color*/
+                                            /*textShadow: '0 0 0px #000000',*/
                                             fontWeight: "none",
                                             textDecoration: 'none'
                                         }
@@ -72,11 +72,12 @@ highMaps.prototype.init = function(){
                                     states: {
                                     	// 하위 지도 hover 스타일 설정
                                         hover: {
-                                            color: '#99004C'
+                                        	color : '#2388e8', /*상위지도 moseover*/
                                         },
                                         // 하위 지도 select 스타일 설정
                                         select: {
-                                            color: '#998A00'
+                                            /*color: '#998A00'*/
+                                        	color : 'blue', /*click했을 때 color*/
                                         }
                                     },
                                     tooltip: {
@@ -107,8 +108,8 @@ highMaps.prototype.init = function(){
                 states: {
                 	// 상위 지도 hover 스타일 설정
                     hover: {
-                        color: '#99004C',
-                        borderColor: 'white'
+                        color: '#2388e8',  /*상위지도 moseover*/
+                        borderColor: 'white' /*지도 테두리*/
                     }
                 },
                 tooltip: {
@@ -129,9 +130,9 @@ highMaps.prototype.init = function(){
             drilldown: {
             	// 상위 지도 레이블 스타일 설정
                 activeDataLabelStyle: {
-                	color : '#000',
+                	color : '#000', /*지역 이름 color*/
                 	shadow: false,
-                    textShadow: '0 0 0px #000000',
+                    /*textShadow: '0 0 0px #000000',*/
                     fontWeight: "none",
                     textDecoration: 'none'
                 },

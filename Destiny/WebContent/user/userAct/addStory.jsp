@@ -100,11 +100,21 @@
 			var file = $("input[name=uploadFile]").val();
 	
 			if (name == null || name.length < 1) {
-				alert("제목을 입력해주세요.");
+				/* alert("제목을 입력해주세요.");
+				return false; */
+				swal({
+					title : "제목을 입력해주세요.",
+					icon : "info"
+				});
 				return false;
 			}
 			if (detail == null || detail.length < 1) {
-				alert("내용을 입력해주세요.");
+				/* alert("내용을 입력해주세요.");
+				return false; */
+				swal({
+					title : "내용을 입력해주세요.",
+					icon : "info"
+				});
 				return false;
 			}
 			/* if (file == null || file.length < 1) {
@@ -112,7 +122,15 @@
 				return false;
 			} */
 			
-			$("form").attr("method","POST").attr("action","/act/addStory/${Category}").submit();
+			swal({
+				icon:"success",
+				title:"등록되었습니다."
+				})
+				.then((value) => {
+					$("form").attr("method","POST").attr("action","/act/addStory/${Category}").submit();
+		         });
+			
+			/* $("form").attr("method","POST").attr("action","/act/addStory/${Category}").submit(); */
 		}
 		
 	});

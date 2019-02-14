@@ -206,12 +206,12 @@ public class UserController {
 							applicationScope.setAttribute("ipLoginList", ipLoginList);
 						}
 						for(User v : loginList) {
-							System.out.println("泅力 立加磊 格废 : " + v);
+							System.out.println("泅犁 立加磊 格废 : " + v);
 						}
 						for(String v : ipLoginList) {
 							System.out.println("立加茄 蜡历狼 ip : " + v);
 						}
-						System.out.println("泅力 立加磊 : " + numberOfLogin);
+						System.out.println("泅犁 立加磊 : " + numberOfLogin);
 						
 						modelAndView.addObject("result", "Success");
 						modelAndView.addObject(dbUser.getUserId(), dbUser);

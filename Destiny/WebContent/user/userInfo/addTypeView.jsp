@@ -345,7 +345,7 @@
 		
 			<div class="types-list-header">
 				<h3>성격 유형</h3>
-				<a href="/articles/our-theory" class="btn btn-action-2">TEST 하러가기<span class="fa fa-caret-right"></span></a>
+				<a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC" class="btn btn-action-2">TEST 하러가기<span class="fa fa-caret-right"></span></a>
 			</div>
 			
 			

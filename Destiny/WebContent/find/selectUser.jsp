@@ -11,15 +11,20 @@
 <!-- All CSS Insert -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-<link rel="stylesheet" href="/resources/css/main.css" > 
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet"> 
 <!-- //All CSS Insert -->
 
 <!-- All js -->
+	<link rel="stylesheet" href="/resources/css/main.css" >
 	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<script>
 	$(function(){
@@ -71,13 +76,13 @@
 		// select 조건
 		$("a[name='find']").on("click", function() {
 			if( $('[name="selectGender"]:checked').length != 1 ){
-				alert('성별을 선택해 주세요.');
+				swal('성별을 선택해 주세요.');
 			} else if( $('select[name="selectAge"]').val() == 0 ) {
-				alert('나이를 선택해 주세요');
+				swal('나이를 선택해 주세요');
 			} else if($('select[name="city"]').val() == 0 || $('select[name="town"]').val() == 0){
-				alert('지역을 선택해 주세요.');
+				swal('지역을 선택해 주세요.');
 			} else if( $('[name="selectInterest"]:checked').length != 3 ) {
-				alert('3개의 관심사를 선택해 주세요.');
+				swal('3개의 관심사를 선택해 주세요.');
 			} else {
 				$("form").attr("method", "POST").attr("action", "/find/getUserResult").submit();	
 			}
@@ -174,6 +179,12 @@
 		margin-top : -2px;
 	}
 	
+	.form-control { -webkit-appearance: menulist;}
+	/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
+	}
 </style>
 	
 </head>
@@ -245,18 +256,16 @@
 								<td>
 									<div class="row uniform">
 										<div class="6u$ 12u$(small)">
-											<div class="select-wrapper">
-												<select name="selectAge" id="demo-category">
-													<option value="">원하는 연령을 선택해 주세요.</option>
-													<option value="1">20세 ~ 24세</option>
-													<option value="2">24세 ~ 29세</option>
-													<option value="3">30세 ~ 34세</option>
-													<option value="4">34세 ~ 49세</option>
-													<option value="5">40세 ~ 44세</option>
-													<option value="6">44세 ~ 59세</option>
-													<option value="7">50세 ~ </option>
-												</select>
-											</div>
+											<select name="selectAge" class="form-control">
+												<option value="">원하는 연령을 선택해 주세요.</option>
+												<option value="1">20세 ~ 24세</option>
+												<option value="2">25세 ~ 29세</option>
+												<option value="3">30세 ~ 34세</option>
+												<option value="4">34세 ~ 49세</option>
+												<option value="5">40세 ~ 44세</option>
+												<option value="6">44세 ~ 59세</option>
+												<option value="7">50세 ~ </option>
+											</select>
 										</div>
 									</div>
 								</td>
@@ -266,35 +275,31 @@
 								<th>지역</th>
 								<td>
 									<div class="row uniform">
-										<div class="6u$ 12u$(small)">
-											<div class="select-wrapper">
-												<select name="city" id="city" name="city">
-													<option value="">도/시를 선택해 주세요</option>
-											      	<option value="서울">서울</option>
-											      	<option value="경기">경기</option>
-											      	<option value="인천">인천</option>
-											      	<option value="부산">부산</option>
-											      	<option value="대구">대구</option>
-											      	<option value="광주">광주</option>
-											      	<option value="대전">대전</option>
-											      	<option value="울산">울산</option>
-											      	<option value="세종">세종</option>
-											      	<option value="강원">강원</option>
-											      	<option value="경남">경남</option>
-											      	<option value="경북">경북</option>
-											      	<option value="전남">전남</option>
-											      	<option value="전북">전북</option>
-											      	<option value="충남">충남</option>
-											      	<option value="충북">충북</option>
-											      	<option value="제주">제주</option>
-												</select>
-											</div>
+										<div class="6u 12u$(small)">
+											<select name="city" id="city" name="city" class="form-control">
+												<option value="">도/시를 선택해 주세요</option>
+										      	<option value="서울">서울</option>
+										      	<option value="경기">경기</option>
+										      	<option value="인천">인천</option>
+										      	<option value="부산">부산</option>
+										      	<option value="대구">대구</option>
+										      	<option value="광주">광주</option>
+										      	<option value="대전">대전</option>
+										      	<option value="울산">울산</option>
+										      	<option value="세종">세종</option>
+										      	<option value="강원">강원</option>
+										      	<option value="경남">경남</option>
+										      	<option value="경북">경북</option>
+										      	<option value="전남">전남</option>
+										      	<option value="전북">전북</option>
+										      	<option value="충남">충남</option>
+										      	<option value="충북">충북</option>
+										      	<option value="제주">제주</option>
+											</select>
 										</div>
 										
 										<div class="6u$ 12u$(small)">
-											<div class="select-wrapper">
-												<select id="town" name="town"></select>
-											</div>
+											<select id="town" name="town" class="form-control"></select>
 										</div>
 									</div>
 								</td>

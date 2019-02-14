@@ -229,6 +229,7 @@ public class UserRestController {
 	public Map emailAuth(@PathVariable String email, HttpSession session) throws Exception {
 		System.out.println("emailAuth 진입 완료");
 		//String email = request.getParameter("email");
+
 		String authNum = "";
 		email += ".com";
 		System.out.println("이메일 획득 : " + email);
@@ -269,7 +270,8 @@ public class UserRestController {
 		String password = "sunnydays15358";
 
 		
-		String content = "인증번호를 입력하여 주세요. 인증번호 ["+authNum+"]";
+		/*String content = "인증번호를 입력하여 주세요. 인증번호 ["+authNum+"]";*/
+		String content = authNum;
 		
 		try {
 			
@@ -282,8 +284,8 @@ public class UserRestController {
 			props.put("mail.smtp.port", 587);
 			props.put("mail.smtp.ssl.trust", host);
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.ssl.enable", "true"); 
-			props.put("mail.smtp.ssl.trust", "smtp.naver.com");
+			//props.put("mail.smtp.ssl.enable", "true"); 
+			//props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 
 			System.out.println("Properties 선언  : " + props.toString());
 			
@@ -296,18 +298,54 @@ public class UserRestController {
 			
 			System.out.println("session 선언 " + session.toString());
 			
+			
+			
 			Message msg = new MimeMessage(session);
 			
 			
 			msg.setFrom(new InternetAddress(user));
-			
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to1));
 			msg.setSubject("Confirm Mail");
-			msg.setText(content);
+			/*msg.setText(content);*/
+			
+			msg.setContent(   "<div style=\"margin: 0 auto; width:30%; font-family:'ubuntu',proxima_nova,'Open Sans','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; border: 2px solid #ddd\">\n" + 
+					"  <div style=\"text-align:center; margin-top:30px;\">\n" + 
+					"    <img src=\"https://i.imgur.com/mWJS8jQ.png\" width=\"200px\" height=\"auto\"/>\n" + 
+					"  </div>\n" + 
+					"  <br/><br/>\n" + 
+					" \n" + 
+					"<p style=\"padding:50px \">\n" + 
+					"안녕하세요!<br><br>\n" + 
+					"<strong style=\"font-size:20px;\">우연</strong>은 다양한 모임과, 이상형을 만날 수 있는 홈페이지입니다.<br>\n" + 
+					"<br>\n" + 
+					"  '우연'으로 부터 이메일 인증번호가 전송되었습니다.\n" + 
+					"  <br><br>\n" + 
+					"  \n" + 
+					" 회원님의 <strong>인증번호</strong>는 <br><br>\n" + 
+					"\n" + 
+					"  &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; [ <strong style=\"font-size:20px; color:#fd5d7c;\">"+content+"</strong> ]입니다.<br>\n" + 
+					"<br>\n" + 
+					"    *인증번호 칸에 입력해 주시길 바랍니다.<br>\n" + 
+					"\n" + 
+					"</p>\n" + 
+					"<p style=\"text-align:center\"><a style=\"background: #fd5d7c; color: #ddd; padding: 10px 50px; border-radius: 3px;text-decoration:none;\" href=\"http://127.0.0.1:8080/\">확인</a>\n" + 
+					"</p>\n" + 
+					"<br/><br/>\n" + 
+					"<p style=\"border-bottom:1px solid #eee\"></p><br>\n" + 
+					"<p style=\"text-align: center;color:#666;font-size:12px\">\n" + 
+					"F: +971.442.7130 &nbsp;&nbsp;&nbsp; E: info@fantastay.com &nbsp;&nbsp;&nbsp;W: www.fantastay.com\n" + 
+					"</p>\n" + 
+					"<p>\n" + 
+					"	&nbsp;\n" + 
+					"</p>\n" + 
+					"</div>", 
+                    "text/html;charset=utf-8");	
+			
 			
 			System.out.println("msg 구축 : " + msg.toString());
 			
 			Transport.send(msg);
+
 			
 		} catch(MessagingException e) {
 			e.printStackTrace();
