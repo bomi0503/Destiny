@@ -41,7 +41,7 @@
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src="http://192.168.0.28:83/socket.io/socket.io.js"></script>
+<script src="http://192.168.0.51:83/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <script >
@@ -73,7 +73,7 @@ function noEvent() { // 새로 고침 방지
 
 
 
-var socket = io.connect('http://192.168.0.28:83');
+var socket = io.connect('http://192.168.0.51:83');
 var timeout;
 var chattingNo='${chatting.chattingNo}';
 var manId="${chatting.manId}";
