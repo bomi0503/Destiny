@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -144,7 +144,8 @@
 		.table-type01 tbody tr:first-child td{border-top:1px solid #DDD;}
 		/* table sytle 추가 */
 		
-	
+		.getMeetingLink{display:inline-block; box-sizing:border-box; vertical-align:middle; width:100px; height:40px; text-align:center; line-height:38px; border:1px solid #666; border-radius:30px; margin-left:15px; color:#000; transition:background 0.35s, color 0.35s;}
+		.getMeetingLink:hover{background:#000; color:#FFF;}
 	</style>
 	
 
@@ -178,24 +179,23 @@
 			
 			
 			<div class="row">
-			
-				<div class="6u 12u(small)">
-					<img src="/resources/images/meeting/${contextMeeting.titleImg}" width="550px" height="500px"/>
-				</div>
-				
-				<div class="6u 12u(small) meetingTable">
+				<div class="meetingTable">
 					<table class="row-table tablebm">
 						<caption>테이블 설명</caption>
 						
 						<colgroup>
-							<col style="width:30%;">
-							<col style="width:70%;">
+							<col style="width:15%;">
+							<col style="width:35%;">
+							<col>
 						</colgroup>
 						
 						<tbody>
 							<tr>
 								<th>모임명</th>
-								<td class="getMeetingLink" data-param="${contextMeeting.meetingNo}">${contextMeeting.meetingName}</td>
+								<td>${contextMeeting.meetingName} <a href="#" class="getMeetingLink" data-param="${contextMeeting.meetingNo}">이동</a></td>
+								<td rowspan="5" class="img-td">
+									<img src="/resources/images/meeting/${contextMeeting.titleImg}" width="550px" height="500px"/>
+								</td>
 							</tr>
 							<tr>
 								<th>관심사</th>
@@ -429,21 +429,26 @@
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						        <h4 class="modal-title" id="myModalLabel"> [ 모임에 참여한 회원 ]</h4>
 						      </div>
+						      <style>
+						      .fix:after{content:''; clear:both; display:block;}
+						      .modal-body{float:left; width:33.333%; text-align:center;}
+						      .modal-body img{max-width:150px; width:100%; max-height:150px;}
 						      
+						      </style>
 						      <c:if test="${i != meeting.meetingActCount }">
 							   <c:set var="i" value="${i+1}"/>
 							  </c:if>
-						      
-						      <c:if test="${i == meeting.meetingActCount }">
-								  <c:forEach var="user" items="${actCrewList[i-1]}">								
+						      <div class="fix">
+							      <c:if test="${i == meeting.meetingActCount }">
+									  <c:forEach var="user" items="${actCrewList[i-1]}">								
 										
-											<div class="modal-body">
-												<div class="row">
-													<div class="3u 6u(small)"><span><img src="/resources/images/userprofile/${user.profile}" width="150px" height="150px"/></span></div>
-												</div>
-											</div>
-								  </c:forEach>
-							  </c:if>
+										<div class="modal-body">
+											<img src="/resources/images/userprofile/${user.profile}">
+											<p>${user.userId}</p>
+										</div>
+									  </c:forEach>
+								  </c:if>
+							  </div>
 						      <div class="modal-footer">
 						        <button type="button" class="button" data-dismiss="modal">확인</button>
 						        <!-- <button type="button" class="button special">확인</button> -->

@@ -66,18 +66,10 @@
 	</script>
 	<!-- //All js -->
 	
-			<style>
-
-		body{ 
-			background : url("/resources/images/meeting/${contextMeeting.titleImg}") no-repeat center center fixed;
-			-webkit-background-size: cover;
- 			-moz-background-size: cover;
-  			-o-background-size: cover;
- 			background-size: cover;
-		}
-		.container{
+	<style>
+		/* .container{
 			font-weight : 700;
-		}
+		} */
 		button{padding: 0 2em; height:40px;}
 		.getMeetingLink{cursor:pointer;}
 		.close {width: 35px; height: 30px; text-shadow: 0 1px 0 #ffdfe5;}
