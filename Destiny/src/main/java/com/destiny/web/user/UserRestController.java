@@ -282,8 +282,8 @@ public class UserRestController {
 			props.put("mail.smtp.port", 587);
 			props.put("mail.smtp.ssl.trust", host);
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.ssl.enable", "true"); 
-			props.put("mail.smtp.ssl.trust", "smtp.naver.com");
+			//props.put("mail.smtp.ssl.enable", "true"); 
+			//props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 
 			System.out.println("Properties 선언  : " + props.toString());
 			
@@ -302,12 +302,14 @@ public class UserRestController {
 			msg.setFrom(new InternetAddress(user));
 			
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to1));
-			msg.setSubject("Confirm Mail");
-			msg.setText(content);
-			
-			System.out.println("msg 구축 : " + msg.toString());
-			
-			Transport.send(msg);
+			msg.setSubject("우연으로 부터 인증번호가 전송되었습니다.");
+			msg.setContent(	/*"<div style=\"border: solid 1px black;inline-size: fit-content;border-radius: 30px;\">"+*/
+					"<img style=\"width:30%;height: 300px; margin-left: 5%;\" src=\"https://i.imgur.com/mWJS8jQ.png\">"+
+					"<hr/>"+
+					"<h1 style=\"margin-left: 5%;\">우연으로 부터 인증번호가 도착하였습니다. </h1>"+ 
+					"<h1 style=\"margin-left: 5%;\"> '"+content+"' </h1>"+
+					"<a style=\"margin-bottom:5px; margin-left: 5%; font-size: 20px;\" href='http://127.0.0.1:8080/'> 사이트로 이동 </a>", 
+	           		"text/html;charset=utf-8");
 			
 		} catch(MessagingException e) {
 			e.printStackTrace();
