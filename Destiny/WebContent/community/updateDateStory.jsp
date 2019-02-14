@@ -24,6 +24,11 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 
+
+<script src="/resources/javascript/skel.min.js"></script>
+<script src="/resources/javascript/util.js"></script>
+<script src="/resources/javascript/main.js"></script>
+
 <link rel="stylesheet" href="/resources/css/main.css" >
 
 <script type="text/javascript">
@@ -138,15 +143,12 @@
 		width : 80%;
 	}
 	.topImg{
-		display : block;
-		position : absolute;
-		top : 0;
-		background-image : url("/resources/images/background/getRestaurantInfo07_background.jpg");
-		background-repeat : no-repeat;
-		background-position : center -400px;
-		background-size : cover;
-		width : 100%;
+		max-width : 100%;
 		height : 400px;
+		background-image : url("/resources/images/background/dateStoryBackground.jpg");
+		background-position : center center;
+		background-size : cover;
+		background-repeat : no-repeat;
 	}
 	.topImg::after{
 		content : "";
@@ -159,12 +161,17 @@
 	}
 	.topImg h1{
 		position : absolute;
-		line-height : 330px;
 		width : 100%;
+		margin : 0;
+		padding : 0;
+		font-family: 'Nanum Myeongjo', serif;
+		font-size : 60px;
 		text-align : center;
+		height : 400px;
+		line-height : 450px;
 		color : white;
 		z-index : 99;
-		font-size : 60px;
+		
 	}
 	h1 .slim{font-weight : lighter;}
 	
@@ -177,7 +184,13 @@
 		float : left;
 	}
 	.updateForm{
-		padding : 25em 0 10em 0;
+		padding : 60px 0 10em 0;
+	}
+	
+	
+	/* 빵메뉴 안맞아서 따로 만듬^^ */
+	.fa{
+		line-height : 50px;
 	}
 </style>
 
@@ -194,13 +207,13 @@
 	
 	<div class="container">
 		
-		<ul class="smallNavi">
+		<!-- <ul class="smallNavi">
 			<li class="homeImg"><img alt="home" src="../resources/images/background/home.jpg"></li>
 			<li>></li>
 			<li>스토리</li>
 			<li>></li>
 			<li>만남후기</li>
-		</ul>
+		</ul> -->
 		
 		<div class="updateForm">
 		

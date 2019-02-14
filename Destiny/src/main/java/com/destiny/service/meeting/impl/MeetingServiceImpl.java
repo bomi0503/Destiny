@@ -198,5 +198,25 @@ public class MeetingServiceImpl implements MeetingService {
 		
 	}
 
+	@Override
+	public Map<String, Object> todayTogeterMeeting(String today) throws Exception {
+		List<Meeting> todaylist= meetingDao.todayTogeterMeeting(today);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("todaylist", todaylist );
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> hotMeeting() throws Exception {
+		List<Meeting> hotlist= meetingDao.hotMeeting();
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("hotlist", hotlist);
+		return map;
+	}
+
 	
 }

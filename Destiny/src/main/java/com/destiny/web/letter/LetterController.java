@@ -64,7 +64,7 @@ public class LetterController {
 
 		String letterMetaDataTitle = letter.getLetterDetail();
 		//"C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\";
-		File temDirText = new File("C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt");
+		File temDirText = new File("C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt");
 		
 		Scanner scan = new Scanner(temDirText);
 		String receiveLetterText = "";
@@ -86,7 +86,7 @@ public class LetterController {
 	@RequestMapping( value="sendLetterView/{senderId}", method=RequestMethod.GET)
 	public ModelAndView sendLetterView(@PathVariable String senderId)throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("forward:/meeting/message.jsp");
+		modelAndView.setViewName("forward:/letter/sendletter.jsp");
 		modelAndView.addObject("senderId", senderId);
 		return modelAndView;
 	}
@@ -106,7 +106,7 @@ public class LetterController {
 			//=================================user별 letter meta-data생성============================================
 			String letterMetaDataTitle = letter.getLetterTitle()+System.currentTimeMillis();
 			
-			String temDirText = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
+			String temDirText = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
 			File sendLetter = new File(temDirText);
 			
 			//FileWriter fw = new FileWriter(detailProduct, true);
@@ -125,7 +125,8 @@ public class LetterController {
 			//===================================================================================================
 			model.addAttribute("reason", "쪽지가 정상적으로 전송되었습니다.");
 		}
-		return "forward:/letter/getlettercomplete.jsp";
+		/*return "forward:/letter/getlettercomplete.jsp";*/
+		return "/letter/getLetterList";
 	}
 	
 	@RequestMapping( value="getLetterList", method=RequestMethod.GET)

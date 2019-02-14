@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -9,13 +9,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>¿ì¿¬</title>
+
+<title>ìš°ì—°</title>
 <!-- All CSS Insert -->
 
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet">
 
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	
@@ -29,26 +30,26 @@
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+	<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script ><!-- sweetAlert -->
 
 	
 	
 	<!-- Bootstrap core CSS -->
 
     
-   <!-- ÄÉ·¯¼¿ ¿Ï·á -->
+   <!-- ì¼€ëŸ¬ì…€ ì™„ë£Œ -->
 
 <!-- //All CSS Insert -->
 
 <!-- All js -->
-	<!--  ÅÛÇÃ¸´ »ç¿ëÇÏ±â À§ÇØ ÇÊ¿äÇÑ js -->
+	<!--  í…œí”Œë¦¿ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í•„ìš”í•œ js -->
 	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	
 	
-	<link rel="stylesheet" href="/resources/css/main.css" > <!-- ¿ì¿¬¸ŞÀÎ -->	
+	<link rel="stylesheet" href="/resources/css/main.css" > <!-- ìš°ì—°ë©”ì¸ -->	
 	
 	 <style>
 	 body {
@@ -63,7 +64,7 @@
 	 #lol{
 	 	/* margin-top: 350px; */
 	 }
-	 /* ÆùÆ® ¼³Á¤ °ü·Ã */
+	 /* í°íŠ¸ ì„¤ì • ê´€ë ¨ */
 	 .titleName{
 	 	font-family: 'Gamja Flower', cursive;
 	 	font-size: 50px;
@@ -74,7 +75,7 @@
 	 	font-size: 20px;
 	 }
 	 
-	/*  ¸ŞÀÎ¹é±×¶ó¿îµå */
+	/*  ë©”ì¸ë°±ê·¸ë¼ìš´ë“œ */
 	 	#loading {
 		 width: 100%;  
 		 height: 100%;  
@@ -172,11 +173,11 @@
 	}
 	
 	
-	 /*  ¸ŞÀÎ¹é±×¶ó¿îµå ³¡! */
+	 /*  ë©”ì¸ë°±ê·¸ë¼ìš´ë“œ ë! */
 	 
 	 
 	 
-	/* ¹İÀÀÇü ¹Ìµğ¾îÄõ¸® */
+	/* ë°˜ì‘í˜• ë¯¸ë””ì–´ì¿¼ë¦¬ */
 	/* @media screen and (max-width:1280px){
 		.ment{
 			display : none;
@@ -186,10 +187,11 @@
 	
 	
 	<script>
+	
 	$(function(){
 		getLocation();
 		var startNo = 1
-		
+		/* 
 		$(function(){
 			 $(window).scroll(function(){
 
@@ -201,10 +203,10 @@
 
                 var documentHeight = $(document).height();
 
-                // scrollbarÀÇ thumb°¡ ¹Ù´Ú Àü 30px±îÁö µµ´Ş ÇÏ¸é ¸®½ºÆ®¸¦ °¡Á®¿Â´Ù.
+                // scrollbarì˜ thumbê°€ ë°”ë‹¥ ì „ 30pxê¹Œì§€ ë„ë‹¬ í•˜ë©´ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
                 
-                //console.log("´ÙÅ¥¸àÆ®±æÀÌ = "+documentHeight);
-                //console.log("½ºÅ©·ÑÅ¾ + À©µµ¿ì ±æÀÌ + 200 = "+scrollTop + windowHeight);
+                //console.log("ë‹¤íë©˜íŠ¸ê¸¸ì´ = "+documentHeight);
+                //console.log("ìŠ¤í¬ë¡¤íƒ‘ + ìœˆë„ìš° ê¸¸ì´ + 200 = "+scrollTop + windowHeight);
 
                 if( scrollTop + windowHeight + 150 > documentHeight ){
 
@@ -237,14 +239,50 @@
 							var list="";
 							for(i in JSONData.list){
 								var meeting = JSONData.list[i];
+								if(i%2==0){
+									//console.log("1ì…ë‹ˆë‹¤ìš”.");
+									list+="<article class='feature left' style='float: right; margin-bottom: 20px;'>";
+									list+="<div class='image' style='display: flex; width:600px; height: 400px;float: right;'><img src='/resources/images/meeting/"+meeting.titleImg+"' style='border-radius: 55px;' class='6u 12u(small)' /></div>";
+									list+="<div class='' style='float: left; margin-left: 10px;text-align: end;'>";
+								    list+="<p class='meetingCenter' style='margin-top: 80px;margin-bottom: -50px;'><span class='glyphicon glyphicon-record'></span>&nbsp;"+meeting.meetingCenter+"<p>";
+									list+="<h2 class='titleName' style='color:black; margin-bottom: -10px;'>"+meeting.meetingName+"</h2>";
+									list+="<p>ëª¨ì„ì •ì› <span class='meetingCenter'>"+meeting.meetingCrewLimit+"</span>ëª…      ì¡°íšŒìˆ˜<span class='meetingCenter'> "+meeting.meetingViews+"</span>íšŒ</p>";
+									list+="<p>ëª¨ì„ë‚ ì§œ:"+meeting.meetingDate+"&nbsp; &nbsp;<span class='glyphicon glyphicon-map-marker'></span>"+meeting.meetingLocation+"</p>";
+									list+="<ul class='actions'>";
+									list+="<li>";
+									list+="<a href='#' id='reMore' data-param='"+meeting.meetingNo+"' class='button' style='margin-top: 20px;'>More</a>";
+									list+="</li>";
+									list+="</ul>";
+									list+="</div>";
+									list+="</article>";
+								}else{
+									//console.log("2ì…ë‹ˆë‹¤.");
+									
+									
+									list+="<article class='' style='float: left; margin-bottom: 20px;'>";
+									list+="<div class='image' style='display: flex; width:600px; height: 400px;float: left;'><img src='/resources/images/meeting/"+meeting.titleImg+"' style='border-radius: 55px;' class='6u 12u(small)' /></div>";
+									list+="<div class='' style='float: left; margin-left: 10px;text-align: left;'>";
+								    list+="<p class='' style='margin-top: 80px;margin-bottom: -50px;'><span class='glyphicon glyphicon-record'></span>&nbsp;"+meeting.meetingCenter+"<p>";
+									list+="<h2 class='titleName' style='color:black; margin-bottom: -10px;'>"+meeting.meetingName+"</h2>";
+									list+="<p>ëª¨ì„ì •ì› <span class='meetingCenter'>"+meeting.meetingCrewLimit+"</span>ëª…      ì¡°íšŒìˆ˜<span class='meetingCenter'> "+meeting.meetingViews+"</span>íšŒ</p>";
+									list+="<p>ëª¨ì„ë‚ ì§œ:"+meeting.meetingDate+"&nbsp; &nbsp;<span class='glyphicon glyphicon-map-marker'></span>"+meeting.meetingLocation+"</p>";
+									list+="<ul class='actions'>";
+									list+="<li>";
+									list+="<a href='#' id='reMore' data-param='"+meeting.meetingNo+"' class='button' style='margin-top: 20px;'>More</a>";
+									list+="</li>";
+									list+="</ul>";
+									list+="</div>";
+									list+="</article>";
+								}
 								//console.log(product.fileName);
+								/* 
 								list+="<article class='feature left'>";
-								list+="<div class='image' style='display: flex; height: 400px;'><img src='/resources/images/meeting/"+meeting.titleImg+"'class='col-xs-12 col-sm-12 col-md-12' /></div>";
+								list+="<div class='image' style='display: flex; height: 400px;'><img src='/resources/images/meeting/"+meeting.titleImg+"' style='border-radius: 55px;' class='col-xs-12 col-sm-12 col-md-12' /></div>";
 								list+="<div class='content'>";
 							    list+="<p class='meetingCenter'><span class='glyphicon glyphicon-record'></span>&nbsp;"+meeting.meetingCenter+"<p>";
 								list+="<h2 class='titleName'>"+meeting.meetingName+"</h2>";
-								list+="<p>¸ğÀÓÁ¤¿ø <span class='meetingCenter'>"+meeting.meetingCrewLimit+"</span>¸í      Á¶È¸¼ö<span class='meetingCenter'> "+meeting.meetingViews+"</span>È¸</p>";
-								list+="<p>¸ğÀÓ³¯Â¥:"+meeting.meetingDate+"&nbsp; &nbsp;<span class='glyphicon glyphicon-map-marker'></span>"+meeting.meetingLocation+"</p>";
+								list+="<p>ëª¨ì„ì •ì› <span class='meetingCenter'>"+meeting.meetingCrewLimit+"</span>ëª…      ì¡°íšŒìˆ˜<span class='meetingCenter'> "+meeting.meetingViews+"</span>íšŒ</p>";
+								list+="<p>ëª¨ì„ë‚ ì§œ:"+meeting.meetingDate+"&nbsp; &nbsp;<span class='glyphicon glyphicon-map-marker'></span>"+meeting.meetingLocation+"</p>";
 								list+="<ul class='actions'>";
 								list+="<li>";
 								list+="<a href='#' id='reMore' data-param='"+meeting.meetingNo+"' class='button'>More</a>";
@@ -252,18 +290,19 @@
 								list+="</ul>";
 								list+="</div>";
 								list+="</article>";
+								
 							}
-							$( "#appendPoint" ).append(list);
+							$( "#one" ).append(list);
 						 
 						}
 				});	
 	       		  
-	       	} //fetchList³¡ //¿©±â±îÁö ¹«ÇÑ½ºÅ©·Ñ
+	       	} //fetchListë //ì—¬ê¸°ê¹Œì§€ ë¬´í•œìŠ¤í¬ë¡¤
 		});
-		
+		 */
 		function getLocation() {
-			//alert("·ÎÄÉÀÌ¼Ç ½ÃÀÛ");
-		  if (navigator.geolocation) { // GPS¸¦ Áö¿øÇÏ¸é
+			//alert("ë¡œì¼€ì´ì…˜ ì‹œì‘");
+		  if (navigator.geolocation) { // GPSë¥¼ ì§€ì›í•˜ë©´
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		      //alert(position.coords.latitude + ' ' + position.coords.longitude);
 		      findaddress(position.coords.latitude, position.coords.longitude);
@@ -275,16 +314,16 @@
 		      timeout: Infinity
 		    });
 		  } else {
-		    alert('GPS¸¦ Áö¿øÇÏÁö ¾Ê½À´Ï´Ù');
+		    alert('GPSë¥¼ ì§€ì›í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤');
 		  }
 		}
 		//getLocation();
 		
-		// Áö¿À¿¡¼­ ¹ŞÀº°Å ÁÖ¼Ò·Î º¯È¯
+		// ì§€ì˜¤ì—ì„œ ë°›ì€ê±° ì£¼ì†Œë¡œ ë³€í™˜
 		function findaddress(locationY,locationX){
-			// ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
+			// ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 			var geocoder = new daum.maps.services.Geocoder();
-		    // ÁÂÇ¥·Î ÇàÁ¤µ¿ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
+		    // ì¢Œí‘œë¡œ í–‰ì •ë™ ì£¼ì†Œ ì •ë³´ë¥¼ ìš”ì²­í•©ë‹ˆë‹¤
 		    var address = geocoder.coord2RegionCode(locationX, locationY, searchAddrFromCoords);  
 		}
 
@@ -292,14 +331,15 @@
 			if (status === daum.maps.services.Status.OK) {
 				//console.log(result[0].region_2depth_name);
 				var address = result[0].region_2depth_name;
+				//console.log(address);
 				$.ajax({
 
                     url:"/meetingRest/nearMeeting?address="+address,
-						method : "GET" ,
+						method : "get" ,
 						dataType : "json" ,
 						headers : {
 							"Accept" : "application/json",
-							"Content-Type" : "application/json"
+							"Content-Type" :  "application/json"
 						},
 						success : function(JSONData , status) {
 							//console.log(JSONData.bestList);
@@ -312,62 +352,65 @@
 								//list+="<div id='frogue-container' class='position-right-bottom'data-color='#555a9c'data-chatbot='b9ca3ac0-61fd-496b-831f-3906f84fbb90'data-user='b9ca3ac0-61fd-496b-831f-3906f84fbb90'data-init-key='value'></div>";
 								//list+="<div class='flex secondSection'>";
 								list+="<div class='move_meeting'>";
-								list+="<span><img style='width: 350px; height: 350px;' src='/resources/images/meeting/"+meeting.titleImg+"'></span>";
-								list+="<p>"+meeting.meetingCenter+"</p>";
-								list+="<h3>"+meeting.meetingName+"</h3>";
+								list+="<span onclick='gotoMeeting("+meeting.meetingNo+")'><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/"+meeting.titleImg+"'></span>";
+								list+="<p onclick='gotoMeeting("+meeting.meetingNo+")'>"+meeting.meetingCenter+"</p>";
+								list+="<h3 onclick='gotoMeeting("+meeting.meetingNo+")'>"+meeting.meetingName+"</h3>";
 								list+="</div>";
 								//list+="</div>";
 								//list+="</div>";
 								//list+="</section>";
 							}
-							$( ".secondSection" ).empty().append(list);
+							$( "#secondSection" ).empty().append(list);
 						 
 						}
 				});	
 			}
 		}
+
 		
-		// ³» ÁÖº¯ ¸ğÀÓ Ã£±â ½ºÅ¸Æ®
+		// ë‚´ ì£¼ë³€ ëª¨ì„ ì°¾ê¸° ìŠ¤íƒ€íŠ¸
 		$( "#nearMeeting" ).on("click", function() {
 			getLocation();
 		});
 		
-		// °³¼³ÇÏ±â ´©¸£¸é ÀÌº¥Æ® Ã³¸®
+		// ê°œì„¤í•˜ê¸° ëˆ„ë¥´ë©´ ì´ë²¤íŠ¸ ì²˜ë¦¬
+		
 		$( "#addMeeting" ).on("click", function() {
 			console.log("${empty sessionScope.me}");
-			
+			//getLocation();
+		
 			if('${sessionScope.me.userGrade }' !='NEW' && ${!empty sessionScope.me.userId}){
-				//alert("¼º°ø");
+				//alert("ì„±ê³µ");
 				self.location="/meeting/addMeeting"
 			}else if('${empty sessionScope.me}'=='true'){
-				if (confirm("·Î±×ÀÎÈÄÀÌ¿ë°¡´ÉÇÕ´Ï´Ù.\n·Î±×ÀÎÇÏ½Ã°Ú½À´Ï±î?") == true){    //È®ÀÎ
+				if (confirm("ë¡œê·¸ì¸í›„ì´ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.\në¡œê·¸ì¸í•˜ì‹œê² ìŠµë‹ˆê¹Œ?") == true){    //í™•ì¸
 					$("#my-dialog,#dialog-background").toggle();
 					//self.location="/user/login";
-				 }else{   //Ãë¼Ò
+				 }else{   //ì·¨ì†Œ
 				     return;
 				 }
 			}else if('${sessionScope.me.userGrade }'=='NEW'){
-				alert("${sessionScope.me.nickName}´ÔÀº ¿ì¿¬µî±ŞÀÔ´Ï´Ù.\nÀÎ¿¬ÀÌ»ó È¸¿øºÎÅÍ °³¼³ ÇÏ´ÉÇÕ´Ï´Ù.");
+				alert("${sessionScope.me.nickName}ë‹˜ì€ ìš°ì—°ë“±ê¸‰ì…ë‹ˆë‹¤.\nì¸ì—°ì´ìƒ íšŒì›ë¶€í„° ê°œì„¤ í•˜ëŠ¥í•©ë‹ˆë‹¤.");
 			}else{
-				alert("ÀÌ¿ë ºÒ°¡ÇÕ´Ï´Ù.");
+				alert("ì´ìš© ë¶ˆê°€í•©ë‹ˆë‹¤.");
 			}
 		});
-		
-		//more´­·¶À»¶§ ÀÌº¥Æ® Ã³¸®
+		 
+		//moreëˆŒë €ì„ë•Œ ì´ë²¤íŠ¸ ì²˜ë¦¬
 		$("a[href='#' ]:contains('More')").on("click", function() {
 			var meetingNo = $(this).data("param");
-			//console.log("¿©±â¿Ô½À´Ï±î??");
+			//console.log("ì—¬ê¸°ì™”ìŠµë‹ˆê¹Œ??");
 			self.location="/meeting/getMeeting?meetingNo="+meetingNo;
 		});
 		
 		$(document).on("click","#reMore",function(){
 			var meetingNo = $(this).data("param");
-			//console.log("¸®ÄÁÆß");
+			//console.log("ë¦¬ì»¨íŒ");
 			//console.log($(this).data("param"));
 			self.location="/meeting/getMeeting?meetingNo="+meetingNo;
 		});
 		
-		//½Ã±º±¸ °¡Á®´Ù ÁÖ´Â ¾Ö 
+		//ì‹œêµ°êµ¬ ê°€ì ¸ë‹¤ ì£¼ëŠ” ì•  
 		$( "#centerLocation" ).on("change" , function() {
 			//var idx = $(".brand_ids").index(this);
 			var city=$(this).val();
@@ -386,7 +429,7 @@
 							
 							var list="";
 							list+="<select  id='centering' name='meetingCenter' class='form-control'>";
-							list+="<option>½Ã/±º/±¸ ¼±ÅÃ</option>";
+							list+="<option>ì‹œ/êµ°/êµ¬ ì„ íƒ</option>";
 							for(i in JSONData.list){
 								var town = JSONData.list[i].townName;
 								
@@ -397,7 +440,7 @@
 				});
 		});
 		
-		//°Ë»ö¾î ÀÌº¥Æ® Ã³¸®
+		//ê²€ìƒ‰ì–´ ì´ë²¤íŠ¸ ì²˜ë¦¬
 		$( "#plzsearch" ).on("click" , function() {
    		 var meetingCenter=$("#centering").val();
    		 var seconCenter=$("#sconcentering").val();
@@ -405,17 +448,24 @@
    		 console.log(meetingCenter);
    		 console.log(interest);
    		 console.log(seconCenter);
-   		 if(interest=='°ü½É»ç'){
+   		 if(interest=='ê´€ì‹¬ì‚¬'){
    			 $("#interest").val("");
    		 }
    		 if(meetingCenter=="" || seconCenter==""){
-   			 //alert("¸ğÀÓÀÎ¿øÀ» ¼³Á¤ÇÏ¿© ÁÖ¼¼¿ä.");
-   			 meetingCenter="¾Æ´Ô";
+   			 //alert("ëª¨ì„ì¸ì›ì„ ì„¤ì •í•˜ì—¬ ì£¼ì„¸ìš”.");
+   			 meetingCenter="ì•„ë‹˜";
    		 }
    		$("form").attr("method" , "POST").attr("action" , "/meeting/listMeeting/"+meetingCenter).submit();
 		 });
 		
 	});
+	
+	function gotoMeeting(value){
+		//console.log($("#todayss").index(this));
+		//console.log(value);
+		self.location="/meeting/getMeeting?meetingNo="+value;
+		
+	}
 		
 	</script>
 <!-- //All js -->
@@ -437,10 +487,10 @@
 
 	
 		<div class="topImg">
-			<h1>¿ì¸®µéÀÇ<span class="slim">¸ğÀÓ</span></h1>
+			<h1>ìš°ë¦¬ë“¤ì˜<span class="slim">ëª¨ì„</span></h1>
 		</div>
 		
-	 <!-- º£½ºÆ®»óÇ° Å×ÀÌºí -->
+	 <!-- ë² ìŠ¤íŠ¸ìƒí’ˆ í…Œì´ë¸” -->
          <%--    <table>
 
             	  <c:set var="i" value="0" />
@@ -452,15 +502,15 @@
 			      <!-- Indicators -->
 				 <div class="carousel-inner" role="listbox">
 			        <div class="item active col-xs-12 col-sm-12" align="center">
-			          <img  class="first-slide" src="/resources/images/meeting/${bestList[0].titleImg}" style="width:auto; height: 400px;" alt="First slide"><!-- Ã¹¹øÂ° »çÁø -->
+			          <img  class="first-slide" src="/resources/images/meeting/${bestList[0].titleImg}" style="width:auto; height: 400px;" alt="First slide"><!-- ì²«ë²ˆì§¸ ì‚¬ì§„ -->
 					
 			        </div>
 			        <div class="item col-xs-12 col-sm-12" align="center">
-			          <img class="second-slide" src="/resources/images/meeting/${bestList[1].titleImg}" style="width:auto; height: 400px;" alt="Second slide"><!-- µÎ¹øÂ° »çÁø -->
+			          <img class="second-slide" src="/resources/images/meeting/${bestList[1].titleImg}" style="width:auto; height: 400px;" alt="Second slide"><!-- ë‘ë²ˆì§¸ ì‚¬ì§„ -->
 
 			        </div>
 			        <div class="item col-xs-12 col-sm-12" align="center">
-			          <img class="third-slide" src="/resources/images/meeting/${bestList[2].titleImg}" style="width:auto; height: 400px;" alt="Third slide"><!-- ¼¼¹øÂ° »çÁø -->
+			          <img class="third-slide" src="/resources/images/meeting/${bestList[2].titleImg}" style="width:auto; height: 400px;" alt="Third slide"><!-- ì„¸ë²ˆì§¸ ì‚¬ì§„ -->
 			        </div>
 			      </div> 
 			      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -475,117 +525,48 @@
             </table> --%>
             
             <!-- /.carousel -->
-            <!-- º£½ºÆ®»óÇ° Å×ÀÌºí Á¾·á -->
-            	<section id="main" class="wrapper">	
-            			 <!-- ½ÃÀÛ!! -->
-		<%-- <div class="col-xs-11 col-md-10 col-centered">
-					  <c:set var="i" value="0" />
-					  <c:forEach var="meet" items="${bestList}">
-					  <c:set var="i" value="${ i+1 }" />
-					  </c:forEach>
-					  
-			<div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
-				<div class="carousel-inner">
-					<div class="item active">
-						<div class="carousel-col">
-							<!-- <div class="block red img-responsive"></div> -->
-							<img class="block" src="/resources/images/meeting/action.jpg" style="width:150px; height: 230px;" alt="First slide">
-						</div>
-					</div>
-					
-					<div class="item">
-						<div class="carousel-col">
-							<!-- <div class="block red img-responsive"></div> -->
-							<img class="block" src="/resources/images/meeting/${bestList[1].titleImg}" style="width:150px; height: 230px;" alt="First slide">
-							
-						</div>
-					</div>
-					
-					<div class="item">
-						<div class="carousel-col">
-							<!-- <div class="block red img-responsive"></div> -->
-							<img class="block" src="/resources/images/meeting/action.jpg"" style="width:150px; height: 230px;" alt="First slide">
-						</div>
-					</div> --%>
-					<!-- 
-					<div class="item">
-						<div class="carousel-col">
-							<div class="block green img-responsive"></div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="carousel-col">
-							<div class="block blue img-responsive"></div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="carousel-col">
-							<div class="block yellow img-responsive"></div>
-						</div>
-					</div>
-					 
-				</div>-->
-
-				<!-- Controls -->
-				<!-- <div class="left carousel-control">
-					<a href="#carousel" role="button" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-				</div>
-				<div class="right carousel-control">
-					<a href="#carousel" role="button" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
-			</div> 
-
-		</div>-->
-
-	<!-- ³¡!! -->		
-            
-
+            <!-- ë² ìŠ¤íŠ¸ìƒí’ˆ í…Œì´ë¸” ì¢…ë£Œ -->
+        <section id="main" class="wrapper" style="margin-top: -100px;">	
 		<div  class="landing">
 		<div style="width:98%; margin-left:10px;">
-
         <form>
             <br/>
-            <!-- °Ë»öÃ¢ ½ÃÀÛ -->
-            <div style="margin-bottom: 30px;" id="lol" align="center" border="7" height="34px" bordercolor="#326ada" class="row col-xs-12 col-sm-12 col-md-12">
+            <!-- ê²€ìƒ‰ì°½ ì‹œì‘ -->
+            <section class="wrapper align-center" style="margin-top: -100px; margin-bottom: -60px">
+            <div class="inner">
 
             		<div class="col-xs-12 col-sm-12 col-md-4">
 	            		<input name="searchKeyword"  
-	            		type="text" placeholder="°Ë»ö¾î¸¦ ÀÔ·Â" style="width: 100%"/>
+	            		type="text" placeholder="ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥" style="width: 100%; height: 34px;"/>
             		</div>
             		<div class='search col-xs-12 col-sm-12 col-md-2'>
 						<select id="centerLocation" class="form-control">
-				 		<option>Áß½ÉÁö¿ª-Áö¿ª</option>
-				 		<option value="¼­¿ï">¼­¿ï</option>
-		                <option value="°æ±â">°æ±â</option>
-		                <option value="ÀÎÃµ">ÀÎÃµ</option>
-		                <option value="ºÎ»ê">ºÎ»ê</option>
-		                <option value="´ë±¸">´ë±¸</option>
-		                <option value="±¤ÁÖ">±¤ÁÖ</option>
-		                <option value="´ëÀü">´ëÀü</option>
-		                <option value="¿ï»ê">¿ï»ê</option>
-		                <option value="¼¼Á¾">¼¼Á¾</option>
-		                <option value="°­¿ø">°­¿ø</option>
-		                <option value="°æ³²">°æ³²</option>
-		                <option value="°æºÏ">°æºÏ</option>
-		                <option value="Àü³²">Àü³²</option>
-		                <option value="ÀüºÏ">ÀüºÏ</option>
-		                <option value="Ãæ³²">Ãæ³²</option>
-		                <option value="ÃæºÏ">ÃæºÏ</option>
-		                <option value="Á¦ÁÖ">Á¦ÁÖ</option>
+				 		<option>ì¤‘ì‹¬ì§€ì—­-ì§€ì—­</option>
+				 		<option value="ì„œìš¸">ì„œìš¸</option>
+		                <option value="ê²½ê¸°">ê²½ê¸°</option>
+		                <option value="ì¸ì²œ">ì¸ì²œ</option>
+		                <option value="ë¶€ì‚°">ë¶€ì‚°</option>
+		                <option value="ëŒ€êµ¬">ëŒ€êµ¬</option>
+		                <option value="ê´‘ì£¼">ê´‘ì£¼</option>
+		                <option value="ëŒ€ì „">ëŒ€ì „</option>
+		                <option value="ìš¸ì‚°">ìš¸ì‚°</option>
+		                <option value="ì„¸ì¢…">ì„¸ì¢…</option>
+		                <option value="ê°•ì›">ê°•ì›</option>
+		                <option value="ê²½ë‚¨">ê²½ë‚¨</option>
+		                <option value="ê²½ë¶">ê²½ë¶</option>
+		                <option value="ì „ë‚¨">ì „ë‚¨</option>
+		                <option value="ì „ë¶">ì „ë¶</option>
+		                <option value="ì¶©ë‚¨">ì¶©ë‚¨</option>
+		                <option value="ì¶©ë¶">ì¶©ë¶</option>
+		                <option value="ì œì£¼">ì œì£¼</option>
 				 	</select>
             		</div>
             		<div id="location" class='search col-xs-12 col-sm-12 col-md-2'>
-						<input readonly="readonly" id="sconcentering" type="text" class="form-control" style="width: 100%"> 
+						<input readonly="readonly" id="sconcentering" type="text" class="form-control" style="width: 100%; height: 34px;"> 
             		</div>
             		<div class="col-xs-12 col-sm-12 col-md-2">
             			<select id="interest" name="searchSortingOption" class="form-control">
-					 		<option >°ü½É»ç</option>
+					 		<option >ê´€ì‹¬ì‚¬</option>
 					 		<c:forEach var="Meeting" items="${interlist}">
 					 		
 					 			<option value="${Meeting.interestName}">${Meeting.interestName }</option>
@@ -593,19 +574,79 @@
 					 		</c:forEach>
 				 		</select>
             		</div>
-            		<div class="col-xs-12 col-sm-12 col-md-2"><input type='button' id="plzsearch" class='sch_smit search-btn' value="Ã£±â"></div>
+            		<div class="col-xs-12 col-sm-12 col-md-2"><input type='button' id="plzsearch" class='sch_smit search-btn' value="ì°¾ê¸°"></div>
 			</div>
+			</section>
 		</form>	 
-			 <!-- °Ë»öÃ¢ Á¾·á -->
+			 <!-- ê²€ìƒ‰ì°½ ì¢…ë£Œ -->
 			 
-			 <!-- ¸µÅ©ÀÌµ¿ start -->
+			 
 		<%-- <c:if test="${!empty sessionScope.me=='true'}"> --%>
-			<section id="linkmove" class="wrapper align-center">
-				
-				<!-- <h2>³»ÁÖº¯ ÃßÃµ¸ğÀÓ</h2> -->
+			<section class="wrapper align-center" style="margin-top: -100px; margin-bottom: -60px">
+				<div align="right" class="inner" style="">
+				 	<input type="button" id="addMeeting" value="ê°œì„¤í•˜ê¸°">
+				 	<!-- <input type="button" id="nearMeeting" value="ë‚´ ì£¼ë³€ ëª¨ì„"> -->
+				</div>
+			</section>
+			<!-- ë‚´ì£¼ë³€ ì¶”ì²œëª¨ì„ start -->
+			<section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
 				
 				<div class="inner">
+				<h2 style="margin-top: -1px;text-align: -webkit-auto;">ë‚´ì£¼ë³€ ì¶”ì²œëª¨ì„</h2>
+					<div id="frogue-container" class="position-right-bottom"
+					      data-color="#555a9c"
+					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-init-key="value"
+					      ></div>
+					
+					<div class="flex secondSection" id="secondSection">
+
+					</div>
+					<hr/>
+				</div>
+			</section>
+			<!-- ë§í¬ì´ë™ end -->
+			
+			<!-- ì˜¤ëŠ˜ì˜ í•¨ê»˜í•´ìš” start -->
+			<section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
 				
+				
+				
+				<div class="inner">
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;">ì˜¤ëŠ˜ì˜ í•¨ê»˜í•´ìš”</h2>
+					<div id="frogue-container" class="position-right-bottom"
+					      data-color="#555a9c"
+					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-init-key="value"
+					      ></div>
+					<div class="flex secondSection">
+					<c:set var="i" value="0" />
+				 	<c:forEach var="todays" items="${todaylist}">
+				 	<c:set var="i" value="${ i+1 }" />
+					
+						<div class='move_meeting todayTogether' id="">
+							<span onclick="gotoMeeting(${todays.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${todays.titleImg }'></span>
+							<p onclick="gotoMeeting(${todays.meetingNo })">${todays.meetingCenter }</p>
+							<h3 onclick="gotoMeeting(${todays.meetingNo })">${todays.meetingName }</h3>
+						</div>
+						
+						
+					</c:forEach>
+					</div>
+					
+					<hr/>
+				</div>
+			</section>
+			<!--ì˜¤ëŠ˜ì˜ í•¨ê»˜í•´ìš” end -->
+			
+			<!-- What's hot start -->
+			<section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
+				
+				
+				<div class="inner">
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;">What's hot</h2>
 					<div id="frogue-container" class="position-right-bottom"
 					      data-color="#555a9c"
 					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
@@ -614,48 +655,74 @@
 					      ></div>
 					
 					<div class="flex secondSection">
-
+					<%-- <c:set var="i" value="0"/> --%>
+				 	<c:forEach var="hot" begin="0" end="2" step="1" items="${hotlist}">
+				 	<c:set var="i" value="${ i+1 }" />
+						<div class='move_meeting todayTogether' id="">
+							<span onclick="gotoMeeting(${hot.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${hot.titleImg }'></span>
+							<p onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingCenter }</p>
+							<h3 onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingName }</h3>
+						</div>
+						
+						
+					</c:forEach>
 					</div>
+					
 				</div>
 			</section>
-		<%-- </c:if> --%>
-			<!-- ¸µÅ©ÀÌµ¿ end -->
+			<!--What's hot end -->
 			 
-			 <!-- ¸®½ºÆ® ½ÃÀÛ -->
+			 <!-- ë¦¬ìŠ¤íŠ¸ ì‹œì‘ -->
                 <div>
-	              	<section style="align-content:center; " id="one" class="wrapper style1">
-						<div id="appendPoint" class="inner" style="text-align: center;">
-						<div align="right" class="addMeeting">
-						 	<input type="button" id="addMeeting" value="°³¼³ÇÏ±â">
-						 	<!-- <input type="button" id="nearMeeting" value="³» ÁÖº¯ ¸ğÀÓ"> -->
-						 </div>
+	              	<section style="align-content:center;" id="one" class="wrapper style1">
+						<div class="inner" style="text-align: center;overflow: hidden;">
+						
+						 <hr/>
+						 <h2 style="margin-top: -40px;text-align: -webkit-auto;">ë°©ê¸ˆ ë“±ë¡ëœ ëª¨ì„</h2>
 							<c:set var="i" value="0" />
 						 	<c:forEach var="meeting" items="${list}">
 						 	<c:set var="i" value="${ i+1 }" />
-						 	<hr/>
-						 	
-							<article class="feature left">
-								<div class="image" style="display: flex; height: 400px;"><img src="/resources/images/meeting/${meeting.titleImg}" class="col-xs-12 col-sm-12 col-md-12" alt="" /></div>
-								<div class="content">
-									<p class="meetingCenter"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
-									<h2 class="titleName">${meeting.meetingName}</h2>
-									<p>¸ğÀÓÁ¤¿ø  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>¸í      Á¶È¸¼ö <span class="meetingCenter">${meeting.meetingViews}</span>È¸</p>
-									<p></p>
-									<p>¸ğÀÓ³¯Â¥:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p>
-									<ul class="actions">
-										<li>
-											<a href="#" data-param="${meeting.meetingNo}" class="button">More</a>
-										</li>
-									</ul>
-								</div>
-							</article>
-							
+								<c:if test="${i%2==1}">
+									<article class="" style="float: left; margin-bottom: 20px;">
+										<div class="image" style="display: flex; width:600px; height: 400px;float: left;"><img src="/resources/images/meeting/${meeting.titleImg}" style="border-radius: 55px;" class="col-xs-12 col-sm-12 col-md-12" alt="" /></div>
+										<div class="" style="float: left; margin-left: 10px;text-align: left;">
+											<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
+											<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
+											<p>ëª¨ì„ì •ì›  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>ëª…      ì¡°íšŒìˆ˜ <span class="meetingCenter">${meeting.meetingViews}</span>íšŒ</p>
+											<p></p>
+											<p>ëª¨ì„ë‚ ì§œ:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p>
+											<ul class="actions">
+												<li>
+													<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
+												</li>
+											</ul>
+										</div>
+									</article>
+								</c:if>
+								<c:if test="${i%2==0}">
+									<article class="" style="float: right; margin-bottom: 20px;">
+										<div class="image" style="display: flex; width:600px; height: 400px;float: right;"><img src="/resources/images/meeting/${meeting.titleImg}" style="border-radius: 55px;" class="col-xs-12 col-sm-12 col-md-12" alt="" /></div>
+										<div class="" style="float: left; margin-left: 10px;text-align: end;">
+											<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
+											<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
+											<p>ëª¨ì„ì •ì›  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>ëª…      ì¡°íšŒìˆ˜ <span class="meetingCenter">${meeting.meetingViews}</span>íšŒ</p>
+											<p></p>
+											<p>ëª¨ì„ë‚ ì§œ:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p>
+											<ul class="actions">
+												<li>
+													<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
+												</li>
+											</ul>
+										</div>
+									</article>
+								</c:if>						 	
+						 
 							</c:forEach>
-							 
+						
 						</div>
 					</section>
             	</div>   
-       		<!-- ¸®½ºÆ® Á¾·á -->
+       		<!-- ë¦¬ìŠ¤íŠ¸ ì¢…ë£Œ -->
     </div>
 	
 		

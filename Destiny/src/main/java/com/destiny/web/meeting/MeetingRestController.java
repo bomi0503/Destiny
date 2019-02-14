@@ -1,5 +1,6 @@
 package com.destiny.web.meeting;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,13 @@ public class MeetingRestController {
 	    meeting.setMeetingTime(meetingService.getAct(meeting.getMeetingNo()).getMeetingTime());
 	    meeting.setMeetingLocation(meetingService.getAct(meeting.getMeetingNo()).getMeetingLocation());
 
+		meeting.setMeetingDate(meetingService.getAct(meeting.getMeetingNo()).getMeetingDate());
+		meeting.setMeetingTime(meetingService.getAct(meeting.getMeetingNo()).getMeetingTime());
+		meeting.setMeetingLocation(meetingService.getAct(meeting.getMeetingNo()).getMeetingLocation());
+		
+		System.out.println("데이트"+meetingService.getAct(meeting.getMeetingNo()).getMeetingDate());
+		System.out.println("타임"+meetingService.getAct(meeting.getMeetingNo()).getMeetingTime());
+		System.out.println("장소"+meetingService.getAct(meeting.getMeetingNo()).getMeetingLocation());
 		//회차에 추가 
 		int success= meetingService.addCrewAct(meeting);
 		//System.out.println("미팅내용 가져와랏"+meeting);
@@ -338,13 +346,29 @@ public class MeetingRestController {
 	}
 	
 	@RequestMapping( value="meetingRest/nearMeeting", method=RequestMethod.GET)
-	public Map<String , Object> getActCrew(@RequestParam("address")String address)throws Exception{
+	public Map<String , Object> getActCrew(@RequestParam("address") String address)throws Exception{
 		System.out.println("근처모임  시작함");
-		
+		String tutu = URLEncoder.encode(address , "utf-8");
+		System.out.println("어드레스 tutu?"+tutu);
+		System.out.println("어드레스 모냐??"+address);
 		Map<String , Object> bestMap=meetingService.getNearMeeting(address);
 		System.out.println(bestMap);
 		
 		return bestMap;
+	}
+	
+	@RequestMapping( value="meetingRest/todayTogeterMeeting", method=RequestMethod.GET)
+	public Map<String , Object> todayTogeterMeeting(@RequestParam("today") String today)throws Exception{
+		System.out.println("오늘의 함께해요  시작함");
+		System.out.println(today);
+		//String tutu = URLEncoder.encode(today , "utf-8");
+		//System.out.println("어드레스 tutu?"+tutu);
+		//System.out.println("어드레스 모냐??"+address);
+		
+		Map<String , Object> todayTogeterMap=meetingService.todayTogeterMeeting(today);
+		System.out.println(todayTogeterMap);
+		
+		return todayTogeterMap;
 	}
 	
 

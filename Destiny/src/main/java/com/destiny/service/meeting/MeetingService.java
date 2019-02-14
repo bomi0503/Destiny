@@ -9,6 +9,10 @@ public interface MeetingService {
 	
 	public Map<String , Object> getInterestList() throws Exception; /*개설하기 열떄 관심사 항목 가져오기*/
 	
+	public Map<String , Object> todayTogeterMeeting(String today) throws Exception; /*리스트 보여줄때 오늘의 함께해요 리스팅*/
+	
+	public Map<String , Object> hotMeeting() throws Exception; /*리스트 보여줄때 what's hot 리스팅*/
+	
 	public void addMeeting(Meeting meeting) throws Exception; /*새로 개설하기*/
 	
 	public void addAct(Meeting meeting) throws Exception; /*개설과 동시에 엑트 1회차 업데이트*/

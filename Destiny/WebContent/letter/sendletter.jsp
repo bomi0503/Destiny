@@ -21,6 +21,9 @@
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	
+	<!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 	
 	
 	
@@ -38,8 +41,14 @@
 					 
 					return; 
 				 }
-				 
-				 $("form").attr("method" , "POST").attr("action" , "/letter/sendLetter").submit();
+				 swal({
+						icon:"success",
+						title:"전송되었습니다."
+						})
+						.then((value) => {
+							$("form").attr("method","POST").attr("action","/letter/sendLetter").submit();
+				         });
+				 /* $("form").attr("method" , "POST").attr("action" , "/letter/sendLetter").submit(); */
 			});
 		});
 	
@@ -48,27 +57,47 @@
 	
 	
 	<style>
-		body {
-            padding-top : 50px;
-        }
+	.letter_icon{
+			display : inline-block;
+			width : 22px;
+			height : 22px;
+			background : url("/resources/icon/envelope.png");
+			background-size : cover;
+			margin-right : 10px;
+		}
+		#top{
+			background : #ff264a;
+		}
+			#top h1{
+				color : white;
+				margin : 0;
+				padding : 20px;
+				font-size : 30px;
+				font-weight : bold;
+			}
+	.con{
+		padding : 0 20px;
+	}
 	</style>
 
 </head>
 
-<body class="subpage">	
+<body>	
 
 
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
+	<section id="main">
 		
-			<h3>쪽지작성</h3>
-			<form class="form-horizontal">
+		
+			<section id="top">
+				<h1><span class="letter_icon"></span>쪽지</h1>
+			</section>
+			<form class="form-horizontal con">
 				<div class="row uniform">
 					
 				<div class="12u">
-					<label for="senderId" >발신자ID : ${me.userId}</label>
+					<%-- <label for="senderId" >발신자ID : ${me.userId}</label> --%>
 					<span id="senderId"></span>
 				</div>
 				
@@ -86,21 +115,20 @@
 				 
 				 <div class="12u">
 					<label for="prodDetail">쪽지내용</label>
-					  <textarea name="letterDetail"  cols="25" rows="25" >
-					  </textarea>
+					  <textarea name="letterDetail" rows="8" style="resize:none;"></textarea>
 				 </div>
 				  
 
 					<ul class="actions small">	
 					  <li><a id="sendNow" class="button special small" href="#" >전 &nbsp;송</a></li>
-					  <li><a class="button special small" href="/letter/letterMain.jsp">취&nbsp;소</a></li>
+					  <li><a class="button special small" href="/letter/getLetterList">취&nbsp;소</a></li>
 					</ul>
 
 
 				</div>
 
 			</form>
-		</div>
+		
 	</section>
 	<!-- //contents -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
