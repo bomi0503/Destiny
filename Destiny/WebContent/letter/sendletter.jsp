@@ -21,6 +21,9 @@
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	
+	<!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 	
 	
 	
@@ -38,8 +41,14 @@
 					 
 					return; 
 				 }
-				 
-				 $("form").attr("method" , "POST").attr("action" , "/letter/sendLetter").submit();
+				 swal({
+						icon:"success",
+						title:"전송되었습니다."
+						})
+						.then((value) => {
+							$("form").attr("method","POST").attr("action","/letter/sendLetter").submit();
+				         });
+				 /* $("form").attr("method" , "POST").attr("action" , "/letter/sendLetter").submit(); */
 			});
 		});
 	
