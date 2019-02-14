@@ -316,7 +316,7 @@ border-radius: 10px 10px 10px 10px;
 		}
 		/* gage끝 */
 </style>
-<script src="http://192.168.0.12:82/socket.io/socket.io.js"></script>
+<script src="http://192.168.0.51:82/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <script>
@@ -338,7 +338,7 @@ function noEvent() { // 새로 고침 방지
 
 ////////////////////////////////////////////
 
-var socket = io.connect('http://192.168.0.12:82');
+var socket = io.connect('http://192.168.0.51:82');
 var timeout;
 var chattingNo='${chatting.chattingNo}';
 var manId="${chatting.manId}";

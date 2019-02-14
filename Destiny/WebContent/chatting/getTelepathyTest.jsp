@@ -45,7 +45,7 @@ $(function() {
 	
 });
  
-var n=1;
+/* var n=1;
 	setTimeout(function() { 
    
    		alert("TimeOut! chatting을 시작합니다!");
@@ -63,12 +63,14 @@ var n=1;
 			
 	   		 n++; }, 1000);
 		
-	})(); 
+	})();  */
 
 </script>
 
 <title>Telepathy Test</title>
 <style type="text/css">
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,800);
 body {
 	
 	 
@@ -107,6 +109,194 @@ section.wrapper, article.wrapper {
 .in{
 margin-bottom: 50px;
 }
+/* hover ============= */
+
+
+figure.snip1141 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 100px;
+  max-width: 310px;
+  max-height: 310px;
+  width: 100%;
+  height: 200px;
+  background: #000000;
+  color: #ffffff;
+  text-align: left;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+figure.snip1141 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+figure.snip1141 img {
+ 
+  max-width: 120%;
+    max-height: 110%;
+    width: 120%;
+    height: 120%;
+     margin-left:-15%;
+  position: relative;
+  opacity: 0.9;
+  
+}
+
+figure.snip1141 .circle {
+  position: relative;
+  height: 55px;
+  width: 55px;
+  top: 0%;
+  left: 0%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  text-align: center;
+}
+
+figure.snip1141 .circle:before,
+figure.snip1141 .circle:after {
+  border: 2px solid white;
+  border-right-color: transparent;
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+
+figure.snip1141 .circle:before {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+figure.snip1141 .circle:after {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+figure.snip1141 figcaption {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
+figure.snip1141 h2 {
+  position: absolute;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 55px;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  padding: 0 20px;
+  opacity: 0;
+  -webkit-transform: translateX(-10%);
+  transform: translateX(-10%);
+  font-size: 30px;
+  color: #ffffff;
+}
+
+figure.snip1141 .icon {
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+}
+
+figure.snip1141 i {
+  color: white;
+  font-size: 48px;
+  line-height: 55px;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+
+figure.snip1141 a {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+figure.snip1141:hover .circle,
+figure.snip1141.hover .circle {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+figure.snip1141:hover .circle:before,
+figure.snip1141.hover .circle:before,
+figure.snip1141:hover .circle:after,
+figure.snip1141.hover .circle:after {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+figure.snip1141:hover h2,
+figure.snip1141.hover h2 {
+  opacity: 1;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+figure.snip1141:hover img,
+figure.snip1141.hover img {
+  opacity: 0.35;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+figure.snip1141:hover i,
+figure.snip1141.hover i {
+  opacity: 0;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.ion-ios-arrow-right:before{
+	    margin-top: 3px;
+}
+
+
+/* Demo purposes only */
+html {
+  height: 100%;
+}
+body {
+  /* background-color: #212121; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  margin: 0;
+  /* height: 100%; */
+}
+
+.question{
+	font-size: 20px;
+	font-weight: bold;
+}
 
 </style>
 </head>
@@ -125,20 +315,33 @@ margin-bottom: 50px;
 		<c:forEach var="telepathy" items="${telepathyList}">
 		<c:set var="i" value="${ i+1 }" />	
 		<div class=" flex-2 flex-2 in">
-			<div class="row align-center  12u 12u$(small)">
-			  		<div class="5u"><strong>${i}</strong></div>
-					<div class="7u$">${telepathy.telepathyQuestion}</div>
+			<div class="row align-center">
+			  		<%-- <div class="5u"><strong>${i}</strong></div> --%>
+					<div class="12u$ question">${telepathy.telepathyQuestion}</div>
 					
 			</div>
-			
-			<div class="row align-center  12u 12u$(small)">
-					
-			  		<div class="6u"><strong>ONE</strong></div>
-					<div class="6u"><strong>TWO</strong></div>
-					
+			<div class="row align-center">
+				<div class="6u">
+					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exOneImg}" alt="sq-sample27" />
+					  <figcaption>
+					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
+					    <h2>${telepathy.exOne}</h2>
+					  </figcaption>
+					  <a href="#"></a>
+					</figure>
+				</div>
+				<div class="6u$">
+					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exTwoImg}" alt="sq-sample17" />
+					  <figcaption>
+					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
+					    <h2>${telepathy.exTwo}</h2>
+					  </figcaption>
+					  <a href="#"></a>
+					</figure>
+				</div>
 			</div>
 		
-			<div class="row align-center  12u 12u$(small)">
+			<%-- <div class="row align-center  12u 12u$(small)">
 			 		
 			  		<div class="6u">
 				  		<span class="image fit align-center">
@@ -152,19 +355,19 @@ margin-bottom: 50px;
 					</div>
 					
 					
-			</div>
+			</div>  --%>
 			<div class="row align-center form-group  12u 12u$(small)">
 					
 						<p class="6u">
 						<input type="radio" id="exOne${i}" name="${i}" checked="checked" value="1">
 						<label for="exOne${i}">
-							${telepathy.exOne}
+							<%-- ${telepathy.exOne} --%>
 						</label>
 						</p>
 						<p class="6u$">
 						<input type="radio" id="exTwo${i}" name="${i}"  value="2" >
 						<label for="exTwo${i}" >
-							${telepathy.exTwo}
+							<%-- ${telepathy.exTwo} --%>
 						</label>
 						</p>
 					

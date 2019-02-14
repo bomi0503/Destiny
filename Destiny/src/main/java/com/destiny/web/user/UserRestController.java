@@ -345,6 +345,7 @@ public class UserRestController {
 			System.out.println("msg ±∏√‡ : " + msg.toString());
 			
 			Transport.send(msg);
+
 			
 		} catch(MessagingException e) {
 			e.printStackTrace();

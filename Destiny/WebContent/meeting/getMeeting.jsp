@@ -700,12 +700,12 @@
 					if('${empty sessionScope.me}'=='true'){
 						
 						swal({
-							  title: "로그인후이용가능합니다.\n로그인하시겠습니까?",
+							  title: "로그인후이용가능합니다.로그인하시겠습니까?",
 							  icon: "info",
 							  buttons: true,
 							  dangerMode: true,
 							})
-							.then((willDelete) =>{
+							.then(function(willDelete){
 							  if (willDelete) {
 								  $("#my-dialog,#dialog-background").toggle();
 							  } else {
@@ -922,7 +922,7 @@
 											
 											if(JSONData=='MST'){
 												swal({title:meetingnickname+"님을 강퇴하시겠습니까?",icon:"info",buttons:{cancel:"취소",confirm:"확인",},})
-												.then((value)=>{
+												.then(function(value){
 													console.log(value==true);
 										
 													if(value==true){
@@ -968,12 +968,19 @@
 		
 			$("a:contains('쪽지보내기')").click(function () {
 				if('${empty sessionScope.me}'=='true'){
-					if (confirm("로그인후이용가능합니다.\n로그인하시겠습니까?") == true){    //확인
-						$("#my-dialog,#dialog-background").toggle();
-						//self.location="/user/login";
-					 }else{   //취소
-					     return;
-					 }
+					swal({
+						  title: "로그인후이용가능합니다.\n로그인하시겠습니까?",
+						  icon: "info",
+						  buttons: true,
+						  dangerMode: true,
+						})
+						.then(function(willDelete){
+						  if (willDelete) {
+							  $("#my-dialog,#dialog-background").toggle();
+						  } else {
+						    	return;
+						  }
+						});
 				}else{
 					$(".popup").addClass("show");
 				}
@@ -998,7 +1005,7 @@
 				 }
 				 $(".popup").removeClass("show");
 				 swal({title:meetingnickname+"님에게 쪽지를 발송하였습니다.",icon:"success",buttons:{confirm:"확인"},})
-				 .then((value)=>{
+				 .then(function(value){
 					 if(value==true){
 						 //$("#massageForm").attr("method" , "POST").attr("action" , "/letter/sendLetter").submit();
 						
@@ -1049,7 +1056,7 @@
 					}else{
 						
 						swal({title:meetingnickname+"님에게 모임장을 위임 하시겠습니까?",icon:"info",buttons:{cancel:"취소",confirm:"확인",},})
-						.then((value)=>{
+						.then(function(value){
 							if(value==true){    //확인
 								
 								$.ajax( 
@@ -1100,7 +1107,7 @@
 							  buttons: true,
 							  dangerMode: true,
 							})
-							.then((willDelete) => {//확인
+							.then(function(willDelete){//확인
 							  if (willDelete) {
 								  $("#my-dialog,#dialog-background").toggle();
 							  } else {
@@ -1144,7 +1151,7 @@
 											  buttons: true,
 											  dangerMode: true,
 											})
-											.then((willDelete) =>{//확인
+											.then(function(willDelete){//확인
 											  if (willDelete) {
 												  $("#dialog2, #backround").toggle();
 											  } else {
@@ -1181,7 +1188,7 @@
 							  buttons: true,
 							  dangerMode: true,
 							})
-							.then((willDelete) => {//확인
+							.then(function(willDelete){//확인
 							  if (willDelete) {
 								  $("#my-dialog,#dialog-background").toggle();
 							  } else {
@@ -1401,7 +1408,15 @@
 	<div class="container" >
 		<div class="col-xs-12 col-sm-12 col-md-12 neayong" align="center" id="bigletter">
 		  	<span id="titleName" data-param="${meeting.meetingName}">${meeting.meetingName}</span><br/>
-		  	<img src="/resources/images/meeting/family.png" width="50px" height="50px"/>
+		  	<script type="text/javascript">
+			  	window.onload = function () {
+			  		var meetlist = "${meeting.interestName}".split("/");
+				  	console.log(meetlist[0]);
+				  	$("#imgid").attr("src","/resources/images/interest/"+meetlist[0]+".png");
+			  	}
+			  	
+		  	</script>
+		  	<img id="imgid" src="/resources/images/interest/dd.png" width="50px" height="50px"/>
 		  	${meeting.interestName}
 		  	
 		</div>
@@ -1455,7 +1470,7 @@
 		<div>
 			<div class='row'>
 				<div id="meetingActCount" align="center" class="col-xs-2 col-md-2 ">
-					<img src="/resources/images/meeting/calendar.png" height="50px" alt="Pic 01" >
+					<img src="https://img.icons8.com/color/48/000000/calendar.png" style="width: 100%" alt="Pic 01" >
 				</div>
 				
 				<div id="meetingActCount2" class="col-xs-6 col-md-6 ">
@@ -1582,10 +1597,18 @@
 					 		<div class="dropdown">
 					 			<div class="col-xs-12 col-sm-12 col-md-12">
 						 			<img src="/resources/images/userprofile/${crew.masterProfileImg}" style="height: 50px; margin-bottom: 6px;"  class="col-xs-4 col-sm-1 col-md-1 imgmen">
-									<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-										<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
-										<span class="caret"></span>
-									</a>
+									<c:if test="${me.nickName ne crew.crewNickName }">
+										<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
+											<span class="caret"></span>
+										</a>
+									</c:if>
+									<c:if test="${me.nickName eq crew.crewNickName }">
+										<div class="thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
+											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
+											<span class="caret"></span>
+										</div>
+									</c:if>
 									<a class="col-xs-1 col-sm-4 col-md-4"></a>
 									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-5 col-sm-3 col-md-3">모임장</strong></span></c:if>
 									
@@ -1595,7 +1618,7 @@
 										<li><a href="#">강퇴하기</a></li>
 										<li><a href="#">위임하기</a></li>
 									</c:if>
-										<li><a>쪽지보내기</a></li>
+										<li><a href="#">쪽지보내기</a></li>
 								</ul>
 								</div>
 							</div>
