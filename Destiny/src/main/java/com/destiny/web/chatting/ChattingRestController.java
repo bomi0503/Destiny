@@ -844,7 +844,7 @@ public class ChattingRestController {
 	
 	
 		
-    String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
+    String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
 
     
@@ -899,7 +899,7 @@ public class ChattingRestController {
 	
 	
 		
-    String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
+    String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
 
     

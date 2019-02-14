@@ -63,7 +63,7 @@
                success : function(JsonData) {
                   //alert("성공");
                   
-                  popWin = window.open("/chatting/getRandomMatching.jsp","popWin", "left=500, top=600, width=800, height=900, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+                  popWin = window.open("/chatting/getRandomMatching.jsp","popWin", " width=800, height=950, scrollbars=1");
                  
                  
                            },//success
@@ -108,7 +108,7 @@
                   success : function(JsonData) {
                      //alert("성공");
                      
-                     popWin = window.open("/chatting/getPerfectMatching.jsp","popWin", "left=500, top=600, width=800, height=900, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+                     popWin = window.open("/chatting/getPerfectMatching.jsp","popWin", " width=800, height=950, scrollbars=1");
                      
                                     },//success
                      error: function () {
@@ -202,7 +202,7 @@ li{
    <!-- //header -->
 <!-- 메인배경이미지 : start -->
    	<div class="topImg">
-		<h1>우연으로 시작된 인연</h1>
+		<h1>우연과 인연</h1>
 	</div>
 	<!-- 메인배경이미지 : end -->
 	<div class="container">

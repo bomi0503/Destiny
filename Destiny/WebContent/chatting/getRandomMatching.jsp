@@ -55,7 +55,7 @@
 					if (JsonData.roomNo==chattingNo&&chattingNo!=0) {
 						console.log('채팅 했던 사람');
 					}else{
-						popWin = window.open("/chatting/telepathyTest/"+JsonData.roomNo,"popWin", "left=500, top=600, width=500, height=800, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+						popWin = window.open("/chatting/telepathyTest/"+JsonData.roomNo,"popWin", "width=500, height=800, scrollbars=1");
 						
 					}
 					return false;

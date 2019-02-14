@@ -53,18 +53,60 @@ $(function() {
 	
 	(function poll() {
 		setTimeout(function() { 
-			if (n<11) {
+			if (n<16) {
 				//$($('h2').val()).remove();
 				poll();
 				//$('h2').last().append(10-n);
-				$('h2').text(11-n);
+				$('h2').text(15-n);
 	            
 			}
 			
 	   		 n++; }, 1000);
 		
 	})();  */
+//이미지 선택=====================
+	$(function() {
 
+	$(".one1").on("click", function(){
+
+		$("input:radio[id='exOne1']").prop("checked",true);
+
+	});
+
+	$(".two1").click(function(){
+
+		$("input:radio[id='exTwo1']").prop("checked", true);
+
+	});
+	
+	$(".one2").on("click", function(){
+
+		$("input:radio[id='exOne2']").prop("checked",true);
+
+	});
+
+	$(".two2").click(function(){
+
+		$("input:radio[id='exTwo2']").prop("checked", true);
+
+	});
+	$(".one3").on("click", function(){
+
+		$("input:radio[id='exOne3']").prop("checked",true);
+
+	});
+
+	$(".two3").click(function(){
+
+		$("input:radio[id='exTwo3']").prop("checked", true);
+
+	});
+
+	
+
+ 
+
+});
 </script>
 
 <title>Telepathy Test</title>
@@ -73,7 +115,8 @@ $(function() {
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,800);
 body {
 	
-	 
+ overflow: scroll;
+ 
 }
 
 body:after{
@@ -91,6 +134,7 @@ body:after{
     width:100%;
     max-width:100%;
     height:100%;
+    
 }
 h2{
 	margin: 0;
@@ -100,7 +144,8 @@ section.wrapper, article.wrapper {
 }
 
 .flex-2{
-	padding-left: 15px;
+	margin: 10px;
+	
 }
 .image.fit img {
     width: 100%;
@@ -116,7 +161,6 @@ figure.snip1141 {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
   overflow: hidden;
-  margin: 10px;
   min-width: 100px;
   max-width: 310px;
   max-height: 310px;
@@ -296,11 +340,21 @@ body {
 .question{
 	font-size: 20px;
 	font-weight: bold;
+	margin-bottom: 20px;
 }
+
+#random{
+	width: 90%;
+}
+
+.button{
+	width: 90%;
+}
+
 
 </style>
 </head>
-<body>
+<body >
 	
 	<!-- <div class="text-center">TelepathyTest</div> -->
 	<section id="three" class="wrapper align-center">
@@ -320,23 +374,23 @@ body {
 					<div class="12u$ question">${telepathy.telepathyQuestion}</div>
 					
 			</div>
-			<div class="row align-center">
-				<div class="6u">
+			<div class="row align-center ">
+				<div class="6u one${i}" >
 					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exOneImg}" alt="sq-sample27" />
 					  <figcaption>
 					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
 					    <h2>${telepathy.exOne}</h2>
 					  </figcaption>
-					  <a href="#"></a>
+					  <a href="javascript:"></a>
 					</figure>
 				</div>
-				<div class="6u$">
+				<div class="6u$ two${i}">
 					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exTwoImg}" alt="sq-sample17" />
 					  <figcaption>
 					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
 					    <h2>${telepathy.exTwo}</h2>
 					  </figcaption>
-					  <a href="#"></a>
+					  <a href="javascript:"></a>
 					</figure>
 				</div>
 			</div>
@@ -356,11 +410,11 @@ body {
 					
 					
 			</div>  --%>
-			<div class="row align-center form-group  12u 12u$(small)">
+			<div class="row align-center form-group">
 					
 						<p class="6u">
 						<input type="radio" id="exOne${i}" name="${i}" checked="checked" value="1">
-						<label for="exOne${i}">
+						<label for="exOne${i}" >
 							<%-- ${telepathy.exOne} --%>
 						</label>
 						</p>
@@ -378,7 +432,7 @@ body {
 		</div>		
 		</c:forEach>
 		</div>
-		<div class='align-center form-group  12u 12u$(small)'>
+		<div class='align-center form-group'>
 			<input type="hidden" name="roomNo" value="${roomNo}">
 			<input type="hidden" name="telepathyNo1" value="${telepathyList[0].telepathyNo}">
 			<input type="hidden" name="telepathyNo2" value="${telepathyList[1].telepathyNo}">
