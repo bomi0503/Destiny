@@ -9,10 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <link rel="stylesheet" href="/resources/css/main.css" > 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
 <!-- //All CSS Insert -->
 
 <!-- All js -->
@@ -21,6 +24,8 @@
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 	
 	
 	
@@ -44,6 +49,15 @@
 				//$("form")[0].reset();
 				history.go(-1);
 			});
+			
+			$("#birthday").datepicker({
+				dateFormat: 'yy-mm-dd',
+				changeMonth: true,
+				changeYear: true,
+	        })
+	        .on('change', function(){
+	        	console.log('1')
+	        });
 		});	
 	
 		
@@ -476,7 +490,7 @@
 		
 		.topImg h1{
 			position : absolute;
-			line-height : 450px;
+			line-height : 330px;
 			width : 100%;
 			text-align : center;
 			color : white;
@@ -498,8 +512,8 @@
 		.smallNavi{
 			overflow : hidden;
 			float : right;
-			margin-top : -30px;
-			margin-bottom : 60px;
+			    margin-top: -80px;
+   		 margin-bottom: 60px;
 		}
 		
 		.smallNavi li{
@@ -544,7 +558,9 @@
 		       border-radius: 2px;
 		       width: 100%;
 		   }
-			
+		   .ui-datepicker-month{float:right !important; background:#FFF !important; border-bottom:0 !important;}
+		   .ui-datepicker-year{float:left !important; background:#FFF !important; border-bottom:0 !important;}
+		   
 		/* /////////////////////////////////////////////////////////// */
 		
 	</style>
@@ -563,11 +579,22 @@
 	
 	
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
-			<h3>회원가입</h3>
+	<div class="container">
+	
+		<div class="wrap">
 			
-			
+				<!-- 페이지 내부 네비게이션 경로 : start -->
+				<ul class="smallNavi">
+					<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+					<li>></li>
+					<li>마이페이지</li>
+					<li>></li>
+					<li>활동관리</li>
+					<li>></li>
+					<li>작성한 게시글</li>
+				</ul>
+				<!-- 페이지 내부 네비게이션 경로 : end -->
+				
 				<form class="form-horizontal" id="form111">
 				
 				
@@ -651,7 +678,7 @@
 							<td>
 								<div class="row uniform">
 									<div class="6u$ 12u$(small)">
-										<input type="date" id="birthday" name="birthday">
+										<input type="text" id="birthday" name="birthday" autocomplete="off">
 									</div>
 								</div>
 							</td>
@@ -725,7 +752,7 @@
 									 </div>
 									 
 									 <div class="3u 12u$(small)">
-										 <button id="phoneConfirm" type="button" class="btn btn-info">인증</button>
+										 <button id="phoneConfirm" type="button" class="">인증</button>
 									 </div>
 									 
 									 <div class="6u$ 12u$(small)">
@@ -863,7 +890,7 @@
 			</div>
 			
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 

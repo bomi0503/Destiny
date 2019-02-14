@@ -293,13 +293,11 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 @media all and (max-width:1024px) {
 .list-wrap .button{box-sizing:border-box; width:100%; padding:0 2%; max-width:180px;}
 .list-item{width:calc(50% - 30px); margin-top:10px;}
-.list-item:nth-child(-n+2){margin-top:0;}
 }
 
 @media all and (max-width:768px) {
 .list-item{width:100%; margin:10px 0 0;}
 .list-item:nth-child(-n+2){margin-top:10px;}
-.list-item:first-child{margin-top:0px;}
 .list-desc{margin-bottom:5px; font-size:0.8rem;}
 .list-tit{
 	font-size: 1.25em;
@@ -323,7 +321,7 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 							<h3 class="list-tit">${meeting.meetingName}</h3>
 							<p class="list-desc">${meeting.meetingDate}</p>
 							<p class="list-desc">${meeting.meetingCenter}</p>
-							<p class="list-desc">${meeting.meetingLocation}</p>
+							<p class="list-desc" style="min-height:60px;">${meeting.meetingLocation}</p>
 							<a href="#" class="button" name="goMeeting" data-param="${meeting.meetingNo}">보러가기</a>
 						</li>
 					  </c:forEach>

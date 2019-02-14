@@ -9,6 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <link rel="stylesheet" href="/resources/css/main.css" > 
 <!-- //All CSS Insert -->
 
@@ -18,7 +21,6 @@
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 	$(function(){
 		// 내부에 스크립트 코드 추가
@@ -104,7 +106,7 @@
 		font-weight : 700;
 	}
 
-	/* .topImg{
+	.topImg{
 		display : block;
 		position : absolute;
 		top : 0;
@@ -113,16 +115,16 @@
 		background-size : cover;
 		width : 100%;
 		height : 400px;
-	} */
+	}
 	
-	.topImg{
+	/*.topImg{
 		max-width : 100%;
 		height : 400px;
 		background-image : url("/resources/images/background/userbg.jpg");
 		background-position : center center;
 		background-size : cover;
 		background-repeat : no-repeat;
-	}
+	}*/
 	
 	.topImg::after{
 		content : "";
@@ -136,7 +138,7 @@
 	
 	.topImg h1{
 		position : absolute;
-		line-height : 450px;
+		line-height : 330px;
 		width : 100%;
 		text-align : center;
 		color : white;
@@ -188,8 +190,9 @@
 	<!-- 메인배경이미지 : end -->
 
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
+	<div class="container">
+	
+		<div class="wrap">
 		
 			<!-- 페이지 내부 네비게이션 경로 : start -->
 			<ul class="smallNavi">
@@ -390,7 +393,7 @@
 				</div>
 			</form>
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 	
 	<!-- footer -->

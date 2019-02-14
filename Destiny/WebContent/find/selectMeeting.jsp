@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <link rel="stylesheet" href="/resources/css/main.css" > 
-
-
 
 <!-- //All CSS Insert -->
 
@@ -108,7 +109,7 @@
 		font-weight : 700;
 	}
 
-	/* .topImg{
+	.topImg{
 		display : block;
 		position : absolute;
 		top : 0;
@@ -118,15 +119,15 @@
 		background-size : cover;
 		width : 100%;
 		height : 400px;
-	} */
-	.topImg{
+	}
+	/* .topImg{
 		max-width : 100%;
 		height : 400px;
 		background-image : url("/resources/images/background/meetingbg.jpg");
 		background-position : center center;
 		background-size : cover;
 		background-repeat : no-repeat;
-	}
+	} */
 	.topImg::after{
 		content : "";
 		background : rgba(0, 0, 0, 0.2);
@@ -137,23 +138,22 @@
 		height : 400px;
 	}
 	.topImg h1{
-		position : absolute;
-		width : 100%;
-		margin : 0;
-		padding : 0;
-		font-family: 'Nanum Myeongjo', serif;
-		font-size : 60px;
-		text-align : center;
-		height : 400px;
-		line-height : 450px;
-		color : white;
-		z-index : 99;
-		
+	    position: absolute;
+	    line-height: 330px;
+	    width: 100%;
+	    text-align: center;
+	    color: white;
+	    z-index: 99;
+	    font-size: 60px;	
 	}
 	
 	h1 .slim{
 		font-weight : lighter;
 	}
+	.wrap {
+    max-width: 1440px;
+    margin-top: 400px;
+}
 	
 	li{
 		list-style-type : none;
@@ -209,7 +209,7 @@
 			</ul>
 			<!-- 페이지 내부 네비게이션 경로 : end -->
 			
-			<div class="row uniform">
+			<div class="row uniform" style="clear:both;">
 				<div class="3u 6u$(small)">
 					<input type="radio" name="selectRadio" id="ex1" value="1" checked="checked">
 					<label for="ex1">일반</label>

@@ -140,8 +140,8 @@
 		    text-decoration: none;
 		}
 		
-		.profileImg{overflow:hidden; max-width:350px; max-height:350px; margin:-150px auto 0; text-align:center; border:3px solid #AAA; border-radius:50%;}
-		.profileImg img{max-width:350px; max-height:350px;}
+		.profileImg{overflow:hidden; max-width:350px; max-height:350px; margin:-200px auto 0; text-align:center; border:3px solid #AAA; border-radius:50%;}
+		.profileImg img{max-width:100%; max-height:100%;}
 		.subTitle{font-size:15px; font-weight:900;}
 	</style>
 	
@@ -160,157 +160,158 @@
 	<!-- 메인배경이미지 : end -->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<section id="main" class="wrapper">
-		<div class="inner">
-		
+	<div class="container">
+	
+		<div class="wrap">
+			
 		<!-- 페이지 내부 네비게이션 경로 : start -->
-		<!-- <ul class="smallNavi">
+		<ul class="smallNavi">
 			<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
 			<li>></li>
 			<li>마이페이지</li>
 			<li>></li>
 			<li>개인정보조회</li>
-		</ul> -->
+		</ul>
 		<!-- 페이지 내부 네비게이션 경로 : end -->
-		
-		
-		<div class="box" style="margin-top:80px;">
-			<div class="profileImg">
-				<%-- <c:set var="i" value="0" />
-				<c:forEach var="file" items="${filelist}" >
-					<c:set var="i" value="${ i+1 }" />
-					<img src="/resources/images/userprofile/${file}">
-				</c:forEach> --%>
-				<img src="/resources/images/userprofile/${user.profile}">
-			</div>
-			
-			<hr/>
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle" >아이디</div>
-				<div class="3u 12u$(small)">${user.userId} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (경고 ${user.warningCount}회)</div>
-				<div class="3u 12u$(small) subTitle">닉네임</div>
-				<div class="3u 12u$(small)">${user.nickName}</div>
-			</div>
-			<hr/>
-			<%-- <div class="row uniform">
-				<div class="3u 12u$(small)">닉네임</div>
-				<div class="9u$ 12u$(small)">${user.nickName}</div>
-			</div> --%>
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">회원등급</div>
-				<c:if test="${user.userGrade=='NEW'}">
-					<div class="3u 12u$(small)">신규회원</div>
-				</c:if>
-				<c:if test="${user.userGrade=='NOR'}">
-					<div class="3u 12u$(small)">일반회원</div>
-				</c:if>
-				<c:if test="${user.userGrade=='VIP'}">
-					<div class="3u 12u$(small)">우수회원</div>
-				</c:if>
-				<c:if test="${user.userGrade=='ADM'}">
-					<div class="3u 12u$(small)">관리자</div>
-				</c:if>
-				<c:if test="${user.userGrade=='BLK'}">
-					<div class="3u 12u$(small)">블랙리스트</div>
-				</c:if>
-				<div class="3u 12u$(small) subTitle">출석일</div>
-				<div class="3u 12u$(small)">${user.attendCount}일</div>
-			</div>
-			<hr/>
-			<%-- <div class="row uniform">
-				<div class="3u 12u$(small)">출석일</div>
-				<div class="9u$ 12u$(small)">${user.attendCount}</div>
-			</div> --%>
-			<%-- <div class="row uniform">
-				<div class="3u 12u$(small)">경고횟수</div>
-				<div class="9u$ 12u$(small)">${user.warningCount} 회</div>
-			</div> --%>
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">거주지역</div>
-				<div class="3u 12u$(small)">${user.address}</div>
-				<div class="3u 12u$(small) subTitle">생년월일</div>
-				<div class="3u 12u$(small)">${user.birthday}</div>
-			</div>
-			<hr/>
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">연락처</div>
-				<div class="3u 12u$(small)">${user.phone}</div>
-				<div class="3u 12u$(small) subTitle">이메일</div>
-				<div class="3u 12u$(small)">${user.email}</div>
-			</div>
-			<hr/>
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">관심사</div>
-				<div class="3u 12u$(small)">${interestList[0]}</div>
-				<div class="3u 12u$(small)">${interestList[1]}</div>
-				<div class="3u 12u$(small)">${interestList[2]}</div>
-			</div>
-			<hr/>
-			
-			<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-			
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">내 성격유형</div>
-				<c:if test="${typeMap.myType == null}">
-					<div class="3u 12u$(small)">
-						<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
-					</div>
-				</c:if>
+		<div style="clear:both; padding-top:80px;">
+			<div class="box">
+				<div class="profileImg">
+					<%-- <c:set var="i" value="0" />
+					<c:forEach var="file" items="${filelist}" >
+						<c:set var="i" value="${ i+1 }" />
+						<img src="/resources/images/userprofile/${file}">
+					</c:forEach> --%>
+					<img src="/resources/images/userprofile/${user.profile}">
+				</div>
 				
-				<c:if test="${typeMap.myType != null}">
-					<div class="4u 12u$(small)">${typeMap.myType}</div>
-					<div class="5u 12u$(small)">
-						<img src="/resources/images/mbti/${typeFileMap.myTpyeFile}" width="150" height="200"/>
-					</div>
-				</c:if>
+				<hr/>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle" >아이디</div>
+					<div class="3u 12u$(small)">${user.userId} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (경고 ${user.warningCount}회)</div>
+					<div class="3u 12u$(small) subTitle">닉네임</div>
+					<div class="3u 12u$(small)">${user.nickName}</div>
+				</div>
+				<hr/>
+				<%-- <div class="row uniform">
+					<div class="3u 12u$(small)">닉네임</div>
+					<div class="9u$ 12u$(small)">${user.nickName}</div>
+				</div> --%>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">회원등급</div>
+					<c:if test="${user.userGrade=='NEW'}">
+						<div class="3u 12u$(small)">신규회원</div>
+					</c:if>
+					<c:if test="${user.userGrade=='NOR'}">
+						<div class="3u 12u$(small)">일반회원</div>
+					</c:if>
+					<c:if test="${user.userGrade=='VIP'}">
+						<div class="3u 12u$(small)">우수회원</div>
+					</c:if>
+					<c:if test="${user.userGrade=='ADM'}">
+						<div class="3u 12u$(small)">관리자</div>
+					</c:if>
+					<c:if test="${user.userGrade=='BLK'}">
+						<div class="3u 12u$(small)">블랙리스트</div>
+					</c:if>
+					<div class="3u 12u$(small) subTitle">출석일</div>
+					<div class="3u 12u$(small)">${user.attendCount}일</div>
+				</div>
+				<hr/>
+				<%-- <div class="row uniform">
+					<div class="3u 12u$(small)">출석일</div>
+					<div class="9u$ 12u$(small)">${user.attendCount}</div>
+				</div> --%>
+				<%-- <div class="row uniform">
+					<div class="3u 12u$(small)">경고횟수</div>
+					<div class="9u$ 12u$(small)">${user.warningCount} 회</div>
+				</div> --%>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">거주지역</div>
+					<div class="3u 12u$(small)">${user.address}</div>
+					<div class="3u 12u$(small) subTitle">생년월일</div>
+					<div class="3u 12u$(small)">${user.birthday}</div>
+				</div>
+				<hr/>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">연락처</div>
+					<div class="3u 12u$(small)">${user.phone}</div>
+					<div class="3u 12u$(small) subTitle">이메일</div>
+					<div class="3u 12u$(small)">${user.email}</div>
+				</div>
+				<hr/>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">관심사</div>
+					<div class="3u 12u$(small)">${interestList[0]}</div>
+					<div class="3u 12u$(small)">${interestList[1]}</div>
+					<div class="3u 12u$(small)">${interestList[2]}</div>
+				</div>
+				<hr/>
 				
+				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				
-			</div>
-			
-			<hr/>
-			
-			<div class="row uniform">
-				<div class="3u 12u$(small) subTitle">상대방 성격유형</div>
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">내 성격유형</div>
+					<c:if test="${typeMap.myType == null}">
+						<div class="3u 12u$(small)">
+							<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+						</div>
+					</c:if>
+					
+					<c:if test="${typeMap.myType != null}">
+						<div class="4u 12u$(small)">${typeMap.myType}</div>
+						<div class="5u 12u$(small)">
+							<img src="/resources/images/mbti/${typeFileMap.myTpyeFile}" width="150" height="200"/>
+						</div>
+					</c:if>
+					
+					
+				</div>
 				
-				<c:if test="${typeMap.firstType == null && typeMap.secondType == null&& typeMap.thirdType == null}">
-					<div class="3u 12u$(small)">
-						<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
-					</div>
-				</c:if>
+				<hr/>
+				
+				<div class="row uniform">
+					<div class="3u 12u$(small) subTitle">상대방 성격유형</div>
+					
+					<c:if test="${typeMap.firstType == null && typeMap.secondType == null&& typeMap.thirdType == null}">
+						<div class="3u 12u$(small)">
+							<a class="button-mbti" href="/user/addTypeView/${me.userId}">설정하기</a>
+						</div>
+					</c:if>
+					
+					<c:if test="${typeMap.firstType != null && typeMap.secondType != null&& typeMap.thirdType != null}">
+						<div class="3u 12u$(small)">${typeMap.firstType}</div>
+						<div class="3u 12u$(small)">${typeMap.secondType}</div>
+						<div class="3u 12u$(small)">${typeMap.thirdType}</div>
+					</c:if>
+				</div>
 				
 				<c:if test="${typeMap.firstType != null && typeMap.secondType != null&& typeMap.thirdType != null}">
-					<div class="3u 12u$(small)">${typeMap.firstType}</div>
-					<div class="3u 12u$(small)">${typeMap.secondType}</div>
-					<div class="3u 12u$(small)">${typeMap.thirdType}</div>
+					<div class="row uniform">
+						<div class="3u 12u$(small)"></div>
+						<div class="3u 12u$(small)">
+							<img src="/resources/images/mbti/${typeFileMap.typeFileList[0]}" width="150" height="200"/>
+						</div>
+						<div class="3u 12u$(small)">
+							<img src="/resources/images/mbti/${typeFileMap.typeFileList[1]}" width="150" height="200"/>
+						</div>
+						<div class="3u 12u$(small)">
+							<img src="/resources/images/mbti/${typeFileMap.typeFileList[2]}" width="150" height="200"/>
+						</div>
+					</div>
 				</c:if>
+				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			
 			</div>
 			
-			<c:if test="${typeMap.firstType != null && typeMap.secondType != null&& typeMap.thirdType != null}">
-				<div class="row uniform">
-					<div class="3u 12u$(small)"></div>
-					<div class="3u 12u$(small)">
-						<img src="/resources/images/mbti/${typeFileMap.typeFileList[0]}" width="150" height="200"/>
-					</div>
-					<div class="3u 12u$(small)">
-						<img src="/resources/images/mbti/${typeFileMap.typeFileList[1]}" width="150" height="200"/>
-					</div>
-					<div class="3u 12u$(small)">
-						<img src="/resources/images/mbti/${typeFileMap.typeFileList[2]}" width="150" height="200"/>
-					</div>
-				</div>
-			</c:if>
-			<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-		
-		</div>
-		
-		<ul class="actions align-center">
-			<li><a href="#" class="button" name="back">이전</a></li>
-			<li><a href="#" class="button special" name="update">수정하기</a></li>
-		</ul>
-		
-		
- 		</div>
- 	</section>
+			<ul class="actions align-center">
+				<li><a href="#" class="button" name="back">이전</a></li>
+				<li><a href="#" class="button special" name="update">수정하기</a></li>
+			</ul>
+			
+			
+	 		</div>
+	 	</div>
+ 	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
  	
  	<!-- footer -->

@@ -9,7 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
-<link rel="stylesheet" href="/resources/css/main.css" > 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="/resources/css/main.css" >
 
 <!-- //All CSS Insert -->
 
@@ -286,9 +290,7 @@
 							alert("메일이 발송되었습니다. 메일을 확인해 주세요.");
 							
 							$('input[name="authnum"]').on("keyup", function(){
-								 //alert("좀 돼바 슈밤");
 								 if(JSONData.authNum == $("#authnum").val()){
-									 //alert("맞음");
 									 $('input[name="authnum"]').css('background-color','rgb(207, 253, 170)');
 									 $("#authnumWirte").text("");
 								 } else {
@@ -451,8 +453,8 @@
 	.smallNavi{
 		overflow : hidden;
 		float : right;
-		margin-top : -30px;
-		margin-bottom : 60px;
+		margin-top: -80px;
+    margin-bottom: 60px;
 	}
 	
 	.smallNavi li{
@@ -499,7 +501,7 @@
 	}
 /* /////////////////////////////////// */
 </style>
-</style>
+
 
 </head>
 
@@ -516,11 +518,22 @@
 	
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
+	<div class="container">
+	
+		<div class="wrap">
+		
+			<!-- 페이지 내부 네비게이션 경로 : start -->
+			<ul class="smallNavi">
+				<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+				<li>></li>
+				<li>마이페이지</li>
+				<li>></li>
+				<li>개인정보 수정</li>
+			</ul>
+			<!-- 페이지 내부 네비게이션 경로 : end -->
 		
 			<!-- form Start /////////////////////////////////////-->
-			<form class="form-horizontal">
+			<form class="form-horizontal" style="clear:both;">
 				<div class="box">
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
@@ -615,7 +628,7 @@
 							<input type="text" id="phone3" name="phoneBe" value="${ ! empty phone[2] ? phone[2]: ''}"   placeholder="변경번호">
 						</div>
 						<div class="2u 12u$(xsmall)">
-							<button id="phoneConfirm" type="button" class="btn btn-info">인증</button>
+							<button id="phoneConfirm" type="button">인증</button>
 						</div>
 						
 					</div>
@@ -746,7 +759,7 @@
 			</form>
 		
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
