@@ -79,9 +79,6 @@
     </insert>
 <!-- /////////////////개설된 모임 조회////////////////// -->
     <select    id="getMeetingList" parameterType="com.destiny.common.Search" resultMap="meetingSelectMap">
-       SELECT *
-      FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
-         FROM (
             SELECT m.*, ma.act_date as meeting_date, ma.act_location as meeting_location
             FROM meeting m, meeting_act ma
             WHERE m.meeting_no = ma.meeting_no 
@@ -95,9 +92,6 @@
          <if test="searchSortingOption != null">
             and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
          </if>
-         order by m.meeting_no desc) inner_table 
-      WHERE ROWNUM &lt;= #{endRowNum})
-   WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
     </select>
 <!-- /////////////////상세 조회////////////////// -->
     <select    id   ="getMeeting"   parameterType="string"   resultMap="meetingSelectMap">

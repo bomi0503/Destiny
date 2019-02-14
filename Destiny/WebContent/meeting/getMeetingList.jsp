@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +19,6 @@
 	
 	
    	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54cfa5aea3e5609fcbb420ef8cd6ed4c&libraries=services"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -599,6 +596,9 @@
 						
 						
 					</c:forEach>
+					<c:if test="${empty todaylist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
 					</div>
 					
 					<hr/>
@@ -629,6 +629,10 @@
 							<h3 onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingName }</h3>
 						</div>
 					</c:forEach>
+					<c:if test="${empty hotlist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
 					</div>
 					
 				</div>
@@ -650,7 +654,16 @@
 					<c:set var="i" value="0" />
 					<c:forEach var="meeting" items="${list}">
 				    <c:set var="i" value="${ i+1 }" />
-						<div class='move_meeting todayTogether' id="">
+				    
+				    
+				    	<c:if test="${ i<=3 }">
+						<div class='move_meeting todayTogether' >
+						</c:if>
+						<c:if test="${ i>3 }">
+							<div class='move_meeting todayTogether' style="display:none">
+						</c:if>
+						
+						
 							<span onclick="gotoMeeting(${meeting.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${meeting.titleImg }'></span>
 							<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
 							<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
@@ -664,25 +677,29 @@
 							</ul>
 						</div>
 					</c:forEach>
+					<c:if test="${empty list}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
+					<c:if test="${fn:length(list) > 3}">
+					<div>
+						<button onclick="fnChangeDisplay(this)">more</button>
+					</div>
+					</c:if>
 					</div>
 					
 				</div>
 			</section>
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
+			
+			<script>
+				function fnChangeDisplay(em) {
+					$(".todayTogether").each(function(idx, e) {
+						$(e).css("display", "");
+					});
+					$(em).css("display", "none");
+					
+				}
+			</script>
 			 
 			 
 			 <%-- 
