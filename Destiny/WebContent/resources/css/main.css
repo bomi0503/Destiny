@@ -2005,7 +2005,7 @@ body{overflow-y:scroll;}
 		background: #fddde3;
 		border-radius: 10px;
 		border: none;
-		border: solid 2px #fd5d7c;
+		border: solid 2px #6cc091;
 		color: #fff;
 		display: block;
 		outline: 0;
@@ -2710,7 +2710,7 @@ button.close,
 			input[type="button"].special:active,
 			button.special:active,
 			.button.special:active {
-				background-color: #5ab884;
+				/* background-color: #5ab884; */
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
@@ -2899,7 +2899,7 @@ button.close,
 			position: fixed;
 			right: -20em;
 			top: 0;
-			background: #6cc091;
+			background: #fd5d7c;
 			color: #daefe3;
 			height: 100%;
 			max-width: 80%;

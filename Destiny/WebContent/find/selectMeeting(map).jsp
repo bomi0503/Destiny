@@ -9,27 +9,25 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
-<link rel="stylesheet" href="/resources/css/main.css" >
-<style>
-#map {
-    height: 500px; 
-    min-width: 500x; 
-    max-width: 500px; 
-    margin: 0 auto; 
-}
-</style> 
-<!-- //All CSS Insert -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="/resources/css/main.css" > 
 
+<!-- //All CSS Insert -->
 
 <!-- All js -->
 	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
+	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="http://code.highcharts.com/maps/highmaps.js"></script>
 	<script src="http://code.highcharts.com/maps/modules/drilldown.js"></script>
 	<script src="../resources/javascript/highmap/chart.js"></script>
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script>
 	$(function() {
@@ -51,7 +49,7 @@
 		
 		$("a[name='find']" ).on("click" , function() {
 			if($('#town-data').val() == 0){
-				alert('지역을 선택해 주세요.');
+				swal('지역을 선택해 주세요.');
 			}else{
 				$("form").attr("method", "POST").attr("action", "/find/getMeetingResult").submit();
 			}
@@ -141,7 +139,7 @@
 	.smallNavi{
 		overflow : hidden;
 		float : right;
-		margin-top : -30px;
+		margin-top : -80px;
 		margin-bottom : 60px;
 	}
 	
@@ -155,10 +153,19 @@
 		margin-top : -2px;
 	}
 	
-	section.wrapper, article.wrapper {
-    	padding: 500px 0;
+	.form-control { -webkit-appearance: menulist;}
+	/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
 	}
-
+	
+	#map {
+	    height: 500px; 
+	    min-width: 500x; 
+	    max-width: 500px; 
+	    margin: 0 auto; 
+	}
 </style>
 	
 
@@ -178,12 +185,23 @@
 	<!-- 메인배경이미지 : end -->
 
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
+	<div class="container">
+	
+		<div class="wrap">
+		
+			<!-- 페이지 내부 네비게이션 경로 : start -->
+			<ul class="smallNavi">
+				<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+				<li>></li>
+				<li>Place</li>
+				<li>></li>
+				<li>모임 검색</li>
+			</ul>
+			<!-- 페이지 내부 네비게이션 경로 : end -->
 			
-			<div class="row uniform">
+			<div class="row uniform" style="clear:both;">
 				<div class="3u 6u$(small)">
-					<input type="radio" name="selectRadio" id="ex1" value="1" >
+					<input type="radio" name="selectRadio" id="ex1" value="1">
 					<label for="ex1">일반</label>
 					<input type="radio" name="selectRadio" id="ex2" value="2" checked="checked">
 					<label for="ex2">지도로 보기</label>
@@ -233,7 +251,7 @@
 				<input type="hidden" id="town-data" name="town">
 			</form>
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 	
 	<!-- footer -->
