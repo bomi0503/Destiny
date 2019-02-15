@@ -126,7 +126,7 @@ public class LetterController {
 			model.addAttribute("reason", "쪽지가 정상적으로 전송되었습니다.");
 		}
 		/*return "forward:/letter/getlettercomplete.jsp";*/
-		return "/letter/getLetterList";
+		return "redirect:/letter/getLetterList";
 	}
 	
 	@RequestMapping( value="getLetterList", method=RequestMethod.GET)

@@ -12,7 +12,7 @@
 	display: none;
 	top: 100%;
 	left: 0;
-	z-index: 99;
+	z-index: -99;
 }
 .sf-menu > li {
 	float: left;
