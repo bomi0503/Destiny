@@ -282,8 +282,8 @@ public class UserRestController {
 			props.put("mail.smtp.port", 587);
 			props.put("mail.smtp.ssl.trust", host);
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.ssl.enable", "true"); 
-			props.put("mail.smtp.ssl.trust", "smtp.naver.com");
+			//props.put("mail.smtp.ssl.enable", "true"); 
+			//props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 
 			System.out.println("Properties ¼±¾ð  : " + props.toString());
 			
