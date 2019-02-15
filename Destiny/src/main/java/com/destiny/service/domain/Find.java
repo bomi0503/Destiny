@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Find {
 
-	private	String		selectGender;
-	private	String		selectAge;
-	private	String		selectInterest;
-	private	String		selectInterest01;
-	private	String		selectInterest02;
-	private	String		selectInterest03;
-	private	String		town;
+	private	 String		selectGender;
+	private	 String		selectAge;
+	private	 String		selectInterest;
+	private	 String		selectInterest01;
+	private	 String		selectInterest02;
+	private String		selectInterest03;
+	private	 String		town;
 
 
 	public Find() {
@@ -93,7 +93,7 @@ public class Find {
 				+ ", selectInterest01=" + selectInterest01 + ", selectInterest02=" + selectInterest02
 				+ ", selectInterest03=" + selectInterest03 + ", town=" + town + "]";
 	}
-	
+
 	
 	
 }

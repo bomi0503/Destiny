@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +19,6 @@
 	
 	
    	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54cfa5aea3e5609fcbb420ef8cd6ed4c&libraries=services"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -490,42 +487,7 @@
 			<h1>우리들의<span class="slim">모임</span></h1>
 		</div>
 		
-	 <!-- 베스트상품 테이블 -->
-         <%--    <table>
-
-            	  <c:set var="i" value="0" />
-				  <c:forEach var="meeting" items="${bestList}">
-				  <c:set var="i" value="${ i+1 }" />
-				  </c:forEach>
-
-			<div id="myCarousel" class="carousel slide " data-ride="carousel">
-			      <!-- Indicators -->
-				 <div class="carousel-inner" role="listbox">
-			        <div class="item active col-xs-12 col-sm-12" align="center">
-			          <img  class="first-slide" src="/resources/images/meeting/${bestList[0].titleImg}" style="width:auto; height: 400px;" alt="First slide"><!-- 첫번째 사진 -->
-					
-			        </div>
-			        <div class="item col-xs-12 col-sm-12" align="center">
-			          <img class="second-slide" src="/resources/images/meeting/${bestList[1].titleImg}" style="width:auto; height: 400px;" alt="Second slide"><!-- 두번째 사진 -->
-
-			        </div>
-			        <div class="item col-xs-12 col-sm-12" align="center">
-			          <img class="third-slide" src="/resources/images/meeting/${bestList[2].titleImg}" style="width:auto; height: 400px;" alt="Third slide"><!-- 세번째 사진 -->
-			        </div>
-			      </div> 
-			      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			        <span class="sr-only">Previous</span>
-			      </a>
-			      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			        <span class="sr-only">Next</span>
-			      </a> 
-			   </div>
-            </table> --%>
-            
-            <!-- /.carousel -->
-            <!-- 베스트상품 테이블 종료 -->
+		
         <section id="main" class="wrapper" style="margin-top: -100px;">	
 		<div  class="landing">
 		<div style="width:98%; margin-left:10px;">
@@ -634,6 +596,9 @@
 						
 						
 					</c:forEach>
+					<c:if test="${empty todaylist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
 					</div>
 					
 					<hr/>
@@ -655,7 +620,7 @@
 					      ></div>
 					
 					<div class="flex secondSection">
-					<%-- <c:set var="i" value="0"/> --%>
+					<c:set var="i" value="0"/>
 				 	<c:forEach var="hot" begin="0" end="2" step="1" items="${hotlist}">
 				 	<c:set var="i" value="${ i+1 }" />
 						<div class='move_meeting todayTogether' id="">
@@ -663,9 +628,11 @@
 							<p onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingCenter }</p>
 							<h3 onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingName }</h3>
 						</div>
-						
-						
 					</c:forEach>
+					<c:if test="${empty hotlist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
 					</div>
 					
 				</div>
@@ -673,7 +640,71 @@
 			<!--What's hot end -->
 			 
 			 <!-- 리스트 시작 -->
+			 <section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
+				<div class="inner">
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;">방금 등록 된 모임</h2>
+					<div id="frogue-container" class="position-right-bottom"
+					      data-color="#555a9c"
+					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-init-key="value"
+					      ></div>
+					
+					<div class="flex secondSection">
+					<c:set var="i" value="0" />
+					<c:forEach var="meeting" items="${list}">
+				    <c:set var="i" value="${ i+1 }" />
+				    
+				    
+				    	<c:if test="${ i<=3 }">
+						<div class='move_meeting todayTogether' >
+						</c:if>
+						<c:if test="${ i>3 }">
+							<div class='move_meeting todayTogether' style="display:none">
+						</c:if>
+						
+						
+							<span onclick="gotoMeeting(${meeting.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${meeting.titleImg }'></span>
+							<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
+							<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
+							<p>모임정원  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${meeting.meetingViews}</span>회</p>
+							<p></p>
+							<%-- <p>모임날짜:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p> --%>
+							<ul class="actions">
+							<li>
+								<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
+							</li>
+							</ul>
+						</div>
+					</c:forEach>
+					<c:if test="${empty list}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
+					<c:if test="${fn:length(list) > 3}">
+					<div>
+						<button onclick="fnChangeDisplay(this)">more</button>
+					</div>
+					</c:if>
+					</div>
+					
+				</div>
+			</section>
+			
+			<script>
+				function fnChangeDisplay(em) {
+					$(".todayTogether").each(function(idx, e) {
+						$(e).css("display", "");
+					});
+					$(em).css("display", "none");
+					
+				}
+			</script>
+			 
+			 
+			 <%-- 
                 <div>
+                
 	              	<section style="align-content:center;" id="one" class="wrapper style1">
 						<div class="inner" style="text-align: center;overflow: hidden;">
 						
@@ -721,13 +752,12 @@
 						
 						</div>
 					</section>
-            	</div>   
+					
+					
+            	</div>    --%>
        		<!-- 리스트 종료 -->
     </div>
-	
-		
-			
-		</div>
+	</div>
 	</section>
 	<!-- //contents -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

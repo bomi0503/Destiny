@@ -582,7 +582,7 @@ public class ActController {
 			upload.setFileName("basic.gif");
 		}else {
 			/*대표이미지 업로드 : start*/
-			String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
+			String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
 			String name = System.currentTimeMillis()+"."+fileName.getOriginalFilename().split("\\.")[1];
 			
 			File file = new File(path + name);
@@ -625,7 +625,8 @@ public class ActController {
 		uploadService.addUload(upload);
 		System.out.println("upload : "+upload);
 		/*업로드 테이블 : end*/
-		modelAndView.setViewName("/user/userAct/addStoryConfirm.jsp");
+		/*modelAndView.setViewName("/user/userAct/addStoryConfirm.jsp");*/
+		modelAndView.setViewName("redirect:/act/getWriteCommunityList/"+userId);
 		return modelAndView;
 	}
 	/*addRestaurantInfo : end*/

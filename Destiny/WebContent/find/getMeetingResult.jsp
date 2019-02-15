@@ -31,7 +31,7 @@
 .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 .info .close:hover {cursor: pointer;}
 .info .body {position: relative;overflow: hidden;}
-.info .desc {position: relative;margin: 13px 0 0 90px; height: 90px;}
+.info .desc {position: relative;margin: 13px 0 0 85px; height: 90px;}
 .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap; }
 .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
 .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
@@ -182,7 +182,11 @@
 					
 				</script>
 				
+				<%-- <c:forEach var="meeting" items="${list}"> --%>
+				<c:set var="i" value="0" />
 				<c:forEach var="meeting" items="${list}">
+				<c:set var="i" value="${ i+1 }" />
+				
 				<script>
 					// 주소-좌표 변환 객체를 생성합니다
 					var geocoder = new daum.maps.services.Geocoder();
@@ -211,7 +215,7 @@
 					            '                <img src="/resources/images/meeting/${meeting.titleImg}" width="73" height="70"/>' +
 					            '           </div>' + 
 					            '            <div class="desc">' + 
-					            '                <div class="ellipsis"><p>${meeting.meetingLocation}</p></div>' + 	
+					            '                <div class="ellipsis"><p>${placeList[i-1]}</p></div>' + 	
 					            '                <div><a href="/meeting/getMeeting?meetingNo=${meeting.meetingNo}" target="_blank" class="link">상세정보보기</a></div>' + 	
 					            '            </div>' + 
 					            '        </div>' + 
@@ -275,7 +279,7 @@
 body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 .list-wrap{max-width:1400px; margin:0 auto;}
 .list-wrap:after{content:''; display:block; clear:both;}
-.list-item{box-sizing:border-box; float:left; width:calc(33.333% - 30px); margin:0 15px; margin-top:20px; padding: 15px; border:1px solid #7d7b7b; border-radius:10px;}
+.list-item{box-sizing:border-box; float:left; width:calc(33.333% - 30px); margin:0 15px; margin-top:50px; padding: 15px; border:1px solid #7d7b7b; border-radius:10px;}
 .list-img{max-width:200px; width:100%;}
 .list-tit{
 	font-size: 1.75em;
@@ -293,13 +297,11 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 @media all and (max-width:1024px) {
 .list-wrap .button{box-sizing:border-box; width:100%; padding:0 2%; max-width:180px;}
 .list-item{width:calc(50% - 30px); margin-top:10px;}
-.list-item:nth-child(-n+2){margin-top:0;}
 }
 
 @media all and (max-width:768px) {
 .list-item{width:100%; margin:10px 0 0;}
 .list-item:nth-child(-n+2){margin-top:10px;}
-.list-item:first-child{margin-top:0px;}
 .list-desc{margin-bottom:5px; font-size:0.8rem;}
 .list-tit{
 	font-size: 1.25em;
@@ -323,7 +325,9 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 							<h3 class="list-tit">${meeting.meetingName}</h3>
 							<p class="list-desc">${meeting.meetingDate}</p>
 							<p class="list-desc">${meeting.meetingCenter}</p>
-							<p class="list-desc">${meeting.meetingLocation}</p>
+							<%-- <p class="list-desc" style="min-height:60px;">${meeting.meetingLocation}</p> --%>
+
+							<p class="list-desc" style="min-height:40px;">${placeList[i-1]}</p>
 							<a href="#" class="button" name="goMeeting" data-param="${meeting.meetingNo}">보러가기</a>
 						</li>
 					  </c:forEach>

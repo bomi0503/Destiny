@@ -63,11 +63,11 @@
 		SELECT
 		 DECODE(cnt,0,0,cnt)
 		FROM (SELECT
-				 count(*) cnt
-				FROM users u, age_range ar
+				 count(*) cnt 
+				FROM users u, age_range ar 
 				WHERE substr( NVL(TRUNC(MONTHS_BETWEEN(SYSDATE, TO_DATE(u.birthday, 'YYYY-mm-dd'))/12), 0), 3,4) BETWEEN ar.low_age AND ar.high_age
-					AND u.gender=#{selectGender}
-					AND ar.age_range_no=#{selectAge}
+					AND u.gender = #{selectGender}
+					AND ar.age_range_no = #{selectAge}
 					AND u.address LIKE '%'||#{town}||'%'
 					AND( u.first_interest=#{selectInterest01} OR u.first_interest=#{selectInterest02} OR u.first_interest=#{selectInterest03}
 						OR u.second_interest=#{selectInterest01} OR u.second_interest=#{selectInterest02} OR u.second_interest=#{selectInterest03}
