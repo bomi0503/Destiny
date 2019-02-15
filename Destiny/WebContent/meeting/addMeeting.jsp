@@ -636,7 +636,7 @@
 				
 				<ul class="actions align-center">
 					<li><a href="#" class="button" name="reset">취소</a></li>
-					<li><a href="#" class="button special" name="join" onclick="fncAddProduct()">토토</a></li>
+					<li><a href="#" class="button special" name="join" onclick="fncAddProduct()">개설</a></li>
 				</ul>
 					
 				<!-- ////////////////////////////////////////////////////////////////// -->

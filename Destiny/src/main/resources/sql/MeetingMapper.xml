@@ -45,6 +45,7 @@
       SELECT m.*, ma.act_date
       FROM meeting m, meeting_act ma
       where m.meeting_no = ma.meeting_no
+      and m.meeting_condition in ('DEF','EMP')
       and m.interest_name='함께해요'
       and ma.act_date = #{value}
       order by m.meeting_views desc
@@ -52,6 +53,7 @@
 <!-- /////////////////what's hot 조회////////////////// -->
     <select    id="hotMeeting" resultMap="meetingSelectMap">
       SELECT*from meeting where meeting_views is not null
+      and meeting_condition in ('DEF','EMP')
       order by meeting_views desc
     </select>
 <!-- /////////////////베스트상품 조회////////////////// -->
