@@ -10,10 +10,10 @@
 
 <script type="text/javascript">
 
+	
 
-
-   $(function() {
-      
+   $(function() { 
+		
       $("a[href='#' ]:contains('Destiny')").on("click", function() {
          self.location = "/index.jsp"
       });
@@ -582,6 +582,8 @@
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Meeting</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Chatting</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Place</a>
+			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">MeetingStory</a>
+			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">DateStory</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">RestaurantInfo</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">LoveAdvice</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Notice</a>
