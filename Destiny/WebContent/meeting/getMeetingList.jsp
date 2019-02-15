@@ -306,7 +306,7 @@
 			alert("로케이션 시작");
 		  if (navigator.geolocation) { // GPS를 지원하면
 		    navigator.geolocation.getCurrentPosition(function(position) {
-		      alert(position.coords.latitude + ' ' + position.coords.longitude);
+		      //alert(position.coords.latitude + ' ' + position.coords.longitude);
 		      findaddress(position.coords.latitude, position.coords.longitude);
 		    }, function(error) {
 		      console.error(error);
@@ -333,7 +333,7 @@
 			if (status === daum.maps.services.Status.OK) {
 				//console.log(result[0].region_2depth_name);
 				var address = result[0].region_2depth_name;
-				//console.log(address);
+				alert(address);
 				$.ajax({
 
                     url:"/meetingRest/nearMeeting?address="+address,
