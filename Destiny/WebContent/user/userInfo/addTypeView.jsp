@@ -9,7 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우리들의 연결고리</title>
 <!-- All CSS Insert -->
-<link rel="stylesheet" href="/resources/css/main.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet"> 
 
@@ -18,12 +21,12 @@
 
 
 <!-- All js -->
+<link rel="stylesheet" href="/resources/css/main.css" >
 	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript">
 
 		$(function() {
@@ -107,7 +110,7 @@
 		
 		.topImg h1{
 			position : absolute;
-			line-height : 450px;
+			line-height : 330px;
 			width : 100%;
 			text-align : center;
 			color : white;
@@ -129,7 +132,7 @@
 		.smallNavi{
 			overflow : hidden;
 			float : right;
-			margin-top : -30px;
+			margin-top : -80px;
 			margin-bottom : 60px;
 		}
 		
@@ -137,6 +140,11 @@
 			float : left;
 			margin-right : 20px;
 			margin-top : 8em;
+		}
+		
+		.smallNavi li img{
+			margin-top:0;
+			width:auto;
 		}
 		
 		.homeImg{
@@ -234,6 +242,7 @@
 		    color: #FFF;
 		}
 		
+		.form-control{-webkit-appearance: menulist;}
 		
 	</style>
 	
@@ -251,9 +260,21 @@
 	<!-- 메인배경이미지 : end -->
 
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
-		<form action="horizontal">
+	<div class="container">
+	
+		<div class="wrap">
+		
+		<!-- 페이지 내부 네비게이션 경로 : start -->
+		<ul class="smallNavi">
+			<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+			<li>></li>
+			<li>마이페이지</li>
+			<li>></li>
+			<li>MBTI Type</li>
+		</ul>
+		<!-- 페이지 내부 네비게이션 경로 : end -->
+		
+		<form action="horizontal" style="clear:both;">
 			<div>
 				<table class="row-table tablebm">
 					<caption>테이블 설명</caption>
@@ -315,7 +336,7 @@
 				
 				<ul class="actions align-center">
 					<li><a href="#" class="button" name="reset">취소</a></li>
-					<li><a href="#" class="button special btn-primary" name="find">성격등록</a></li>
+					<li><a href="#" class="button" name="find">성격등록</a></li>
 				</ul>
 			</div>
 		</form>
@@ -324,7 +345,7 @@
 		
 			<div class="types-list-header">
 				<h3>성격 유형</h3>
-				<a href="/articles/our-theory" class="btn btn-action-2">TEST 하러가기<span class="fa fa-caret-right"></span></a>
+				<a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC" class="btn btn-action-2">TEST 하러가기<span class="fa fa-caret-right"></span></a>
 			</div>
 			
 			
@@ -453,7 +474,7 @@
 		</main>
 
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 	
 	<!-- footer -->

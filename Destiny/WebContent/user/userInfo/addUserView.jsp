@@ -9,10 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <link rel="stylesheet" href="/resources/css/main.css" > 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
 <!-- //All CSS Insert -->
 
 <!-- All js -->
@@ -21,12 +24,12 @@
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	
-	
-	
-	
-	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 	<script>
 	//============= "가입"  Event 연결 =============
 		 $(function() {
@@ -44,6 +47,17 @@
 				//$("form")[0].reset();
 				history.go(-1);
 			});
+			
+			$("#birthday").datepicker({
+				dateFormat: 'yy-mm-dd',
+				changeMonth: true,
+				changeYear: true,
+				minDate: '-150y',
+	            yearRange: 'c-100:c+10'
+	        })
+	        .on('change', function(){
+	        	console.log('1')
+	        });
 		});	
 	
 		
@@ -97,6 +111,9 @@
 				return;
 			} else if( $('[name="selectInterest"]:checked').length != 3 ) {
 				swal('3개의 관심사를 선택해 주세요.');
+			} else if($("#authnumWirte").text() != "" && $("#authnumWirte").text() != null){
+				alert("이메일이 제대로 입력되거나 인증이 수행되지 않았습니다. 확인해 주세요.");
+				return;
 			}
 			
 			var value = "";	
@@ -476,7 +493,7 @@
 		
 		.topImg h1{
 			position : absolute;
-			line-height : 450px;
+			line-height : 330px;
 			width : 100%;
 			text-align : center;
 			color : white;
@@ -498,8 +515,8 @@
 		.smallNavi{
 			overflow : hidden;
 			float : right;
-			margin-top : -30px;
-			margin-bottom : 60px;
+			    margin-top: -80px;
+   		 margin-bottom: 60px;
 		}
 		
 		.smallNavi li{
@@ -526,7 +543,7 @@
 			input[type="text"], input[type="text"].join, input[type="password"].join, .join{
 			    background: #fff;
 			    border: none;
-			    border-bottom: 2px solid #ababab;
+			    border-bottom: 1px solid #ababab;
 			    color: #555;
 			    border-radius: 2px;
 			    width:100%;
@@ -538,14 +555,23 @@
 			}
 			
 			input[type="text"], input[type="password"], select.join, textarea {
-		       background: #ffe7e7;
-		       border: none;
+		       /* background: #ffe7e7; */
+		       /* border: none; */
 		       color: #555;
 		       border-radius: 2px;
 		       width: 100%;
 		   }
-			
+		   .ui-datepicker-month{float:right !important; background:#FFF !important; border-bottom:0 !important;}
+		   .ui-datepicker-year{float:left !important; background:#FFF !important; border-bottom:0 !important;}
+		   
 		/* /////////////////////////////////////////////////////////// */
+		
+		.form-control { -webkit-appearance: menulist;}
+		/* sweetalert buttom design^^ */
+		.swal-button{
+			padding : 0 56px;
+			color : rgba(0,0,0,.65) !important;
+		}
 		
 	</style>
 </head>
@@ -563,11 +589,22 @@
 	
 	
 	<!-- contents -->
-	<section id="main" class="wrapper">
-		<div class="inner">
-			<h3>회원가입</h3>
+	<div class="container">
+	
+		<div class="wrap">
 			
-			
+				<!-- 페이지 내부 네비게이션 경로 : start -->
+				<ul class="smallNavi">
+					<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+					<li>></li>
+					<li>마이페이지</li>
+					<li>></li>
+					<li>활동관리</li>
+					<li>></li>
+					<li>작성한 게시글</li>
+				</ul>
+				<!-- 페이지 내부 네비게이션 경로 : end -->
+				
 				<form class="form-horizontal" id="form111">
 				
 				
@@ -651,7 +688,7 @@
 							<td>
 								<div class="row uniform">
 									<div class="6u$ 12u$(small)">
-										<input type="date" id="birthday" name="birthday">
+										<input type="text" id="birthday" name="birthday" autocomplete="off">
 									</div>
 								</div>
 							</td>
@@ -662,39 +699,36 @@
 							<td colspan="3">
 								<div class="row uniform">
 									<div class="4u 6u$(small)">
-										<div class="select-wrapper">
-											<select id="address1" name="address1" class="select_wrapper join">
-												<option value="">지역을 선택해 주세요.</option>
-												<option value="서울">서울</option>
-												<option value="경기">경기</option>
-												<option value="인천">인천</option>
-												<option value="부산">부산</option>
-												<option value="대구">대구</option>
-												<option value="광주">광주</option>
-												<option value="대전">대전</option>
-												<option value="울산">울산</option>
-												<option value="세종">세종</option>
-												<option value="강원">강원</option>
-												<option value="경남">경남</option>
-												<option value="경북">경북</option>
-												<option value="전남">전남</option>
-												<option value="전북">전북</option>
-												<option value="충남">충남</option>
-												<option value="충북">충북</option>
-												<option value="제주">제주</option>
-											</select>
-										</div>
+										<select id="address1" name="address1" class="select_wrapper join form-control">
+											<option value="">지역을 선택해 주세요.</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="부산">부산</option>
+											<option value="대구">대구</option>
+											<option value="광주">광주</option>
+											<option value="대전">대전</option>
+											<option value="울산">울산</option>
+											<option value="세종">세종</option>
+											<option value="강원">강원</option>
+											<option value="경남">경남</option>
+											<option value="경북">경북</option>
+											<option value="전남">전남</option>
+											<option value="전북">전북</option>
+											<option value="충남">충남</option>
+											<option value="충북">충북</option>
+											<option value="제주">제주</option>
+										</select>
 									</div>
 									
 									<div class="4u 6u$(small)">
-										<div class="select-wrapper">
-											<select id="address2" name="address2" class="select_wrapper join">
-												<c:forEach var="location" items="${list}">
-													<option value="${location.townName}">${location.townName}</option>
-												</c:forEach>
-											</select>
-										</div>
+										<select id="address2" name="address2" class="select_wrapper join form-control">
+											<c:forEach var="location" items="${list}">
+												<option value="${location.townName}">${location.townName}</option>
+											</c:forEach>
+										</select>
 									</div>
+									<input type="hidden" name="address"/>
 								</div>
 							</td>
 						</tr>
@@ -704,15 +738,13 @@
 							<td colspan="3">
 								<div class="row uniform">
 									<div class="3u 12u$(small)">
-										<div class="select-wrapper">
-											<select name="phoneBe" id="phone1" class="select_wrapper join phone">
-											 	<option value="010" >010</option>
-											 	<option value="011" >011</option>
-												<option value="016" >016</option>
-												<option value="018" >018</option>
-												<option value="019" >019</option>
-											 </select>
-										 </div>
+										<select name="phoneBe" id="phone1" class="select_wrapper join phone form-control">
+										 	<option value="010" >010</option>
+										 	<option value="011" >011</option>
+											<option value="016" >016</option>
+											<option value="018" >018</option>
+											<option value="019" >019</option>
+										 </select>
 									 </div>
 									 
 									 <div class="3u 12u$(small)">
@@ -724,7 +756,7 @@
 									 </div>
 									 
 									 <div class="3u 12u$(small)">
-										 <button id="phoneConfirm" type="button" class="btn btn-info">인증</button>
+										 <button id="phoneConfirm" type="button" class="">인증</button>
 									 </div>
 									 
 									 <div class="6u$ 12u$(small)">
@@ -838,11 +870,14 @@
 									</div>
 								</div>
 							</td>
+							<input type="hidden" name="firstInterest"/>
+							<input type="hidden" name="secondInterest"/>
+							<input type="hidden" name="thirdInterest"/>
 						</tr>
 						<tr>
 							<th>프로필 사진</th>
 							<td colspan="3">
-								<input type="file" id="file" name="file"  multiple>
+								<input type="file" name="uploadFile" >
 							</td>
 						</tr>
 					</tbody>
@@ -859,7 +894,7 @@
 			</div>
 			
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 

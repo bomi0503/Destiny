@@ -40,6 +40,7 @@
 				
 				if("${reason}"!= ""){
 					alert('${reason}');
+					return;
 					//$('.message').show();
 				}else{
 					alert("가입을 수락하시겠습니까?");
@@ -66,22 +67,15 @@
 	</script>
 	<!-- //All js -->
 	
-			<style>
-
-		body{ 
-			background : url("/resources/images/meeting/${contextMeeting.titleImg}") no-repeat center center fixed;
-			-webkit-background-size: cover;
- 			-moz-background-size: cover;
-  			-o-background-size: cover;
- 			background-size: cover;
-		}
-		.container{
+	<style>
+		/* .container{
 			font-weight : 700;
-		}
+		} */
 		button{padding: 0 2em; height:40px;}
 		.getMeetingLink{cursor:pointer;}
 		.close {width: 35px; height: 30px; text-shadow: 0 1px 0 #ffdfe5;}
 		.meetingTable{margin-top:5em;}
+		input[type="text"].form-control{border: solid 2px #fff;color: #666; }
 		.form-control[readonly]{background-color: #f9acac3b;}
 		/* table sytle 추가 */
 		table{border-collapse:collapse; table-layout:fixed; margin-top:20px; }
@@ -108,12 +102,18 @@
 		<div class="wrap">
 			
 			<hr/>
+			
+			<div>
+				<!-- 모임이름넣기 -->
+			</div>
+			
+			<hr/>
 				
 			<div class="message">
-			<c:if test="${reason != null }">
-				<h4>모집 인원이 마감되었습니다.</h4>
-				<br/><br/>
-			</c:if>
+				<c:if test="${reason != '' }">
+					<h4>모집 인원이 마감되었습니다.</h4>
+					<br/><br/>
+				</c:if>
 			</div>
 			
 			

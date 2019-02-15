@@ -10,10 +10,10 @@
 
 <script type="text/javascript">
 
+	
 
-
-   $(function() {
-      
+   $(function() { 
+		
       $("a[href='#' ]:contains('Destiny')").on("click", function() {
          self.location = "/index.jsp"
       });
@@ -84,21 +84,25 @@
       
       $('#headerId').on("keyup", function(){
          var id=$("#headerId").val();
-         $('.loginOk').text('');
+         /* $('.loginOk').text(''); */
+         $('.loginOk').html('');
          if(id.length > 3 ){
             $.ajax(
                    {
                       method : "GET",
                       url : '/user/json/getUser/'+id,
                       success : function(JSONData){
-                         if(JSONData.user == null){
-                            $('#loginCheckId').text('해당 회원이 존재하지 않습니다.');
+                         if(JSONData.user == null || JSONData.user.userState == 'O'){
+                        	 $('#loginCheckId').html('<p>해당 회원이 존재하지 않습니다.</p>');
+                             $('#headerPw').attr('readonly',true).attr("disabled",false);
                          }else{
-                            $('#loginCheckId').text('');
+                        	$('#headerPw').attr('readonly',false).attr("disabled",false);
+                            $('#loginCheckId').html('');
                             if(JSONData.user.userGrade == 'BLK'){
-                               $('#loginCheckBlack').text('블랙리스트');
+                            	$('#loginCheckId').html('<p>블랙리스트입니다.</p>');
+                            	$('#headerPw').attr('readonly',true).attr("disabled",false);
                             }else if(JSONData.user.userGrade != 'BLK'){
-                               $('#loginCheckBlack').text('');
+                            	$('#loginCheckId').html('');
                             }
                          }
                       }
@@ -134,7 +138,8 @@
          
          if(id == null || id.length <1) {
             //alert('ID 를 입력하지 않으셨습니다.');
-            $('.loginOk').text('아이디를 입력해주세요.');
+            /* $('.loginOk').text('아이디를 입력해주세요.'); */
+            $('.loginOk').html('<p>아이디를 입력해주세요.</p>');
 
             $("#headerId").focus();
             return;
@@ -142,21 +147,24 @@
          
          if(pw == null || pw.length <1) {
             //alert('패스워드를 입력하지 않으셨습니다.');
-            $('.loginOk').text('비밀번호를 입력해주세요.');
+            /* $('.loginOk').text('비밀번호를 입력해주세요.'); */
+            $('.loginOk').html('<p>비밀번호를 입력해주세요.</p>');
             $("#headerPw").focus();
             return;
          }
          
          if($('#loginCheckId').text() != null && $('#loginCheckId').text() != ''){
             //alert('아이디가 존재하지 않습니다.');
-            $('.loginOk').text('아이디가 존재하지 않습니다.');
+            /* $('.loginOk').text('아이디가 존재하지 않습니다.'); */
+            $('.loginOk').html('<p>아이디가 존재하지 않습니다.</p>');
             $("#headerId").focus();
             return false;
          }
          
          if($('#loginCheckPw').text() != null && $('#loginCheckPw').text() != ''){
             //alert('비밀번호가 틀립니다.');
-            $('.loginOk').text('비밀번호가 일치하지 않습니다.');
+            /* $('.loginOk').text('비밀번호가 일치하지 않습니다.'); */
+            $('.loginOk').html('<p>비밀번호가 일치하지 않습니다.</p>');
             $("#headerPw").focus();
             return false;
          }
@@ -271,20 +279,20 @@
    .modal-login .modal-footer a {
       color: #999;
    }      
+   
    .modal-login .avatar {
-      position: absolute;
-      margin: 0 auto;
-      left: 0;
-      right: 0;
-      top: -100px;
       width: 95px;
       height: 95px;
       border-radius: 50%;
       z-index: 9;
-      /* background: #60c7c1; */
       padding: 15px;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+      margin : 0 auto;
+      margin-top : -70px;
+      margin-bottom : 20px;
    }
+	.modal-login .avatar h4{
+		display : none;		
+	}
    .modal-login .avatar img {
       width: 100%;
    }
@@ -308,9 +316,44 @@
       display: inline-block;
       margin: 100px auto;
    }
-   #headerId, #headerPw{
-      margin-bottom : 20px;
-  }
+	/* #headerId, #headerPw{
+	    margin-bottom : 40px;
+	} */
+	.input_id{
+		height : 70px;
+	}
+	.loginOk p{
+		font-size : 14px;
+		margin : 0;
+		padding : 0;
+		margin-block-start : 0;
+		margin-block-end : 0;
+		margin-top : -60px;
+		color : #fd5d7c;
+	}
+	#loginCheckId p{
+		font-size : 14px;
+		margin : 0;
+		padding : 0;
+		margin-block-start : 0;
+		margin-block-end : 0;
+		margin-top : -60px;
+		color : #fd5d7c;
+		text-align : left;
+	}
+	/* #loginCheckBlack p{
+		font-size : 14px;
+		margin : 0;
+		padding : 0;
+		margin-block-start : 0;
+		margin-block-end : 0;
+		margin-top : -60px;
+		color : #fd5d7c;
+		text-align : left;
+	} */
+	.input_pw{
+		height : 100px;
+	}
    
    input[type="text"], input[type="password"], select, textarea {
        background: #ffe7e7;
@@ -490,26 +533,33 @@
       <div id="my-dialog">
          <div class="modal-dialog modal-login">
             <div class="modal-content">
-               <div class="modal-header2 " style="height:50px">
+               <div class="modal-header2 ">
                   <div class="avatar">
                      <img src="/resources/images/meeting/logo.png"  alt="Avatar">
                   </div>            
-                  <h4>Login</h4>
+                  <!-- <h4>Login</h4> -->
                </div>
                <div class="modal-body">
                   <form id="loginForm">
                      <div class="form-group" class="form-horizontal">
-                        <input id="headerId" type="text" class="" name="userId" placeholder="userId" required="required">
+                     	<div class="input_id">
+                     		<input id="headerId" type="text" class="" name="userId" placeholder="userId" required="required" autocomplete="off">
+                     	</div>
                      </div>
                      <div class="form-group">
-                        <input id="headerPw" type="password" class="" name="password" placeholder="Password" required="required">
-                     </div>  
+                     	<div class="input_pw">
+                     		<input id="headerPw" type="password" class="" name="password" placeholder="Password" required="required">
+                     	</div>
+                     </div>
+                     
+                     <span class="loginOk" align="left"></span>
+               		 <span class="loginCheckId" id="loginCheckId"></span>
                               
-                     <span class="loginCheckId" id="loginCheckId"></span>
+                     
                      <input type="hidden" class="loginCheckPw" id="loginCheckPw"></input>
                      <input type="hidden" class="loginCheckBlack" id="loginCheckBlack"></input>
                      
-                     <div class="loginOk" align="left"></div>
+                     <!-- <div class="loginOk" align="left"></div> -->
                      
                      <div class="form-group" align="center">
                         <button id="loginButton" type="submit" class="btn2">Login</button>
@@ -532,6 +582,8 @@
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Meeting</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Chatting</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Place</a>
+			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">MeetingStory</a>
+			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">DateStory</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">RestaurantInfo</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">LoveAdvice</a>
 			<a href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Notice</a>

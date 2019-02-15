@@ -109,7 +109,7 @@ public class UserController {
 				modelAndView.addObject("reason", "탈퇴한 회원입니다. 다시 이용하고 싶으시면 계정을 복구해 주십시요.");
 				modelAndView.setViewName("forward:/user/userInfo/loginDe.jsp");
 			//만일 블랙리스트라면
-			} else if(dbUser.getUserGrade().equals("BLK")) {
+			}else if(dbUser.getUserGrade().equals("BLK")) {
 				modelAndView.addObject("result", "Fail");
 				modelAndView.addObject("reason", "블랙 리스트입니다. 다시 이용하고 싶으시면 새로운 이메일로 입력해 주십시요.");
 				modelAndView.setViewName("forward:/user/userInfo/loginDe.jsp");
@@ -206,12 +206,12 @@ public class UserController {
 							applicationScope.setAttribute("ipLoginList", ipLoginList);
 						}
 						for(User v : loginList) {
-							System.out.println("현제 접속자 목록 : " + v);
+							System.out.println("현재 접속자 목록 : " + v);
 						}
 						for(String v : ipLoginList) {
 							System.out.println("접속한 유저의 ip : " + v);
 						}
-						System.out.println("현제 접속자 : " + numberOfLogin);
+						System.out.println("현재 접속자 : " + numberOfLogin);
 						
 						modelAndView.addObject("result", "Success");
 						modelAndView.addObject(dbUser.getUserId(), dbUser);
@@ -365,7 +365,7 @@ public class UserController {
 				System.out.println("profileName : " + profileName);
 				
 				/*프로필이미지 업로드 : start*/
-				String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\userprofile\\";
+				String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\userprofile\\";
 				name = System.currentTimeMillis()+"."+profileName.getOriginalFilename().split("\\.")[1];
 				
 				System.out.println("profilenameName : " + name);
@@ -411,9 +411,10 @@ public class UserController {
 		User user = userService.getUser(userId);
 		
 		//프로필 사진
-		user.setProfile(user.getProfile().replace("[", ""));
+		/*user.setProfile(user.getProfile().replace("[", ""));
 		user.setProfile(user.getProfile().replace("]", ""));
-		String[] filelist = user.getProfile().split(", ");
+		String[] filelist = user.getProfile().split(", ");*/
+		
 		
 		//관심사 가져오기
 		int[] interestNo = new int[3];
@@ -445,7 +446,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/user/userInfo/getUser.jsp");
 		modelAndView.addObject("user", user);
-		modelAndView.addObject("filelist", filelist);
+		/*modelAndView.addObject("filelist", filelist);*/
 		modelAndView.addObject("interestList", interestList);
 		modelAndView.addObject("typeMap", typeMap);
 		modelAndView.addObject("typeFileMap", typeFileMap);
@@ -508,8 +509,11 @@ public class UserController {
 		
 		//지역 시/도  - 구/군 따로 확보
 		List<String> location = new ArrayList<String>();
+		
 		location.add(user.getAddress().split(" ")[0]);
 		location.add(user.getAddress().split(" ")[1]);
+		
+		System.out.println("획득한 장소 리스트 : " + location);
 		
 		//폰 번호 따로 확보
 		List<String> phone = new ArrayList<String>();
@@ -518,97 +522,50 @@ public class UserController {
 		phone.add(user.getPhone().split("-")[2]);
 		
 		//프로필 사진 따로
-		List<String> profile = new ArrayList<String>();
+		/*List<String> profile = new ArrayList<String>();
 		for(String v : user.getProfile().split(", ")) {
 			profile.add(v);
-		}
+		}*/
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/user/userInfo/updateUser.jsp");
 		modelAndView.addObject("user", user);
 		modelAndView.addObject("location", location);
 		modelAndView.addObject("phone", phone);
-		modelAndView.addObject("filelist", profile);
+		/*modelAndView.addObject("filelist", profile);*/
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping(value="updateUserResult", method=RequestMethod.POST)
-	public ModelAndView updateUserResult(@ModelAttribute("user") User user, MultipartHttpServletRequest multipartHttpServletRequest, HttpServletRequest request) throws Exception{
+	public ModelAndView updateUserResult(@ModelAttribute("user") User user, @RequestParam("uploadFile")MultipartFile profileName, HttpServletRequest request) throws Exception{
 		System.out.println("user/updateUserResult POST 가져온 user정보 : " + user);
 		
-		//===========================프로필 사진을 수정하거나 수정하지 않았을 때 프로필 사진 업로드(다중)===========================
-		String temDir = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\userprofile\\";
-		
-		List<MultipartFile> fileList  = multipartHttpServletRequest.getFiles("file");
-		System.out.println("받은 파일들 : " + fileList);
-		
-		//새로운 프로필 사진을 등록하지 않았을 때
-		if(fileList.get(0).getOriginalFilename() == "") {
-			String[] profile = new String[3];
-			String profileRe = "";
-			for(int i = 0; i<=2; i++) {
-				profile[i] = request.getParameter("profile"+(i+1));
-				System.out.println("기존 프로필 사진 : "+profile[i]);
-				if(profile[i] != "") {
-					profileRe = profileRe + profile[i] + ", ";
+		/* ===================== */
+		String name="";
+				
+				if(profileName.getOriginalFilename() == "") {
+					//name = communityService.getCommunity(communityNo).getFileName();
+					name = userService.getUser(user.getUserId()).getProfile();
+					System.out.println("name은?? : " + name);
+				}else {
+					/*대표이미지 업로드 : start*/
+					String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\userprofile\\";
+					name = System.currentTimeMillis()+"."+profileName.getOriginalFilename().split("\\.")[1];
+					System.out.println("name : " + name);
+					File file = new File(path + name);
+					
+					profileName.transferTo(file);
+					/*대표이미지 업로드 : end*/
+					
+					
 				}
-			}
-			user.setProfile(profileRe);
-		//새로운 프로필 사진을 등록했을 때
-		} else {
-			
-			String originalFileName = null;
-			long fileSize = 0;
-			int idx = 0;
-			String initail = "";
-			
-			List list = new ArrayList();
-			
-			File file = new File(temDir);
-			if(file.exists() == false) {
-				file.mkdirs();
-			}
-			
-	
-			//	================ File이름 setting==================
-			for(MultipartFile mf : fileList) {
-				System.out.println("각 파일 : " + mf);
-				originalFileName = mf.getOriginalFilename();
-				System.out.println("파일 이름 : " + originalFileName);
-				
-				idx = originalFileName.indexOf('.');
-				initail = originalFileName.substring(idx, originalFileName.length());
-				originalFileName = originalFileName.substring(0, idx);
-				originalFileName += System.currentTimeMillis();
-				originalFileName += initail;
-				
-				list.add(originalFileName);
-				
-				fileSize = mf.getSize();
-				System.out.println("파일 사이즈 : " + fileSize);
-				
-				String safeFile = temDir + originalFileName;
-				System.out.println("파일 경로 + 이름 : " + safeFile);
-				file = new File(safeFile);
-				mf.transferTo(file);
-			}
-			String profileDomain = String.valueOf(list);
-			profileDomain = profileDomain.replace("[", "");
-			profileDomain = profileDomain.replace("]", "");
-			
-			user.setProfile(profileDomain);
-			//====================================================
-			//=========================================================================
-		}
+		/* ===================== */
+		user.setProfile(name);
 		
 		userService.updateUser(user);
 		User reUser = userService.getUser(user.getUserId());
 		
-		//프로필 사진
-		reUser.setProfile(reUser.getProfile().replace("[", ""));
-		reUser.setProfile(reUser.getProfile().replace("]", ""));
-		String[] filelist = reUser.getProfile().split(", ");
 		
 		//관심사 가져오기
 		int[] interestNo = new int[3];
@@ -638,9 +595,10 @@ public class UserController {
 		typeFileMap.put("typeFileList", typeFileList);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("forward:/user/userInfo/getUser.jsp");
+		/*modelAndView.setViewName("forward:/user/userInfo/getUser.jsp");*/
+		modelAndView.setViewName("redirect:/user/getUser/"+user.getUserId());
 		modelAndView.addObject("user", reUser);
-		modelAndView.addObject("filelist", filelist);
+		/*modelAndView.addObject("filelist", filelist);*/
 		modelAndView.addObject("interestList", interestList);
 		modelAndView.addObject("typeMap", typeMap);
 		modelAndView.addObject("typeFileMap", typeFileMap);

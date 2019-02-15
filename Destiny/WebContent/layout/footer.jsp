@@ -10,7 +10,8 @@
 				$("#proposeButton").on("click", function(){
 					
 					var propose = $("input[name='propose']").val();
-					alert(propose);
+					swal({title:"문의사항이 접수되었습니다.",icon:"success"});
+					$("#propose").val("");
 					
 					$.ajax({
 						url : "/act/json/inquiry/"+propose,

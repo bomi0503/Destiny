@@ -105,7 +105,7 @@
 									+ images
 									+'</td>'
 									+'<td class="userInfo" id="cc">'
-									+'<h5>'
+									+'<h5 style="text-align:left;">'
 										+'아이디 : '+JSONData.user.userId+'<br/>'
 										+'이  름 : '+JSONData.user.nickName+'<br/>'
 										+'이메일 : '+JSONData.user.email+'<br/>'

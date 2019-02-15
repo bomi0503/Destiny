@@ -35,7 +35,30 @@
 		
 		$(function(){
 			$("button[id='leaveSite']").on("click", function(){
-				self.location = "/user/userInfo/leaveSite.jsp";
+				/* self.location = "/user/userInfo/leaveSite.jsp"; */
+				swal("탈퇴하는 경우 다시 가입할 수 있으나 등급이 신규회원으로 리셋됩니다.", {
+					icon:"info",
+					  buttons: {
+					    cancel: "취소",
+					    catch: {
+					      text: "탈퇴",
+					      value: "catch",
+					    },
+					  },
+					})
+					.then((value) => {
+					  switch (value) {
+					 	
+					  	case "catch":
+					      swal({title:"탈퇴성공", icon:"success"}).then((value => {
+					    	  self.location = "/user/leaveSite";
+					      }))
+					      break;
+					 
+					    default:
+					      swal("취소되었습니다.",{icon:"success"});
+					  }
+					});
 			});
 		});
 		
@@ -264,6 +287,12 @@
 				transition : 1s;
 			}
 		/* 쪽지함CSS : end */
+		
+	/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
+	}
 </style>
 
 

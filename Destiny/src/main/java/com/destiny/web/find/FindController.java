@@ -21,6 +21,8 @@ import com.destiny.service.domain.Meeting;
 import com.destiny.service.domain.User;
 import com.destiny.service.find.FindService;
 
+import oracle.jdbc.util.Login;
+
 @Controller
 @RequestMapping("/find/*")
 public class FindController {
@@ -78,6 +80,36 @@ public class FindController {
 			
 			if(applicationScope.getAttribute("loginList") != null) {
 				loginList = (List<User>) applicationScope.getAttribute("loginList");
+				System.out.println("loginList : " + loginList);
+			}
+			String checkGender = find.getSelectGender();
+			String checkAge = find.getSelectAge();
+			String checkTown = find.getTown();
+			String check01 = find.getSelectInterest01();
+			String check02 = find.getSelectInterest02();
+			String check03 = find.getSelectInterest03();
+			System.out.println("선택값 : " + checkGender +" ,"+checkAge+" ,"+checkTown+", "+check01+" ,"+check02+" ,"+check03);
+
+			List<User> checkUser = new ArrayList<User>();
+			
+			int loginUser = 0; /* 회원찾기 현재 로그인 접속 회원 수*/
+			
+			for(int i=0; i<loginList.size(); i++) {
+				String checkInterest01 = loginList.get(i).getFirstInterest()+"";
+				String checkInterest02 = loginList.get(i).getSecondInterest()+"";
+				String checkInterest03= loginList.get(i).getThirdInterest()+"";
+				//address에서 town찾기
+				String checkAddress = loginList.get(i).getAddress();
+				checkAddress = checkAddress.split(" ")[1];
+
+				if(loginList.get(i).getGender().equals(checkGender) && checkAddress.equals(checkTown) &&checkInterest01.equals(check01) &&checkInterest02.equals(check02) &&checkInterest03.equals(check03) ) {
+					checkUser.add(loginList.get(i));
+					System.out.println("checkUser : " + checkUser);
+					System.out.println("checkUser 명:  " + checkUser.size());
+				}
+				
+				loginUser = checkUser.size();
+				
 			}
 			
 			int numberOfLogin = 0;
@@ -96,6 +128,7 @@ public class FindController {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("totalCount",totalCount);
 			modelAndView.addObject("numberOfLogin",numberOfLogin);
+			modelAndView.addObject("loginUser",loginUser);
 			modelAndView.setViewName("forward:/find/getUserResult.jsp");
 			return modelAndView;
 		}
@@ -113,10 +146,35 @@ public class FindController {
 			System.out.println("FIND : "+ town +"======================");
 			
 			List<Meeting> list = findService.getMeetingResult(town);
+			
+			List<String> placeList = new ArrayList<String>();
+			
+			for(int i=0; i<list.size() ; i++) {
+				
+				/*System.out.println("list [ "+i+" ] : " + list.get(i).getMeetingLocation());*/
+				String place = list.get(i).getMeetingLocation();
+				String newPlace = "";
+				
+				if(place.length() >15) {
+					
+					newPlace = place.substring(0,20)+"....";
+					
+					System.out.println("newPlace : " + newPlace);
+					
+				}else {
+					newPlace = place;
+					System.out.println("newPlace작은거 : " + newPlace);
+				}
+				placeList.add((String)newPlace);
+				System.out.println("======================== placeList : " + placeList);
+			}
 
+			
+			
 			ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("list",map.get("list"));
 			modelAndView.addObject("list",list);
+			modelAndView.addObject("placeList",placeList);
 			modelAndView.setViewName("forward:/find/getMeetingResult.jsp");
 			
 			return modelAndView;

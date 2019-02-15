@@ -240,12 +240,13 @@ public class ActRestController {
 		String subject = "인증정보 전달";
 		String fromName = "전달자";
 		String from = "ABC";
-		String to1 = "pischa@naver.com";
+		String to1 = "kbm4853@naver.com";
 		
 		//String user = "pischa@naver.com";
-		String password = "sunnydays15358";
+		String password = "!Bomi0417!";
 		
-		String content = "다음과 같은 건의사항이 접수되었습니다. ["+propose+"]";
+		/*String content = "다음과 같은 건의사항이 접수되었습니다. ["+propose+"]";*/
+		String content = propose;
 		
 		try {
 			
@@ -274,7 +275,39 @@ public class ActRestController {
 			
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to1));
 			msg.setSubject("Inquiry Mail");
-			msg.setText(content);
+			//msg.setText(content);
+			
+			msg.setContent(   "<div style=\"margin: 0 auto; width:30%; font-family:'ubuntu',proxima_nova,'Open Sans','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; border: 2px solid #ddd\">\n" + 
+					"  <div style=\"text-align:center; margin-top:30px;\">\n" + 
+					"    <img src=\"https://i.imgur.com/mWJS8jQ.png\" width=\"200px\" height=\"auto\"/>\n" + 
+					"  </div>\n" + 
+					"  <br/><br/>\n" + 
+					" \n" + 
+					"<p style=\"padding:50px \">\n" + 
+					"안녕하세요!<br><br>\n" + 
+					"<strong style=\"font-size:20px;\">우연</strong>은 다양한 모임과, 이상형을 만날 수 있는 홈페이지입니다.<br>\n" + 
+					"<br>\n" + 
+					"  우연 회원으로 부터 문의사항이 접수되었습니다.\n" + 
+					"  <br><br>\n" + 
+					"  \n" + 
+					" <strong>문의내용</strong><br><br>\n" + 
+					"\n" + 
+					"  <strong style=\"font-size:20px; color:#fd5d7c;\">"+propose+"</strong><br>\n" + 
+					"<br>\n" + 
+					"\n" + 
+					"</p>\n" + 
+					"<p style=\"text-align:center\"><a style=\"background: #fd5d7c; color: #ddd; padding: 10px 50px; border-radius: 3px;text-decoration:none;\" href=\"http://127.0.0.1:8080/\">답변하기</a>\n" + 
+					"</p>\n" + 
+					"<br/><br/>\n" + 
+					"<p style=\"border-bottom:1px solid #eee\"></p><br>\n" + 
+					"<p style=\"text-align: center;color:#666;font-size:12px\">\n" + 
+					"F: +971.442.7130 &nbsp;&nbsp;&nbsp; E: info@fantastay.com &nbsp;&nbsp;&nbsp;W: www.fantastay.com\n" + 
+					"</p>\n" + 
+					"<p>\n" + 
+					"	&nbsp;\n" + 
+					"</p>\n" + 
+					"</div>", 
+                    "text/html;charset=utf-8");
 			
 			System.out.println("msg 구축 : " + msg.toString());
 			
