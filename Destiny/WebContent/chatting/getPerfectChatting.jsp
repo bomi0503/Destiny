@@ -39,7 +39,7 @@
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src="http://192.168.0.51:82/socket.io/socket.io.js"></script>
+<script src="http://192.168.0.35:82/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 
@@ -62,7 +62,7 @@ function noEvent() { // 새로 고침 방지
 
 ////////////////////////////////////////////
 
-var socket = io.connect('http://192.168.0.51:82');
+var socket = io.connect('http://192.168.0.35:82');
 var timeout;
 var chattingNo='${chatting.chattingNo}';
 var manId="${chatting.manId}";
@@ -127,8 +127,8 @@ socket.on('connect', function(){
 	            partnerType=JsonData.type.firstType;
 	            interest=[JsonData.interest[0],JsonData.interest[1],JsonData.interest[2]];
 		        
-	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".JPG'  style='width: 100px; height: 100px;'></div><br>"+JsonData.type.firstType+"</div>");
-	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".JPG' style='width: 100px; height: 100px;'></div><br>"+JsonData.type.myType+"</div>");
+	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".png'  style='width: 100px; height: 100px;'></div><br>"+JsonData.type.firstType+"</div>");
+	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".png' style='width: 100px; height: 100px;'></div><br>"+JsonData.type.myType+"</div>");
 	            
 	            //$('#you').append("<div class='text-center'><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".JPG' class='img-circle' width='100px' height='100px'><br>"+JsonData.type.firstType+"</div>");
 	            //$('#me').append("<div class='text-center'><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".JPG' class='img-circle' width='100px' height='100px'><br>"+JsonData.type.myType+"</div>");
@@ -263,7 +263,7 @@ socket.on('connect', function(){
 	    });//updatevoicefile 끝
 	//==========================================================================
 
-
+		
 	
 	
 });//connect end
@@ -280,7 +280,7 @@ socket.on('updatechat', function (username, data1) {
 	   
 		//alert(message);
 		//alert(lang);
-		if (username!="SERVER : ") {
+		if (username!="SERVER") {
 			//alert(lang);
 			
 			var message=data1;
@@ -313,13 +313,13 @@ socket.on('updatechat', function (username, data1) {
 				if (!profileOpen) {
 					//번역언어가 없을 경우
 					if (lang=="") {
-						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nicName"></b><br><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"</div></div></div></div></li>");
 					//번역언어가 있을 경우
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nicName"></b><br><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"<br>"+Data+"</div></div></div></div></li>");	
@@ -327,13 +327,13 @@ socket.on('updatechat', function (username, data1) {
 				}else{
 					//alert("90이상 프로필 공개 채팅중");
 					if (lang=="") {
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nicName">'+username+'</b><br><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"</div></div></div></div></li>");
 					//번역언어가 있을 경우
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nicName">'+username+'</b><br><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"<br>"+Data+"</div></div></div></div></li>");	
@@ -437,15 +437,16 @@ function getProfile(){
 		        type: 'GET',
 		        dataType: 'json',
 		        success: function(JsonData) {
-		       alert("상대방의 프로필이 공개되었습니다!");
+		       alert("남자상대방의 프로필이 공개되었습니다!");
 		       console.log(JsonData);
 		       // JsonData.profile
 		         // JsonData.userId
 		          profileImg=JsonData.user.profile;
 		           $(".youProfile").attr("src","/resources/images/userprofile/"+JsonData.user.profile);
-		          $(".sent").attr("text",womanId);
+		          //$(".nicName").text(womanId);
+		          $(".nicName").text(JsonData.user.userId);
 		          $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
-		          $(".replies").attr("text",JsonData.user.userId); 
+		          //$(".replies").attr("text",JsonData.user.userId); 
 		        }
 				
 		    });	//ajax끝
@@ -455,16 +456,18 @@ function getProfile(){
 		        type: 'GET',
 		        dataType: 'json',
 		        success: function(JsonData) {
-		        	alert("상대방의 프로필이 공개되었습니다!");
+		        	alert("여자상대방의 프로필이 공개되었습니다!");
 		        	//프로필 사진과 아이디 공개 
 		        	console.log(JsonData);
 		        	profileImg=JsonData.user.profile;
 		        	 JsonData.user.profile
 			          JsonData.user.userId
 			          $(".youProfile").attr("src","/resources/images/userprofile/"+JsonData.user.profile);
-			          $(".sent").attr("text",manId);
+		        	 // $(".nicName").text(manId); 
+		        	  $(".nicName").text(JsonData.user.userId);
+		        	 //$(".sent").attr("text",manId);
 			          $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
-			          $(".replies").attr("text",JsonData.user.userId);
+			          //$(".replies").attr("text",JsonData.user.userId);
 		        }
 				
 		    });//ajax끝
@@ -475,6 +478,8 @@ function getProfile(){
 
 //서버로 gage보내기=================================================================
 var myGage=0;
+var confirmflag01="";
+var confirmflagyou="";
 socket.on('updategage', function (username, data) {
 	   if (username=="${me.userId}") {
 		   myGage=ti;
@@ -495,8 +500,7 @@ socket.on('updategage', function (username, data) {
 			console.log("2 상대방 gage : "+otherGage+" 나의 gage : "+myGage)
 		}else if (otherGage>=90&&myGage>=90) {
 			//alert("호감도 90% 달성!");
-			 var confirmflag01="";
-			 var confirmflagyou="";
+			
 			 //둘다 만남을 선택해야만 진행됨
 			 if (womanId=="${me.userId}") {
 				 confirmflag01 = confirm("호감도 90% 달성! 상대방과 만나시겠습니까?");
@@ -528,6 +532,7 @@ socket.on('updategage', function (username, data) {
 								        dataType: 'text',
 								        success: function(JsonData) {
 								        	//프로필 사진과 아이디 공개 
+								        	//alert("success");
 								        	
 								        	 
 								        }
@@ -535,6 +540,7 @@ socket.on('updategage', function (username, data) {
 							    	});//ajax끝
 						contactMeeting.done(function(Data) {
 							console.log(Data);
+							//alert("done");
 							getProfile();
 						});
 							 
@@ -545,10 +551,11 @@ socket.on('updategage', function (username, data) {
 			   			 
 			           }
 					 }, 10000);
+					 
+					 
 					});
 			
 			 
-			
 			
 	
 			console.log("3 상대방 gage : "+otherGage+" 나의 gage : "+myGage)
@@ -600,17 +607,20 @@ $(function(){
 		}
 		
 		
+			  /* do what you want to do */
+			  //$('.message-input').blur();
+			
 		
 	};
 
 	$('.submit').click(function() {
 	  newMessage();
-	  
+	  $(this).next('input').focus();
 	});
 
 	$('input').keypress(function(e) {
 		if(e.which == 13) {
-			$(this).blur();
+			//$(this).blur();
 			newMessage();
 			
 		}
@@ -670,7 +680,7 @@ var ti = 0;
 	                    },
 	                    cw =
 	                    //(bw - pw) / 2,
-	                    (bw - pw)/ 1,
+	                    (bw - pw)/1.3,
 	                    ca = {
 	                        left: cw
 	                    }
@@ -1047,6 +1057,7 @@ select{
 	width: 100px;
     height: 30px;
     line-height: normal;
+    border: solid 2px #ffb6c5;
 }
 .icon{
 	float: right;
