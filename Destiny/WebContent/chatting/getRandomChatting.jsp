@@ -41,7 +41,7 @@
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src="http://192.168.0.51:83/socket.io/socket.io.js"></script>
+<script src="http://192.168.0.35:83/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <script >
@@ -66,7 +66,7 @@ function noEvent() { // 새로 고침 방지
 
 
 
-var socket = io.connect('http://192.168.0.51:83');
+var socket = io.connect('http://192.168.0.35:83');
 var timeout;
 var chattingNo='${chatting.chattingNo}';
 var manId="${chatting.manId}";
@@ -141,10 +141,10 @@ socket.on('connect', function(){
 		}else{
 			wThreeImg="${telepathyList[2].exTwoImg}";
 		}
-		if (wResult01!=null) {
+		
 			$('#content01-me').append('<div><div><img src="/resources/images/telepathy/'+wOneImg+'" style="width: 50px; height: 50px;" ><img src="/resources/images/telepathy/'+wTwoImg+'" style="width: 50px; height: 50px;" ><img src="/resources/images/telepathy/'+wThreeImg+'" style="width: 50px; height: 50px;" ></div><br>' + wResult01+''+wResult02+''+wResult03+'</div>');
 			
-		}
+		
     	
 	}else if(manId=="${me.userId}"){
 		//남자일 경우==============================================================
@@ -183,10 +183,10 @@ socket.on('connect', function(){
 		}else{
 			mThreeImg="${telepathyList[2].exTwoImg}";
 		}
-   		if (mResult01!=null) {
+   		
    			$('#content01-me').append('<div><div><img src="/resources/images/telepathy/'+mOneImg+'" style="width: 50px; height: 50px;" ><img src="/resources/images/telepathy/'+mTwoImg+'" style="width: 50px; height: 50px;" ><img src="/resources/images/telepathy/'+mThreeImg+'" style="width: 50px; height: 50px;" ></div><br>' + mResult01+''+mResult02+''+mResult03+ '</div>');
    			
-		}
+		
    		
 		
 		
@@ -330,7 +330,7 @@ socket.on('updatechat', function (username, data1) {
 	  
 		//alert(message);
 		//alert(lang);
-		if (username!="SERVER : ") {
+		if (username!="SERVER") {
 			
 			
 			var message=data1;
@@ -363,13 +363,13 @@ socket.on('updatechat', function (username, data1) {
 				if (!profileOpen) {
 					//번역언어가 없을 경우
 					if (lang=="") {
-						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nicName"></b><br><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"</div></div></div></div></li>");
 					//번역언어가 있을 경우
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nicName"></b><br><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"<br>"+Data+"</div></div></div></div></li>");	
@@ -377,13 +377,13 @@ socket.on('updatechat', function (username, data1) {
 				}else{
 					//alert("90이상 프로필 공개 채팅중");
 					if (lang=="") {
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nicName">'+username+'</b><br><p>' + data1 + '</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"</div></div></div></div></li>");
 					//번역언어가 있을 경우
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nicName">'+username+'</b><br><p>' + data1 + '<br>'+Data+'</p></li>').appendTo($('.messages ul'));
 						//$('.message-input input').val(null);
 						$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 						//$('#user_1').append("<li><div class='you'><div><div class='name'>"+username+"</div><div class='img'></div><div class='text'><div>"+data1+"<br>"+Data+"</div></div></div></div></li>");	
@@ -498,9 +498,9 @@ function getProfile(){
 		         // JsonData.userId
 		          profileImg=JsonData.user.profile;
 		           $(".youProfile").attr("src","/resources/images/userprofile/"+JsonData.user.profile);
-		          $(".sent").attr("text",womanId);
-		          $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
-		          $(".replies").attr("text",JsonData.user.userId); 
+		           $(".nicName").text(JsonData.user.userId);
+			       $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
+		          //$(".replies").attr("text",JsonData.user.userId); 
 		        }
 				
 		    });	//ajax끝
@@ -517,9 +517,9 @@ function getProfile(){
 		        	 JsonData.user.profile
 			          JsonData.user.userId
 			          $(".youProfile").attr("src","/resources/images/userprofile/"+JsonData.user.profile);
-			          $(".sent").attr("text",manId);
-			          $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
-			          $(".replies").attr("text",JsonData.user.userId);
+		        	 $(".nicName").text(JsonData.user.userId);
+		        	 $(".meProfile").attr("src","/resources/images/userprofile/${me.profile}");
+			         // $(".replies").attr("text",JsonData.user.userId);
 		        }
 				
 		    });//ajax끝
@@ -670,7 +670,7 @@ $('.submit').click(function() {
 
 $('input').keypress(function(e) {
 	if(e.which == 13) {
-		$(this).blur();
+		//$(this).blur();
 		newMessage();
 		
 	}
@@ -1185,6 +1185,7 @@ select{
 	width: 100px;
     height: 30px;
     line-height: normal;
+    border: solid 2px #ffb6c5;
 }
 .icon{
 	float: right;
