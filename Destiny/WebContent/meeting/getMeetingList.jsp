@@ -642,7 +642,14 @@
 			 <!-- 리스트 시작 -->
 			 <section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
 				<div class="inner">
-				<h2 style="margin-top: -80px;text-align: -webkit-auto;">방금 등록 된 모임</h2>
+					<div class="row 12u">
+						<div class="8u 12u(small)">
+							<h2 style="margin-top: -80px;text-align: -webkit-auto;">모든 모임</h2>
+						</div>
+						<div class="4u 12u(small)">
+							<button onclick="fnChangeDisplay(this)">더보기 &gt;</button>
+						</div>
+					</div>
 					<div id="frogue-container" class="position-right-bottom"
 					      data-color="#555a9c"
 					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
@@ -657,10 +664,10 @@
 				    
 				    
 				    	<c:if test="${ i<=3 }">
-						<div class='move_meeting todayTogether' >
+						<div class='move_meeting todayTogether' style="margin-right: 2%;">
 						</c:if>
 						<c:if test="${ i>3 }">
-							<div class='move_meeting todayTogether' style="display:none">
+							<div class='move_meeting todayTogether' style="display:none; margin-right: 2%;">
 						</c:if>
 						
 						
@@ -682,9 +689,7 @@
 					</c:if>
 					
 					<c:if test="${fn:length(list) > 3}">
-					<div>
-						<button onclick="fnChangeDisplay(this)">more</button>
-					</div>
+					
 					</c:if>
 					</div>
 					
