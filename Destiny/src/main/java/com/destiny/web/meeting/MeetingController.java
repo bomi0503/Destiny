@@ -188,7 +188,7 @@ public class MeetingController {
 	
 	@RequestMapping(value="updateMeeting", method=RequestMethod.POST)
 	public ModelAndView updateMeeting(@ModelAttribute("meeting") Meeting meeting,HttpServletRequest request) throws Exception{
-		System.out.println("하이 업데이트");
+		System.out.println("하이 업데이트 업데이트 업데이트 ");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		String Referer = request.getHeader("referer");
@@ -213,12 +213,12 @@ public class MeetingController {
 			System.out.println("def가 아니다");
 			//개시물 삭제 플래그 처리 
 			meetingService.updateMeeting(meeting);
-			modelAndView.setViewName("redirect:/"+referer);
+			modelAndView.setViewName("redirect:/meeting/listMeeting");
 		}else {
 			//개시물 내용 수정
 			meetingService.updateContentsMeeting(meeting);
 			meetingService.updateContentsAct(meeting);
-			modelAndView.setViewName("redirect:/meeting/listMeeting");
+			modelAndView.setViewName("redirect:/"+referer);
 		}
 		
 		

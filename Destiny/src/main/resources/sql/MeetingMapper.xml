@@ -92,6 +92,7 @@
          <if test="searchSortingOption != null">
             and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
          </if>
+         	order by m.meeting_no desc
     </select>
 <!-- /////////////////상세 조회////////////////// -->
     <select    id   ="getMeeting"   parameterType="string"   resultMap="meetingSelectMap">
