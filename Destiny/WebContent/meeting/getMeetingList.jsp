@@ -303,7 +303,7 @@
 		});
 		 */
 		function getLocation() {
-			alert("로케이션 시작");
+			//alert("로케이션 시작");
 		  if (navigator.geolocation) { // GPS를 지원하면
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		      //alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -333,7 +333,7 @@
 			if (status === daum.maps.services.Status.OK) {
 				//console.log(result[0].region_2depth_name);
 				var address = result[0].region_2depth_name;
-				alert(address);
+				//alert(address);
 				$.ajax({
 
                     url:"/meetingRest/nearMeeting?address="+address,
@@ -377,7 +377,7 @@
 		
 		// 개설하기 누르면 이벤트 처리
 		
-		$( "#addMeeting" ).on("click", function() {
+		$( ".addMeeting" ).on("click", function() {
 			console.log("${empty sessionScope.me}");
 			//getLocation();
 		
@@ -551,7 +551,7 @@
 		<%-- <c:if test="${!empty sessionScope.me=='true'}"> --%>
 			<section style="margin-top: 5%">
 				<div align="right" class="inner">
-				 	<input type="button" id="addMeeting" value="개설하기">
+				 	<input type="button" class="addMeeting" value="개설하기">
 				 	<!-- <input type="button" id="nearMeeting" value="내 주변 모임"> -->
 				</div>
 			</section>
@@ -607,7 +607,7 @@
 						
 					</c:forEach>
 					<c:if test="${empty todaylist}">
-						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" value="개설하기"></span>
 					</c:if>
 					</div>
 					
@@ -646,7 +646,7 @@
 						</div>
 					</c:forEach>
 					<c:if test="${empty hotlist}">
-						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" value="개설하기"></span>
 					</c:if>
 					
 					</div>
