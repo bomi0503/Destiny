@@ -123,8 +123,8 @@ public class RestDateController {
    public Map<String, Object> listIndexDateStory(@RequestBody Search search, HttpSession session) throws Exception{
       System.out.println("RestDateController / listIndexDateStory : POST ½ÇÇà ===============");
       
-      /*int notRead = letterService.getCountNetReadReceive(((User)session.getAttribute("me")).getUserId());
-      session.setAttribute("notRead", notRead);*/
+      int notRead = letterService.getCountNetReadReceive(((User)session.getAttribute("me")).getUserId());
+      session.setAttribute("notRead", notRead);
       
       if (search.getCurrentPage() == 0) {
          search.setCurrentPage(1);

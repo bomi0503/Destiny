@@ -68,12 +68,21 @@ $(function() {
 				var list = "";
 				for ( var i in JSON.list) {
 					var community = JSON.list[i];
+					var title = community.title;
 					console.log("writeDate : "+community.writeDate);
 					list += '<div class="col-sm-6 col-md-4 giyong">';
 					list += '<div class="thumbnail headline" data-param="'+community.communityNo+'">';
 					list += '<div style="width:100%;height:300px;background:url(\'../resources/images/uploadImg/'+community.fileName+'\');background-size:cover;background-position : center center;"></div>';
 					list += '<div class="caption">';
-					list += '<h3 class="tumTitle">'+community.title+'</h3>';
+					if (title.length > 6) {
+						title = title.substring(0,8)+"..."
+						console.log(":: 6long : "+title);
+						list += '<h3 class="tumTitle">'+title+'</h3>';
+					} else {
+						console.log(":: short : "+title);
+						list += '<h3 class="tumTitle">'+title+'</h3>';
+					}
+					/* list += '<h3 class="tumTitle">'+community.title+'</h3>'; */
 					list += '<p>'+community.writeDate+'</p>';
 					list += '<ul class="infoFirst">';
 					list += '<li>'+community.writerNickName+'</li>';

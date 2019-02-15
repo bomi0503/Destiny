@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +19,6 @@
 	
 	
    	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54cfa5aea3e5609fcbb420ef8cd6ed4c&libraries=services"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -178,11 +175,16 @@
 	 
 	 
 	/* 반응형 미디어쿼리 */
-	/* @media screen and (max-width:1280px){
-		.ment{
-			display : none;
+	 @media screen and (max-width:1680px){
+		.wrapper.align-center {
+			/* margin-bottom: 0 !important; */
+			margin-top: 5% !important;
+			
 		}
-	} */	
+		.align-center.search{
+			margin-top: 10% !important;
+		}
+	} 	
 	</style>
 	
 	
@@ -301,7 +303,7 @@
 		});
 		 */
 		function getLocation() {
-			//alert("로케이션 시작");
+			alert("로케이션 시작");
 		  if (navigator.geolocation) { // GPS를 지원하면
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		      //alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -331,7 +333,7 @@
 			if (status === daum.maps.services.Status.OK) {
 				//console.log(result[0].region_2depth_name);
 				var address = result[0].region_2depth_name;
-				//console.log(address);
+				alert(address);
 				$.ajax({
 
                     url:"/meetingRest/nearMeeting?address="+address,
@@ -497,7 +499,7 @@
         <form>
             <br/>
             <!-- 검색창 시작 -->
-            <section class="wrapper align-center" style="margin-top: -100px; margin-bottom: -60px">
+            <section class="align-center search">
             <div class="inner">
 
             		<div class="col-xs-12 col-sm-12 col-md-4">
@@ -547,8 +549,8 @@
 			 
 			 
 		<%-- <c:if test="${!empty sessionScope.me=='true'}"> --%>
-			<section class="wrapper align-center" style="margin-top: -100px; margin-bottom: -60px">
-				<div align="right" class="inner" style="">
+			<section style="margin-top: 5%">
+				<div align="right" class="inner">
 				 	<input type="button" id="addMeeting" value="개설하기">
 				 	<!-- <input type="button" id="nearMeeting" value="내 주변 모임"> -->
 				</div>
@@ -568,7 +570,7 @@
 					<div class="flex secondSection" id="secondSection">
 
 					</div>
-					<hr/>
+					
 				</div>
 			</section>
 			<!-- 링크이동 end -->
@@ -593,15 +595,23 @@
 					
 						<div class='move_meeting todayTogether' id="">
 							<span onclick="gotoMeeting(${todays.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${todays.titleImg }'></span>
-							<p onclick="gotoMeeting(${todays.meetingNo })">${todays.meetingCenter }</p>
-							<h3 onclick="gotoMeeting(${todays.meetingNo })">${todays.meetingName }</h3>
+							<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${todays.meetingCenter}<p>
+							<h2 class="titleName" style="color:black; margin-bottom: -10px;">${todays.meetingName}</h2>
+							<p>모임정원  <span class="meetingCenter">${todays.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${todays.meetingViews}</span>회</p>
+							<ul class="actions">
+							<li>
+								<a href="#" data-param="${todays.meetingNo}" class="button" style="margin-top: 20px;">More</a>
+							</li>
+							</ul>
 						</div>
 						
-						
 					</c:forEach>
+					<c:if test="${empty todaylist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
 					</div>
 					
-					<hr/>
+					
 				</div>
 			</section>
 			<!--오늘의 함께해요 end -->
@@ -625,10 +635,20 @@
 				 	<c:set var="i" value="${ i+1 }" />
 						<div class='move_meeting todayTogether' id="">
 							<span onclick="gotoMeeting(${hot.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${hot.titleImg }'></span>
-							<p onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingCenter }</p>
-							<h3 onclick="gotoMeeting(${hot.meetingNo })">${hot.meetingName }</h3>
+							<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${hot.meetingCenter}<p>
+							<h2 class="titleName" style="color:black; margin-bottom: -10px;">${hot.meetingName}</h2>
+							<p>모임정원  <span class="meetingCenter">${hot.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${hot.meetingViews}</span>회</p>
+							<ul class="actions">
+							<li>
+								<a href="#" data-param="${hot.meetingNo}" class="button" style="margin-top: 20px;">More</a>
+							</li>
+							</ul>
 						</div>
 					</c:forEach>
+					<c:if test="${empty hotlist}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
 					</div>
 					
 				</div>
@@ -638,7 +658,7 @@
 			 <!-- 리스트 시작 -->
 			 <section id="linkmove" class="wrapper align-center" style="margin-top: -150px; margin-bottom: -50px">
 				<div class="inner">
-				<h2 style="margin-top: -80px;text-align: -webkit-auto;">방금 등록 된 모임</h2>
+					<h2 style="margin-top: -80px;text-align: -webkit-auto;">모든 모임</h2>
 					<div id="frogue-container" class="position-right-bottom"
 					      data-color="#555a9c"
 					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
@@ -650,13 +670,20 @@
 					<c:set var="i" value="0" />
 					<c:forEach var="meeting" items="${list}">
 				    <c:set var="i" value="${ i+1 }" />
-						<div class='move_meeting todayTogether' id="">
+				    
+				    
+				    	<c:if test="${ i<=3 }">
+						<div class='move_meeting todayTogether' style="margin-right: 2%;">
+						</c:if>
+						<c:if test="${ i>3 }">
+							<div class='move_meeting todayTogether' style="display:none; margin-right: 2%;">
+						</c:if>
+						
+						
 							<span onclick="gotoMeeting(${meeting.meetingNo })"><img style='width: 350px; height: 350px; border-radius:30px' src='/resources/images/meeting/${meeting.titleImg }'></span>
 							<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
 							<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
 							<p>모임정원  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${meeting.meetingViews}</span>회</p>
-							<p></p>
-							<%-- <p>모임날짜:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p> --%>
 							<ul class="actions">
 							<li>
 								<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
@@ -664,81 +691,30 @@
 							</ul>
 						</div>
 					</c:forEach>
+					
+					<c:if test="${empty list}">
+						<span>등록된 모임이 없습니다.<input style="margin-left: 2%;" type="button" id="addMeeting" value="개설하기"></span>
+					</c:if>
+					
+					<c:if test="${fn:length(list) > 3}">
+					<div class="12u">
+						<button onclick="fnChangeDisplay(this)">모든모임 더보기 &gt;</button>
+					</div>
+					</c:if>
 					</div>
 					
 				</div>
 			</section>
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 <%-- 
-                <div>
-                
-	              	<section style="align-content:center;" id="one" class="wrapper style1">
-						<div class="inner" style="text-align: center;overflow: hidden;">
-						
-						 <hr/>
-						 <h2 style="margin-top: -40px;text-align: -webkit-auto;">방금 등록된 모임</h2>
-							<c:set var="i" value="0" />
-						 	<c:forEach var="meeting" items="${list}">
-						 	<c:set var="i" value="${ i+1 }" />
-								<c:if test="${i%2==1}">
-									<article class="" style="float: left; margin-bottom: 20px;">
-										<div class="image" style="display: flex; width:600px; height: 400px;float: left;"><img src="/resources/images/meeting/${meeting.titleImg}" style="border-radius: 55px;" class="col-xs-12 col-sm-12 col-md-12" alt="" /></div>
-										<div class="" style="float: left; margin-left: 10px;text-align: left;">
-											<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
-											<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
-											<p>모임정원  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${meeting.meetingViews}</span>회</p>
-											<p></p>
-											<p>모임날짜:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p>
-											<ul class="actions">
-												<li>
-													<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
-												</li>
-											</ul>
-										</div>
-									</article>
-								</c:if>
-								<c:if test="${i%2==0}">
-									<article class="" style="float: right; margin-bottom: 20px;">
-										<div class="image" style="display: flex; width:600px; height: 400px;float: right;"><img src="/resources/images/meeting/${meeting.titleImg}" style="border-radius: 55px;" class="col-xs-12 col-sm-12 col-md-12" alt="" /></div>
-										<div class="" style="float: left; margin-left: 10px;text-align: end;">
-											<p class="meetingCenter" style="margin-top: 80px;margin-bottom: -50px;"><span class="glyphicon glyphicon-record"></span>&nbsp;${meeting.meetingCenter}<p>
-											<h2 class="titleName" style="color:black; margin-bottom: -10px;">${meeting.meetingName}</h2>
-											<p>모임정원  <span class="meetingCenter">${meeting.meetingCrewLimit}</span>명      조회수 <span class="meetingCenter">${meeting.meetingViews}</span>회</p>
-											<p></p>
-											<p>모임날짜:${meeting.meetingDate}&nbsp; &nbsp;<span class="glyphicon glyphicon-map-marker"></span>${meeting.meetingLocation}</p>
-											<ul class="actions">
-												<li>
-													<a href="#" data-param="${meeting.meetingNo}" class="button" style="margin-top: 20px;">More</a>
-												</li>
-											</ul>
-										</div>
-									</article>
-								</c:if>						 	
-						 
-							</c:forEach>
-						
-						</div>
-					</section>
+			
+			<script>
+				function fnChangeDisplay(em) {
+					$(".todayTogether").each(function(idx, e) {
+						$(e).css("display", "");
+					});
+					$(em).css("display", "none");
 					
-					
-            	</div>    --%>
-       		<!-- 리스트 종료 -->
+				}
+			</script>
     </div>
 	</div>
 	</section>

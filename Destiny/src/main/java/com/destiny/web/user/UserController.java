@@ -109,7 +109,7 @@ public class UserController {
 				modelAndView.addObject("reason", "탈퇴한 회원입니다. 다시 이용하고 싶으시면 계정을 복구해 주십시요.");
 				modelAndView.setViewName("forward:/user/userInfo/loginDe.jsp");
 			//만일 블랙리스트라면
-			} else if(dbUser.getUserGrade().equals("BLK")) {
+			}else if(dbUser.getUserGrade().equals("BLK")) {
 				modelAndView.addObject("result", "Fail");
 				modelAndView.addObject("reason", "블랙 리스트입니다. 다시 이용하고 싶으시면 새로운 이메일로 입력해 주십시요.");
 				modelAndView.setViewName("forward:/user/userInfo/loginDe.jsp");
