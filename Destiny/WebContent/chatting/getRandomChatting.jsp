@@ -805,7 +805,7 @@ var ti = 0;
 	                        width: w + '%'
 	                    },
 	                    cw =
-	                    (bw - pw) / 2,
+	                    (bw - pw) / 1.3,
 	                    ca = {
 	                        left: cw
 	                    }
