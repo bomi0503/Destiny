@@ -261,9 +261,9 @@
 												<option value="1">20技 ~ 24技</option>
 												<option value="2">25技 ~ 29技</option>
 												<option value="3">30技 ~ 34技</option>
-												<option value="4">34技 ~ 49技</option>
+												<option value="4">34技 ~ 39技</option>
 												<option value="5">40技 ~ 44技</option>
-												<option value="6">44技 ~ 59技</option>
+												<option value="6">44技 ~ 49技</option>
 												<option value="7">50技 ~ </option>
 											</select>
 										</div>
