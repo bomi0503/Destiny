@@ -249,7 +249,7 @@
 				<div class="form-group">
 				
 					<label for="title">力格</label>
-					<input type="text" class="form-control" name="title" placeholder="力格阑 涝仿秦林技夸." autofocus autocomplete=off>
+					<input type="text" class="form-control" name="title" placeholder="力格阑 涝仿秦林技夸." maxlength="25" autofocus autocomplete=off>
 					
 				</div>
 				

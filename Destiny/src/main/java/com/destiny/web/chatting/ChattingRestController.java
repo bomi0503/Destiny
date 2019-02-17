@@ -700,7 +700,7 @@ public class ChattingRestController {
 		if (user.getGender().equals("W")) {
 			if (applicationScope.getAttribute("perfectWomanList") != null) {
 				perfectWomanList = (List<User>) applicationScope.getAttribute("perfectWomanList");
-				for (int i = perfectNo; i < perfectWomanList.size(); i++) {
+				for (int i = 0; i < perfectWomanList.size(); i++) {
 					if (perfectWomanList.get(i).getUserId().equals(userId)) {
 						perfectWomanList.remove(i);
 						result = "Perfect 여성 이상형 대기자 지워짐";
@@ -712,7 +712,7 @@ public class ChattingRestController {
 		} else {
 			if (applicationScope.getAttribute("perfectManList") != null) {
 				perfectManList = (List<User>) applicationScope.getAttribute("perfectManList");
-				for (int j = perfectNo; j < perfectManList.size(); j++) {
+				for (int j = 0; j < perfectManList.size(); j++) {
 					if (perfectManList.get(j).getUserId().equals(userId)) {
 						perfectManList.remove(j);
 						result = "Perfect 남성 이상형 대기자 지워짐";
@@ -746,7 +746,8 @@ public class ChattingRestController {
 		}
 		if (chattingNo != 0) {
 			Chatting emptyChatting = new Chatting();
-			session.setAttribute("chatting", emptyChatting);
+			outUserChatting=emptyChatting;
+			session.setAttribute("chatting", outUserChatting);
 			for (int i = 0; i < perfectMatchingResult.size(); i++) {
 				if (perfectMatchingResult.get(i).getManId().equals(userId)
 						|| perfectMatchingResult.get(i).getWomanId().equals(userId)) {
@@ -760,6 +761,7 @@ public class ChattingRestController {
 
 		}
 		System.out.println("perfectMatchingResult : " + perfectMatchingResult);// 저장된 매칭 리스트
+		System.out.println("outUserChatting : "+outUserChatting);
 		System.out.println("Result : " + result);// 결과
 		return result;
 	}
@@ -844,7 +846,7 @@ public class ChattingRestController {
 	
 	
 		
-    String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
+    String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
 
     
@@ -899,7 +901,7 @@ public class ChattingRestController {
 	
 	
 		
-    String path = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
+    String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
 
     

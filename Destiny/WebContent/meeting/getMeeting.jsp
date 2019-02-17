@@ -597,7 +597,7 @@
 			var today = (year+'-0' +month + '-' + day+'-'+time);
 			var mitingTime = ('${meetingAct.meetingDate}'+'-'+'${meetingAct.meetingTime }');
 		
-			//console.log("관심사"+interestName);
+			console.log("관심사"+interestName);
 			//console.log("센터미팅"+centerMeeting);
 			//console.log("미팅센터"+meetingCenter);
 			//console.log("타이틀이미지"+titleImg);
@@ -610,6 +610,7 @@
 			//console.log("시간"+meetingTime);
 			//console.log("장소"+meetingLocation);
 			console.log("오늘"+today);
+			alert("여기니???");
 			if(interestName == null || interestName.length<1){
 				swal("관심사를 선택해 주세요.");
 				return;

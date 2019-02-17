@@ -45,6 +45,7 @@
       SELECT m.*, ma.act_date
       FROM meeting m, meeting_act ma
       where m.meeting_no = ma.meeting_no
+      and m.meeting_condition in ('DEF','EMP')
       and m.interest_name='함께해요'
       and ma.act_date = #{value}
       order by m.meeting_views desc
@@ -52,6 +53,7 @@
 <!-- /////////////////what's hot 조회////////////////// -->
     <select    id="hotMeeting" resultMap="meetingSelectMap">
       SELECT*from meeting where meeting_views is not null
+      and meeting_condition in ('DEF','EMP')
       order by meeting_views desc
     </select>
 <!-- /////////////////베스트상품 조회////////////////// -->
@@ -79,9 +81,6 @@
     </insert>
 <!-- /////////////////개설된 모임 조회////////////////// -->
     <select    id="getMeetingList" parameterType="com.destiny.common.Search" resultMap="meetingSelectMap">
-       SELECT *
-      FROM ( SELECT inner_table. * ,  ROWNUM AS row_seq 
-         FROM (
             SELECT m.*, ma.act_date as meeting_date, ma.act_location as meeting_location
             FROM meeting m, meeting_act ma
             WHERE m.meeting_no = ma.meeting_no 
@@ -95,9 +94,7 @@
          <if test="searchSortingOption != null">
             and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
          </if>
-         order by m.meeting_no desc) inner_table 
-      WHERE ROWNUM &lt;= #{endRowNum})
-   WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+         	order by m.meeting_no desc
     </select>
 <!-- /////////////////상세 조회////////////////// -->
     <select    id   ="getMeeting"   parameterType="string"   resultMap="meetingSelectMap">

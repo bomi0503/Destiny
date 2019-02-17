@@ -230,8 +230,8 @@
 					condition = "MEM";
 				}
 				var thisRole = "${ crewList['0'].crewNickName==sessionScope.me.nickName ? '모임장님' : '' }";
-				console.log(masterNick);
-				console.log(condition);
+				//console.log(masterNick);
+				//console.log(condition);
 				///신고하기 
 				  	$( "a[href='#' ]:contains('신고')" ).on("click" , function() {
 				  		if('${empty sessionScope.me}'=='true'){
@@ -242,7 +242,7 @@
 								  buttons: true,
 								  dangerMode: true,
 								})
-								.then((willDelete) =>{
+								.then(function(willDelete){
 								  if (willDelete) {
 									  $("#my-dialog,#dialog-background").toggle();
 								  } else {
@@ -257,8 +257,23 @@
 				  //=============수정 시 모임장인지 확인==================================//
 					$("a[href='#' ]:contains('수정')").click(function () {
 						//$("#update-dialog").click(function () {
-							$.ajax( 
-							 {
+							if('${empty sessionScope.me}'=='true'){
+							
+							swal({
+								  title: "로그인후이용가능합니다.\n로그인하시겠습니까?",
+								  icon: "info",
+								  buttons: true,
+								  dangerMode: true,
+								})
+								.then(function(willDelete){
+								  if (willDelete) {
+									  $("#my-dialog,#dialog-background").toggle();
+								  } else {
+								    	return;
+								  }
+								});
+							}else{
+								$.ajax({
 									url : "/meetingRest/getCrewrole",
 									method : "post" ,
 									dataType : "text" ,
@@ -281,7 +296,10 @@
 										}
 									
 									}
-							}); 
+							});
+								
+								
+							}
 					});
 					//=================삭제 시 모임장인지 확인==================================//		
 					$("a[href='#' ]:contains('삭제')").click(function () {
@@ -310,8 +328,9 @@
 													  buttons: true,
 													  dangerMode: true,
 													})
-													.then(function(willDelete){
-													  if (willDelete) {
+													.then(function(value){
+													 console.log(value);
+													  if (value==true) {
 														  $("#detailForm").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/meeting/updateMeeting").submit();
 													  } else {
 														  return;
@@ -461,12 +480,12 @@
 											if(JSONData==5018){
 												swal({title:"이미 가입하셨습니다.",icon:"error"});
 												$("#dialog2form")[0].reset();
-												$("#dialog2").toggle();
+												$("#dialog2, #backround").toggle();
 											}else{
 												swal({title:"가입 신청이 완료되었습니다.\n 모임장의 승인후 가입됩니다.",icon:"success"});
 												//window.opener.location.reload(false);
 												$("#dialog2form")[0].reset();
-												$("#dialog2").toggle();
+												$("#dialog2, #backround").toggle();
 											}
 										}
 						});
