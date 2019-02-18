@@ -49,14 +49,23 @@
                "Content-type" : "application/json"
             },
             success : function(JSON){
+            	console.log("ajax성공");
                var list = "";
                for (var i = 0; i < 3; i++) {
                   var community = JSON.list[i];
-                  /* alert("communityNo : "+community.communityNo); */
+                  var title = community.title;
                   list += '<article style="text-align : center;"><div style="display:inline-block;width : 300px; height : 300px; border-radius : 100%; background : url(\'resources/images/uploadImg/'+community.fileName+'\'); background-size : cover; box-shadow : 0px 15px 15px -4px rgba(229, 66, 93, 0.7);border : 3px solid white;">';
                   /* list += '<img src="resources/images/uploadImg/'+community.fileName+'" alt="title_img" />'; */
                   list += '</div>';
-                  list += '<header><h3 style="color : white">'+community.title+'</h3></header>';
+                  if (title.length > 6) {
+						title = title.substring(0,8)+"..."
+						console.log(":: 6long : "+title);
+						list += '<header><h3 style="color : white">'+title+'</h3></header>';
+					} else {
+						console.log(":: short : "+title);
+						list += '<header><h3 style="color : white">'+title+'</h3></header>';
+					}
+                  /* list += '<header><h3 style="color : white">'+community.title+'</h3></header>'; */
                   list += '<footer><a href="#" class="button" data-param="'+community.communityNo+'">보기</a></footer></article>';
                }
                
@@ -75,7 +84,6 @@
             }
             else{
                var communityNo = $(this).data("param")
-               alert("comNo : "+communityNo);
                self.location="/date/getDateStory?communityNo="+communityNo   
             }
          });
