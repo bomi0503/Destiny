@@ -127,7 +127,7 @@
 				title:"등록되었습니다."
 				})
 				.then((value) => {
-					$("form").attr("method","POST").attr("action","/act/addStory/${Category}").submit();
+					$("form").attr("method","POST").attr("action","/act/addStory/${Category}/${MeetingNo}").submit();
 		         });
 			
 			/* $("form").attr("method","POST").attr("action","/act/addStory/${Category}").submit(); */

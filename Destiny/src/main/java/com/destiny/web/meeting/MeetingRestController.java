@@ -269,7 +269,7 @@ public class MeetingRestController {
 	}
 	
 	@RequestMapping(value="meetingRest/meetingListByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Meeting> meetingListByAndroid(@PathVariable("currentPage") int currentPage) throws Exception{
+	public Map<String, Object> meetingListByAndroid(@PathVariable("currentPage") int currentPage) throws Exception{
 		System.out.println("안드로이드에서 meetingListByAndroid 로");
 		
 		Search search = new Search();
@@ -295,7 +295,7 @@ public class MeetingRestController {
 		//returnMap.put("search", search);
 		
 		//System.out.println("안드로이드로 전달될 객체 : " + returnMap);
-		return (List<Meeting>)map.get("list");
+		return map;
 	}
 
 	@RequestMapping( value="meetingRest/takeOver", method=RequestMethod.POST)

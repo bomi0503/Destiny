@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -563,19 +564,25 @@ public class ActController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addStoryView/{Category}", method=RequestMethod.GET)
-	public ModelAndView addStoryView(@PathVariable("Category") String Category) throws Exception{
+	@RequestMapping(value="addStoryView/{Category}/{MeetingNo}", method=RequestMethod.GET)
+	public ModelAndView addStoryView(@PathVariable("Category") String Category, @PathVariable("MeetingNo") String MeetingNo) throws Exception{
+		
+		System.out.println(":: Category : "+Category);
+		System.out.println(":: MeetingNo : "+MeetingNo );
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/user/userAct/addStory.jsp");
+		modelAndView.addObject("MeetingNo", MeetingNo);
 		modelAndView.addObject("Category", Category);
 		return modelAndView;
 	}
 	
 	/*addRestaurantInfo : start*/
-	@RequestMapping(value="addStory/{Category}", method=RequestMethod.POST)
-	public ModelAndView addStory(@ModelAttribute("community") Community community, HttpSession session, @PathVariable("Category") String Category, @RequestParam("uploadFile")MultipartFile fileName, MultipartHttpServletRequest mtfRequest, @ModelAttribute("upload")Upload upload) throws Exception{
+	@RequestMapping(value="addStory/{Category}/{MeetingNo}", method=RequestMethod.POST)
+	public ModelAndView addStory(@ModelAttribute("community") Community community, HttpSession session, @PathVariable("Category") String Category, @PathVariable("MeetingNo") String MeetingNo, @RequestParam("uploadFile")MultipartFile fileName, MultipartHttpServletRequest mtfRequest, @ModelAttribute("upload")Upload upload) throws Exception{
 		System.out.println(":: ActController/addStory/post : 실행");
 		
+		System.out.println(":::: MeetingNo : "+MeetingNo);
 		
 		if(fileName.getOriginalFilename() == "") {
 			System.out.println("이미지 없음");
@@ -603,6 +610,7 @@ public class ActController {
 		System.out.println("nickName : "+nickName);
 		System.out.println("userGrade : "+userGrade);
 		
+		community.setMeetingNo(Integer.parseInt(MeetingNo));
 		community.setWriterId(userId);
 		community.setCategory(Category);
 		community.setUserGrade(userGrade);
@@ -615,7 +623,7 @@ public class ActController {
 		System.out.println(":: ActController/addStory/post의 community : "+community);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		communityService.addCommunity(community);
+		communityService.addMetCommunity(community);
 		
 		System.out.println("community : "+community);
 		/*업로드 테이블 : start*/
