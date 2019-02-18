@@ -44,6 +44,9 @@ public class MeetingDaoImpl implements MeetingDao {
 	@Override
 	public void addMeeting(Meeting meeting) throws Exception {
 		String picpath = "";
+		
+		System.out.println("사진 하는곳 여기오면 찍어");
+		
 		if(meeting.getImgFile() !=null && !meeting.getImgFile().isEmpty()) {
 			MultipartFile file = meeting.getImgFile();
 			byte fileData[] = file.getBytes();
@@ -53,6 +56,7 @@ public class MeetingDaoImpl implements MeetingDao {
 			fos.write(fileData);
 			fos.close();
 		}
+		System.out.println(picpath);
 		meeting.setTitleImg(picpath);
 		
 		sqlSession.insert("MeetingMapper.addMeeting", meeting);
@@ -114,10 +118,13 @@ public class MeetingDaoImpl implements MeetingDao {
 	public void updateContentsMeeting(Meeting meeting) throws Exception {
 		String picpath = "";
 		
+		System.out.println("사진 하는곳 여기오면 찍어");
+		
 		if(meeting.getImgFile() !=null && !meeting.getImgFile().isEmpty()) {
 			MultipartFile file = meeting.getImgFile();
 			byte fileData[] = file.getBytes();
 			picpath = file.getOriginalFilename();
+			System.out.println(picpath);
 			FileOutputStream fos = new FileOutputStream("C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\meeting\\" + picpath);
 			fos.write(fileData);
 			fos.close();

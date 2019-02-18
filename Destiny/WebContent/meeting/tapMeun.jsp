@@ -328,8 +328,9 @@
 													  buttons: true,
 													  dangerMode: true,
 													})
-													.then(function(willDelete){
-													  if (willDelete) {
+													.then(function(value){
+													 console.log(value);
+													  if (value==true) {
 														  $("#detailForm").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/meeting/updateMeeting").submit();
 													  } else {
 														  return;
@@ -479,12 +480,12 @@
 											if(JSONData==5018){
 												swal({title:"이미 가입하셨습니다.",icon:"error"});
 												$("#dialog2form")[0].reset();
-												$("#dialog2").toggle();
+												$("#dialog2, #backround").toggle();
 											}else{
 												swal({title:"가입 신청이 완료되었습니다.\n 모임장의 승인후 가입됩니다.",icon:"success"});
 												//window.opener.location.reload(false);
 												$("#dialog2form")[0].reset();
-												$("#dialog2").toggle();
+												$("#dialog2, #backround").toggle();
 											}
 										}
 						});
