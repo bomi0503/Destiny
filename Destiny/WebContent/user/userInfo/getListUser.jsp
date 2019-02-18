@@ -370,7 +370,7 @@
 		</div>
 		
 		<!-- pageNavigator -->
-		<jsp:include page="/common/pageNavigator_new.jsp"/>	
+		<jsp:include page="/common/pageNavigator.jsp"/>	
 		<!-- pageNavigator -->
 		
 	</div>

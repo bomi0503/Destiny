@@ -805,7 +805,7 @@ var ti = 0;
 	                        width: w + '%'
 	                    },
 	                    cw =
-	                    (bw - pw) / 2,
+	                    (bw - pw) / 1.3,
 	                    ca = {
 	                        left: cw
 	                    }
@@ -1077,6 +1077,7 @@ body:after{
 }
 #frame .content .messages ul li img {
   width: 50px;
+  height: 50px;
   border-radius: 50%;
   float: left;
 }
@@ -1257,7 +1258,7 @@ body.modal-open{
      padding-right: 0px; 
 }
 .modal-dialog{
-	left: 50px;
+	left: 300px;
     top: 120px;
     width: 10px;
     height: 5px;

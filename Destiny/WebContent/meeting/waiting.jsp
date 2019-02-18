@@ -65,7 +65,7 @@
 
 			  
 	<div id="load" >
-		<img src="/resources/images/chatting/wait.gif" alt="loading">
+		<img src="/resources/images/meeting/wait.gif" alt="loading">
 		<br> <h1>loading...</h1>
 	</div>
 
