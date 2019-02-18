@@ -122,9 +122,16 @@ public class RestDateController {
    @RequestMapping(value="/json/index/listDateStory", method=RequestMethod.POST)
    public Map<String, Object> listIndexDateStory(@RequestBody Search search, HttpSession session) throws Exception{
       System.out.println("RestDateController / listIndexDateStory : POST 실행 ===============");
+      System.out.println(":: "+session.getAttribute("me"));
       
-      int notRead = letterService.getCountNetReadReceive(((User)session.getAttribute("me")).getUserId());
-      session.setAttribute("notRead", notRead);
+      if (session.getAttribute("me") != null) {
+    	  System.out.println("::login 후");
+    	  int notRead = letterService.getCountNetReadReceive(((User)session.getAttribute("me")).getUserId());
+          System.out.println(":: notRead : "+notRead);
+          session.setAttribute("notRead", notRead);
+      }
+      
+      System.out.println("::login 전");
       
       if (search.getCurrentPage() == 0) {
          search.setCurrentPage(1);
