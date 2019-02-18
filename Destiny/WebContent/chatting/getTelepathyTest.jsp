@@ -28,7 +28,8 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <link rel="stylesheet" href="/resources/css/main.css" > 
-   
+   <!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    
 <script type="text/javascript">
 
@@ -45,11 +46,25 @@ $(function() {
 	
 });
  
-/* var n=1;
+ var n=1;
 	setTimeout(function() { 
-   
-   		alert("TimeOut! chatting을 시작합니다!");
-   		getRandomChatting(); }, 10000);
+		swal({
+			  title: "TimeOut!",
+			  text: "chatting을 시작합니다!",
+			  icon: "success",
+			  buttons: true,
+			  dangerMode: false,
+			  
+			})
+			.then(function(willDelete)  {
+			  if (willDelete) {
+				  getRandomChatting(); 
+			  }else{
+				  self.close();
+			  }
+			});
+   		//alert("TimeOut! chatting을 시작합니다!");
+   		 }, 16000);
 	
 	(function poll() {
 		setTimeout(function() { 
@@ -63,7 +78,7 @@ $(function() {
 			
 	   		 n++; }, 1000);
 		
-	})();  */
+	})();  
 //이미지 선택=====================
 	$(function() {
 
@@ -240,7 +255,7 @@ figure.snip1141 figcaption {
   overflow: hidden;
 }
 
-figure.snip1141 h2 {
+figure.snip1141 h1 {
   position: absolute;
   margin: 0;
   text-transform: uppercase;
@@ -296,8 +311,8 @@ figure.snip1141.hover .circle:after {
   transition-delay: 0s;
 }
 
-figure.snip1141:hover h2,
-figure.snip1141.hover h2 {
+figure.snip1141:hover h1,
+figure.snip1141.hover h1 {
   opacity: 1;
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
@@ -351,7 +366,11 @@ body {
 	width: 90%;
 }
 
-
+/* sweetalert buttom design^^ */
+.swal-button{
+	padding : 0 56px;
+	color : rgba(0,0,0,.65) !important;
+}
 </style>
 </head>
 <body >
@@ -379,7 +398,7 @@ body {
 					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exOneImg}" alt="sq-sample27" />
 					  <figcaption>
 					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
-					    <h2>${telepathy.exOne}</h2>
+					    <h1>${telepathy.exOne}</h1>
 					  </figcaption>
 					  <a href="javascript:"></a>
 					</figure>
@@ -388,7 +407,7 @@ body {
 					<figure class="snip1141"><img src="/resources/images/telepathy/${telepathy.exTwoImg}" alt="sq-sample17" />
 					  <figcaption>
 					    <div class="circle"><i class="ion-ios-arrow-right"> </i></div>
-					    <h2>${telepathy.exTwo}</h2>
+					    <h1>${telepathy.exTwo}</h1>
 					  </figcaption>
 					  <a href="javascript:"></a>
 					</figure>

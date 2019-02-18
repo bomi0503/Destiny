@@ -56,23 +56,26 @@
 	 
 	 <select 	id="getChatting"	parameterType="string"	resultMap="chattingSelectMap">
 		
-	 	select * from( 
-    		select * from chatting 
-    		where man_id=#{value} OR woman_id=#{value} 
-   			order by chatting_date desc) 
-   		where rownum <![CDATA[ < ]]> 2
+	 	SELECT c.chatting_no, c.man_id, c.woman_id, c.chatting_date, c.contact_meeting 
+	 	FROM( 
+    		SELECT chatting_no, man_id, woman_id, chatting_date, contact_meeting  
+    		FROM chatting 
+    		WHERE man_id=#{value} OR woman_id=#{value} 
+   			ORDER BY chatting_date DESC) c 
+   		WHERE ROWNUM <![CDATA[ < ]]> 2
 	 </select>
 	 
 	 <select 	id="getChatting2"	parameterType="int"	resultMap="chattingSelectMap">
 		
-	 	
-    		select * from chatting 
-    		where chatting_no=#{value} 
-   			
+ 	
+   		SELECT chatting_no, man_id, woman_id, chatting_date, contact_meeting  
+   		FROM chatting 
+   		WHERE chatting_no=#{value} 
+  			
 	 </select>
 	 
 	 <select 	id="listChatting"	parameterType="map" resultMap="chattingSelectMap">
-		SELECT *
+		SELECT chatting_no, man_id, woman_id, chatting_date, contact_meeting  
 		FROM chatting
 	 	WHERE woman_id=#{userId} OR man_id=#{userId}
 	 </select>
@@ -86,17 +89,19 @@
 	 </update>
 	 
 	 <select 	id="listTelepathy"	parameterType="map" resultMap="telepathySelectMap">
-		select * from( 
-    		select * from telepathy
-   			order by DBMS_RANDOM.RANDOM) 
-   		where rownum <![CDATA[ < ]]> 4
+		SELECT t.telepathy_no, t.telepathy_question, t.ex_one, t.ex_two, t.ex_one_img, t.ex_two_img  
+		FROM( 
+    		SELECT telepathy_no, telepathy_question, ex_one, ex_two, ex_one_img, ex_two_img  
+    		FROM telepathy
+   			ORDER BY DBMS_RANDOM.RANDOM) t 
+   		WHERE ROWNUM <![CDATA[ < ]]> 4
 
 	 </select>
 	 
 	 <select 	id="getTelepathyResult"	parameterType="map" resultMap="telepathySelectMap">
-		select *
-		from telepathy
-		where telepathy_no=#{telepathyNo}
+		SELECT chatting_no, man_id, woman_id, chatting_date, contact_meeting  
+		FROM telepathy
+		WHERE telepathy_no=#{telepathyNo}
 
 	 </select>
 	 
