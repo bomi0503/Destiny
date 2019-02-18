@@ -224,4 +224,9 @@ public class CommunityServiceImpl implements CommunityService {
 		return communityDao.getNextDateStory(communityNo);
 	}
 
+	@Override
+	public void addMetCommunity(Community community) throws Exception {
+		communityDao.addMetCommunity(community);
+	}
+
 }

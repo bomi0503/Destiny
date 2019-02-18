@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.destiny.common.Search;
+import com.destiny.service.comment.CommentService;
 import com.destiny.service.community.CommunityService;
+import com.destiny.service.domain.Comment;
 import com.destiny.service.domain.Community;
 import com.destiny.service.domain.Meeting;
 import com.destiny.service.meeting.MeetingService;
@@ -40,6 +42,11 @@ public class ActRestController {
 	@Qualifier("communityServiceImpl")
 	private CommunityService communityService;
 	
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
+	
+	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -51,7 +58,7 @@ public class ActRestController {
 	}
 	
 	@RequestMapping(value="json/getAdviceistByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Community> getAdviceistByAndroid(@PathVariable int currentPage) throws Exception{
+	public Map<String, Object> getAdviceistByAndroid(@PathVariable int currentPage) throws Exception{
 		System.out.println("act/json/getAdviceistByAndroid/"+currentPage);
 		
 		Search search = new Search();
@@ -72,11 +79,11 @@ public class ActRestController {
 		System.out.println("MAP : "+map);
 		
 		List<Community> list = (List<Community>)map.get("list");
-		return list;
+		return map;
 	}
 	
 	@RequestMapping(value="json/getDateReviewListByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Community> getDateReviewListByAndroid(@PathVariable int currentPage) throws Exception{
+	public Map<String, Object> getDateReviewListByAndroid(@PathVariable int currentPage) throws Exception{
 		System.out.println("act/json/getReviewListByAndroid/"+currentPage);
 		
 		Search search = new Search();
@@ -97,11 +104,11 @@ public class ActRestController {
 		System.out.println("MAP : "+map);
 		
 		List<Community> list = (List<Community>)map.get("list");
-		return list;
+		return map;
 	}
 	
 	@RequestMapping(value="json/getMeetingReviewListByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Community> getMeetingReviewListByAndroid(@PathVariable int currentPage) throws Exception{
+	public Map<String, Object> getMeetingReviewListByAndroid(@PathVariable int currentPage) throws Exception{
 		System.out.println("act/json/getMeetingReviewListByAndroid/"+currentPage);
 		
 		Search search = new Search();
@@ -122,13 +129,13 @@ public class ActRestController {
 		System.out.println("MAP : "+map);
 		
 		List<Community> list = (List<Community>)map.get("list");
-		return list;
+		return map;
 	}
 	
 	
 	
 	@RequestMapping(value="json/getInfoListByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Community> getInfoListByAndroid(@PathVariable int currentPage) throws Exception{
+	public Map<String, Object> getInfoListByAndroid(@PathVariable int currentPage) throws Exception{
 		System.out.println("act/json/getInfoListByAndroid/"+currentPage);
 		
 		Search search = new Search();
@@ -147,18 +154,26 @@ public class ActRestController {
 		System.out.println("MAP : "+map);
 		
 		List<Community> list = (List<Community>)map.get("list");
-		return list;
+		return map;
 	}
 	
 	@RequestMapping(value="json/getInfoByAndroid/{communityNo}", method=RequestMethod.GET)
-	public Community getInfoByAndroid(@PathVariable("communityNo") int communityNo) throws Exception{
+	public Map<String, Object> getInfoByAndroid(@PathVariable("communityNo") int communityNo) throws Exception{
 		System.out.println("act/json/getInfoByAndroid/"+communityNo);
 		
 		Community community = communityService.getCommunity(communityNo);
 		communityService.updateViews(communityNo);
 		System.out.println(community);
 		
-		return community;
+		List<Comment> commentList = commentService.getCommentList(community.getCommunityNo());
+		
+		System.out.println(commentList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("community", community);
+		map.put("commentList", commentList);
+		
+		return map;
 	}
 	
 	@RequestMapping(value="json/getAdvcieByAndroid/{communityNo}", method=RequestMethod.GET)
@@ -172,8 +187,19 @@ public class ActRestController {
 		return community;
 	}
 	
+	@RequestMapping(value="json/getNoticeByAndroid/{communityNo}", method=RequestMethod.GET)
+	public Community getNoticeByAndroid(@PathVariable("communityNo") int communityNo) throws Exception{
+		System.out.println("act/json/getInfoByAndroid/"+communityNo);
+		
+		Community community = communityService.getNotice(communityNo);
+		communityService.updateViews(communityNo);
+		System.out.println(community);
+		
+		return community;
+	}
+	
 	@RequestMapping(value="json/getNoticeListByAndroid/{currentPage}", method=RequestMethod.GET)
-	public List<Community> getNoticeListByAndroid(@PathVariable int currentPage) throws Exception{
+	public Map<String, Object> getNoticeListByAndroid(@PathVariable int currentPage) throws Exception{
 		System.out.println("act/json/getNoticeListByAndroid/"+currentPage);
 		
 		Search search = new Search();
@@ -192,17 +218,28 @@ public class ActRestController {
 		System.out.println("MAP : "+map);
 		
 		List<Community> list = (List<Community>)map.get("list");
-		return list;
+		return map;
 	}
 	
 	
 	
 	@RequestMapping(value="json/getMeetingByAndroid/{meetingNo}", method=RequestMethod.GET)
-	public Meeting getMeeting(@PathVariable int meetingNo) throws Exception{
+	public Map<String, Object> getMeeting(@PathVariable int meetingNo) throws Exception{
 		System.out.println("json/getMeeting/"+meetingNo);
 		Meeting meeting = meetingService.getMeeting(meetingNo);
+		
+		Map<String, Object> map = meetingService.getCrew(meetingNo);
+		List<Meeting> crewList= (List<Meeting>)map.get("crewList");
+		
 		System.out.println("안드로이드로 전달되는 meeting : " + meeting);
-		return meeting;
+		System.out.println("안드로이드로 전달되는 crewList : " + crewList);
+		
+		Map<String, Object> returnMap  = new HashMap<String, Object>();
+		
+		returnMap.put("meeting", meeting);
+		returnMap.put("crewList", crewList);
+		
+		return returnMap;
 	}
 	
 	@RequestMapping(value="json/inquiry/{propose}", method=RequestMethod.GET)

@@ -14,6 +14,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54cfa5aea3e5609fcbb420ef8cd6ed4c&libraries=services"></script><!-- 다음지도 -->
 	<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script><!-- 카카오공유 -->
+	
+	<!--  템플릿 사용하기 위해 필요한 js -->
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 	<link rel="stylesheet" href="/resources/css/main.css" > <!-- 우연메인 -->
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -690,7 +696,7 @@
 			 var hours = dt.getHours();
 			 var minute = dt.getMinutes();
 			 var time = (hours + ':' +minute);
-			 var today = "2019-02-14-14:00";/* (year+'-0' +month + '-' + day+'-'+time); */
+			 var today = (year+'-0' +month + '-' + day+'-'+time);
 			 var mitingTime = ('${meetingAct.meetingDate}'+'-'+'${meetingAct.meetingTime }');
 			 /* ${meetingAct.meetingDate} ${meetingAct.meetingTime } */
 			 console.log(today);
@@ -1322,6 +1328,10 @@
 				$("#dialog3, #backround").toggle();
 			});
 		});
+		
+		function community(communityNo){
+			self.location="/meetingStory/getMeetingStory?communityNo="+communityNo
+		}
 
 	</script>
 	
@@ -1478,6 +1488,7 @@
 				<p> 날짜 : ${meetingAct.meetingDate} ${meetingAct.meetingTime } </p>
 				<p> 장소 : ${meetingAct.meetingLocation} </p>
 				<p> 회비 : ${meetingAct.meetingDues} </p>
+				
 				</div>
 			
 				<div class="col-xs-4 col-md-4 ">
@@ -1550,6 +1561,38 @@
 			<button class="button" style="margin-bottom: 30px; width: 100%;">가입하기</button>
 		</div>
 		
+		<!-- 후기 보기  -->
+		<section id="linkmove" class="wrapper align-center" style="margin-top: 100px;">
+				
+				
+				<div class="inner col-xs-12 col-md-12">
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;color: #fd5d7c;">모임 후기 </h2>
+					<div id="frogue-container" class="position-right-bottom"
+					      data-color="#555a9c"
+					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-init-key="value"
+					      ></div>
+					
+					<div class="flex secondSection">
+					<c:set var="i" value="0"/>
+				 	<c:forEach var="post" begin="0" end="2" step="1" items="${postList}">
+				 	<c:set var="i" value="${ i+1 }" />
+						<div class='move_meeting todayTogether' id="">
+							<span onclick="community(${post.communityNo})"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/uploadImg/${post.fileName}'></span>
+						</div>
+						
+					</c:forEach>
+					<%-- <c:if test="${empty hotlist}">
+						<span>등록된 후기가 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" value="게시판 바로가기"></span>
+					</c:if> --%>
+					
+					</div>
+					
+				</div>
+			</section>
+		<!-- 후기 완료  -->
+		
 		<jsp:include page="/meeting/modal.jsp" />
 		<!-- 모달창 디자인 부분 :: 가입하기 모달창 -->
         <div id="dialog2" class="madal">
@@ -1581,12 +1624,12 @@
         <!-- 모달창 디자인 부분  끝-->
         </div>
 
-		<div >
+		<div style="margin-top: 213px;">
 			<table>
 				
 				<tr>
 					<td>
-					모임멤버${crewCount}명
+					모임멤버${crewCount}명 / 정원 ${meeting.meetingCrewLimit}명
 					</td>
 				</tr>
 				
@@ -1599,19 +1642,19 @@
 					 			<div class="col-xs-12 col-sm-12 col-md-12">
 						 			<img src="/resources/images/userprofile/${crew.masterProfileImg}" style="height: 50px; margin-bottom: 6px;"  class="col-xs-4 col-sm-1 col-md-1 imgmen">
 									<c:if test="${me.nickName ne crew.crewNickName }">
-										<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+										<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-3 col-md-3" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
 											<span class="caret"></span>
 										</a>
 									</c:if>
 									<c:if test="${me.nickName eq crew.crewNickName }">
-										<div class="thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
+										<div class="thisName col-xs-2 col-sm-6 col-md-6" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
 											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
 											<span class="caret"></span>
 										</div>
 									</c:if>
-									<a class="col-xs-1 col-sm-4 col-md-4"></a>
-									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-5 col-sm-3 col-md-3">모임장</strong></span></c:if>
+									<span class="col-xs-1 col-sm-2 col-md-2">${crew.interviewTitle}</span>
+									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-3 col-sm-3 col-md-3">모임장</strong></span></c:if>
 									
 								
 								<ul class="dropdown-menu">

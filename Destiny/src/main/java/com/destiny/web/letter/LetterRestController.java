@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.destiny.common.Page;
 import com.destiny.common.Search;
@@ -27,7 +28,7 @@ import com.destiny.service.domain.User;
 import com.destiny.service.letter.LetterService;
 import com.destiny.service.user.UserService;
 
-@Controller
+@RestController
 @RequestMapping("/letterRest/*")
 public class LetterRestController {
 	//Field
@@ -66,7 +67,7 @@ public class LetterRestController {
 				//=================================user喊 letter meta-data积己============================================
 				String letterMetaDataTitle = letter.getLetterTitle()+System.currentTimeMillis();
 				
-				String temDirText = "C:\\Users\\Bitcamp\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
+				String temDirText = "C:\\Users\\Bitcamp\\git\\Destiny\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
 				File sendLetter = new File(temDirText);
 				
 				//FileWriter fw = new FileWriter(detailProduct, true);
@@ -103,7 +104,7 @@ public class LetterRestController {
 				//=================================user喊 letter meta-data积己============================================
 				String letterMetaDataTitle = letter.getLetterTitle()+System.currentTimeMillis();
 				
-				String temDirText = "C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
+				String temDirText = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt";
 				File sendLetter = new File(temDirText);
 				
 				//FileWriter fw = new FileWriter(detailProduct, true);
@@ -138,7 +139,7 @@ public class LetterRestController {
 			
 			String letterMetaDataTitle = letter.getLetterDetail();
 			//"C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\";
-			File temDirText = new File("C:\\Users\\Bit\\git\\Destiny02\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt");
+			File temDirText = new File("C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\letterDetail\\"+letterMetaDataTitle+".txt");
 			
 			Scanner scan = new Scanner(temDirText);
 			String receiveLetterText = "";

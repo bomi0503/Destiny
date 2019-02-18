@@ -173,11 +173,13 @@ public class MeetingController {
 		Meeting meetingAct = meetingService.getAct(meetingNo);
 		int crewCount = meetingService.getCrewCount(meetingNo);
 		Map<String , Object> crewMap=meetingService.getCrew(meetingNo);
+		Map<String , Object> postMap=meetingService.getMeetingPost(meetingNo);
 		
 		model.addAttribute("meeting", meeting);
 		model.addAttribute("meetingAct", meetingAct);
 		model.addAttribute("crewCount", crewCount);
 		model.addAttribute("crewList", crewMap.get("crewList"));
+		model.addAttribute("postList", postMap.get("postList"));
 		
 		//System.out.println("이러나ㅣㅇ러ㅣ만어라ㅣㄴ얼민ㄹㅇ"+crewMap.get("crewList"));
 		ModelAndView modelAndView = new ModelAndView();
