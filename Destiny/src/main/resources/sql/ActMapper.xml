@@ -321,7 +321,7 @@
 	  					FROM		(	SELECT chatting_no , man_id , woman_id , chatting_date , contact_meeting
 											FROM chatting
 											<where>
-												man_id = #{userId} or woman_id = #{userId}
+												(man_id = #{userId} or woman_id = #{userId}) AND contact_meeting = 'Y'
 											</where>
 									 	) inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )

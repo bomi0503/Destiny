@@ -292,6 +292,7 @@ public class ActController {
 		/* =================차트 Start========================= */
 		
 		//============================================가입한 회원들의 주요 관심사=============================================
+			
 		Map<String, Object> meetingCrewMap = meetingService.getCrew(meetingNo);
 		List<Meeting> meetingCrew = (List<Meeting>) meetingCrewMap.get("crewList");
 		
@@ -323,8 +324,9 @@ public class ActController {
 		int i = 0;
 		
 		for(String s : interestList) {
-			for(String ss: globalInterestList) {
+			for(String ss : globalInterestList) {
 				if(s.equals(ss)) {
+					System.out.println("the globalInterestList element : " + ss);
 					numOfInterest[i]++;
 				}
 			}
