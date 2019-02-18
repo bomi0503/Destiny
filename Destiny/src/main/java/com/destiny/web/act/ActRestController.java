@@ -224,11 +224,22 @@ public class ActRestController {
 	
 	
 	@RequestMapping(value="json/getMeetingByAndroid/{meetingNo}", method=RequestMethod.GET)
-	public Meeting getMeeting(@PathVariable int meetingNo) throws Exception{
+	public Map<String, Object> getMeeting(@PathVariable int meetingNo) throws Exception{
 		System.out.println("json/getMeeting/"+meetingNo);
 		Meeting meeting = meetingService.getMeeting(meetingNo);
+		
+		Map<String, Object> map = meetingService.getCrew(meetingNo);
+		List<Meeting> crewList= (List<Meeting>)map.get("crewList");
+		
 		System.out.println("안드로이드로 전달되는 meeting : " + meeting);
-		return meeting;
+		System.out.println("안드로이드로 전달되는 crewList : " + crewList);
+		
+		Map<String, Object> returnMap  = new HashMap<String, Object>();
+		
+		returnMap.put("meeting", meeting);
+		returnMap.put("crewList", crewList);
+		
+		return returnMap;
 	}
 	
 	@RequestMapping(value="json/inquiry/{propose}", method=RequestMethod.GET)
