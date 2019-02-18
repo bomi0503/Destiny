@@ -230,6 +230,11 @@ public class MeetingDaoImpl implements MeetingDao {
 	public List<Meeting> hotMeeting() throws Exception {
 		return sqlSession.selectList("MeetingMapper.hotMeeting");
 	}
+
+	@Override
+	public List<Meeting> getMeetingPost(int meetingNo) throws Exception {
+		return sqlSession.selectList("MeetingMapper.getMeetingPost",meetingNo);
+	}
 	
 
 }

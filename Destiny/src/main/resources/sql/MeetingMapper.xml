@@ -37,6 +37,23 @@
       <result property="targetId"       	column="target_id"             jdbcType="VARCHAR" />   <!-- 강퇴시킬 아이디 -->
       <result property="interviewTitle"       column="interview_title"      jdbcType="VARCHAR" />   <!-- 인터뷰 타이틀 -->
    </resultMap>
+   
+   <resultMap id="communitySelectMap" type="com.destiny.service.domain.Community">
+		<result property="communityNo" 			column="community_no" 							jdbcType="NUMERIC"/>
+		<result property="writerId"				column="community_writer_id" 					jdbcType="VARCHAR" />
+		<result property="meetingNo" 			column="meeting_no" 							jdbcType="NUMERIC" />
+		<result property="category" 			column="category" 								jdbcType="CHAR" />
+		<result property="userGrade"			column="community_user_grade" 					jdbcType="CHAR" />
+		<result property="title"				column="community_title" 						jdbcType="VARCHAR" />
+		<result property="writerNickName" 		column="community_writer_nick_name" 			jdbcType="VARCHAR" />
+		<result property="detail"				column="community_detail" 						jdbcType="VARCHAR" />
+		<result property="writeDate"			column="community_write_date" 					jdbcType="DATE" />
+		<result property="views"				column="community_views" 						jdbcType="INTEGER" />
+		<result property="like"					column="community_like" 						jdbcType="INTEGER" />
+		<result property="importRank"			column="import_rank" 							jdbcType="CHAR" />
+		<result property="viewCondition"		column="community_view_condition" 				jdbcType="CHAR" />
+		<result property="fileName"				column="file_name" 								jdbcType="VARCHAR" />
+	</resultMap>
 <!-- /////////////////관심사 조회////////////////// -->
     <select    id="getInterestList" resultMap="meetingSelectMap">
       SELECT* FROM interest
@@ -322,5 +339,13 @@
             and m.interest_name LIKE '%'||#{searchSortingOption}||'%'
          </if>
       order by m.meeting_no desc   ) countTable      
+    </select>
+ <!-- /////////////////모임 후기 조회////////////////// -->    
+ 
+ <select  id="getMeetingPost"  parameterType="com.destiny.service.domain.Meeting" resultMap="communitySelectMap">
+    select c.community_no as communityNo, u.file_name as fileName
+	from community c, upload u
+	where c.COMMUNITY_NO = u.COMMUNITY_NO 
+	and c.meeting_no =#{meetingNo}
     </select>
 </mapper>

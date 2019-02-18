@@ -1328,6 +1328,10 @@
 				$("#dialog3, #backround").toggle();
 			});
 		});
+		
+		function community(communityNo){
+			self.location="/meetingStory/getMeetingStory?communityNo="+communityNo
+		}
 
 	</script>
 	
@@ -1562,7 +1566,7 @@
 				
 				
 				<div class="inner col-xs-12 col-md-12">
-				<h2 style="margin-top: -80px;text-align: -webkit-auto;">모임 후기 </h2>
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;color: #fd5d7c;">모임 후기 </h2>
 					<div id="frogue-container" class="position-right-bottom"
 					      data-color="#555a9c"
 					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
@@ -1571,19 +1575,14 @@
 					      ></div>
 					
 					<div class="flex secondSection">
-					<%-- <c:set var="i" value="0"/>
-				 	<c:forEach var="hot" begin="0" end="2" step="1" items="${hotlist}">
-				 	<c:set var="i" value="${ i+1 }" /> --%>
+					<c:set var="i" value="0"/>
+				 	<c:forEach var="post" begin="0" end="2" step="1" items="${postList}">
+				 	<c:set var="i" value="${ i+1 }" />
 						<div class='move_meeting todayTogether' id="">
-							<span onclick="gotoMeeting(${hot.meetingNo })"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/meeting/job2.jpg'></span>
+							<span onclick="community(${post.communityNo})"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/uploadImg/${post.fileName}'></span>
 						</div>
-						<div class='move_meeting todayTogether' id="">
-							<span onclick="gotoMeeting(${hot.meetingNo })"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/meeting/job2.jpg'></span>
-						</div>
-						<div class='move_meeting todayTogether' id="">
-							<span onclick="gotoMeeting(${hot.meetingNo })"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/meeting/job2.jpg'></span>
-						</div>
-					<%-- </c:forEach> --%>
+						
+					</c:forEach>
 					<%-- <c:if test="${empty hotlist}">
 						<span>등록된 후기가 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" value="게시판 바로가기"></span>
 					</c:if> --%>
