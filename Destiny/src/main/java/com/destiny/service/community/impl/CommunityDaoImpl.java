@@ -191,4 +191,9 @@ public class CommunityDaoImpl implements CommunityDao{
 		return sqlSession.selectList("CommunityMapper.getIndexDateStoryList", search);
 	}
 
+	@Override
+	public void addMetCommunity(Community community) throws Exception {
+		sqlSession.insert("CommunityMapper.addMetCommunity", community);
+	}
+
 }

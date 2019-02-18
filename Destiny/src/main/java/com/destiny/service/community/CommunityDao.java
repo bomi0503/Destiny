@@ -12,6 +12,9 @@ public interface CommunityDao {
 	//insert
 	public void addCommunity(Community community) throws Exception;
 	
+	//모임후기 게시글 등록
+	public void addMetCommunity(Community community) throws Exception;
+	
 	//select one
 	public Community getCommunity(int communityNo) throws Exception;
 	
