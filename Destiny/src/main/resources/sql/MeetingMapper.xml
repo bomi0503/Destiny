@@ -34,7 +34,8 @@
       <result property="meetingActNo"       column="meeting_act_no"    jdbcType="VARCHAR" />      <!-- ACT_NO -->
       <result property="meetingCrewNo"       column="meeting_Crew_no"    jdbcType="VARCHAR" />      <!-- CREW_NO -->
       <result property="meetingActCount"       column="meeting_act_count"    jdbcType="NUMERIC" />   <!-- 관심사 번호 -->
-      <result property="targetId"       column="target_id"             jdbcType="VARCHAR" />   <!-- 강퇴시킬 아이디 -->
+      <result property="targetId"       	column="target_id"             jdbcType="VARCHAR" />   <!-- 강퇴시킬 아이디 -->
+      <result property="interviewTitle"       column="interview_title"      jdbcType="VARCHAR" />   <!-- 인터뷰 타이틀 -->
    </resultMap>
 <!-- /////////////////관심사 조회////////////////// -->
     <select    id="getInterestList" resultMap="meetingSelectMap">
@@ -131,11 +132,11 @@
 <!-- ////////////////가입된 모임원 리스트 표현용////////////////// -->    
     <select  id="getCrew" resultMap="meetingSelectMap">
        select u.user_id as meeting_master_id, u.profile_img as master_profile_img, 
-               u.nick_name as crew_nick_name, cl.role 
+               u.nick_name as crew_nick_name, cl.role , cl.interview_title as interview_title
       from meeting_crew_list cl, users u
       where u.user_id= cl.crew_id
       and cl.crew_condition = 'YES'
-      and cl.meeting_no= #{meetingNo}
+      and cl.meeting_no= 10001
       order by cl.role desc
     </select>
     

@@ -582,7 +582,7 @@ public class ActController {
 			upload.setFileName("basic.gif");
 		}else {
 			/*대표이미지 업로드 : start*/
-			String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
+			String path = "C:\\Users\\Bitcamp\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
 			String name = System.currentTimeMillis()+"."+fileName.getOriginalFilename().split("\\.")[1];
 			
 			File file = new File(path + name);
