@@ -11,6 +11,9 @@ public interface CommunityService {
 	//게시글 등록
 	public void addCommunity(Community community) throws Exception;
 	
+	//모임후기 게시글 등록
+	public void addMetCommunity(Community community) throws Exception;
+	
 	//게시글 상세보기
 	public Community getCommunity(int communityNo) throws Exception;
 	

@@ -146,6 +146,11 @@ public class UserServiceImpl implements UserService {
 		
 		return map;
 	}
+
+	@Override
+	public List<String> getType() throws Exception {
+		return userDao.getType();
+	}
 	
 	
 	

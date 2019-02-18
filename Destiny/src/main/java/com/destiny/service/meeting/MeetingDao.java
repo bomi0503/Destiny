@@ -70,4 +70,6 @@ public interface MeetingDao {
    public void shutdown(Meeting meeting)throws Exception; /*모임장 탈퇴 셧다운 발동*/
    
    public int getTotalCount(Search search) throws Exception;
+   
+   public List<Meeting> getMeetingPost(int meetingNo) throws Exception; /*미팅 후기 */
 }
