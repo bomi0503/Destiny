@@ -25,10 +25,8 @@
 	
 	
 	
-	<!-- Bootstrap core CSS -->
-    
-    <link href="carousel.css" rel="stylesheet">
-    
+    <!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <!-- 케러셀 완료 -->
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -66,7 +64,43 @@
 	        	if (n<5) {
 	        	poll();
 				}else{
-					  var confirmflag = confirm("상대방을 찾을 수 없습니다. 나가시겠습니까?");
+					swal({
+						  title: "상대방을 찾을 수 없습니다.",
+						  text: " 나가시겠습니까?",
+						  icon: "warning",
+						  buttons: true,
+						  dangerMode: false,
+						})
+						.then(function(willDelete)  {
+						  if (willDelete) {
+							//확인 버튼 클릭 true 
+				        	   window.close();
+				        	   $.ajax({
+			        		        url: '/chatting/json/endRandomMatching',
+			        		        type: 'GET',
+			        		        dataType: 'text',
+			        		        success: function(JsonData) {
+			        		            console.log('success');
+			        		          //alert(JsonData);
+			        					
+			        		        }
+			        				
+			        		    });
+						  } else {
+							//취소 버튼 클릭 false
+					             setTimeout(function() { 
+					            	 if (n2<10000) {
+					            		 poll();
+									}else{
+										swal("상대방을 찾을 수 없습니다. 다음에 다시 이용해주세요!");
+
+									}
+					            	 
+					            	 console.log(n2); n2+3000; }, 10000)
+						  }
+						});
+					//=============================================================
+					 /*  var confirmflag = confirm("상대방을 찾을 수 없습니다. 나가시겠습니까?");
 
 			           if(confirmflag){
 
@@ -100,7 +134,7 @@
 			            	 
 			            	 console.log(n2); n2+3000; }, n2)
 			        	   
-			           }
+			           } */
 			
 				}console.log(n); n++; }, 3000)
 			
@@ -137,7 +171,11 @@
 	z-index: 99;
 	text-align: center;
 }
-
+/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
+	}
 
 </style>
 </head>
