@@ -51,4 +51,6 @@ public interface UserDao {
 	
 	public int getUserTotalCount(Search search) throws Exception;
 	
+	public List<String> getType() throws Exception;
+	
 }
