@@ -49,5 +49,7 @@ public interface UserService {
 	
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	
+	public List<String> getType() throws Exception;
+	
 	
 }
