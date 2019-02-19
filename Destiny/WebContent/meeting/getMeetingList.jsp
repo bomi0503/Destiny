@@ -406,9 +406,9 @@
 					  }
 					});
 			}else if('${sessionScope.me.userGrade }'=='NEW'){
-				alert("${sessionScope.me.nickName}님은 우연등급입니다.\n인연이상 회원부터 개설 하능합니다.");
+				swal("${sessionScope.me.nickName}님은 우연등급입니다.\n인연이상 회원부터 개설 하능합니다.");
 			}else{
-				alert("이용 불가합니다.");
+				swal("이용 불가합니다.");
 			}
 		});
 		 

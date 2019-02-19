@@ -1612,7 +1612,7 @@
 		
 		<jsp:include page="/meeting/modal.jsp" />
 		<!-- 모달창 디자인 부분 :: 가입하기 모달창 -->
-        <div id="dialog2" class="madal">
+        <div id="dialog2" class="madal" style="border-radius: 20px;">
         <form id="dialog2form" class="form-horizontal">
         <div>
         	<div name="meetingMasterId" value="${sessionScope.me.userId}" class="form-group col-sm-12 col-md-12" align="center">
@@ -1633,7 +1633,7 @@
 		 	 placeholder="내용을 입력해주세요" ></textarea>
 		 	</div>
 	        <div class="form-group col-sm-12 col-md-12" align="center">
-	         <a type="button" class="btn btn-success"  >확 &nbsp;인</a>
+	         <a type="button" class="btn btn-success" id="joinSubmit" >확 &nbsp;인</a>
 	         <a class="btn btn-primary btn cancelbtn" id="pushCancle2" role="button">취&nbsp;소</a>
 	         </div>
 	    </div>
