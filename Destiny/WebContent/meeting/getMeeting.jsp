@@ -441,6 +441,16 @@
 		font-size : 30px;
 	}
 	
+	#cute{
+		font-family: 'Cute Font', cursive;
+		font-size : 20px;
+	}
+	
+	#inCrew{
+		font-size: 30px;
+    	font-family: 'Nanum Pen Script', cursive;
+	}
+	
 	@media screen and (max-width:600px){	
 		#dialog, #dialog2, #nextDialog{
 		    left: calc( 5%);
@@ -1245,11 +1255,11 @@
 										//console.log("<img src='/resources/images/userprofile/"+crewArray[0]+"'width='100px' height='100px'>")
 										 
 											var display = "<div>"
-												display+="<h6 style='font-size:20px;'>[참여한 모임원]<h6><br/>";
+												display+="<h6 id='inCrew'> 참여한 모임원<h6><br/>";
 											for(i=0; i+1<=displayValue.length; i++){
-												display+="<div style='float:left;'>";
+												display+="<div style='float:left; text-align:center;'>";
 												display+="<img src='/resources/images/userprofile/"+displayValue[i].masterProfileImg+"' width='100px' height='100px'> <br/>";
-												display+="<span>"+displayValue[i].crewNickName+"</span><br/>";
+												display+="<span ><strong id='cute'>"+displayValue[i].crewNickName+"</strong></span><br/>";
 												display+="</div>"
 											}
 												display+="<button class='col-xm-12 col-sm-12' style='alin:center;' id='joinerConfirm' role='button'>확인</button>"
@@ -1680,7 +1690,7 @@
 		</div>
 		
 <!--=======================참여자 목록 모달창================-->
-		<div id="dialog3">
+		<div id="dialog3" style="border-radius: 20px;">
 			<div class="actCrewList">
 				<form id="dialog3From" class="form-horizontal">
 					
