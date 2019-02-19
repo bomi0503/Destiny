@@ -196,6 +196,7 @@
          }) */
       
    });   
+
 </script>
 <style>
 
@@ -207,9 +208,6 @@
    #example{
       font-family: 'Source Serif Pro', serif;
    }
-      #example a:hover{
-         /* color : #1c1c1c; */
-      }
    .modal-login .avatar img {
        width: 100%;
        margin-top: 5px;

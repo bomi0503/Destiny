@@ -4,7 +4,7 @@
 	    <!-- 모달창 디자인 부분 -->
         
         <!-- ///////////////////////   다음 모임 등록 모달창    //////////////////////////////////////////////// -->
-        <div id="nextDialog">
+        <div id="nextDialog" style="border-radius: 20px;">
         	<form id="nextDialogForm" class="form-horizontal">
 				 <div  id="dateOrDay" class="form-group col-sm-12 col-md-12" >
 		 			<input style="width: 100%;" id="nextDay" type="text" class="datepicker form-control" readonly="readonly" class="form-control" placeholder="모임날짜" name="meetingDate"/>

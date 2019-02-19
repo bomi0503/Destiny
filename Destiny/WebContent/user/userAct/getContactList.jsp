@@ -45,7 +45,8 @@
 	 $(function() {
 		 $( "button[id='writeStoryButton']" ).on("click" , function() {
 			 var userId = "${me.userId}";
-			 self.location = "/act/addStoryView/DAT";
+			 var communityNo = $(this).data("param");
+			 self.location = "/act/addStoryView/DAT/"+communityNo;
 		});
 	});	
 	
@@ -224,7 +225,7 @@
 							</c:if>
 		                    
 		                    <td>${chatting.chattingDate}</td>
-		                    <td><button class="writeStoryButton" id="writeStoryButton" type="button">府轰 累己</button></td>
+		                    <td><button class="writeStoryButton" id="writeStoryButton" type="button" data-param="${chatting.chattingNo}">府轰 累己</button></td>
 		                </tr>
 	            		
 	            	</c:forEach>
