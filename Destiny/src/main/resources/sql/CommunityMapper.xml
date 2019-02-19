@@ -540,12 +540,12 @@
 											</if>
 											<choose>
 												<when test="searchSortingOption == null">
-														ORDER BY community_no desc, import_rank desc
+														ORDER BY import_rank desc, community_no desc
 												</when>
 											</choose>
 											<choose>
 												<when test="searchSortingOption == 0">
-														ORDER BY community_no desc 
+														ORDER BY import_rank desc, community_no desc 
 												</when>
 											</choose>
 											<choose>
@@ -555,7 +555,7 @@
 											</choose>
 											<choose>
 												<when test="searchSortingOption == 2">
-														ORDER BY community_no desc, import_rank desc  
+														ORDER BY community_no desc  
 												</when>
 											</choose>
 											<choose>

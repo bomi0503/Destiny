@@ -156,16 +156,18 @@
 <style type="text/css" media="screen">
 #content {
 	position: absolute;
-	height: 200px; /* 퀵메뉴, 배너 이미지의 높이 */
 	width: 270px; /* 퀵메뉴, 배너 이미지의 너비*/
-	margin: 0px 0px 0px 700px;
 	/* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */
-	top: 10em; /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-	left: 50%; /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
+	top: 30em; /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
+	right : 50px; /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
 	text-align: left;
-	padding: 50px;
 	border: 1px solid #ff879b;
 	border-radius: 15px;
+	padding : 20px;
+}
+
+#questionButton{
+	margin-top : 10px;
 }
 
 .topImg {
@@ -322,13 +324,8 @@
 
 			<div id="content">
 				<div class="12u">
-					<input type="text" name="questionButton" id="question"> <a
-						class="button special 12u" href="#" id="questionButton">질문!</a>
-				</div>
-
-				<div class="bs-glyphicons">
-					<i class="fa fa-envelope-o" style="font-size: 36px"></i>
-					<span class="w3-badge">${notRead}</span>
+					<input type="text" name="questionButton" id="question">
+					<a class="button special 12u" href="#" id="questionButton">질문!</a>
 				</div>
 
 			</div>
