@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -293,6 +294,7 @@ public class ActController {
 		/* =================차트 Start========================= */
 		
 		//============================================가입한 회원들의 주요 관심사=============================================
+			
 		Map<String, Object> meetingCrewMap = meetingService.getCrew(meetingNo);
 		List<Meeting> meetingCrew = (List<Meeting>) meetingCrewMap.get("crewList");
 		
@@ -324,8 +326,9 @@ public class ActController {
 		int i = 0;
 		
 		for(String s : interestList) {
-			for(String ss: globalInterestList) {
+			for(String ss : globalInterestList) {
 				if(s.equals(ss)) {
+					System.out.println("the globalInterestList element : " + ss);
 					numOfInterest[i]++;
 				}
 			}
@@ -370,11 +373,11 @@ public class ActController {
 		int femaleNum = 0;
 		int maleNum = 0;
 		
-		int firstGeneration = 0;	//0~19
-		int secondGeneration = 0;	//20~39
-		int thirdGeneration = 0;	//40~59
-		int fourthGeneration = 0;	//60~79
-		int fifthGeneration = 0;	//80~99
+		int firstGeneration = 0;	//20~24
+		int secondGeneration = 0;	//25~29
+		int thirdGeneration = 0;	//30~34
+		int fourthGeneration = 0;	//35~39
+		int fifthGeneration = 0;	//40~
 		
 		int age = 0;
 		
@@ -396,15 +399,15 @@ public class ActController {
 			age = period.getYears() + 2;
 			System.out.println("이사람은 몇짤???" + age);
 			
-			if(0 < age && age <= 19) {
+			if(19 < age && age <= 24) {
 				firstGeneration++;
-			} else if(19 < age && age <= 39) {
+			} else if(24 < age && age <= 29) {
 				secondGeneration++;
-			} else if(39 < age && age <= 59) {
+			} else if(29 < age && age <= 34) {
 				thirdGeneration++;
-			} else if(59 < age && age <= 79) {
+			} else if(34 < age && age <= 39) {
 				fourthGeneration++;
-			} else if(79 < age && age <= 99) {
+			} else if(39 < age) {
 				fifthGeneration++;
 			}
 		}
@@ -565,26 +568,35 @@ public class ActController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addStoryView/{Category}", method=RequestMethod.GET)
-	public ModelAndView addStoryView(@PathVariable("Category") String Category) throws Exception{
+	@RequestMapping(value="addStoryView/{Category}/{MeetingNo}", method=RequestMethod.GET)
+	public ModelAndView addStoryView(@PathVariable("Category") String Category, @PathVariable("MeetingNo") String MeetingNo) throws Exception{
+		
+		System.out.println(":: Category : "+Category);
+	
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/user/userAct/addStory.jsp");
+		
+		if(Category.equals(""))
+		System.out.println(":: MeetingNo : "+MeetingNo );
+		modelAndView.addObject("MeetingNo", MeetingNo);
+		
 		modelAndView.addObject("Category", Category);
 		return modelAndView;
 	}
 	
 	/*addRestaurantInfo : start*/
-	@RequestMapping(value="addStory/{Category}", method=RequestMethod.POST)
-	public ModelAndView addStory(@ModelAttribute("community") Community community, HttpSession session, @PathVariable("Category") String Category, @RequestParam("uploadFile")MultipartFile fileName, MultipartHttpServletRequest mtfRequest, @ModelAttribute("upload")Upload upload) throws Exception{
+	@RequestMapping(value="addStory/{Category}/{MeetingNo}", method=RequestMethod.POST)
+	public ModelAndView addStory(@ModelAttribute("community") Community community, HttpSession session, @PathVariable("Category") String Category, @PathVariable("MeetingNo") String MeetingNo, @RequestParam("uploadFile")MultipartFile fileName, MultipartHttpServletRequest mtfRequest, @ModelAttribute("upload")Upload upload) throws Exception{
 		System.out.println(":: ActController/addStory/post : 실행");
 		
+		System.out.println(":::: MeetingNo : "+MeetingNo);
 		
 		if(fileName.getOriginalFilename() == "") {
 			System.out.println("이미지 없음");
 			upload.setFileName("basic.gif");
 		}else {
 			/*대표이미지 업로드 : start*/
-			String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
+			String path = "C:\\Users\\Bitcamp\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\uploadImg\\";
 			String name = System.currentTimeMillis()+"."+fileName.getOriginalFilename().split("\\.")[1];
 			
 			File file = new File(path + name);
@@ -605,6 +617,7 @@ public class ActController {
 		System.out.println("nickName : "+nickName);
 		System.out.println("userGrade : "+userGrade);
 		
+		community.setMeetingNo(Integer.parseInt(MeetingNo));
 		community.setWriterId(userId);
 		community.setCategory(Category);
 		community.setUserGrade(userGrade);
@@ -617,7 +630,7 @@ public class ActController {
 		System.out.println(":: ActController/addStory/post의 community : "+community);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		communityService.addCommunity(community);
+		communityService.addMetCommunity(community);
 		
 		System.out.println("community : "+community);
 		/*업로드 테이블 : start*/

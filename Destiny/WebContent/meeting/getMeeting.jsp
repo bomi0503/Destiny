@@ -14,6 +14,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54cfa5aea3e5609fcbb420ef8cd6ed4c&libraries=services"></script><!-- 다음지도 -->
 	<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script><!-- 카카오공유 -->
+	
+	<!--  템플릿 사용하기 위해 필요한 js -->
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 	<link rel="stylesheet" href="/resources/css/main.css" > <!-- 우연메인 -->
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -435,6 +441,16 @@
 		font-size : 30px;
 	}
 	
+	#cute{
+		font-family: 'Cute Font', cursive;
+		font-size : 20px;
+	}
+	
+	#inCrew{
+		font-size: 30px;
+    	font-family: 'Nanum Pen Script', cursive;
+	}
+	
 	@media screen and (max-width:600px){	
 		#dialog, #dialog2, #nextDialog{
 		    left: calc( 5%);
@@ -594,8 +610,8 @@
 			var hours = dt.getHours();
 			var minute = dt.getMinutes();
 			var time = (hours + ':' +minute);
-			var today = (year+'-0' +month + '-' + day+'-'+time);
-			var mitingTime = ('${meetingAct.meetingDate}'+'-'+'${meetingAct.meetingTime }');
+			var today = (year+'-0' +month + '-' + day);
+			var mitingTime = ('${meetingAct.meetingDate}');
 		
 			console.log("관심사"+interestName);
 			//console.log("센터미팅"+centerMeeting);
@@ -610,7 +626,7 @@
 			//console.log("시간"+meetingTime);
 			//console.log("장소"+meetingLocation);
 			console.log("오늘"+today);
-			alert("여기니???");
+			//alert("여기니???");
 			if(interestName == null || interestName.length<1){
 				swal("관심사를 선택해 주세요.");
 				return;
@@ -690,7 +706,7 @@
 			 var hours = dt.getHours();
 			 var minute = dt.getMinutes();
 			 var time = (hours + ':' +minute);
-			 var today = "2019-02-14-14:00";/* (year+'-0' +month + '-' + day+'-'+time); */
+			 var today = (year+'-0' +month + '-' + day+'-'+time);
 			 var mitingTime = ('${meetingAct.meetingDate}'+'-'+'${meetingAct.meetingTime }');
 			 /* ${meetingAct.meetingDate} ${meetingAct.meetingTime } */
 			 console.log(today);
@@ -1081,7 +1097,7 @@
 												
 													if(JSONData==2){
 														swal({title:meetingnickname+" 님이 모임장이되었습니다.",icon:"success"});
-														window.location.reload();
+														//window.location.reload();
 													}
 													
 												}
@@ -1237,14 +1253,17 @@
 										}
 										//console.log(crewArray);
 										//console.log("<img src='/resources/images/userprofile/"+crewArray[0]+"'width='100px' height='100px'>")
-										
-											var display = "<h6>"
+										 
+											var display = "<div>"
+												display+="<h6 id='inCrew'> 참여한 모임원<h6><br/>";
 											for(i=0; i+1<=displayValue.length; i++){
+												display+="<div style='float:left; text-align:center;'>";
 												display+="<img src='/resources/images/userprofile/"+displayValue[i].masterProfileImg+"' width='100px' height='100px'> <br/>";
-												display+=displayValue[i].crewNickName+"<br/>";
+												display+="<span ><strong id='cute'>"+displayValue[i].crewNickName+"</strong></span><br/>";
+												display+="</div>"
 											}
-												display+="<button id='joinerConfirm' role='button'>확인</button>"
-												display+="</h6>";
+												display+="<button class='col-xm-12 col-sm-12' style='alin:center;' id='joinerConfirm' role='button'>확인</button>"
+												display+="</div>";
 												
 										console.log(display);	
 										$( ".actCrewList" ).html(display);
@@ -1322,6 +1341,14 @@
 				$("#dialog3, #backround").toggle();
 			});
 		});
+		
+		function community(communityNo){
+			self.location="/meetingStory/getMeetingStory?communityNo="+communityNo
+		}communityList
+		
+		function communityList(){
+			self.location="/meetingStory/listMeetingStory"
+		}
 
 	</script>
 	
@@ -1444,15 +1471,15 @@
 		  
 		  <div class="col-md-12">
 		  
-		  	<div class="row"><br/>
-	  			<div class="col-xs-4 col-md-4"><strong>Who I'm</strong></div><hr/>
-				<div style="white-space:pre;" class="col-xs-8 col-md-8 neayong">${meeting.meetingDetail}</div>
-			</div>
+		  	
+	  			<div class="col-xs-12 col-md-12"><strong>Who I'm</strong></div><hr/>
+				<div style="white-space:pre;" class="col-xs-12 col-md-12 neayong">${meeting.meetingRule}</div>
+			
 			<hr/>
-			<div class="row">
-		  		<div class="col-xs-5 col-md-5 "><strong>Rule</strong></div><hr/>
-				<div style="white-space:pre;" class="col-xs-7 col-md-7 neayong">${meeting.meetingRule}</div>
-			</div>
+			
+		  		<div class="col-xs-12 col-md-12 "><strong>Rule</strong></div><hr/>
+				<div style="white-space:pre;" class="col-xs-12 col-md-12 neayong">${meeting.meetingDetail}</div>
+			
 			<hr/>
 		  </div>
 		 </div>
@@ -1478,6 +1505,7 @@
 				<p> 날짜 : ${meetingAct.meetingDate} ${meetingAct.meetingTime } </p>
 				<p> 장소 : ${meetingAct.meetingLocation} </p>
 				<p> 회비 : ${meetingAct.meetingDues} </p>
+				
 				</div>
 			
 				<div class="col-xs-4 col-md-4 ">
@@ -1550,9 +1578,41 @@
 			<button class="button" style="margin-bottom: 30px; width: 100%;">가입하기</button>
 		</div>
 		
+		<!-- 후기 보기  -->
+		<section id="linkmove" class="wrapper align-center" style="margin-top: 100px;">
+				
+				
+				<div class="inner col-xs-12 col-md-12">
+				<h2 style="margin-top: -80px;text-align: -webkit-auto;color: #fd5d7c;">모임 후기 </h2>
+					<div id="frogue-container" class="position-right-bottom"
+					      data-color="#555a9c"
+					      data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+					      data-init-key="value"
+					      ></div>
+					
+					<div class="flex secondSection">
+					<c:set var="i" value="0"/>
+				 	<c:forEach var="post" begin="0" end="2" step="1" items="${postList}">
+				 	<c:set var="i" value="${ i+1 }" />
+						<div class='move_meeting todayTogether' id="">
+							<span onclick="community(${post.communityNo})"><img style='width: 300px; height: 300px; border-radius:30px; margin-bottom: 10px;' src='/resources/images/uploadImg/${post.fileName}'></span>
+						</div>
+						
+					</c:forEach>
+					<c:if test="${empty postList}">
+						<span>등록된 후기가 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" onclick="communityList()" value="게시판 바로가기"></span>
+					</c:if>
+					
+					</div>
+					
+				</div>
+			</section>
+		<!-- 후기 완료  -->
+		
 		<jsp:include page="/meeting/modal.jsp" />
 		<!-- 모달창 디자인 부분 :: 가입하기 모달창 -->
-        <div id="dialog2" class="madal">
+        <div id="dialog2" class="madal" style="border-radius: 20px;">
         <form id="dialog2form" class="form-horizontal">
         <div>
         	<div name="meetingMasterId" value="${sessionScope.me.userId}" class="form-group col-sm-12 col-md-12" align="center">
@@ -1573,7 +1633,7 @@
 		 	 placeholder="내용을 입력해주세요" ></textarea>
 		 	</div>
 	        <div class="form-group col-sm-12 col-md-12" align="center">
-	         <a type="button" class="btn btn-success"  >확 &nbsp;인</a>
+	         <a type="button" class="btn btn-success" id="joinSubmit" >확 &nbsp;인</a>
 	         <a class="btn btn-primary btn cancelbtn" id="pushCancle2" role="button">취&nbsp;소</a>
 	         </div>
 	    </div>
@@ -1581,12 +1641,12 @@
         <!-- 모달창 디자인 부분  끝-->
         </div>
 
-		<div >
+		<div style="margin-top: 213px;">
 			<table>
 				
 				<tr>
 					<td>
-					모임멤버${crewCount}명
+					모임멤버${crewCount}명 / 정원 ${meeting.meetingCrewLimit}명
 					</td>
 				</tr>
 				
@@ -1599,19 +1659,19 @@
 					 			<div class="col-xs-12 col-sm-12 col-md-12">
 						 			<img src="/resources/images/userprofile/${crew.masterProfileImg}" style="height: 50px; margin-bottom: 6px;"  class="col-xs-4 col-sm-1 col-md-1 imgmen">
 									<c:if test="${me.nickName ne crew.crewNickName }">
-										<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+										<a href="#" class="dropdown-toggle thisName col-xs-2 col-sm-3 col-md-3" data-param="${crew.crewNickName}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
 											<span class="caret"></span>
 										</a>
 									</c:if>
 									<c:if test="${me.nickName eq crew.crewNickName }">
-										<div class="thisName col-xs-2 col-sm-4 col-md-4" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
+										<div class="thisName col-xs-2 col-sm-3 col-md-3" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
 											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
 											<span class="caret"></span>
 										</div>
 									</c:if>
-									<a class="col-xs-1 col-sm-4 col-md-4"></a>
-									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-5 col-sm-3 col-md-3">모임장</strong></span></c:if>
+									<span class="col-xs-1 col-sm-5 col-md-5">${crew.interviewTitle}</span>
+									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-3 col-sm-3 col-md-3">모임장</strong></span></c:if>
 									
 								
 								<ul class="dropdown-menu">
@@ -1630,19 +1690,18 @@
 		</div>
 		
 <!--=======================참여자 목록 모달창================-->
-		<div id="dialog3">
+		<div id="dialog3" style="border-radius: 20px;">
 			<div class="actCrewList">
 				<form id="dialog3From" class="form-horizontal">
-				
+					
 				</form>
 			</div>
 		</div>
 		
 	</div>
-	
-			<!-- footer -->
-		<jsp:include page="/layout/footer.jsp" />
-		<!-- //footer -->
+	<!-- footer -->
+	<jsp:include page="/layout/footer.jsp" />
+	<!-- //footer -->
 
 	<!-- ////////////////      탭하면 나오는 메뉴 시작             ////////////////////// -->
 

@@ -18,16 +18,8 @@ public interface ChattingDao {
 	
 	public List<Chatting> listContactMeeting(Chatting chatting) throws Exception;
 	
-	public String addVoice(String voiceFileName) throws Exception;
-	
-	public String addImage(String imageFileName) throws Exception;
-	
 	public void updateContactMeeting(Chatting chatting) throws Exception;
 	
 	public List<Telepathy> listTelepathy(int chattingNo) throws Exception;
-	
-	public String getTelepathyResult(Telepathy telepathy) throws Exception;
-
-	public int getTotalCount(Chatting chatting);
 	
 }

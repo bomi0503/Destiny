@@ -270,6 +270,14 @@
 	.fa{
 		line-height : 50px;
 	}
+	
+	#footer{
+		margin : 0 auto !important;
+		text-align : center !important;
+	}
+	.actions{
+		margin : 0 auto !important;
+	}
 </style>
 
 </head>

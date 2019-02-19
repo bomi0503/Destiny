@@ -45,7 +45,8 @@
 	 $(function() {
 		 $( "button[id='writeStoryButton']" ).on("click" , function() {
 			 var userId = "${me.userId}";
-			 self.location = "/act/addStoryView/DAT";
+			 var communityNo = $(this).data("param");
+			 self.location = "/act/addStoryView/DAT/"+communityNo;
 		});
 		 
 		 /* 내가 쓴 게시글 링크 */
@@ -255,7 +256,7 @@
 							</c:if>
 		                    
 		                    <td>${chatting.chattingDate}</td>
-		                    <td><button class="writeStoryButton" id="writeStoryButton" type="button">리뷰 작성</button></td>
+		                    <td><button class="writeStoryButton" id="writeStoryButton" type="button" data-param="${chatting.chattingNo}">리뷰 작성</button></td>
 		                </tr>
 	            		
 	            	</c:forEach>

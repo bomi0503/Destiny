@@ -33,6 +33,16 @@
 			SELECT seq_community_no.currval FROM dual
 		</selectKey>
 	</insert>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addMetCommunity" parameterType="com.destiny.service.domain.Community" >
+	 	INSERT
+		INTO community( community_no, community_writer_id, meeting_no, category, community_user_grade, community_title, community_writer_nick_name, community_detail, community_write_date,  community_views, community_like, import_rank, community_view_condition) 
+		VALUES( seq_community_no.nextval, #{writerId}, #{meetingNo}, #{category}, #{userGrade}, #{title}, #{writerNickName}, #{detail}, SYSDATE, #{views}, #{like}, #{importRank}, #{viewCondition})
+		<selectKey resultType="int" keyProperty="communityNo" order="AFTER">
+			SELECT seq_community_no.currval FROM dual
+		</selectKey>
+	</insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select id="getCommunity" parameterType="int" resultMap="communitySelectMap">
@@ -530,12 +540,12 @@
 											</if>
 											<choose>
 												<when test="searchSortingOption == null">
-														ORDER BY community_no desc, import_rank desc
+														ORDER BY import_rank desc, community_no desc
 												</when>
 											</choose>
 											<choose>
 												<when test="searchSortingOption == 0">
-														ORDER BY community_no desc 
+														ORDER BY import_rank desc, community_no desc 
 												</when>
 											</choose>
 											<choose>
@@ -545,7 +555,7 @@
 											</choose>
 											<choose>
 												<when test="searchSortingOption == 2">
-														ORDER BY community_no desc, import_rank desc  
+														ORDER BY community_no desc  
 												</when>
 											</choose>
 											<choose>

@@ -218,5 +218,15 @@ public class MeetingServiceImpl implements MeetingService {
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> getMeetingPost(int meetingNo) throws Exception {
+		List<Meeting> postList= meetingDao.getMeetingPost(meetingNo);
+		
+		
+		Map<String, Object> postMap = new HashMap<String, Object>();
+		postMap.put("postList", postList);
+		return postMap;
+	}
+
 	
 }

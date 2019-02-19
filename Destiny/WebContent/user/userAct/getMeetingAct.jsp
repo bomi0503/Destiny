@@ -46,7 +46,7 @@
 			
 			//==>리뷰 작성
 			$(".writeStoryButton").on("click", function(){
-				self.location = "/act/addStoryView/MET";
+				self.location = "/act/addStoryView/MET/"+$(this).data("param");
 			});
 			
 			//==> 해당모임 이동
@@ -311,7 +311,7 @@
 								var myChart = new Chart(ctx, {
 								    type: 'bar',
 								    data: {
-								        labels: ["0~19", "20~39", "40~59", "60~79", "80~99"],
+								        labels: ["20~24", "25~29", "30~34", "35~39", "40~"],
 								        datasets: [{
 								            label: '# of Votes',
 								            data: [${firstGeneration}, ${secondGeneration}, ${thirdGeneration}, ${fourthGeneration}, ${fifthGeneration}],
@@ -417,7 +417,7 @@
 		                    	<button type="button" data-toggle="modal" data-target="#${meeting.meetingNo}modal">보기</button>
 		                    </td>
 		                    <td>
-		                    	<button type="button" class="writeStoryButton" id="writeStoryButton">작성</button>
+		                    	<button type="button" class="writeStoryButton" id="writeStoryButton" data-param="${meeting.meetingNo}">작성</button>
 		                    </td>
 		                </tr>
 		                

@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
@@ -839,12 +841,13 @@ public class ChattingRestController {
 	}
 
 	@RequestMapping(value = "json/imageUpload", method = RequestMethod.POST)
-	public Map<String, Object> imageUpload(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	public Map<String, Object> imageUpload(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest multipartHttpServletRequest, HttpServletResponse response) throws Exception {
 		System.out.println("json/imageUpload 들어옴");
 		 Chatting chatting= (Chatting)session.getAttribute("chatting");
          User user=(User)session.getAttribute("me");
 	
-	
+         response.setContentType("text/html;charset=utf-8");
+ 		PrintWriter out = response.getWriter();
 		
     String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
@@ -877,29 +880,33 @@ public class ChattingRestController {
           count++;
           try {
               mFile.transferTo(new File(path,fileName));
-             
+              out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
+      		
           } catch (Exception e) {
               e.printStackTrace();
           }finally {
           this.file = fileName;
-          
+          out.close();
        }
       }
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("fileName", file);
       System.out.println(file);
       map.put("userId", user.getUserId());
+      map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
       
       return map;
 	}
 	
 	@RequestMapping(value = "json/voiceUpload", method = RequestMethod.POST)
-	public Map<String, Object> voiceUpload(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	public Map<String, Object> voiceUpload(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest multipartHttpServletRequest, HttpServletResponse response) throws Exception {
 		System.out.println("json/imageUpload 들어옴");
 		 Chatting chatting= (Chatting)session.getAttribute("chatting");
          User user=(User)session.getAttribute("me");
 	
-	
+
+         response.setContentType("text/html;charset=utf-8");
+ 		PrintWriter out = response.getWriter();
 		
     String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
@@ -922,33 +929,30 @@ public class ChattingRestController {
           System.out.println("실제 파일 이름 : " +fileName);
           System.out.println("변경할 파일 이름 : "+chattingFile);
          
-          if (fileName!=null) {
-        	  String splitFileName=fileName.split("\\.")[0];
-              
-              System.out.println("splitFileName[0] : "+splitFileName);
-              String extension=fileName.split("\\.")[1];
-             // splitFileName[0]=chattingFile;
-             fileName=chattingFile+"."+extension;
-              System.out.println("변경된 파일 이름 : "+fileName);
-              count++;
-              try {
-                  mFile.transferTo(new File(path,fileName));
-                 
-              } catch (Exception e) {
-                  e.printStackTrace();
-              }finally {
-              this.file = fileName;
-              
-           }
-		}else {
-			this.file=null;
-		}
+          String splitFileName=fileName.split("\\.")[0];
           
+          System.out.println("splitFileName[0] : "+splitFileName);
+          String extension=fileName.split("\\.")[1];
+         // splitFileName[0]=chattingFile;
+         fileName=chattingFile+"."+extension;
+          System.out.println("변경된 파일 이름 : "+fileName);
+          count++;
+          try {
+              mFile.transferTo(new File(path,fileName));
+              out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
+      		
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally {
+          this.file = fileName;
+          out.close();
+       }
       }
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("fileName", file);
       System.out.println(file);
       map.put("userId", user.getUserId());
+      map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
       
       return map;
 	}
