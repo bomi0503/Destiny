@@ -52,7 +52,7 @@ public class LetterRestController {
 		@RequestMapping( value="letterRest/sendLetter", method=RequestMethod.POST)
 		public int sendLetter(@RequestBody Letter letter, HttpSession session, Model model) throws Exception{
 			
-			System.out.println("/userRest/sendLetter : POST");
+			System.out.println("/letterRest/sendLetter : POST");
 			System.out.println("찍어보자 레터 : "+letter);
 			int result = 0;
 			if(userService.getUser(letter.getReceiverId()) == null) {
@@ -63,6 +63,7 @@ public class LetterRestController {
 				User senderUser = (User) session.getAttribute("me");
 				
 				letter.setSenderId(senderUser.getUserId());
+				letter.setReceiverId((userService.getUserByNickName(letter.getReceiverId())).getUserId());
 				
 				//=================================user별 letter meta-data생성============================================
 				String letterMetaDataTitle = letter.getLetterTitle()+System.currentTimeMillis();

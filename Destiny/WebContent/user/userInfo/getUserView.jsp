@@ -320,7 +320,7 @@
 
 		<div class="inner">
 
-			<div id="content">
+			<!-- <div id="content">
 				<div class="12u">
 					<input type="text" name="questionButton" id="question"> <a
 						class="button special 12u" href="#" id="questionButton">Áú¹®!</a>
@@ -331,7 +331,7 @@
 					<span class="w3-badge">${notRead}</span>
 				</div>
 
-			</div>
+			</div>  -->
 
 
 			<div class="box alt">

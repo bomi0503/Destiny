@@ -26,7 +26,6 @@
 	
 	<!--  ///////////////////////// 데이트픽커 ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
@@ -170,8 +169,18 @@
 				swal("모임장소를 입력하여 주세요.");
 				return;
 			}
-
-			if (confirm("모임을 등록하시겠습니까?") == true) { //확인
+			swal({title:"모임을 등록하시겠습니까?",icon:"info",buttons:{cancel:"취소",confirm:"확인",}})
+			.then(function(value){
+				console.log(value==true);
+				if(value==true){
+					$("form").attr("method", "POST").attr("enctype",
+					"multipart/form-data")
+					.attr("action", "/meeting/addMeeting").submit();
+				}else{
+					return;
+				}
+			});
+			/* if (confirm("모임을 등록하시겠습니까?") == true) { //확인
 
 				$("form").attr("method", "POST").attr("enctype",
 						"multipart/form-data")
@@ -183,7 +192,7 @@
 
 				return;
 
-			}
+			} */
 			//alert("모임이 등록되었습니다.");
 		}
 		 
@@ -550,7 +559,7 @@
 							<th>모임설명</th>
 							<td colspan="3">
 								<textarea class="form-control" cols="100" rows="3"
-								name="meetingRule" placeholder="모임에 규칙이 있나요? 있다면 간략히 적어주세요"></textarea>
+								name="meetingRule" placeholder="어떤 모임인지 설명해주세요"></textarea>
 							</td>
 						</tr>
 						
@@ -558,7 +567,7 @@
 							<th>모임규칙</th>
 							<td colspan="3">
 								<textarea class="form-control" cols="100" rows="3"
-								name="meetingDetail" placeholder="어떤 모임인지 설명해주세요"></textarea>
+								name="meetingDetail" placeholder="모임에 규칙이 있나요? 있다면 간략히 적어주세요"></textarea>
 							</td>
 						</tr>
 						

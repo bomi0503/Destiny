@@ -441,6 +441,16 @@
 		font-size : 30px;
 	}
 	
+	#cute{
+		font-family: 'Cute Font', cursive;
+		font-size : 20px;
+	}
+	
+	#inCrew{
+		font-size: 30px;
+    	font-family: 'Nanum Pen Script', cursive;
+	}
+	
 	@media screen and (max-width:600px){	
 		#dialog, #dialog2, #nextDialog{
 		    left: calc( 5%);
@@ -600,8 +610,8 @@
 			var hours = dt.getHours();
 			var minute = dt.getMinutes();
 			var time = (hours + ':' +minute);
-			var today = (year+'-0' +month + '-' + day+'-'+time);
-			var mitingTime = ('${meetingAct.meetingDate}'+'-'+'${meetingAct.meetingTime }');
+			var today = (year+'-0' +month + '-' + day);
+			var mitingTime = ('${meetingAct.meetingDate}');
 		
 			console.log("관심사"+interestName);
 			//console.log("센터미팅"+centerMeeting);
@@ -616,7 +626,7 @@
 			//console.log("시간"+meetingTime);
 			//console.log("장소"+meetingLocation);
 			console.log("오늘"+today);
-			alert("여기니???");
+			//alert("여기니???");
 			if(interestName == null || interestName.length<1){
 				swal("관심사를 선택해 주세요.");
 				return;
@@ -1087,7 +1097,7 @@
 												
 													if(JSONData==2){
 														swal({title:meetingnickname+" 님이 모임장이되었습니다.",icon:"success"});
-														window.location.reload();
+														//window.location.reload();
 													}
 													
 												}
@@ -1243,14 +1253,17 @@
 										}
 										//console.log(crewArray);
 										//console.log("<img src='/resources/images/userprofile/"+crewArray[0]+"'width='100px' height='100px'>")
-										
-											var display = "<h6>"
+										 
+											var display = "<div>"
+												display+="<h6 id='inCrew'> 참여한 모임원<h6><br/>";
 											for(i=0; i+1<=displayValue.length; i++){
+												display+="<div style='float:left; text-align:center;'>";
 												display+="<img src='/resources/images/userprofile/"+displayValue[i].masterProfileImg+"' width='100px' height='100px'> <br/>";
-												display+=displayValue[i].crewNickName+"<br/>";
+												display+="<span ><strong id='cute'>"+displayValue[i].crewNickName+"</strong></span><br/>";
+												display+="</div>"
 											}
-												display+="<button id='joinerConfirm' role='button'>확인</button>"
-												display+="</h6>";
+												display+="<button class='col-xm-12 col-sm-12' style='alin:center;' id='joinerConfirm' role='button'>확인</button>"
+												display+="</div>";
 												
 										console.log(display);	
 										$( ".actCrewList" ).html(display);
@@ -1331,6 +1344,10 @@
 		
 		function community(communityNo){
 			self.location="/meetingStory/getMeetingStory?communityNo="+communityNo
+		}communityList
+		
+		function communityList(){
+			self.location="/meetingStory/listMeetingStory"
 		}
 
 	</script>
@@ -1454,15 +1471,15 @@
 		  
 		  <div class="col-md-12">
 		  
-		  	<div class="row"><br/>
-	  			<div class="col-xs-4 col-md-4"><strong>Who I'm</strong></div><hr/>
-				<div style="white-space:pre;" class="col-xs-8 col-md-8 neayong">${meeting.meetingDetail}</div>
-			</div>
+		  	
+	  			<div class="col-xs-12 col-md-12"><strong>Who I'm</strong></div><hr/>
+				<div style="white-space:pre;" class="col-xs-12 col-md-12 neayong">${meeting.meetingRule}</div>
+			
 			<hr/>
-			<div class="row">
-		  		<div class="col-xs-5 col-md-5 "><strong>Rule</strong></div><hr/>
-				<div style="white-space:pre;" class="col-xs-7 col-md-7 neayong">${meeting.meetingRule}</div>
-			</div>
+			
+		  		<div class="col-xs-12 col-md-12 "><strong>Rule</strong></div><hr/>
+				<div style="white-space:pre;" class="col-xs-12 col-md-12 neayong">${meeting.meetingDetail}</div>
+			
 			<hr/>
 		  </div>
 		 </div>
@@ -1583,9 +1600,9 @@
 						</div>
 						
 					</c:forEach>
-					<%-- <c:if test="${empty hotlist}">
-						<span>등록된 후기가 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" value="게시판 바로가기"></span>
-					</c:if> --%>
+					<c:if test="${empty postList}">
+						<span>등록된 후기가 없습니다.<input style="margin-left: 2%;" type="button" class="addMeeting" onclick="communityList()" value="게시판 바로가기"></span>
+					</c:if>
 					
 					</div>
 					
@@ -1595,7 +1612,7 @@
 		
 		<jsp:include page="/meeting/modal.jsp" />
 		<!-- 모달창 디자인 부분 :: 가입하기 모달창 -->
-        <div id="dialog2" class="madal">
+        <div id="dialog2" class="madal" style="border-radius: 20px;">
         <form id="dialog2form" class="form-horizontal">
         <div>
         	<div name="meetingMasterId" value="${sessionScope.me.userId}" class="form-group col-sm-12 col-md-12" align="center">
@@ -1616,7 +1633,7 @@
 		 	 placeholder="내용을 입력해주세요" ></textarea>
 		 	</div>
 	        <div class="form-group col-sm-12 col-md-12" align="center">
-	         <a type="button" class="btn btn-success"  >확 &nbsp;인</a>
+	         <a type="button" class="btn btn-success" id="joinSubmit" >확 &nbsp;인</a>
 	         <a class="btn btn-primary btn cancelbtn" id="pushCancle2" role="button">취&nbsp;소</a>
 	         </div>
 	    </div>
@@ -1648,12 +1665,12 @@
 										</a>
 									</c:if>
 									<c:if test="${me.nickName eq crew.crewNickName }">
-										<div class="thisName col-xs-2 col-sm-6 col-md-6" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
+										<div class="thisName col-xs-2 col-sm-3 col-md-3" data-param="${crew.crewNickName}" role="button" aria-haspopup="true" aria-expanded="false"> 
 											<span id="masterNick" data-param="${crew.crewNickName}">${crew.crewNickName}</span>
 											<span class="caret"></span>
 										</div>
 									</c:if>
-									<span class="col-xs-1 col-sm-2 col-md-2">${crew.interviewTitle}</span>
+									<span class="col-xs-1 col-sm-5 col-md-5">${crew.interviewTitle}</span>
 									<c:if test="${crew.role=='MST' }"><span><strong class="col-xs-3 col-sm-3 col-md-3">모임장</strong></span></c:if>
 									
 								
@@ -1673,19 +1690,18 @@
 		</div>
 		
 <!--=======================참여자 목록 모달창================-->
-		<div id="dialog3">
+		<div id="dialog3" style="border-radius: 20px;">
 			<div class="actCrewList">
 				<form id="dialog3From" class="form-horizontal">
-				
+					
 				</form>
 			</div>
 		</div>
 		
 	</div>
-	
-			<!-- footer -->
-		<jsp:include page="/layout/footer.jsp" />
-		<!-- //footer -->
+	<!-- footer -->
+	<jsp:include page="/layout/footer.jsp" />
+	<!-- //footer -->
 
 	<!-- ////////////////      탭하면 나오는 메뉴 시작             ////////////////////// -->
 

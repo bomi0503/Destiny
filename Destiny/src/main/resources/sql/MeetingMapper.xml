@@ -153,7 +153,7 @@
       from meeting_crew_list cl, users u
       where u.user_id= cl.crew_id
       and cl.crew_condition = 'YES'
-      and cl.meeting_no= 10001
+      and cl.meeting_no= #{meetingNo}
       order by cl.role desc
     </select>
     
@@ -170,7 +170,7 @@
     <update   id="updateContentsMeeting"   parameterType="com.destiny.service.domain.Meeting" >
          UPDATE meeting
          <set>
-            meeting_center      =#{meetingCenter:VARCHAR}, 
+         meeting_center      =#{meetingCenter:VARCHAR}, 
          meeting_name      =#{meetingName:VARCHAR}, 
          title_img         =#{titleImg:VARCHAR}, 
          meeting_detail      =#{meetingDetail:VARCHAR}, 
