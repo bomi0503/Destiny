@@ -141,17 +141,17 @@
 				<li>신고함 관리</li>
 			</ul>
 			<!-- 페이지 내부 네비게이션 경로 : end -->
-		
-			<!-- <div class="col-md-5"> -->
-			<div class="6u$">
-		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-		    	</p>
-		    </div>
+			<form>
+				<div class="6u$">
+			    	<p class="text-primary">
+			    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+			    	</p>
+			    	<input type="hidden" id="currentPage" name="currentPage" value="">
+			    </div>
+		    </form>
 		    <!-- <hr class="major"> -->
 			
 			<!-- form Start /////////////////////////////////////-->
-			<form class="form-horizontal">
 
 				<div>
 					<!-- <table class="row-table"> -->
@@ -221,7 +221,11 @@
 						</tbody>
 					</table>
 				</div>
-			</form>
+			
+		<!-- PageNavigation : start -->
+		<jsp:include page="/common/pageNavigator.jsp" />
+		<!-- PageNavigation : end -->
+		
 		</div>
 	</section>
 	<!-- //contents -->

@@ -150,10 +150,10 @@
 		font-weight : lighter;
 	}
 	.wrap {
-    max-width: 1440px;
-    margin-top: 400px;
-}
-	
+	    max-width: 1440px;
+	    margin-top: 400px;
+	}
+		
 	li{
 		list-style-type : none;
 	}

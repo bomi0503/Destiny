@@ -172,9 +172,11 @@ public class ActController {
 			}
 		}
 		String reason = "";
-		if(request.getAttribute("judgmentApplyReason") != null) {
+		if(request.getAttribute("judgmentApplyReason") != null ) {
 			reason = (String) request.getAttribute("judgmentApplyReason");
 			request.removeAttribute("judgmentApplyReason");
+		}else if(limit == listYES.size()+1) {
+			reason = "모집 인원이 마감되었습니다.";
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();

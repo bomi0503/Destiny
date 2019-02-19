@@ -47,6 +47,31 @@
 			 var userId = "${me.userId}";
 			 self.location = "/act/addStoryView/DAT";
 		});
+		 
+		 /* 내가 쓴 게시글 링크 */
+			$(".writeCommunity").on("click",function(){
+				self.location = "/act/getWriteCommunityList/${me.userId}";
+			});
+			
+			/* 내가 쓴 댓글 링크 */
+			$(".writeComment").on("click",function(){
+				self.location = "/act/getCommentListByWriter/${me.userId}";
+			});
+			
+			/* 개설한 모임 링크 */
+			$(".openMeeting").on("click",function(){
+				self.location = "/act/getOpenMeetingList/${me.userId}";
+			});
+			
+			/* 가입한 모임 링크 */
+			$(".joinMeeting").on("click",function(){
+				self.location = "/act/getJoinMeetingList/${me.userId}";
+			});
+			
+			/* 성사된 만남 링크 */
+			$(".contact").on("click",function(){
+				self.location = "/act/getContactList/${me.userId}";
+			});
 	});	
 	
 </script>
@@ -128,6 +153,7 @@
 	}
 	
 	/* table sytle 추가 */
+	a{color: #fd5d7c;}
 	.wrap{max-width:1440px; margin-top: 400px;}
 	table{border-collapse:collapse; table-layout:fixed; margin-top:20px;}
 	.table-type01{width:100%;}
@@ -177,6 +203,11 @@
 					<input type="hidden" id="currentPage" name="currentPage" value="">
 				</div>
 			</form>
+			
+			<div class="12u" style="clear:both;">
+				<a href="#" class="writeCommunity" >작성한 게시글</a> &nbsp; | &nbsp; <a href="#" class="writeComment">작성한 댓글</a>&nbsp; | &nbsp; <a href="#" class="openMeeting">개설한 모임</a>&nbsp; | &nbsp; <a href="#" class="joinMeeting">가입한 모임</a>&nbsp; | &nbsp; <a href="#" class="contact">성사된 만남</a>
+			</div>
+			<hr/>
 			
 			<div class="12u" style="clear:both;"> 전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</div>
 			

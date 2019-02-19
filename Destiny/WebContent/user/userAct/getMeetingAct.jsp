@@ -399,7 +399,7 @@
 	            
 	            	<c:if test="${list[0] == null}">
 	            		<tr>
-	            			<td colspan="5"> 참여한 모임 회차가 없습니다. </td>
+	            			<td colspan="6"> 참여한 모임 회차가 없습니다. </td>
 	            		</tr>
 	           		</c:if>
 	           		

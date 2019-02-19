@@ -57,6 +57,31 @@
 			 
 		});
 		
+		/* 내가 쓴 게시글 링크 */
+		$(".writeCommunity").on("click",function(){
+			self.location = "/act/getWriteCommunityList/${me.userId}";
+		});
+		
+		/* 내가 쓴 댓글 링크 */
+		$(".writeComment").on("click",function(){
+			self.location = "/act/getCommentListByWriter/${me.userId}";
+		});
+		
+		/* 개설한 모임 링크 */
+		$(".openMeeting").on("click",function(){
+			self.location = "/act/getOpenMeetingList/${me.userId}";
+		});
+		
+		/* 가입한 모임 링크 */
+		$(".joinMeeting").on("click",function(){
+			self.location = "/act/getJoinMeetingList/${me.userId}";
+		});
+		
+		/* 성사된 만남 링크 */
+		$(".contact").on("click",function(){
+			self.location = "/act/getContactList/${me.userId}";
+		});
+		
 	});	
 	
 	
@@ -139,6 +164,7 @@
 		/* padding-top : 5em; */
 	}
 	
+	a{color: #fd5d7c;}
 	.getCommunityLink{cursor:pointer;}
 	/* table sytle 추가 */
 	.wrap{max-width:1440px; margin-top: 400px;}
@@ -188,6 +214,11 @@
 			  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			</form>
+			
+			<div class="12u" style="clear:both;">
+				<a href="#" class="writeCommunity" >작성한 게시글</a> &nbsp; | &nbsp; <a href="#" class="writeComment">작성한 댓글</a>&nbsp; | &nbsp; <a href="#" class="openMeeting">개설한 모임</a>&nbsp; | &nbsp; <a href="#" class="joinMeeting">가입한 모임</a>&nbsp; | &nbsp; <a href="#" class="contact">성사된 만남</a>
+			</div>
+			<hr/>
 			
 			<div class="12u" style="clear:both;"> 전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</div>
 			

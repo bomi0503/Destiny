@@ -9,16 +9,21 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우연</title>
 <!-- All CSS Insert -->
-<link rel="stylesheet" href="/resources/css/main.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="/resources/css/main.css" > 
+
 <!-- //All CSS Insert -->
 
 <!-- All js -->
-<script src="/resources/javascript/jquery.min.js"></script>
-<script src="/resources/javascript/skel.min.js"></script>
-<script src="/resources/javascript/util.js"></script>
-<script src="/resources/javascript/main.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 <script type="text/javascript">
 	$(function() {
 		
@@ -152,7 +157,7 @@
 			top : 0;
 			background-image : url("/resources/images/background/complainbg.jpg");
 			background-repeat : no-repeat;
-			background-position : center -280px;
+			background-position : center center;
 			background-size : cover;
 			width : 100%;
 			height : 400px;
@@ -167,24 +172,24 @@
 			width : 100%;
 			height : 400px;
 		}
-		
 		.topImg h1{
-			position : absolute;
-			line-height : 450px;
-			width : 100%;
-			text-align : center;
-			color : white;
-			z-index : 99;
-			font-size : 60px;
+		    position: absolute;
+		    line-height: 330px;
+		    width: 100%;
+		    text-align: center;
+		    color: white;
+		    z-index: 99;
+		    font-size: 60px;	
 		}
 		
 		h1 .slim{
 			font-weight : lighter;
 		}
-		.wrap{
-			margin-top : 400px;
+		.wrap {
+		    max-width: 1440px;
+		    margin-top: 400px;
 		}
-		
+			
 		li{
 			list-style-type : none;
 		}
@@ -192,7 +197,7 @@
 		.smallNavi{
 			overflow : hidden;
 			float : right;
-			margin-top : -30px;
+			margin-top : -80px;
 			margin-bottom : 60px;
 		}
 		
@@ -206,8 +211,15 @@
 			margin-top : -2px;
 		}
 		
-		section.wrapper, article.wrapper {
-	    	padding: 500px 0;
+		.form-control { -webkit-appearance: menulist;}
+		/* sweetalert buttom design^^ */
+		.swal-button{
+			padding : 0 56px;
+			color : rgba(0,0,0,.65) !important;
+		}
+		
+		.form{
+			width: 80%; margin:0 auto;
 		}
 	
 	</style>
@@ -228,137 +240,149 @@
 
 	<!-- contents -->
 	
-	<section id="main" class="wrapper">
-		<div class="inner">
+	<div class="container">
+	
+		<div class="wrap">
+		
+			<!-- 페이지 내부 네비게이션 경로 : start -->
+			<ul class="smallNavi">
+				<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
+				<li>></li>
+				<li>신고함관리</li>
+			</ul>
+			<!-- 페이지 내부 네비게이션 경로 : end -->
 			
-			<form class="form-horizontal">
-				<div>
-					<table class="row-table">
-						<caption>테이블 설명</caption>
-						
-							<colgroup>
-								<col style="width:20%;">
-								<col style="width:30%;">
-								<col style="width:20%;">
-								<col style="width:30%;">
-							</colgroup>
-						
-						<thead class="hide">
-							<tr>
-								<th>구분</th>
-								<td>내용</td>
-							</tr>
-						</thead>
-						
-						<tbody>
-							<c:if test="${complain.complainState=='N'}">
+			
+			<div class="form" style="clear:both;">
+				<form class="form-horizontal">
+					<div>
+						<table class="row-table">
+							<caption>테이블 설명</caption>
+							
+								<colgroup>
+									<col style="width:20%;">
+									<col style="width:30%;">
+									<col style="width:20%;">
+									<col style="width:30%;">
+								</colgroup>
+							
+							<thead class="hide">
+								<tr>
+									<th>구분</th>
+									<td>내용</td>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<c:if test="${complain.complainState=='N'}">
+									<tr>
+										<th>신고처리상태</th>
+										<td colspan="3">
+											<div class="6u$ 12u$(small)" name="complainState" id="complainState">
+											 	${complain.complainState=='N' ? "대기중":"처리 완료"}
+											 </div>
+										</td>
+									</tr>
+								</c:if>
+								
+								<c:if test="${complain.complainState=='Y'}">
 								<tr>
 									<th>신고처리상태</th>
-									<td colspan="3">
-										<div class="6u$ 12u$(small)" name="complainState" id="complainState">
-										 	${complain.complainState=='N' ? "신고처리 대기중":"신고처리 완료"}
+									<td>
+										<div class="4u$ 12u$(small)" name="complainState" id="complainState">
+										 	${complain.complainState=='N' ? "대기중":"처리 완료"}
 										 </div>
 									</td>
+										<th>신고</th>
+										<div class="4u$ 12u$(small)" name="complainCondition" id="complainCondition">
+												<c:if test="${complain.complainCondition=='NOT'}"><td>무고</td></c:if>
+												<c:if test="${complain.complainCondition=='WAR'}"><td>경고</td></c:if>
+												<c:if test="${complain.complainCondition=='BLK'}"><td>블랙리스트</td></c:if>
+										 </div>
 								</tr>
-							</c:if>
-							
-							<c:if test="${complain.complainState=='Y'}">
-							<tr>
-								<th>신고처리상태</th>
-								<td>
-									<div class="4u$ 12u$(small)" name="complainState" id="complainState">
-									 	${complain.complainState=='N' ? "신고처리 대기중":"신고처리 완료"}
-									 </div>
-								</td>
-									<th>신고</th>
-									<div class="4u$ 12u$(small)" name="complainCondition" id="complainCondition">
-											<c:if test="${complain.complainCondition=='NOT'}"><td>무고</td></c:if>
-											<c:if test="${complain.complainCondition=='WAR'}"><td>경고</td></c:if>
-											<c:if test="${complain.complainCondition=='BLK'}"><td>블랙리스트</td></c:if>
-									 </div>
-							</tr>
-							</c:if>
-							
-							<tr>
-								<th>신고자</th>
-								<td>
-									<div class="6u$ 12u$(small)"  name="complainType"> ${complain.complainerId} ( 경고 ${user.warningCount}회 )</div>
-								</td>
+								</c:if>
 								
-								<th>작성자</th>
-								<td colspan="3">
-									<div class="6u$ 12u$(small)"  name="complainType" id="complainType"> ${complain.defendantId} ( 경고 ${user.warningCount}회 )</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<th>신고날짜</th>
-								<td colspan="3">
-									<div class="6u$ 12u$(small)" name="complainDate"> ${complain.complainDate}  </div>
-								</td>
-							</tr>
-							
-							<tr>
-								<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
-								<c:if test="${complain.complainKind == 'BD'}">
-							  		<th>제목</th>
+								<tr>
+									<th>신고자</th>
+									<td>
+										<div class="6u$ 12u$(small)"  name="complainType"> ${complain.complainerId}</div>
+									</td>
+									
+									<th>작성자</th>
+									<td colspan="3">
+										<div class="6u$ 12u$(small)"  name="complainType" id="complainType"> ${complain.defendantId}</div>
+										<div class="6u$ 12u$(small)"  name="complainType" id="complainType">&nbsp;&nbsp;&nbsp; ( 경고 ${user.warningCount}회  )</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<th>신고날짜</th>
+									<td colspan="3">
+										<div class="6u$ 12u$(small)" name="complainDate"> ${complain.complainDate}  </div>
+									</td>
+								</tr>
+								
+								<tr>
+									<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
+									<c:if test="${complain.complainKind == 'BD'}">
+								  		<th>제목</th>
+								  		<td colspan="3">
+									  		<div class="6u$ 12u$(small)" name="complainDetail" data-param="${complain.communityNo}" > 
+									  			<a href="/info/getRestaurantInfo?communityNo=${complain.communityNo}" target=“_blank”>${complain.complainDetail}</a>
+									  		</div>
+								  		</td>
+									</c:if>
+									<c:if test="${complain.complainKind == 'MT'}">
+								  		<th>모임이름</th>
+								  		<td colspan="3">
+									  		<div class="6u$ 12u$(small) getComplainLink" name="complainDetail" data-param="${complain.meetingNo}">
+									  		 	<a href="/meeting/getMeeting?meetingNo=${complain.meetingNo}" target=“_blank”>${complain.complainDetail}</a>
+									  		</div>
+								  		</td>
+									</c:if>
+								</tr>
+								
+								<tr>
+									<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
+							  		<th>신고사유</th>
 							  		<td colspan="3">
-								  		<div class="6u$ 12u$(small)" name="complainDetail" data-param="${complain.communityNo}" > 
-								  			<a href="/info/getRestaurantInfo?communityNo=${complain.communityNo}" target=“_blank”>${complain.complainDetail}</a>
-								  		</div>
-							  		</td>
-								</c:if>
-								<c:if test="${complain.complainKind == 'MT'}">
-							  		<th>모임이름</th>
+										<div class="6u$ 12u$(small)">
+											<c:if test="${complain.complainType == 'FKU'}"> 욕설/비방 </c:if>
+											<c:if test="${complain.complainType == 'SEX'}"> 음란 </c:if>
+											<c:if test="${complain.complainType == 'ADV'}"> 스팸/광고 </c:if>
+											<c:if test="${complain.complainType == 'ETC'}"> 기타 </c:if>
+										</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
+							  		<th>신고내용</th>
 							  		<td colspan="3">
-								  		<div class="6u$ 12u$(small) getComplainLink" name="complainDetail" data-param="${complain.meetingNo}">
-								  		 	<a href="/meeting/getMeeting?meetingNo=${complain.meetingNo}" target=“_blank”>${complain.complainDetail}</a>
-								  		</div>
-							  		</td>
+										<div class="6u$ 12u$(small)">${complain.complainText}</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<div class="doComplain"></div>
+						
+						<ul class="actions align-center">
+							<div class="form-group text-center">
+								<c:if test="${complain.complainState=='N'}">
+									<li><a href="#" class="button" id="okBtn">확인</a></li>
+									<li><a href="#" class="button" id="doComplainBtn">신고처리</a></li>
 								</c:if>
-							</tr>
-							
-							<tr>
-								<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
-						  		<th>신고사유</th>
-						  		<td colspan="3">
-									<div class="6u$ 12u$(small)">
-										<c:if test="${complain.complainType == 'FKU'}"> 욕설/비방 </c:if>
-										<c:if test="${complain.complainType == 'SEX'}"> 음란 </c:if>
-										<c:if test="${complain.complainType == 'ADV'}"> 스팸/광고 </c:if>
-										<c:if test="${complain.complainType == 'ETC'}"> 기타 </c:if>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<%-- 게시글:제목 / 댓글:내용 / 모임:모임명 --%>
-						  		<th>신고내용</th>
-						  		<td colspan="3">
-									<div class="6u$ 12u$(small)">${complain.complainText}</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<div class="doComplain"></div>
-					
-					<ul class="actions align-center">
-						<div class="form-group text-center">
-							<c:if test="${complain.complainState=='N'}">
-								<li><a href="#" class="button" id="okBtn">확인</a></li>
-								<li><a href="#" class="button" id="doComplainBtn">신고처리</a></li>
-							</c:if>
-							<c:if test="${complain.complainState=='Y'}">
-								<li><a href="#" class="button" id="okBtn">확인</a></li>
-							</c:if>
-						</div>
-					</ul>
-				</div>
-			</form>
-			
+								<c:if test="${complain.complainState=='Y'}">
+									<li><a href="#" class="button" id="okBtn">확인</a></li>
+								</c:if>
+							</div>
+						</ul>
+					</div>
+				</form>
+			</div>
 		</div>
-	</section>
+	</div>
 	<!-- //contents -->
 	
 	<!-- footer -->

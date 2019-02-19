@@ -168,7 +168,7 @@
 		<div class="inner">
 			
 			<div>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=238c3f6eaacc311151fd24574cf5b8e9&libraries=services"></script>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=24da39b08d919008f226e53338762aa6&libraries=services"></script>
 				<div id="map"></div>
 				<script>
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

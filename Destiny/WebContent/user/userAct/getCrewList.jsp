@@ -163,11 +163,13 @@
 	            			<td>${listAPLUser[i-1].birthday}</td>
 	            			<td>
 	            				<%-- <a href="#exampleModal" data-toggle="modal" >${meeting.interviewTitle}</a> --%>
-	            				<button type="button" data-toggle="modal" data-target="#exampleModal">가입인사</button>
+	            				<!-- <button type="button" data-toggle="modal" data-target="#exampleModal">가입인사</button> -->
+	            				<button type="button" data-toggle="modal" data-target="#${meeting.meetingCrewNo}modal">가입인사</button>
 								
 								
 								<!-- Modal -->
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+								<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"> -->
+								<div class="modal fade" id="${meeting.meetingCrewNo}modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 								  <div class="modal-dialog" role="document">
 								    <div class="modal-content">
 								      <div class="modal-header">
@@ -176,9 +178,6 @@
 								      </div>
 								      
 								      <div class="modal-body">
-								      <%-- 	<c:set var="i" value="0" />
-							         	<c:forEach var="meeting" items="${listAPL}">
-							         		<c:set var="i" value="${ i+1 }" /> --%>
 								      
 									          <div class="form-group">
 									            <label for="recipient-name" class="control-label title">가입인사</label>
@@ -189,7 +188,6 @@
 									            <textarea class="form-control" readonly="readonly">${meeting.interview}</textarea>
 									          </div>
 								          
-								          <%-- </c:forEach> --%>
 								      </div>
 								      
 								      <div class="modal-footer">
