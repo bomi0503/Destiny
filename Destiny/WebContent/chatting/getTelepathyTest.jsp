@@ -35,7 +35,7 @@
 
 
 function getRandomChatting(){
-	$("form").attr("method" , "POST").attr("action" , "/chatting/telepathyResult").submit();
+	$("form").attr("method" , "POST").attr("action" , "/chatting/getRandomChatting").submit();
   	}
 
 $(function() {

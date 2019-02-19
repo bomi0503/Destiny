@@ -150,7 +150,7 @@
          }else{
             
          
-            if(userType==""||firstType==""){
+            if(userType==""||firstType==""||userType==0||firstType==0){
             	swal({
       			  title: "성격유형 등록 후 이용 가능합니다.",
       			  text: "등록 페이지로 이동하시겠습니까?",
@@ -227,6 +227,17 @@
    
    
    <style>
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR|Pacifico');
+   
+   strong{
+      font-family: 'Nanum Myeongjo', serif;
+   }
+   body {
+    font-family: 'Varela Round', sans-serif;
+}
+.container {
+    font-weight: 700;
+}
       .topImg {
     max-width: 100%;
     height: 400px;

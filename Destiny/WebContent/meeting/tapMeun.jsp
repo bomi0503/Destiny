@@ -445,8 +445,8 @@
 					});
 					
 			///////////* 가입하기에서 확인누르면 이벤트 처리 *//////////////
-					 $( "a.btn.btn-success" ).on("click" , function() {
-						 
+					 $( "#joinSubmit" ).on("click" , function() {
+						 //alert("히얼??");
 						 var interviewTitle = $("#interviewTitle").val();
 						 var interview = $("#interview").val();
 						 
