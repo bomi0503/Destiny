@@ -385,12 +385,26 @@
 				//alert("성공");
 				self.location="/meeting/addMeeting"
 			}else if('${empty sessionScope.me}'=='true'){
-				if (confirm("로그인후이용가능합니다.\n로그인하시겠습니까?") == true){    //확인
+				/* if (confirm("로그인후이용가능합니다.\n로그인하시겠습니까?") == true){    //확인
 					$("#my-dialog,#dialog-background").toggle();
 					//self.location="/user/login";
 				 }else{   //취소
 				     return;
-				 }
+				 } */
+				
+				swal({
+					  title: "로그인후이용가능합니다.로그인하시겠습니까?",
+					  icon: "info",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then(function(willDelete){
+					  if (willDelete) {
+						  $("#my-dialog,#dialog-background").toggle();
+					  } else {
+					    	return;
+					  }
+					});
 			}else if('${sessionScope.me.userGrade }'=='NEW'){
 				alert("${sessionScope.me.nickName}님은 우연등급입니다.\n인연이상 회원부터 개설 하능합니다.");
 			}else{
