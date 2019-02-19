@@ -28,7 +28,8 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <link rel="stylesheet" href="/resources/css/main.css" > 
-   
+   <!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    
    <script type="text/javascript">
    var userId="${me.userId}";
@@ -43,10 +44,38 @@
    
    function getTelepathyTest(){
       if (userId=="") {
-         alert("로그인 후 이용 가능합니다.");
-         $("#my-dialog,#dialog-background").toggle();
+         //alert("로그인 후 이용 가능합니다.");
+         swal({
+			  title: "비 로그인 상태 입니다.",
+			  text: "로그인 후 이용 가능합니다.",
+			  icon: "info",
+			  buttons: true,
+			  dangerMode: false,
+			})
+			.then(function(willDelete)  {
+			  if (willDelete) {
+				  $("#my-dialog,#dialog-background").toggle();
+			  } else {
+			   
+			  }
+			});
+         //swal("로그인 후 이용 가능합니다."); 
+         
       }else if (userGrade=='BLK') {
-    	  alert("일반회원 이상부터 이용 가능합니다.");
+    	  //alert("일반회원 이상부터 이용 가능합니다.");
+    	  swal({
+			  title: "일반회원 이상부터 이용 가능합니다.",
+			  icon: "info",
+			  buttons: true,
+			  dangerMode: false,
+			})
+			.then(function(willDelete)  {
+			  if (willDelete) {
+				 // $("#my-dialog,#dialog-background").toggle();
+			  } else {
+			   
+			  }
+			});
 	  }else{
          //location="/chatting/addRandomChatting";
          ///////////////////////////////////////////////
@@ -68,7 +97,9 @@
                  
                            },//success
                   error: function () {
-                     alert("error");
+                	  swal("다시 로그인 해주세요."); 
+                	  location.reload();
+                     //alert("다시 로그인 해주세요.");
                   },
                   complete: function () {
                     
@@ -82,16 +113,60 @@
    function getPerfectChatting(){
       //////////////로그인 기능 작동 가능시
        if (userId=="") {
-         alert("로그인 후 이용 가능합니다.");
-         $("#my-dialog,#dialog-background").toggle();
+    	   swal({
+ 			  title: "비 로그인 상태 입니다.",
+ 			  text: "로그인 후 이용 가능합니다.",
+ 			  icon: "info",
+ 			  buttons: true,
+ 			  dangerMode: false,
+ 			})
+ 			.then(function(willDelete)  {
+ 			  if (willDelete) {
+ 				  $("#my-dialog,#dialog-background").toggle();
+ 			  } else {
+ 			   
+ 			  }
+ 			});
+         //alert("로그인 후 이용 가능합니다.");
+         //$("#my-dialog,#dialog-background").toggle();
       }else {
+    	
          if (userGrade=='NEW' || userGrade=='BLK') {
-            alert("일반회원 이상부터 이용 가능합니다.");
+        	 swal({
+    			  title: "일반회원 이상부터 이용 가능합니다.",
+    			  icon: "info",
+    			  buttons: true,
+    			  dangerMode: false,
+    			})
+    			.then(function(willDelete)  {
+    			  if (willDelete) {
+    				  //$("#my-dialog,#dialog-background").toggle();
+    				  location="/user/getUser/${me.userId}";
+    			  } else {
+    			   
+    			  }
+    			});
+            //alert("일반회원 이상부터 이용 가능합니다.");
          }else{
             
          
             if(userType==""||firstType==""){
-               location = "/user/addTypeView";
+            	swal({
+      			  title: "성격유형 등록 후 이용 가능합니다.",
+      			  text: "등록 페이지로 이동하시겠습니까?",
+      			  icon: "info",
+      			  buttons: true,
+      			  dangerMode: false,
+      			})
+      			.then(function(willDelete)  {
+      			  if (willDelete) {
+      				  
+      				location = "/user/addTypeView";
+      			  } else {
+      			   
+      			  }
+      			});
+               
             }else{
                
                ///////////////////////////////////////////////
@@ -112,7 +187,8 @@
                      
                                     },//success
                      error: function () {
-                        alert("error");
+                    	 swal("다시 시도해 주세요."); 
+                    	// alert("error");
                      },
                      complete: function () {                
                        //alert("complete");
@@ -185,12 +261,20 @@ li{
 		float : right;
 		margin-top : -80px;
 		margin-bottom : 60px;
+		margin-right: 20px;
+		
 	}
 	
 	.smallNavi li{
 		float : left;
 		margin-right : 20px;
 		margin-top : 8em;
+	}
+	
+	/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
 	}
    </style>
 
