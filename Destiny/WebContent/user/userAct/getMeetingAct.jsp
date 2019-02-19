@@ -311,7 +311,7 @@
 								var myChart = new Chart(ctx, {
 								    type: 'bar',
 								    data: {
-								        labels: ["0~19", "20~39", "40~59", "60~79", "80~99"],
+								        labels: ["20~24", "25~29", "30~34", "35~39", "40~"],
 								        datasets: [{
 								            label: '# of Votes',
 								            data: [${firstGeneration}, ${secondGeneration}, ${thirdGeneration}, ${fourthGeneration}, ${fifthGeneration}],
