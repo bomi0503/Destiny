@@ -116,8 +116,8 @@ socket.on('connect', function(){
 	            interest03=JsonData.interest[2];
 	            myType=JsonData.type.myType;
 	            partnerType=JsonData.type.firstType; 
-	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".png'  style='width: 100px; height: 100px;'></div><br>"+JsonData.type.firstType+"</div>");
-	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".png' style='width: 100px; height: 100px;'></div><br>"+JsonData.type.myType+"</div>");
+	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".png'  style='width: 100px; height: 100px;'></div><br><h1>"+JsonData.type.firstType+"</h1></div>");
+	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".png' style='width: 100px; height: 100px;'></div><br><h1>"+JsonData.type.myType+"</h1></div>");
 	            
 	        }
 			
@@ -151,8 +151,8 @@ socket.on('connect', function(){
 	            interest03=JsonData.interest[2];
 	            myType=JsonData.type.myType;
 	            partnerType=JsonData.type.firstType;
-	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".png'  style='width: 100px; height: 100px;'></div><br>"+JsonData.type.firstType+"</div>");
-	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".png' style='width: 100px; height: 100px;'></div><br>"+JsonData.type.myType+"</div>");
+	            $('#content01-you').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.firstType+".png'  style='width: 100px; height: 100px;'></div><br><h1>"+JsonData.type.firstType+"</h1></div>");
+	            $('#content01-me').append("<div><div><img src='/resources/images/chatting/mbti/"+JsonData.type.myType+".png' style='width: 100px; height: 100px;'></div><br><h1>"+JsonData.type.myType+"</h1></div>");
 	            
 				
 	        }
@@ -855,8 +855,8 @@ $(function(){
 		var interest01split=interest01.split('/')[0];
 		var interest02split=interest02.split('/')[0];
 		var interest03split=interest03.split('/')[0];
-		$('#content02').append('<div class="text-center interest"><img src="/resources/images/interest/'+interest01split+'.png">' +interest01+'<br><img src="/resources/images/interest/'+interest02split+'.png">'+interest02+'<br><img src="/resources/images/interest/'+interest03split+'.png">'+interest03+'</div>');
-	})
+		$('#content02').append('<div class="text-center interest"><img src="/resources/images/interest/'+interest01split+'.png"><h1>' +interest01+'</h1><br><img src="/resources/images/interest/'+interest02split+'.png"><h1>'+interest02+'</h1><br><img src="/resources/images/interest/'+interest03split+'.png"><h1>'+interest03+'</h1></div>');
+		})
 	
 	//프로필 공개===================================================================
 	
@@ -1332,7 +1332,7 @@ border-radius: 10px 10px 10px 10px;
   position: absolute;
   z-index: 9;
   text-align: center;
-   background-color: rgba(66, 139, 202, 0.1); 
+   background-color: white; 
   /* height: 400px; */
   width: 300px;
 }
@@ -1464,7 +1464,7 @@ body.modal-open{
 		padding: 0.625em 0.625em 0.625em 2em;
 		/* border-top: 1px solid #0079c1; */
 		font-weight: bold;
-		color: #f2dede;
+		color: #ffb6c5;
 		cursor: pointer;
 }
 
@@ -1472,13 +1472,13 @@ body.modal-open{
 .accordion-container .article-title:active,
 .accordion-container .content-entry.open .article-title {
 		/* background-color: #00aaa7; */
-		color: white;
+		color: #fd5d7c;
 }
 
 .accordion-container .article-title:hover i:before,
 .accordion-container .article-title:hover i:active,
 .accordion-container .content-entry.open i {
-		color: white;
+		color: #f55d7c;
 }
 
 .accordion-container .content-entry i {
@@ -1488,7 +1488,7 @@ body.modal-open{
 		font-style: normal;
 		font-size: 1.625em;
 		sans-serif;
-		color: #f2dede;
+		color: #feb6c5;
 }
 
 .accordion-container .content-entry i:before {
@@ -1537,7 +1537,7 @@ h2{
 }	
 h1{
 	font-weight: bold;
-    color: #f9ffff;
+    color: #fd5d7c;
 }
 .content01{
 	margin-left: 20px;	
@@ -1554,6 +1554,9 @@ h1{
 input[type="text"]{
 border: none;
 color: #333;
+}
+#content03{
+    margin-left: 0;
 }
 </style>
 
