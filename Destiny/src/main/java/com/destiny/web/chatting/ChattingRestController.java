@@ -73,11 +73,12 @@ public class ChattingRestController {
 	private List<Telepathy> telepathyList = new ArrayList<Telepathy>();
 	private int count;
 	private String file;
+	
 	@ResponseBody
-	@RequestMapping(value = "json/translate", method = RequestMethod.POST)
+	@RequestMapping(value = "json/getGoogleTranslate", method = RequestMethod.POST)
 
-	public String chatGoogleTranslatePOST(@RequestBody JSONObject body, HttpSession session) throws Exception {
-		System.out.println("chat 들어옴");
+	public String getGoogleTranslate(@RequestBody JSONObject body, HttpSession session) throws Exception {
+		System.out.println("getGoogleTranslate 들어옴");
 		System.out.println(body);
 		// userId 가져옴
 		User user = (User) session.getAttribute("me");
@@ -746,7 +747,7 @@ public class ChattingRestController {
 			perfectMatchingResult = (List<Chatting>) applicationScope.getAttribute("perfectMatchingResult");
 
 		}
-		if (chattingNo != 0) {
+		//if (chattingNo != 0) {
 			Chatting emptyChatting = new Chatting();
 			outUserChatting=emptyChatting;
 			session.setAttribute("chatting", outUserChatting);
@@ -759,9 +760,9 @@ public class ChattingRestController {
 
 			}
 
-		} else {
+		//} else {
 
-		}
+		//}
 		System.out.println("perfectMatchingResult : " + perfectMatchingResult);// 저장된 매칭 리스트
 		System.out.println("outUserChatting : "+outUserChatting);
 		System.out.println("Result : " + result);// 결과
@@ -846,8 +847,8 @@ public class ChattingRestController {
 		 Chatting chatting= (Chatting)session.getAttribute("chatting");
          User user=(User)session.getAttribute("me");
 	
-         response.setContentType("text/html;charset=utf-8");
- 		PrintWriter out = response.getWriter();
+        // response.setContentType("text/html;charset=utf-8");
+ 		//PrintWriter out = response.getWriter();
 		
     String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
@@ -880,20 +881,20 @@ public class ChattingRestController {
           count++;
           try {
               mFile.transferTo(new File(path,fileName));
-              out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
+             // out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
       		
           } catch (Exception e) {
               e.printStackTrace();
           }finally {
           this.file = fileName;
-          out.close();
+       //   out.close();
        }
       }
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("fileName", file);
       System.out.println(file);
       map.put("userId", user.getUserId());
-      map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
+      //map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
       
       return map;
 	}
@@ -905,8 +906,8 @@ public class ChattingRestController {
          User user=(User)session.getAttribute("me");
 	
 
-         response.setContentType("text/html;charset=utf-8");
- 		PrintWriter out = response.getWriter();
+        // response.setContentType("text/html;charset=utf-8");
+ 		//PrintWriter out = response.getWriter();
 		
     String path = "C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\chatting\\image\\";
     System.out.println("파일업로드하는곳");
@@ -939,20 +940,20 @@ public class ChattingRestController {
           count++;
           try {
               mFile.transferTo(new File(path,fileName));
-              out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
+             // out.print("http://127.0.0.1:8080/resources/images/chatting/image/"+fileName);
       		
           } catch (Exception e) {
               e.printStackTrace();
           }finally {
           this.file = fileName;
-          out.close();
+          //out.close();
        }
       }
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("fileName", file);
       System.out.println(file);
       map.put("userId", user.getUserId());
-      map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
+      //map.put("url", "http://127.0.0.1:8080/resources/images/chatting/image/"+file);
       
       return map;
 	}
