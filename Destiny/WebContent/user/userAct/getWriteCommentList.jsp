@@ -39,9 +39,9 @@
 	 $(function() {
 	
 		//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$( "td:nth-child(2)" ).on("click" , function() {
+		/*$( "td:nth-child(2)" ).on("click" , function() {
 			 self.location ="/info/getRestaurantInfo?communityNo="+$(this).text().trim();
-		});
+		});*/
 		
 		//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$( "td:nth-child(3)" ).on("click" , function() {

@@ -21,15 +21,31 @@
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
+<style>
+#load {
+	width: 100%;
+	height: 100%;
+	top: 30%;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+/* sweetalert buttom design^^ */
+	.swal-button{
+		padding : 0 56px;
+		color : rgba(0,0,0,.65) !important;
+	}
+</style>
 	
-	
-	
-	<!-- Bootstrap core CSS -->
-    
-    <link href="carousel.css" rel="stylesheet">
-    
-   <!-- 케러셀 완료 -->
+
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	var userId="${me.userId}";
@@ -68,6 +84,43 @@
 	        	if (n<5) {
 	        	poll();
 				}else{
+					swal({
+						  title: "상대방을 찾을 수 없습니다.",
+						  text: " 나가시겠습니까?",
+						  icon: "warning",
+						  buttons: true,
+						  dangerMode: false,
+						})
+						.then(function(willDelete)  {
+						  if (willDelete) {
+							//확인 버튼 클릭 true 
+				        	   window.close();
+				        	   $.ajax({
+			        		        url: '/chatting/json/endRandomMatching',
+			        		        type: 'GET',
+			        		        dataType: 'text',
+			        		        success: function(JsonData) {
+			        		            console.log('success');
+			        		          //alert(JsonData);
+			        					
+			        		        }
+			        				
+			        		    });
+						  } else {
+							//취소 버튼 클릭 false
+					             setTimeout(function() { 
+					            	 if (n2<10000) {
+					            		 poll();
+									}else{
+										swal("상대방을 찾을 수 없습니다. 다음에 다시 이용해주세요!");
+
+									}
+					            	 
+					            	 console.log(n2); n2+3000; }, 10000)
+						  }
+						});
+					//==========================================================
+						/* 
 					  var confirmflag = confirm("상대방을 찾을 수 없습니다. 나가시겠습니까?");
 
 			           if(confirmflag){
@@ -100,9 +153,10 @@
 
 							}
 			            	 
-			            	 console.log(n2); n2+3000; }, n2)
-			        	   
-			           }
+			            	 console.log(n2); n2+3000; }, n2) 
+			           } */
+			            	 //======================================================  
+			           
 			
 				}console.log(n); n++; }, 3000)
 			
@@ -127,27 +181,7 @@
 	
 	</script>
 <title>matching</title>
-<style>
-#load {
-	width: 100%;
-	height: 100%;
-	top: 30%;
-	left: 0;
-	position: fixed;
-	display: block;
-	opacity: 0.8;
-	background: white;
-	z-index: 99;
-	text-align: center;
-}
 
-/* #load > img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	z-index: 100;
-} */
-</style>
 </head>
 
 <body>

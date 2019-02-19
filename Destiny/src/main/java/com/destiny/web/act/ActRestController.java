@@ -1,5 +1,6 @@
 package com.destiny.web.act;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,9 @@ import com.destiny.service.community.CommunityService;
 import com.destiny.service.domain.Comment;
 import com.destiny.service.domain.Community;
 import com.destiny.service.domain.Meeting;
+import com.destiny.service.domain.User;
 import com.destiny.service.meeting.MeetingService;
+import com.destiny.service.user.UserService;
 
 @RestController
 @RequestMapping("/act/*")
@@ -45,6 +48,10 @@ public class ActRestController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	
 	@Value("#{commonProperties['pageUnit']}")
@@ -231,13 +238,18 @@ public class ActRestController {
 		Map<String, Object> map = meetingService.getCrew(meetingNo);
 		List<Meeting> crewList= (List<Meeting>)map.get("crewList");
 		
+		List<User> userList = new ArrayList<User>();
+		for(Meeting m : crewList) {
+			userList.add(userService.getUser(m.getMeetingMasterId()));
+		}
+		
 		System.out.println("안드로이드로 전달되는 meeting : " + meeting);
-		System.out.println("안드로이드로 전달되는 crewList : " + crewList);
+		System.out.println("안드로이드로 전달되는 crewList : " + userList);
 		
 		Map<String, Object> returnMap  = new HashMap<String, Object>();
 		
 		returnMap.put("meeting", meeting);
-		returnMap.put("crewList", crewList);
+		returnMap.put("crewList", userList);
 		
 		return returnMap;
 	}
