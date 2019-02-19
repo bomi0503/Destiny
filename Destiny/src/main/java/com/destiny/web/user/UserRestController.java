@@ -354,9 +354,9 @@ public class UserRestController {
 		}
 	}
 	
-	@RequestMapping(value="json/getTypeList/{type}", method=RequestMethod.GET)
-	public Map<String, Object> getTypeList(@PathVariable String type) throws Exception{
-		System.out.println("restController 진입 성공. json/getTypeList/"+type);
+	@RequestMapping(value="json/getTypeList", method=RequestMethod.GET)
+	public Map<String, Object> getTypeList() throws Exception{
+		System.out.println("restController 진입 성공. json/getTypeList/");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", userService.getTypeList());

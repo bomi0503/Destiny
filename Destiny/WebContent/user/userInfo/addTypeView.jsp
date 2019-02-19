@@ -31,7 +31,7 @@
 
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( ".button.special.btn-primary" ).on("click" , function() {
+			$( "a[name='ok']" ).on("click" , function() {
 				fncAddType();
 			});
 		});	
@@ -55,20 +55,41 @@
 		 
 		 function fncAddType(){
 			 alert("버튼22");
-			 var myType = $("select[name='myType']").val();
+			 var myType = $("select[name='myTypeSelect']").val();
+			
+			 var typeName = myType.split("/")[0];
+			 myType = myType.split("/")[1];
+			 
 			 var otherType = [];
 			 $('input:checkbox[type=checkbox]:checked').each(function () {
 				 otherType.push($(this).val());
 			 });
 			 
-			 alert(otherType);
+			 alert('myType :'+myType);
+			 alert('otherType :'+otherType);
 			 
 			$("input:hidden[name='firstType']").val( otherType[0] );
 			$("input:hidden[name='secondType']").val( otherType[1] );
 			$("input:hidden[name='thirdType']").val( otherType[2] );
+			$("input:hidden[name='myType']").val( myType );
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addType").submit();		 
 		 }
+		 
+		 $(function() {
+			$( "#myType" ).on("change" , function() {
+				
+				var type = $(this).val();
+				alert('type : ' + type);
+				
+				var typeName = type.split("/")[0];
+				var typeNo = type.split("/")[1];
+				
+				var typeImg = '<img src="/resources/images/mbti/'+typeName+'.png"/>'
+				
+				$('#myTypeImg').html(typeImg);
+				});
+			});
 		
 	</script>
 	<!-- //All js -->
@@ -295,15 +316,17 @@
 							<td>
 							<div class="row">
 								<div class="4u 12u$(small) select-wrapper">
-									<select class="form-control" id="myType" name="myType">
+									<select class="form-control" id="myType" name="myTypeSelect">
 										<c:set var="i" value="10000"/>
 										<c:forEach var="file" items="${list}">
-											<option value="${i}" ${ (! empty userList) && (userList[0] == i) ? 'selected' : '' }>${file}</option>
+											<%-- <option value="${i}" ${ (! empty userList) && (userList[0] == i) ? 'selected' : '' }>${file}</option> --%>
+											<option value="${file}/${i}" ${ (! empty userList) && (userList[0] == i) ? 'selected' : '' }>${file}</option>
 											<c:set var="i" value="${i+1}"/>
 										</c:forEach>
 									</select>
+									<input type="hidden" name="myType">
 								</div>
-								<div class="8u 12u$(small)">
+								<div class="8u 12u$(small)" id="myTypeImg">
 									<c:set var="i" value="10000"/>
 									<c:forEach var="file" items="${list}">
 										<c:if test="${ (! empty userList) && (userList[0] == i)}">
@@ -313,6 +336,7 @@
 									</c:forEach>
 								</div>
 							</div>
+							
 							</td>
 							
 							<td>
@@ -336,7 +360,7 @@
 				
 				<ul class="actions align-center">
 					<li><a href="#" class="button" name="reset">취소</a></li>
-					<li><a href="#" class="button" name="find">성격등록</a></li>
+					<li><a href="#" class="button" name="ok">성격등록</a></li>
 				</ul>
 			</div>
 		</form>
