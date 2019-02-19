@@ -1097,7 +1097,7 @@
 												
 													if(JSONData==2){
 														swal({title:meetingnickname+" 님이 모임장이되었습니다.",icon:"success"});
-														window.location.reload();
+														//window.location.reload();
 													}
 													
 												}
