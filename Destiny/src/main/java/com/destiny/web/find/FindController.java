@@ -155,9 +155,11 @@ public class FindController {
 				String place = list.get(i).getMeetingLocation();
 				String newPlace = "";
 				
-				if(place.length() >15) {
+				if(place.length() >10) {
 					
-					newPlace = place.substring(0,20)+"....";
+					System.out.println("¿Âº“ : " + place);
+					
+					newPlace = place.substring(0,15)+"....";
 					
 					System.out.println("newPlace : " + newPlace);
 					

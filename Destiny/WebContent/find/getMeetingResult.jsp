@@ -322,7 +322,7 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 						<c:set var="i" value="${ i+1 }" />						  
 						  <li class="list-item">
 							<img src="/resources/images/meeting/${meeting.titleImg}" class="list-img" width="50px" height="150px">
-							<h3 class="list-tit">${meeting.meetingName}</h3>
+							<h5 class="list-tit">${meeting.meetingName}</h5>							
 							<p class="list-desc">${meeting.meetingDate}</p>
 							<p class="list-desc">${meeting.meetingCenter}</p>
 							<%-- <p class="list-desc" style="min-height:60px;">${meeting.meetingLocation}</p> --%>
@@ -335,35 +335,7 @@ body ul, body ol, body li{margin:0; padding:0; list-style:none;}
 				</div>
 			</section>
 			
-			<%-- <div>
-				<table class="table table-hover table-striped">
-			        <thead>
-			          <tr>
-			            <th align="center">No</th>
-			            <th align="center">Image</th>
-			            <th align="left">모임명</th>
-			            <th align="center">모임날짜</th>
-			            <th align="center">중심지</th>
-			            <th align="center">모임장소</th>
-			          </tr>
-			        </thead>
-		       
-					<tbody>
-					  <c:set var="i" value="0" />
-					  <c:forEach var="meeting" items="${list}">
-						<c:set var="i" value="${ i+1 }" />
-						<tr>
-						  <td align="center">${ i }</td>
-						  <td align="left"> <img src="/resources/images/meeting/${meeting.titleImg}" width=100px height=100px/></td>
-						  <td align="left"  data-param="${meeting.meetingNo}" >${meeting.meetingName}</td>
-						  <td align="left">${meeting.meetingDate}</td>
-						  <td align="left">${meeting.meetingCenter}</td>
-						  <td align="left">${meeting.meetingLocation}</td>
-						</tr>
-					  </c:forEach>
-			        </tbody>
-				</table>
-			</div> --%>
+			
 		</div>
 	</section>
 	<!-- //contents -->

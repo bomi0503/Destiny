@@ -116,18 +116,24 @@
 		$(".getComplainLink").on("click", function(){
 			var communityNo = $(this).data("param");
 			var meetingNo = $(this).data("param1");
+			console.log('communityNo : ' + communityNo);
+			console.log('meetingNo : ' + meetingNo);
 			
 			if(meetingNo == null){
-				/* if(${community.category == "RES"}){
-					self.location="/info/getRestaurantInfo?communityNo="+communityNo
-				}  */
 				
-				self.location="/info/getRestaurantInfo?communityNo="+communityNo
-
-
+				/* self.location="/info/getRestaurantInfo?communityNo="+communityNo */
+						
+ 				popWin = window.open("/info/getRestaurantInfo?communityNo="+communityNo,
+					   	 "popWin",
+						 "left=300, top=200, width=1100, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+ 
 				
 			}else if(communityNo == null){
-				self.location="/meeting/getMeeting?meetingNo="+meetingNo
+				/* self.location="/meeting/getMeeting?meetingNo="+meetingNo */
+						
+				popWin = window.open("/meeting/getMeeting?meetingNo="+meetingNo,
+					   	 "popWin",
+						 "left=300, top=200, width=1100, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 			}
 			
 		});
@@ -221,6 +227,9 @@
 		.form{
 			width: 80%; margin:0 auto;
 		}
+		
+		.getComplainLink{cursor:pointer;}
+		a{color: #fd5d7c; text-decoration:none;}
 	
 	</style>
 
@@ -327,16 +336,18 @@
 									<c:if test="${complain.complainKind == 'BD'}">
 								  		<th>제목</th>
 								  		<td colspan="3">
-									  		<div class="6u$ 12u$(small)" name="complainDetail" data-param="${complain.communityNo}" > 
-									  			<a href="/info/getRestaurantInfo?communityNo=${complain.communityNo}" target=“_blank”>${complain.complainDetail}</a>
+									  		<div class="6u$ 12u$(small)" name="complainDetail"  > 
+									  			<%-- <a href="/info/getRestaurantInfo?communityNo=${complain.communityNo}">${complain.complainDetail}</a> --%>
+									  			<a href="#" class="getComplainLink" data-param="${complain.communityNo}"> ${complain.complainDetail}</a>
 									  		</div>
 								  		</td>
 									</c:if>
 									<c:if test="${complain.complainKind == 'MT'}">
 								  		<th>모임이름</th>
 								  		<td colspan="3">
-									  		<div class="6u$ 12u$(small) getComplainLink" name="complainDetail" data-param="${complain.meetingNo}">
-									  		 	<a href="/meeting/getMeeting?meetingNo=${complain.meetingNo}" target=“_blank”>${complain.complainDetail}</a>
+									  		<div class="6u$ 12u$(small) getComplainLink" name="complainDetail">
+									  		 	<%-- <a href="/meeting/getMeeting?meetingNo=${complain.meetingNo}" >${complain.complainDetail}</a> --%>
+									  		 	<a href="#" class="getComplainLink"  data-param="${complain.meetingNo}">${complain.complainDetail}</a>
 									  		</div>
 								  		</td>
 									</c:if>
