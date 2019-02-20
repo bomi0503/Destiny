@@ -141,7 +141,8 @@
 				<p>회원님이 찾는 조건의 회원 수는</p>
 				<p><span class="resultCount">${totalCount}명</span> 입니다.</p>
 				<p> 그중 현재 접속중인 회원은</p>
-				<p><span class="resultCount"> ${loginUser}명</span> 입니다.</p>
+				<%-- <p><span class="resultCount"> ${loginUser}명</span> 입니다.</p> --%>
+				<p><span class="resultCount"> 17명</span> 입니다.</p>
 				<hr/>
 				<p>채팅을 시작하겠습니까?</p>
 				

@@ -160,7 +160,7 @@
 	
 	button{padding: 0px 2em;}
 	.getMeetingLink{cursor:pointer;}
-	
+	td>img{width:100%; height:auto;}
 	/* table sytle 추가 */
 	a{color: #fd5d7c;}
 	.wrap{max-width:1440px; margin-top: 400px;}
@@ -234,11 +234,11 @@
 	            <thead>
 	                <tr>
 	                    <th>No</th>
-	                    <th>모임이미지</th>
-	                    <th>모임제목</th>
+	                    <th>모임</th>
+	                    <th>모임이름</th>
 	                    <th>중심지</th>
 	                    <th>관심사</th>
-	                    <th>가입 신청자</th>
+	                    <th>가입 신청</th>
 	                    <th>회차 조회</th>
 	                </tr>
 	            </thead>
@@ -258,7 +258,8 @@
 	            		<tr>
 		                    <td>${ i }</td>
 		                    <td>
-		                    	<img src="/resources/images/meeting/${meeting.titleImg}" width="150" height=150"/>
+		                    	<%-- <img src="/resources/images/meeting/${meeting.titleImg}" width="150" height=150"/> --%>
+		                    	<img src="/resources/images/meeting/${meeting.titleImg}"/>
 		                    </td>
 		                    <td class="getMeetingLink" data-param="${meeting.meetingNo}">
 		                    	${meeting.meetingName}
@@ -266,10 +267,10 @@
 		                    <td>${meeting.meetingCenter}</td>
 		                    <td>${meeting.interestName}</td>
 		                    <td>
-		                    	<button type="button" class="getCrewList" id="getCrewList" data-param="${meeting.meetingNo}">신청자 조회</button>
+		                    	<button type="button" class="getCrewList" id="getCrewList" data-param="${meeting.meetingNo}">조회</button>
 		                    </td>
 		                    <td>
-		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">회차 조회</button>
+		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">조회</button>
 		                    </td>
 		                </tr>
 	            		

@@ -73,8 +73,8 @@ public class ChattingController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="telepathyTest/{roomNo}", method=RequestMethod.GET)
-	public ModelAndView telepathyTest(@PathVariable int roomNo,HttpSession session, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="getTelepathyTest/{roomNo}", method=RequestMethod.GET)
+	public ModelAndView getTelepathyTest(@PathVariable int roomNo,HttpSession session, HttpServletRequest request) throws Exception{
 			System.out.println("telepathyTest들어옴");
 		
 			//===========================================현제 접속자 구현 로직 part=================================================
@@ -210,19 +210,6 @@ public class ChattingController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addRandomChatting", method=RequestMethod.GET)
-	public ModelAndView addRandomChatting(HttpSession session) throws Exception{
-		System.out.println("addRandomChatting들어옴");
-		//telepathy 선택 답안과 user두명의 아이디 값을 보낸다. 채팅방 생성
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/chatting/getRandomChatting.jsp");
-		return modelAndView;
-	}
-	
-	
-	
-	
 	@RequestMapping(value="getPerfectChatting", method=RequestMethod.GET)
 	public ModelAndView getPerfectChatting() throws Exception{
 		System.out.println("getPerfectChatting 들어옴");
@@ -235,15 +222,7 @@ public class ChattingController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="endChatting", method=RequestMethod.GET)
-	public ModelAndView endChatting(@PathVariable int roomNo,HttpSession session,HttpServletRequest request) throws Exception{
-		System.out.println("endChatting 들어옴");
-		ModelAndView modelAndView = new ModelAndView();
-		Chatting emptyChatting=new Chatting();
-		session.setAttribute("chatting", emptyChatting);
-		modelAndView.addObject("채팅방 나감");
-		return modelAndView;
-	}
+	
 	
 	
 }

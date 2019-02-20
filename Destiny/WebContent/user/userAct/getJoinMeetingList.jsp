@@ -154,6 +154,8 @@
 		margin-top : -2px;
 	}
 	
+	button{padding: 0px 2em;}
+	td>img{width:100%; height:auto;}
 	.getMeetingLink{cursor:pointer;}
 	/* table sytle 추가 */
 	a{color: #fd5d7c;}
@@ -250,7 +252,7 @@
 	            		<tr>
 		                    <td>${ i }</td>
 		                    <td>
-		                    	<img src="/resources/images/meeting/${meeting.titleImg}" width="150" height=150"/>
+		                    	<img src="/resources/images/meeting/${meeting.titleImg}"/>
 		                    </td>
 		                    <td class="getMeetingLink" data-param="${meeting.meetingNo}">
 		                    	${meeting.meetingName}
@@ -259,7 +261,7 @@
 		                    <td>${meeting.interestName}</td>
 		                    <td>
 		                    	<%-- <a class="btn btn-primary btn" href="/act/getMeetingAct/${meeting.meetingNo}" role="button" id="getMeetingAct">모임 &nbsp;회차&nbsp;조회</a> --%>
-		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">회차 조회</button>
+		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">조회</button>
 		                    </td>
 		                </tr>
 	            		

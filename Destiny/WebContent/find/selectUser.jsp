@@ -47,8 +47,6 @@
 			var idx = $("#city").index(this);
 			var city = $(this).val();
 			
-			alert(city + idx);
-			
 			$.ajax( 
 					{
 						url : "/user/json/getLocationList/"+city ,
