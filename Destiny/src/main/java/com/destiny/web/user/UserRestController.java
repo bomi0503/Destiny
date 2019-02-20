@@ -188,8 +188,8 @@ public class UserRestController {
 	public Map SMSAuth(@PathVariable String phone, HttpSession session) throws Exception{
 		System.out.println("SMSAuth 진입 완료. 받은 폰 번호 : " + phone);
 		
-		String api_key = "NCS14Y4JAMHE1URY";
-		String api_secret = "PGIB0ZOIVBL9IHYLZP7QIMNWHSSWP9F9";
+		String api_key = "NCSVNPXGDXR313KS";
+		String api_secret = "J7K4C3WVID3LHZ4YUR6USDB9VBF8WMMU";
 		Coolsms coolsms = new Coolsms(api_key, api_secret);
 		
 		String key = RandomNum();
@@ -197,8 +197,8 @@ public class UserRestController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("to", phone);
-		map.put("from", "01076679328");
-		map.put("text", "하이 헬로우 안녕? 인증번호는 [" + key + "] 이야");
+		map.put("from", "01086032406");
+		map.put("text", "[우리들의 연결고리] 본인확인 인증번호 [" + key + "] 를 화면에 입력해주세요.");
 		map.put("type", "sms");
 		
 		System.out.println("여까지오긴하니?");
