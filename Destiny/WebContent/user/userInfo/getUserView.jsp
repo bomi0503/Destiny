@@ -133,6 +133,9 @@
 
 
 <style>
+body{
+	overflow-y:hidden;
+}
 #grad1 {
 	height: 300px;
 	background-color: #000000;
