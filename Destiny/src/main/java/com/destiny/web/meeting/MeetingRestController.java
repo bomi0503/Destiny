@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.destiny.common.Coolsms;
 import com.destiny.common.Page;
 import com.destiny.common.Search;
 import com.destiny.service.domain.Meeting;
@@ -75,6 +78,62 @@ public class MeetingRestController {
 			
 			int susses= meetingService.addCrewM(meeting);
 			//System.out.println("미팅내용 가져와랏"+meeting);
+			
+			//================================================SMS로 가입신청 전송==============================================
+			Meeting contextMeeting = meetingService.getMeeting(meeting.getMeetingNo());
+			
+			//모임장 획득. 
+			Map<String, Object> reMap = meetingService.getCrew(meeting.getMeetingNo());
+			List<Meeting> crewList = (List<Meeting>)reMap.get("crewList");
+			User masterUser = new User();
+			for(Meeting m : crewList) {
+				if(m.getRole().equals("MST")) {
+					masterUser = userService.getUser(m.getMeetingMasterId());
+				}
+			}
+			
+			//모임장의 폰 번호로 가입신청자 전송
+			String phone = masterUser.getPhone();
+					
+			System.out.println("SMS part 진입 완료. 받은 모임장 phone 번호 : " +  phone);
+			
+			String api_key = "NCSVNPXGDXR313KS";
+			String api_secret = "J7K4C3WVID3LHZ4YUR6USDB9VBF8WMMU";
+			Coolsms coolsms = new Coolsms(api_key, api_secret);
+			
+			//String key = RandomNum();
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			//map.put("to", phone);
+			map.put("to", "01086032406");
+			map.put("from", "01086032406");
+			map.put("text", "[우연] 모임 : [" + contextMeeting.getMeetingName() + "] \n가입신청자 : [" + user.getUserId() + "]");
+			map.put("type", "sms");
+			
+			System.out.println("여까지오긴하니?");
+			
+			
+			
+			JSONObject result = coolsms.send(map);
+			if((boolean) result.get("status") == true) {
+				System.out.println("성공");
+				System.out.println(result.get("group_id")); // 그룹아이디
+				System.out.println(result.get("result_code")); // 결과코드
+				System.out.println(result.get("result_message")); // 결과 메시지
+				System.out.println(result.get("success_count")); // 메시지아이디
+				System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+				//reMap.put("authNum", key);
+				//reMap.put("result", "success");
+			} else {
+				System.out.println("실패");
+				System.out.println(result.get("code"));
+				System.out.println(result.get("message"));
+				//reMap.put("result", "fail");
+			}
+			
+			//================================================SMS로 가입신청 전송 End===========================================
+			
 			System.out.println("끝냄");
 			return susses;
 		}else {
@@ -83,6 +142,8 @@ public class MeetingRestController {
 		
 	}
 	
+	
+
 	@RequestMapping( value="meetingRest/addActList", method=RequestMethod.POST)
 	public int addActList(@RequestBody Meeting meeting)throws Exception{
 		System.out.println("참여하기시작함");
