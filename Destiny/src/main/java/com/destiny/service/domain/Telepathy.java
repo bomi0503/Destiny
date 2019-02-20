@@ -14,6 +14,7 @@ public class Telepathy {
 	private String exTwoImg;
 	private String womanTelepathyResult;
 	private String manTelepathyResult;
+	
 	public int getChattingNo() {
 		return chattingNo;
 	}

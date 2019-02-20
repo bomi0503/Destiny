@@ -306,15 +306,15 @@ socket.on('connect', function(){
 				console.log("다른사람 파일 추가");
 	    	if ("${me.userId}"!=file.userId) {
 	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 		    		
 						
 	       		}else{
 	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 			    		
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 			    		
 					}
 	       			
@@ -333,15 +333,15 @@ socket.on('connect', function(){
 				console.log("다른사람 파일 추가");
 	    	if ("${me.userId}"!=file.userId&&file.fileName!=null) {
 	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 					
 						
 	       		}else{
 	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 						
 	       			}else{
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 						
 	       			}
 	       			

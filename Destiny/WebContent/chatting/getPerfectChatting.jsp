@@ -259,61 +259,61 @@ socket.on('connect', function(){
 	 });
 	//파일 가져오기=================================================================
 	
-		socket.on('updateimgfile', function (file) {
-	    	//console.log(file);
-	    
-			
-				console.log("다른사람 파일 추가");
-	    	if ("${me.userId}"!=file.userId) {
-	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
-		    		
-						
-	       		}else{
-	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
-			    		
-					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
-			    		
-					}
-	       			
-	       		}
-	    		$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
-
-				//$('#user_1').append("<li><div class='you'><div><div class='name'>"+file.userId+"</div><div class='img'></div><div class='text'><div><img src='/resources/images/chatting/image/"+file.fileName+"' style='width: 100px; height: 100px;' class='blur'></div></div></div></div></li>");
+	socket.on('updateimgfile', function (file) {
+    	//console.log(file);
+    
 		
-			}  
-	    });//updateimgfile 끝
-	
-		socket.on('updatevoicefile', function (file) {
-	    	console.log(file);
-	    	
-			
-				console.log("다른사람 파일 추가");
-	    	if ("${me.userId}"!=file.userId&&file.fileName!=null) {
-	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+			console.log("다른사람 파일 추가");
+    	if ("${me.userId}"!=file.userId) {
+    		if (!profileOpen) {
+    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	    		
 					
-						
-	       		}else{
-	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
-						
-	       			}else{
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
-						
-	       			}
-	       			
-	       		}
-				
-				$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
+       		}else{
+       			if (womanId==file.userId) {
+       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+		    		
+				}else{
+					$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+		    		
+				}
+       			
+       		}
+    		$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 
-	    		//$('#user_1').append("<li><div class='you'><div><div class='name'>"+file.userId+"</div><div class='img'></div><div class='text'><div><audio controls class='col-xs-12 col-sm-12'><source src='/resources/images/chatting/image/"+file.fileName+"'  ></audio></div></div></div></div></li>");
+			//$('#user_1').append("<li><div class='you'><div><div class='name'>"+file.userId+"</div><div class='img'></div><div class='text'><div><img src='/resources/images/chatting/image/"+file.fileName+"' style='width: 100px; height: 100px;' class='blur'></div></div></div></div></li>");
+	
+		}  
+    });//updateimgfile 끝
+
+	socket.on('updatevoicefile', function (file) {
+    	console.log(file);
+    	
+		
+			console.log("다른사람 파일 추가");
+    	if ("${me.userId}"!=file.userId&&file.fileName!=null) {
+    		if (!profileOpen) {
+    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 				
-			}  
-	    });//updatevoicefile 끝
-	//==========================================================================
+					
+       		}else{
+       			if (womanId==file.userId) {
+       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+					
+       			}else{
+       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+					
+       			}
+       			
+       		}
+			
+			$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
+
+    		//$('#user_1').append("<li><div class='you'><div><div class='name'>"+file.userId+"</div><div class='img'></div><div class='text'><div><audio controls class='col-xs-12 col-sm-12'><source src='/resources/images/chatting/image/"+file.fileName+"'  ></audio></div></div></div></div></li>");
+			
+		}  
+    });//updatevoicefile 끝
+//==========================================================================
 
 
 	
