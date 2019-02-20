@@ -51,7 +51,7 @@ public class MeetingDaoImpl implements MeetingDao {
 			MultipartFile file = meeting.getImgFile();
 			byte fileData[] = file.getBytes();
 			picpath = file.getOriginalFilename();
-			FileOutputStream fos = new FileOutputStream("C:\\Users\\Bitcamp\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\meeting\\" + picpath);
+			FileOutputStream fos = new FileOutputStream("C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\meeting\\" + picpath);
 
 			fos.write(fileData);
 			fos.close();
@@ -125,7 +125,7 @@ public class MeetingDaoImpl implements MeetingDao {
 			byte fileData[] = file.getBytes();
 			picpath = file.getOriginalFilename();
 			System.out.println(picpath);
-			FileOutputStream fos = new FileOutputStream("C:\\Users\\Bitcamp\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\meeting\\" + picpath);
+			FileOutputStream fos = new FileOutputStream("C:\\Users\\Bit\\git\\Destiny\\Destiny\\WebContent\\resources\\images\\meeting\\" + picpath);
 			fos.write(fileData);
 			fos.close();
 			meeting.setTitleImg(picpath);
