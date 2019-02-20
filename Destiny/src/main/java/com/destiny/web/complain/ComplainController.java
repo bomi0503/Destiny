@@ -87,7 +87,7 @@ public class ComplainController {
 			String complainerId = user.getUserId();
 			System.out.println("complainerId : " + complainerId);
 			
-			System.out.println("adfadf : " + community.getTitle());
+			System.out.println("게시물 제목 : " + community.getTitle());
 			if(communityNo != 0) {
 				complain.setComplainerId(complainerId);
 				complain.setDefendantId(community.getWriterId());
@@ -111,7 +111,15 @@ public class ComplainController {
 				modelAndView.addObject("meeting", meetingService.getMeeting(meetingNo));
 			}
 			
-			modelAndView.setViewName("forward:/complain/addComplainConfirm.jsp");
+			/*modelAndView.setViewName("forward:/complain/addComplainConfirm.jsp");*/
+			
+			if(communityNo != 0) {
+				modelAndView.setViewName("forward:/info/listRestaurantInfo");
+			}else if(meetingNo != 0){
+				modelAndView.setViewName("forward:/meeting/listMeeting");
+			}
+			
+			
 			return modelAndView;
 		}
 		/*addComplain : end*/

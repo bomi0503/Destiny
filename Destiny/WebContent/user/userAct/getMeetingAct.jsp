@@ -130,6 +130,7 @@
 		}
 		
 		button{padding: 0 2em;}
+		td>img{width: 100%; height: auto; margin: 1em auto;}
 		.close {width: 35px; height: 30px; text-shadow: 0 1px 0 #ffdfe5;}
 		.box {margin: 6em 0 3em 0;}
 		.meetingTable{margin-top:5em;}
@@ -399,7 +400,7 @@
 	            
 	            	<c:if test="${list[0] == null}">
 	            		<tr>
-	            			<td colspan="5"> 참여한 모임 회차가 없습니다. </td>
+	            			<td colspan="6"> 참여한 모임 회차가 없습니다. </td>
 	            		</tr>
 	           		</c:if>
 	           		

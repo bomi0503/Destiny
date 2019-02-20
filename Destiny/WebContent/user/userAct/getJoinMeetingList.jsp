@@ -49,6 +49,31 @@
 			self.location = "/act/getMeetingAct/${me.userId}/"+ meetingNo;
 		});
 		
+		/* 내가 쓴 게시글 링크 */
+		$(".writeCommunity").on("click",function(){
+			self.location = "/act/getWriteCommunityList/${me.userId}";
+		});
+		
+		/* 내가 쓴 댓글 링크 */
+		$(".writeComment").on("click",function(){
+			self.location = "/act/getCommentListByWriter/${me.userId}";
+		});
+		
+		/* 개설한 모임 링크 */
+		$(".openMeeting").on("click",function(){
+			self.location = "/act/getOpenMeetingList/${me.userId}";
+		});
+		
+		/* 가입한 모임 링크 */
+		$(".joinMeeting").on("click",function(){
+			self.location = "/act/getJoinMeetingList/${me.userId}";
+		});
+		
+		/* 성사된 만남 링크 */
+		$(".contact").on("click",function(){
+			self.location = "/act/getContactList/${me.userId}";
+		});
+		
 	});	
 	
 </script>
@@ -129,8 +154,11 @@
 		margin-top : -2px;
 	}
 	
+	button{padding: 0px 2em;}
+	td>img{width:100%; height:auto;}
 	.getMeetingLink{cursor:pointer;}
 	/* table sytle 추가 */
+	a{color: #fd5d7c;}
 	.wrap{max-width:1440px; margin-top: 400px;}
 	table{border-collapse:collapse; table-layout:fixed; margin-top:20px;}
 	.table-type01{width:100%;}
@@ -181,6 +209,11 @@
 				</div>
 			</form>
 			
+			<div class="12u" style="clear:both;">
+				<a href="#" class="writeCommunity" >작성한 게시글</a> &nbsp; | &nbsp; <a href="#" class="writeComment">작성한 댓글</a>&nbsp; | &nbsp; <a href="#" class="openMeeting">개설한 모임</a>&nbsp; | &nbsp; <a href="#" class="joinMeeting">가입한 모임</a>&nbsp; | &nbsp; <a href="#" class="contact">성사된 만남</a>
+			</div>
+			<hr/>
+			
 			<div class="12u" style="clear:both;"> 전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</div>
 			
 			<!-- 테이블 리스트 : start -->
@@ -219,7 +252,7 @@
 	            		<tr>
 		                    <td>${ i }</td>
 		                    <td>
-		                    	<img src="/resources/images/meeting/${meeting.titleImg}" width="150" height=150"/>
+		                    	<img src="/resources/images/meeting/${meeting.titleImg}"/>
 		                    </td>
 		                    <td class="getMeetingLink" data-param="${meeting.meetingNo}">
 		                    	${meeting.meetingName}
@@ -228,7 +261,7 @@
 		                    <td>${meeting.interestName}</td>
 		                    <td>
 		                    	<%-- <a class="btn btn-primary btn" href="/act/getMeetingAct/${meeting.meetingNo}" role="button" id="getMeetingAct">모임 &nbsp;회차&nbsp;조회</a> --%>
-		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">회차 조회</button>
+		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">조회</button>
 		                    </td>
 		                </tr>
 	            		
