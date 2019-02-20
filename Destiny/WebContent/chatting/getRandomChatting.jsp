@@ -224,63 +224,34 @@ socket.on('connect', function(){
          contentType : false,
 	        success: function(JsonData) {
 	           // console.log('success');
-	        	
-	        	while(true){
-					var re = doesFileExist(JsonData);
-					console.log("re : "+re)
-					if(re){
-						
-						console.log("re들어옴");
-						
-						break;	
-					}
-				}//while 끝
+	        	//var myFile=$('#img').val();
+	        	//console.log(myFile);
+	        	 
 	        }
 			
 	    }); 
-		 
-		 
-		 function doesFileExist(urlToFile){
-				var xhr = new XMLHttpRequest();
-				xhr.open('HEAD', urlToFile, false);
-				xhr.send();
-				
-				if (xhr.status == "404") {
-					return false;
-				} else {
-					return true;
-				}
-			}
 		//4초 뒤에 가져오기==========================================================
-	    
+	    setTimeout(function() {
 	    fileUpload.done(function(Data) {
 	    	  console.log('이미지 업로드 성공!');
-	            console.log(Data);
-	           setTimeout(function() {
-	        	   var emitData={fileName:Data, userId:"${me.userId}"};
-	              socket.emit('sendimgfile', emitData);
+	           // console.log(JsonData);
+	           
+	            socket.emit('sendimgfile', Data);
 	          
 	        	  
 	        		console.log("내 파일 추가");
-	        		if (!profileOpen) {
-	        			$('<li class="replies"><img class="meProfile" src="/resources/images/chatting/loading.gif" alt="" /><p><img src="'+Data+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
-							
-	        		}else{
-	        			$('<li class="replies"><img class="meProfile" src="/resources/images/userprofile/${me.profile}" alt="" /><p><img src="'+Data+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
-						
-	        		}
-	        		//$('<li class="replies"><img class="meProfile" src="/resources/images/chatting/loading.gif" alt="" /><p><img src="'+Data+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	        		$('<li class="replies"><img class="meProfile" src="/resources/images/chatting/loading.gif" alt="" /><p><img src="/resources/images/chatting/image/'+Data.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 					
 	        		$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
-  
+
 	        		//$('#user_1').append("<li><div class='me'><div><div class='name'>"+Data.userId+"</div><div class='img'></div><div class='text'><div><img src='/resources/images/chatting/image/"+Data.fileName+"' style='width: 100px; height: 100px;' class='blur'></div></div></div></div></li>");
-	           }, 1000);
+  
 	            
 		       
 	       });
 	
 
-	   	
+	    }, 10000);	
 	    
 	    
 	  
@@ -298,49 +269,21 @@ socket.on('connect', function(){
          contentType : false,
 	        success: function(JsonData) {
 	           // console.log('success');
-	        	while(true){
-					var re = doesFileExist(JsonData);
-					console.log("re : "+re)
-					if(re){
-						
-						console.log("re들어옴");
-						
-						break;	
-					}
-				}//while 끝
+	        	
 	        	 
 	        }
 			
 	    }); 
-		 
-		 function doesFileExist(urlToFile){
-				var xhr = new XMLHttpRequest();
-				xhr.open('HEAD', urlToFile, false);
-				xhr.send();
-				
-				if (xhr.status == "404") {
-					return false;
-				} else {
-					return true;
-				}
-			}
 	    setTimeout(function() {
 		    fileUpload.done(function(Data) {
 	    	  	console.log('오디오 업로드 성공!');
 	           // console.log(JsonData);
 	           
-	             var emitData={fileName:Data, userId:"${me.userId}"};
-	              socket.emit('sendvoicefile', emitData);
-	          
+	            socket.emit('sendvoicefile', Data);
+	           
 	       		console.log("내 파일 추가");
-	       		if (!profileOpen) {
-	       			$('<li class="replies"><img class="meProfile" src="/resources/images/chatting/loading.gif" alt="" /><p><audio controls ><source src="'+Data+'" ></audio></p></li>').appendTo($('.messages ul'));
-						
-	       		}else{
-	       			$('<li class="replies"><img class="meProfile" src="/resources/images/userprofile/${me.profile}" alt="" /><p><audio controls ><source src="'+Data+'" ></audio></p></li>').appendTo($('.messages ul'));
-					
-	       		}
-	       		
+	       		$('<li class="replies"><img class="meProfile" src="/resources/images/chatting/loading.gif" alt="" /><p><audio controls ><source src="/resources/images/chatting/image/'+Data.fileName+'" ></audio></p></li>').appendTo($('.messages ul'));
+				
 	       		$(".messages").animate({ scrollTop: $(".messages").prop("scrollHeight") }, 500);
 
 	       		
@@ -349,7 +292,7 @@ socket.on('connect', function(){
 	       	});
 	
 
-	    }, 1000);	
+	    }, 10000);	
 	    
 	    
 	  
@@ -363,15 +306,15 @@ socket.on('connect', function(){
 				console.log("다른사람 파일 추가");
 	    	if ("${me.userId}"!=file.userId) {
 	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 		    		
 						
 	       		}else{
 	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 			    		
 					}else{
-						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
+						$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><img src="/resources/images/chatting/image/'+file.fileName+'" style="width: 100px; height: 100px;" class="blur"></p></li>').appendTo($('.messages ul'));
 			    		
 					}
 	       			
@@ -390,15 +333,15 @@ socket.on('connect', function(){
 				console.log("다른사람 파일 추가");
 	    	if ("${me.userId}"!=file.userId&&file.fileName!=null) {
 	    		if (!profileOpen) {
-	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	    			$('<li class="sent"><img class="youProfile" src="/resources/images/chatting/loading.gif" alt="" /><b class="nickName"></b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 					
 						
 	       		}else{
 	       			if (womanId==file.userId) {
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+wNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 						
 	       			}else{
-	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
+	       				$('<li class="sent"><img class="youProfile" src="/resources/images/userprofile/'+profileImg+'" alt="" /><b class="nickName">'+mNickName+'</b><br><p><audio controls ><source src="/resources/images/chatting/image/'+file.fileName+'"  ></audio></p></li>').appendTo($('.messages ul'));
 						
 	       			}
 	       			
@@ -434,7 +377,7 @@ socket.on('updatechat', function (username, data1) {
 			//alert(message);
 			var trans=$.ajax({	
 				
-				url : "/chatting/json/translate" ,
+				url : "/chatting/json/getGoogleTranslate" ,
 				type : "POST" ,
 				dataType : "text" ,
 				headers : {
@@ -901,7 +844,7 @@ $(function(){
 	//상대방의 이심전심 결과 확인========================================================
 	$('h1:contains("이심전심")').click(function () {
 		$.ajax({
-	        url: '/chatting/json/getTelepathyResult/',
+	        url: '/chatting/json/getTelepathyResult',
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function(JsonData) {

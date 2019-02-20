@@ -79,7 +79,17 @@
 	  }else{
          //location="/chatting/addRandomChatting";
          ///////////////////////////////////////////////
-            
+            $.ajax({
+    		        url: '/chatting/json/endRandomChatting',
+    		        type: 'GET',
+    		        dataType: 'text',
+    		        success: function(JsonData) {
+    		            console.log('success');
+    		          //alert(JsonData);
+    					
+    		        }
+    				
+    		    });
             $.ajax({   
                
                url : "/chatting/json/addRandomChatting" ,
@@ -168,7 +178,17 @@
       			});
                
             }else{
-               
+            	$.ajax({
+    		        url: '/chatting/json/endPerfectChatting',
+    		        type: 'GET',
+    		        dataType: 'text',
+    		        success: function(JsonData) {
+    		            console.log('success');
+    		          //alert(JsonData);
+    					
+    		        }
+    				
+    		    });
                ///////////////////////////////////////////////
                
                $.ajax({   
@@ -221,6 +241,14 @@
       
       
    });
+   //Ãªº¿=====================================
+   (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
+       fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'frogue-embed'));
   
    </script>
 <!-- //All js -->
@@ -313,6 +341,14 @@ li{
 		
 		<!-- ÆäÀÌÁö ³»ºÎ ³×ºñ°ÔÀÌ¼Ç °æ·Î : end -->
             <div class="inner">
+            <!--Ãªº¿ : start -->
+            <div id="frogue-container" class="position-right-bottom"
+               data-color="#555a9c"
+               data-chatbot="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+               data-user="b9ca3ac0-61fd-496b-831f-3906f84fbb90"
+               data-init-key="value"
+               ></div>
+             <!--Ãªº¿ : end -->
                <div class="flex flex-2">
                   <article>
                      <div class="image fit" >

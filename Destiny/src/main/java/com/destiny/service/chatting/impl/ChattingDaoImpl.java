@@ -54,13 +54,6 @@ public class ChattingDaoImpl implements ChattingDao {
 	
 
 	@Override
-	public List<Chatting> listContactMeeting(Chatting chatting) throws Exception {
-		sqlSession.selectList("ChattingMapper.listChatting", chatting);
-		System.out.println("ChattingDaoImpl.listContactMeeting() : "+sqlSession.selectList("ChattingMapper.listChatting", chatting));
-		return sqlSession.selectList("ChattingMapper.listChatting", chatting);
-	}
-
-	@Override
 	public void updateContactMeeting(Chatting chatting) throws Exception {
 		System.out.println("ChattingDaoImpl.updateContactMeeting() : "+chatting);
 		
