@@ -81,9 +81,7 @@ $(function() {
 	
 	/* 정렬 선택 : start*/
 	$('.sort-control').on('change',function(){
-		alert("정렬 선택!");
 		var searchSortingOption = $('.sort-control option:selected').val();
-		alert("searchSortingOption : "+searchSortingOption);
 		fncGetList(1);					
 	});
 	/* 정렬 선택 : end */
@@ -331,11 +329,11 @@ $(function() {
 			
 				<select class="sort-control searchSortingOption" name="searchSortingOption" >
 					<option value="0"
-						${ !empty search.searchSortingOption && search.searchSortingOption=="0" ? "selected" : ""}>최신 게시물 순</option>
+						${ !empty search.searchSortingOption && search.searchSortingOption=="0" ? "selected" : ""}>중요도 순</option>
 					<option value="1"
 						${ !empty search.searchSortingOption && search.searchSortingOption=="1" ? "selected" : ""}>조회수 순</option>
 					<option value="2"
-						${ !empty search.searchSortingOption && search.searchSortingOption=="2" ? "selected" : ""}>중요도 순</option>
+						${ !empty search.searchSortingOption && search.searchSortingOption=="2" ? "selected" : ""}>최신 게시물 순</option>
 					<option value="3"
 						${ !empty search.searchSortingOption && search.searchSortingOption=="3" ? "selected" : ""}>이전 게시물 순</option>
 				</select>

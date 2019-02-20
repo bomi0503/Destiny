@@ -246,9 +246,7 @@
 			<ul class="smallNavi">
 				<li class="homeImg"><img alt="home" src="/resources/images/background/home.jpg"></li>
 				<li>></li>
-				<li>마이페이지</li>
-				<li>></li>
-				<li>채팅 조회</li>
+				<li>회원리스트</li>
 			</ul>
 			<!-- 페이지 내부 네비게이션 경로 : end -->
 			
@@ -263,11 +261,16 @@
 						<div class="select-wrapper">
 							<select  name="searchSortingOption">
 								<option value="">검색종류</option>
-								<option value="0" ${! empty search.searchSortingOption && search.searchSortingOption==0 ? "selected" : ""}>기본</option>
+								<%-- <option value="0" ${! empty search.searchSortingOption && search.searchSortingOption==0 ? "selected" : ""}>기본</option>
 								<option value="1" ${! empty search.searchSortingOption && search.searchSortingOption==1 ? "selected" : ""}>출석일수 낮은순(이 페이지)</option>
 								<option value="2" ${! empty search.searchSortingOption && search.searchSortingOption==2 ? "selected" : ""}>출석일수 높은순(이 페이지)</option>
-								<option value="3" ${! empty search.searchSortingOption && search.searchSortingOption==1 ? "selected" : ""}>출석일수 낮은순(전체)</option>
-								<option value="4" ${! empty search.searchSortingOption && search.searchSortingOption==2 ? "selected" : ""}>출석일수 높은순(전체)</option>
+								<option value="3" ${! empty search.searchSortingOption && search.searchSortingOption==3 ? "selected" : ""}>출석일수 낮은순(전체)</option>
+								<option value="4" ${! empty search.searchSortingOption && search.searchSortingOption==4 ? "selected" : ""}>출석일수 높은순(전체)</option> --%>
+								<option value="0" ${! empty search.searchSortingOption && search.searchSortingOption==0 ? "selected" : ""}>기본</option>
+								<option value="3" ${! empty search.searchSortingOption && search.searchSortingOption==3 ? "selected" : ""}>출석일 낮은순</option>
+								<option value="4" ${! empty search.searchSortingOption && search.searchSortingOption==4 ? "selected" : ""}>출석일 높은순</option>
+								<option value="5" ${! empty search.searchSortingOption && search.searchSortingOption==5 ? "selected" : ""}>경고받은 회원</option>
+								<option value="6" ${! empty search.searchSortingOption && search.searchSortingOption==6 ? "selected" : ""}>블랙리스트</option>
 							</select>
 						</div>
 					</div>

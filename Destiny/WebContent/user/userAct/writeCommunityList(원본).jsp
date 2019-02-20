@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>우리들의 연결고리</title>
+
 	
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -23,8 +24,6 @@
 <script src="/resources/javascript/util.js"></script>
 <script src="/resources/javascript/main.js"></script>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 <link rel="stylesheet" href="/resources/css/main.css" >
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
@@ -34,59 +33,42 @@
 	//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
-		$("form").attr("method" , "GET").attr("action" , "/act/getJoinMeetingList/${me.userId}").submit();
+		$("form").attr("method" , "GET").attr("action" , "/act/getWriteCommunityList/${me.userId}").submit();
 	}
-		
+	
+	//============= 해당 게시물로 이동하는  Event  처리(Click) =============	
 	 $(function() {
-		//==> 모임 이동
-		$( ".getMeetingLink" ).on("click" , function() {
-			 self.location ="/meeting/getMeeting?meetingNo="+$(this).data("param");
-		});
-		
-		//==> 모임회차
-		$(".getMeetingAct").on("click", function(){
-			var meetingNo = $(this).data("param");
-			self.location = "/act/getMeetingAct/${me.userId}/"+ meetingNo;
-		});
-		
-		/* 내가 쓴 게시글 링크 */
-		$(".writeCommunity").on("click",function(){
-			self.location = "/act/getWriteCommunityList/${me.userId}";
-		});
-		
-		/* 내가 쓴 댓글 링크 */
-		$(".writeComment").on("click",function(){
-			self.location = "/act/getCommentListByWriter/${me.userId}";
-		});
-		
-		/* 개설한 모임 링크 */
-		$(".openMeeting").on("click",function(){
-			self.location = "/act/getOpenMeetingList/${me.userId}";
-		});
-		
-		/* 가입한 모임 링크 */
-		$(".joinMeeting").on("click",function(){
-			self.location = "/act/getJoinMeetingList/${me.userId}";
-		});
-		
-		/* 성사된 만남 링크 */
-		$(".contact").on("click",function(){
-			self.location = "/act/getContactList/${me.userId}";
+	
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$( ".getCommunityLink" ).on("click" , function() {
+			var category = $(this).data("param1");
+			
+			if(category=='RES'){
+				self.location ="/info/getRestaurantInfo?communityNo="+$(this).data("param");
+			}else if(category =='LUV'){
+				self.location ="/love/getLoveAdvice?communityNo="+$(this).data("param");
+			}else if(category == 'MET'){
+				self.location ="/meetingStory/getMeetingStory?communityNo="+$(this).data("param");
+			}else if(category == 'DAT'){
+				self.location ="/date/getDateStory?communityNo="+$(this).data("param");
+			}else if(category == 'NTC'){
+				self.location ="/notice/getNotice?communityNo="+$(this).data("param");
+			}
+			 
 		});
 		
 	});	
 	
-</script>
+	
 
+
+</script>
 <style>
 	body{
 		position : relative;
 		font-family: 'Nanum Myeongjo', serif;
 	}
 	.container{
-		font-weight : 700;
-	}
-	.tumTitle{
 		font-weight : 700;
 	}
 	.button{
@@ -153,10 +135,12 @@
 	.homeImg{
 		margin-top : -2px;
 	}
+	form{
+		/* padding-top : 5em; */
+	}
 	
-	.getMeetingLink{cursor:pointer;}
+	.getCommunityLink{cursor:pointer;}
 	/* table sytle 추가 */
-	a{color: #fd5d7c;}
 	.wrap{max-width:1440px; margin-top: 400px;}
 	table{border-collapse:collapse; table-layout:fixed; margin-top:20px;}
 	.table-type01{width:100%;}
@@ -167,6 +151,7 @@
 	.table-type01 tbody tr td:nth-child(3){padding:10px 20px; vertical-align:middle; text-align:left; border-bottom:1px solid #DDD; font-size:14px;}
 	.table-type01 tbody tr:first-child td{border-top:1px solid #DDD;}
 	/* table sytle 추가 */
+	
 </style>
 </head>
 
@@ -175,12 +160,10 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/header.jsp" />
   	<!-- ToolBar End /////////////////////////////////////-->
-  	
-  	
-    
+
     <!-- 메인배경이미지 : start -->
 	<div class="topImg">
-		<h1><span class="slim">가입한 </span>모임 <span class="slim"></span></h1>
+		<h1><span class="slim">작성한 </span>게시글<span class="slim"></span></h1>
 	</div>
 	<!-- 메인배경이미지 : end -->
 	
@@ -196,21 +179,15 @@
 				<li>></li>
 				<li>활동관리</li>
 				<li>></li>
-				<li>가입한 모임</li>
+				<li>작성한 게시글</li>
 			</ul>
 			<!-- 페이지 내부 네비게이션 경로 : end -->
 			
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<form>
-				<div class="form-group search-group">
-					<input type="hidden" id="currentPage" name="currentPage" value="">
-				</div>
+			<form class="form-horizontal">			  
+			  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+			  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			</form>
-			
-			<div class="12u" style="clear:both;">
-				<a href="#" class="writeCommunity" >작성한 게시글</a> &nbsp; | &nbsp; <a href="#" class="writeComment">작성한 댓글</a>&nbsp; | &nbsp; <a href="#" class="openMeeting">개설한 모임</a>&nbsp; | &nbsp; <a href="#" class="joinMeeting">가입한 모임</a>&nbsp; | &nbsp; <a href="#" class="contact">성사된 만남</a>
-			</div>
-			<hr/>
 			
 			<div class="12u" style="clear:both;"> 전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</div>
 			
@@ -219,48 +196,46 @@
 	            <colgroup>
 	                <col style="width:5%">
 	                <col style="width:15%">
-	                <col style="width:30%">
-	                <col style="width:15%">
-	                <col style="width:15%">
+	                <col style="width:50%">
 	                <col style="width:20%">
+	                <col style="width:10%">
 	            </colgroup>
 	            <thead>
 	                <tr>
 	                    <th>No</th>
-	                    <th>모임이미지</th>
-	                    <th>모임제목</th>
-	                    <th>개설자</th>
-	                    <th>관심사</th>
-	                    <th>회차 조회</th>
+	                    <th>카테고리</th>
+	                    <th>제목</th>
+	                    <th>작성일</th>
+	                    <th>공감수</th>
 	                </tr>
 	            </thead>
 	    
 	            <tbody>
-	            	
+	            
 	            	<c:if test="${list[0] == null}">
 	            		<tr>
-	            			<td colspan="7"> 가입한 모임이 없습니다. </td>
+	            			<td colspan="7"> 작성한 게시글이 없습니다. </td>
 	            		</tr>
 	           		</c:if>
-	            	
+	            
 	            	<c:set var="i" value="0"/>
-	            	<c:forEach var="meeting" items="${list}">
+	            	<c:forEach var="community" items="${list}">
 	            		<c:set var="i" value="${i+1}"/>
 	            		
 	            		<tr>
 		                    <td>${ i }</td>
 		                    <td>
-		                    	<img src="/resources/images/meeting/${meeting.titleImg}" width="150" height=150"/>
+		                    	<c:if test="${community.category == 'RES'}"> [맛집정보] </c:if>
+		                    	<c:if test="${community.category == 'LUV'}"> [연애조언] </c:if>
+		                    	<c:if test="${community.category == 'MET'}"> [모임후기] </c:if>
+		                    	<c:if test="${community.category == 'DAT'}"> [만남후기] </c:if>
+		                    	<c:if test="${community.category == 'NTC'}"> [공지사항] </c:if>
 		                    </td>
-		                    <td class="getMeetingLink" data-param="${meeting.meetingNo}">
-		                    	${meeting.meetingName}
+		                    <td class="getCommunityLink" data-param="${ community.communityNo }" data-param1="${ community.category }">
+		                    	${community.title }
 		                    </td>
-		                    <td>${meeting.meetingMasterId}</td>
-		                    <td>${meeting.interestName}</td>
-		                    <td>
-		                    	<%-- <a class="btn btn-primary btn" href="/act/getMeetingAct/${meeting.meetingNo}" role="button" id="getMeetingAct">모임 &nbsp;회차&nbsp;조회</a> --%>
-		                    	<button type="button" class="getMeetingAct" id="getMeetingAct" data-param="${meeting.meetingNo}">회차 조회</button>
-		                    </td>
+		                    <td>${community.writeDate}</td>
+		                    <td>${community.like}</td>
 		                </tr>
 	            		
 	            	</c:forEach>
@@ -269,13 +244,16 @@
 			<!-- 테이블 리스트 : end -->
 		</div>
 		
+		
+		
 		<!-- PageNavigation : start -->
 		<jsp:include page="/common/pageNavigator.jsp" />
 		<!-- PageNavigation : end -->
-	
-	
-	
 	</div>
+	
+	<!-- footer -->
+	<jsp:include page="/layout/footer.jsp" />
+	<!-- //footer -->
 
 </body>
 </html>

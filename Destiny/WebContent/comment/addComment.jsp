@@ -186,7 +186,6 @@
    
    //대댓글 달기 - 댓글 내용 출력에 input 폼 추가
    function reReplyInsert(commentNo, commentDetail, commentWriterId, targetNo, profile){
-      alert("답글 달기");
       var a ='';
        a += '<div style="overflow:hidden;">';
        a += '<input style="width:85%;float:left;" type="text" class="coCoInput" id="commentDetail" name="commentDetail" autocomplete="off"/>';

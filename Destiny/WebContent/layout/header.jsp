@@ -54,6 +54,9 @@
       $("a[href='#' ]:contains('join')").on("click", function() {
          self.location = "/user/addUser"
       });
+      $("#JoinButton").on("click",function(){
+    	  self.location = "/user/addUser"
+      });
       $("a[href='#' ]:contains('MyPage')").on("click", function() {
          self.location = "/user/getUserView"
       });
@@ -193,6 +196,7 @@
          }) */
       
    });   
+
 </script>
 <style>
 
@@ -204,9 +208,6 @@
    #example{
       font-family: 'Source Serif Pro', serif;
    }
-      #example a:hover{
-         /* color : #1c1c1c; */
-      }
    .modal-login .avatar img {
        width: 100%;
        margin-top: 5px;
@@ -448,6 +449,15 @@
 	.right_nav li{
 		padding-left : 0px;
 	}
+	
+	#loginButton{
+		width : 100%;
+		padding : 0;
+	}
+	#JoinButton{
+		width : 100%;
+		padding : 0;
+	}
 </style>
 
 <header id="header">
@@ -509,7 +519,7 @@
             	<li><a href="#"><span class="login_icon"><img src="/resources/icon/logout.png"></span>logout</a></li>
 	         </c:if>
 	         <c:if test="${me.userGrade != 'ADM'}">
-	            <li class="welcome">${me.nickName}님 우리 ㄱr끔식 오래보r요...</li>
+	            <li class="welcome">${me.nickName}님 참 좋은 인연입니다.</li>
 	            <c:if test="${notRead != 0}">
 		            <li id="mail" >
 		            	<a id="letter_icon" href="#">
@@ -563,6 +573,7 @@
                      
                      <div class="form-group" align="center">
                         <button id="loginButton" type="submit" class="btn2">Login</button>
+                        <button id="JoinButton" type="submit" class="btn2">Join</button>
                      </div>
                   </form>
                </div>
