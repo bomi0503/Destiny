@@ -198,7 +198,7 @@ public class UserRestController {
 		
 		map.put("to", phone);
 		map.put("from", "01086032406");
-		map.put("text", "[우리들의 연결고리] 본인확인 인증번호 [" + key + "] 를 화면에 입력해주세요.");
+		map.put("text", "[우연] 본인확인 인증번호 [" + key + "] 를 화면에 입력해주세요.");
 		map.put("type", "sms");
 		
 		System.out.println("여까지오긴하니?");
