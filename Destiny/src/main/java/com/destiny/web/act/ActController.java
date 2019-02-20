@@ -47,9 +47,7 @@ import com.destiny.service.domain.Community;
 import com.destiny.service.domain.Meeting;
 import com.destiny.service.domain.Upload;
 import com.destiny.service.domain.User;
-import com.destiny.service.info.InfoService;
 import com.destiny.service.meeting.MeetingService;
-import com.destiny.service.review.ReviewService;
 import com.destiny.service.upload.UploadService;
 import com.destiny.service.user.UserService;
 
@@ -65,14 +63,6 @@ public class ActController {
 	@Autowired
 	@Qualifier("communityServiceImpl")
 	private CommunityService communityService;
-	
-	@Autowired
-	@Qualifier("infoServiceImpl")
-	private InfoService infoService;
-	
-	@Autowired
-	@Qualifier("reviewServiceImpl")
-	private ReviewService reviewService;
 	
 	@Autowired
 	@Qualifier("actServiceImpl")
