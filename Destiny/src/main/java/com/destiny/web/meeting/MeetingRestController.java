@@ -108,7 +108,7 @@ public class MeetingRestController {
 			//map.put("to", phone);
 			map.put("to", "01086032406");
 			map.put("from", "01086032406");
-			map.put("text", "[우연] 모임 : [" + contextMeeting.getMeetingName() + "] \n가입신청자 : [" + user.getUserId() + "]");
+			map.put("text", "[우연] \n 모임 : [ " + contextMeeting.getMeetingName() + " ] \n  [ " + user.getNickName() + " ]님이 가입신청을 하였습니다.");
 			map.put("type", "sms");
 			
 			System.out.println("여까지오긴하니?");
