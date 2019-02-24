@@ -263,10 +263,10 @@ public class ActRestController {
 		String subject = "인증정보 전달";
 		String fromName = "전달자";
 		String from = "ABC";
-		String to1 = "kbm4853@naver.com";
+		String to1 = "pischa@naver.com";
 		
 		//String user = "pischa@naver.com";
-		String password = "!Bomi0417!";
+		String password = "sunnydays15358";
 		
 		/*String content = "다음과 같은 건의사항이 접수되었습니다. ["+propose+"]";*/
 		String content = propose;
@@ -285,7 +285,7 @@ public class ActRestController {
 			Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(to1,password);
+						return new PasswordAuthentication("pischa",password);
 					}
 			});
 			
